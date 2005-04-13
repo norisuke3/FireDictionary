@@ -34,22 +34,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
-//////////// global variables /////////////////////
-
-var dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_ENTERERD);								// Dictinoary sidebar object.
-
-///////////////////////////////////////////////////
-
-/**
- * lookup(event)
- */
-function lookup(event){
- 	dicSidebar.lookup();
-}
-
-/**
- * regist(event)
- */
-function regist(event){
-	dicSidebar.registHistory();
+function Exception(_name){
+	var name = _name
+	
+	/**
+	 * String toString()
+	 *  Return the name of this exception.
+	 *
+	 * @return Name of this exception.
+	 */
+	this.toString = function(){
+		return name;
+	}
 }

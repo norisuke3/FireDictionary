@@ -38,58 +38,50 @@
  
 <?xml-stylesheet href="chrome://global/skin" type="text/css"?>
 
-<window title="firedictionary"
-		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		onload="top.document.getElementById('content').reload()">
-		
+<overlay title="firedictionary-sidebar"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://firedictionary/content/firedictionaryOverlay.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_permanent.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_inputstream.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/exception.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_TextNodeArray.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_htmlparser.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_modifiedlocaldocument.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionarysidebar.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/pdictext/PDICText.js"/>
-    <script type="application/x-javascript" src="chrome://firedictionary/content/firedictionary.js"/>
     
-    <tabbox flex="1">
-    
-      <tabs>
-        <tab label="Find"/>
-        <tab label="History"/>
-        <tab label="Study Words"/>
-      </tabs>
-      
-      <tabpanels flex="1">
-        <tabpanel orient="vertical" flex="1">
-	      <spacer style="height:6pt;"/>
-	      <hbox>
-	        <label value="Keyword :" style="font-size:13pt;"/>
-	        <label id="dictionary-pickup-word" value="" style="font-size:13pt;"/>
-	      </hbox>
-	      <hbox>
-	        <textbox id="dictionary-keyword" flex="1" onkeyup="lookup(event)" style="font-size:13pt;"/>
-	        <button label="Regist" oncommand="regist(event)"/>
-	      </hbox>
-	      <textbox id="dictionary-result" 
-	      		   multiline="true"
-	      		   readonly="true"
-	      		   flex="1"
-	      		    style="font-size:11pt;"/>
-	      <textbox id="dictionary-result-history" 
-	      		   multiline="true"
-	      		   readonly="true"
-	      		   flex="2"
-	      		    style="font-size:11pt;"/>
-        </tabpanel>
-        
-        <tabpanel>
-        </tabpanel>
-        
-        <tabpanel>
-        </tabpanel>
-        
-	  </tabpanels>
-	  
-    </tabbox>
-    
-</window>
+		
+	<script>initialize();</script>  	
+		
+	<!--broadcast for Firefox-->
+	<broadcasterset id="mainBroadcasterSet">
+		<broadcaster id="viewFireDictionarySidebar"
+		             autoCheck="false"
+		             label="FireDictionary"
+		             type="checkbox" group="sidebar"
+		             sidebarurl="chrome://firedictionary/content/firedictionary.xul"
+		             sidebartitle="FireDictionary"
+		             oncommand="toggleSidebar('viewFireDictionarySidebar');" />
+	</broadcasterset>
+
+	<!--sidebar-->
+	<menupopup id="viewSidebarMenu">
+		<menuitem observes="viewFireDictionarySidebar" key="key_openDictionarySidebar" />
+	</menupopup>
+
+	<!--menu (Tool)-->
+	<menupopup id="menu_ToolsPopup">
+		<menuitem key="key_openDictionarySidebar" observes="viewFireDictionarySidebar" position="1"/>
+	</menupopup>
+
+	<!--keyset for Firefox-->
+	<keyset id="mainKeyset">
+		<key id="key_openDictionarySidebar" command="viewFireDictionarySidebar"  key="M" modifiers="alt" />
+	</keyset>
+
+	<!-- Tab Browser (Add onmouseover event) -->
+	<tabbrowser id="content"
+	            onmouseover="sendContentWord(event)"/>
+</overlay>

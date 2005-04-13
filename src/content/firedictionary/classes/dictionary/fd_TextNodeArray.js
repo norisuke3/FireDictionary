@@ -34,22 +34,66 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
-//////////// global variables /////////////////////
+function FDTextNodeArray(array){
+ this.texts;
+ 	
+	/**
+	 * FDTextNodeArray(array)
+	 *  Constructor of this class.
+	 */
+	if ( array ){
+		this.texts = array;
+	} else {
+		this.texts = new Array();
+	}
+	
+	/**
+	 * void push(String text, Boolean withSpan)
+	 *  Add the text to this arary.
+	 *
+	 * @param text The text you want to add.
+	 * @param withSpan The flag whether add the text with <span> tag.
+	 */
+	this.push = function(text, withSpan){
+		if ( withSpan ) {
+			var spanText;
 
-var dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_ENTERERD);								// Dictinoary sidebar object.
-
-///////////////////////////////////////////////////
-
-/**
- * lookup(event)
- */
-function lookup(event){
- 	dicSidebar.lookup();
-}
-
-/**
- * regist(event)
- */
-function regist(event){
-	dicSidebar.registHistory();
+	 	if ( text.charAt(text.length - 1 ) == " ") {
+ 	  spanText = "<span>" + text.substring(0, text.length - 1) +"</span> ";
+	 	} else {
+	 		spanText = "<span>" + text + "</span>";
+	 	}
+	 	
+	 	this.texts.push(spanText);
+	 	
+		} else {
+ 		this.texts.push(text);
+ 		
+		}
+	}
+	
+	/**
+	 * FDTextNodeArray concat(FDTextNodeArray array)
+	 *  Concatenate arrays.
+	 *
+	 * @param array
+	 * @return Concatenated array.
+	 */
+	this.concat = function(fd_array){
+		return new FDTextNodeArray(this.texts.concat(fd_array.texts));
+	}
+	
+	/**
+	 * String toString()
+	 *  Return a string of the texts in this array.
+	 *
+	 * @return connected texts in this array.
+	 */
+	this.toString = function(){
+		var s = "";
+		
+		for ( i=0 ; i<this.texts.length ; i++ )	s += this.texts[i];
+		
+		return s;
+	}
 }

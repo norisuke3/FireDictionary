@@ -65,5 +65,12 @@
     <!--<em:optionsURL>chrome://newext2/content/options.xul</em:optionsURL>-->
     <!--<em:aboutURL>chrome://newext2/content/options.xul</em:aboutURL>-->
     <!--<em:iconURL>chrome://newext2/skin/newext2.png</em:iconURL>-->
+    
+    <!-- Packages, Skins and Locales that this extension registers -->
+    <em:file>
+      <Description about="urn:mozilla:extension:file:firedictionary.jar">
+        <em:package>content/firedictionary/</em:package>
+      </Description>
+    </em:file>
   </Description>      
 </RDF>
