@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     2005/02/08 22:56:46                                                        
+
+     deployment_firedictionary    
+     Xul deployment tool for firedictionary
+                   
+     Noriaki Hamamoto                                                                
+     ====================================================================== -->
+
+<project name="deployment_firedictionary" default="deploy">
+	<property name="target" value="firefox.exe"/>
+	<property environment="env"/>
+	<property name="chromePath" value="${env.CHROME}"/>
+    <description>
+            Xul deployment tool for firedictionary
+    </description>
+
+    <!-- ================================= 
+          target: deploy              
+         ================================= -->
+    <target name="deploy"
+		description="--> Xul deployment tool for firedictionary"
+		if="chromePath">
+        <mkdir dir="${chromePath}/firedictionary"/>
+		
+		<copy todir="${chromePath}/firedictionary">
+			<fileset dir="src"/>
+		</copy>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: undeploy                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="undeploy" if="chromePath">
+		<delete dir="${chromePath}/firedictionary"/>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: makeJar
+         - - - - - - - - - - - - - - - - - -->
+	<target name="makeJar">
+		<jar destfile="firedictionary.jar">
+			<fileset dir="src"/>
+		</jar>
+	</target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: deployJar
+         - - - - - - - - - - - - - - - - - -->
+	<target name="deployJar" depends="makeJar" if="chromePath">
+		<copy todir="${chromePath}">
+			<fileset dir=".">
+				<include name="firedictionary.jar"/>
+			</fileset>			
+		</copy>
+	</target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: makeinstaller
+         - - - - - - - - - - - - - - - - - -->
+	<target name="makeInstaller" depends="makeJar">
+		<jar destfile="firedictionary.xpi">
+			<fileset dir=".">
+				<include name="firedictionary.jar"/>
+				<include name="install.js"/>
+			</fileset>
+		</jar>
+	</target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: clean
+         - - - - - - - - - - - - - - - - - -->
+	<target name="clean">
+		<delete file="firedictionary.jar"/>
+		<delete file="firedictionary.xpi"/>
+	</target>
+</project>
