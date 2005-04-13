@@ -1,9 +1,9 @@
-initInstall("Install exttwo", "firedictionary", "0.1");
+initInstall("Install FireDictionary", "firedictionary", "0.1");
 
 var targetFolder = getFolder("Chrome");
 
 setPackageFolder(targetFolder);
-addFile("firedictionary.jar");
+addFile("chrome/firedictionary.jar");
 
 targetFolder = getFolder(targetFolder, "firedictionary.jar");
 

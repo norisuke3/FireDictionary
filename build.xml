@@ -8,7 +8,7 @@
      Noriaki Hamamoto                                                                
      ====================================================================== -->
 
-<project name="deployment_firedictionary" default="deploy">
+<project name="deployment_firedictionary" default="makeInstaller">
 	<property name="target" value="firefox.exe"/>
 	<property environment="env"/>
 	<property name="chromePath" value="${env.CHROME}"/>
@@ -16,31 +16,12 @@
             Xul deployment tool for firedictionary
     </description>
 
-    <!-- ================================= 
-          target: deploy              
-         ================================= -->
-    <target name="deploy"
-		description="--> Xul deployment tool for firedictionary"
-		if="chromePath">
-        <mkdir dir="${chromePath}/firedictionary"/>
-		
-		<copy todir="${chromePath}/firedictionary">
-			<fileset dir="src"/>
-		</copy>
-    </target>
-
-    <!-- - - - - - - - - - - - - - - - - - 
-          target: undeploy                      
-         - - - - - - - - - - - - - - - - - -->
-    <target name="undeploy" if="chromePath">
-		<delete dir="${chromePath}/firedictionary"/>
-    </target>
-
     <!-- - - - - - - - - - - - - - - - - - 
           target: makeJar
          - - - - - - - - - - - - - - - - - -->
 	<target name="makeJar">
-		<jar destfile="firedictionary.jar">
+		<mkdir dir="chrome"/>
+		<jar destfile="chrome/firedictionary.jar">
 			<fileset dir="src"/>
 		</jar>
 	</target>
@@ -50,19 +31,21 @@
          - - - - - - - - - - - - - - - - - -->
 	<target name="deployJar" depends="makeJar" if="chromePath">
 		<copy todir="${chromePath}">
-			<fileset dir=".">
+			<fileset dir="chrome">
 				<include name="firedictionary.jar"/>
 			</fileset>			
 		</copy>
 	</target>
 
-    <!-- - - - - - - - - - - - - - - - - - 
-          target: makeinstaller
-         - - - - - - - - - - - - - - - - - -->
+    <!-- ================================= 
+          target: makeinstaller          
+         ================================= -->
 	<target name="makeInstaller" depends="makeJar">
 		<jar destfile="firedictionary.xpi">
 			<fileset dir=".">
-				<include name="firedictionary.jar"/>
+				<include name="chrome/firedictionary.jar"/>
+				<include name="install.rdf"/>
+				<include name="chrome.manifest"/>
 				<include name="install.js"/>
 			</fileset>
 		</jar>
@@ -72,7 +55,7 @@
           target: clean
          - - - - - - - - - - - - - - - - - -->
 	<target name="clean">
-		<delete file="firedictionary.jar"/>
+		<delete dir="chrome"/>
 		<delete file="firedictionary.xpi"/>
 	</target>
 </project>
