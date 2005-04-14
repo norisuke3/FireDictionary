@@ -35,8 +35,6 @@
    - the terms of any one of the MPL, the GPL or the LGPL.
    -
    - ***** END LICENSE BLOCK ***** -->
- 
-<?xml-stylesheet href="chrome://global/skin" type="text/css"?>
 
 <overlay title="firedictionary-sidebar"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
