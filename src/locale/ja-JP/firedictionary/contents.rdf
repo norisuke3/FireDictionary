@@ -35,44 +35,23 @@
    - the terms of any one of the MPL, the GPL or the LGPL.
    -
    - ***** END LICENSE BLOCK ***** -->
+   
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
 
-<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <RDF:Seq about="urn:mozilla:locale:root">
+    <RDF:li resource="urn:mozilla:locale:ja-JP"/>
+  </RDF:Seq>
 
-  <Description about="urn:mozilla:install-manifest">
-    <em:id>{ABA70AB8-D620-4cef-885B-559691663E23}</em:id>
-    <em:version>0.8</em:version>
-    <em:type>2</em:type>
+  <RDF:Description about="urn:mozilla:locale:ja-JP"
+        chrome:displayName="FireDictionary"
+        chrome:author="Noriaki Hamamoto"
+        chrome:name="ja-JP">
+    <chrome:packages>
+      <RDF:Seq about="urn:mozilla:locale:ja-JP:packages">
+        <RDF:li resource="urn:mozilla:locale:ja-JP:firedictionary"/>
+      </RDF:Seq>
+    </chrome:packages>
     
-    <!-- Target Application this extension can install into, 
-        with minimum and maximum supported versions. --> 
-    <em:targetApplication>
-      <Description>
-        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>1.0</em:minVersion>
-        <em:maxVersion>1.0+</em:maxVersion>
-      </Description>
-    </em:targetApplication>
-    
-    <!-- Front End MetaData -->
-    <em:name>FireDictionary</em:name>
-    <em:description>Cool dictionary on the sidebar.</em:description>
-    <em:creator>Noriaki Hamamoto</em:creator>
-    <em:homepageURL>http://www.firedictionary.com/</em:homepageURL>
-    <!--<em:updateURL>http://www.bengoodger.com/software/mb/umo/update.rdf</em:updateURL>-->
-
-    <!-- Front End Integration Hooks (used by Extension Manager)-->
-    <!--<em:optionsURL>chrome://newext2/content/options.xul</em:optionsURL>-->
-    <!--<em:aboutURL>chrome://newext2/content/options.xul</em:aboutURL>-->
-    <!--<em:iconURL>chrome://newext2/skin/newext2.png</em:iconURL>-->
-    
-    <!-- Packages, Skins and Locales that this extension registers -->
-    <em:file>
-      <Description about="urn:mozilla:extension:file:firedictionary.jar">
-        <em:package>content/firedictionary/</em:package>
-        <em:locale>locale/ja-JP/firedictionary/</em:locale>
-        <em:skin>skin/classic/firedictionary/</em:skin>
-      </Description>
-    </em:file>
-  </Description>      
-</RDF>
+  </RDF:Description>
+</RDF:RDF>

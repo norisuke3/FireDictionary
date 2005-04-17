@@ -45,6 +45,10 @@ targetFolder = getFolder(targetFolder, "firedictionary.jar");
 
 registerChrome(CONTENT | DELAYED_CHROME,
   targetFolder, "content/firedictionary/");
+registerChrome(LOCALE | DELAYED_CHROME,
+  targetFolder, "locale/ja-JP/firedictionary/");
+registerChrome(SKIN | DELAYED_CHROME,
+  targetFolder, "skin/classic/firedictionary/");
   
 if (0 == getLastError()){
 				performInstall();
