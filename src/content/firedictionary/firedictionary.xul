@@ -36,7 +36,7 @@
    -
    - ***** END LICENSE BLOCK ***** -->
  
-<?xml-stylesheet href="chrome://global/skin" type="text/css"?>
+<?xml-stylesheet href="chrome://firedictionary/skin/" type="text/css"?>
 
 <window title="firedictionary"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -61,25 +61,25 @@
       
       <tabpanels flex="1">
         <tabpanel orient="vertical" flex="1">
-	      <spacer style="height:6pt;"/>
-	      <hbox>
-	        <label value="Keyword :" style="font-size:13pt;"/>
-	        <label id="dictionary-pickup-word" value="" style="font-size:13pt;"/>
+	      <spacer class="firedictionary-topspacer"/>
+	      <hbox class="firedictionary-keyword">
+	        <label value="Keyword :"/>
+	        <label id="dictionary-pickup-word" value=""/>
 	      </hbox>
-	      <hbox>
-	        <textbox id="dictionary-keyword" flex="1" onkeyup="lookup(event)" style="font-size:13pt;"/>
+	      <hbox class="firedictionary-keyword">
+	        <textbox id="dictionary-keyword" flex="1" onkeyup="lookup(event)"/>
 	        <button label="Regist" oncommand="regist(event)"/>
 	      </hbox>
-	      <textbox id="dictionary-result" 
-	      		   multiline="true"
-	      		   readonly="true"
-	      		   flex="1"
-	      		    style="font-size:11pt;"/>
-	      <textbox id="dictionary-result-history" 
-	      		   multiline="true"
-	      		   readonly="true"
-	      		   flex="2"
-	      		    style="font-size:11pt;"/>
+	      <vbox class="firedictionary-message" flex="1">
+	        <textbox id="dictionary-result" 
+	      		     multiline="true"
+	      		     readonly="true"
+	      		     flex="1"/>
+	        <textbox id="dictionary-result-history" 
+	      		     multiline="true"
+	      		     readonly="true"
+	      		     flex="2"/>
+          </vbox>
         </tabpanel>
         
         <tabpanel>
