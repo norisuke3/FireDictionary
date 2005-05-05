@@ -38,8 +38,7 @@
  * Class for using PDIC Text type dictionary.
  */
 function PDICText(file){
-	var unicodeConverter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
-	unicodeConverter.charset = "Shift_JIS";
+	var charset = "Shift_JIS";
 	var indexFileName = "indexPDICText.txt";
 	var istream;
 	var indexes = new Array();
@@ -60,6 +59,7 @@ function PDICText(file){
 	
 	// Initialize input stream.
  istream = new FDInputStream(file.getFile());
+ istream.setCharset(charset);
 	
 	// Initialize Index file.
 	fileIndex = file.getParentDirectoryInstance().createFileInstance(indexFileName);
@@ -87,20 +87,20 @@ function PDICText(file){
 			return "";
 		}
 		
-		// Lookup index.
+		// Lookup an index.
 		indexChar = keyword.substr(0, indexCharLength);
 		index = indexes[indexChar];
 		if( !index ){
 			return "";
 		}
 		
-		// Lookup mean.
+		// Lookup a mean.
 		istream.setOffset(0, index.from);
 		while( istream.getOffset() < index.to ){
 			line = istream.readLine();
 			
 			if( line == keyword ){
-				return unicodeConverter.ConvertToUnicode(istream.readLine());
+				return istream.readLineAsUnicode();
 			}
 			
 			istream.readLine(); 						// skip Japanese line

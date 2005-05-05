@@ -39,6 +39,7 @@ function FDInputStream(file){
  var seekable = stream.QueryInterface(Components.interfaces.nsISeekableStream);
  var scriptable = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
 	var filesize;
+	var unicodeConverter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 	
 	/**
 	 * FDInputStream(nsIFile file)
@@ -49,9 +50,30 @@ function FDInputStream(file){
  stream.init(file, 1, 0, 0);
  scriptable.init(stream);
  filesize = file.fileSize;
-	 
+	
+	/**
+	 * setCharset(String charset)
+	 *  set a character set for the file which is given as a attribute of this constractor.
+	 *
+	 * @param charset This is used for both of the method readLineAsUnicode() and the
+	 *                method readAsUnicode().
+	 */
+	this.setCharset = function(charset){
+		unicodeConverter.charset = charset;
+	}
+	
+	/**
+	 * String getCharset()
+	 *  Return the current character set.
+	 *
+	 * @return the current character set.
+	 */
+	this.getCharset = function(){
+		return unicodeConverter.charset;
+	}
+	
  /**
-  * String readLine();
+  * Char* readLine();
   *  read line.
   * 
   * ** NOTICE **
@@ -77,7 +99,27 @@ function FDInputStream(file){
 	}
 	
 	/**
-	 * String read()
+	 * String readLineAsUnicode()
+	 *  read line and convert them to Unicode.
+	 *  You have to set the property 'charset' using the method setCharset()
+	 *  before calling this method.
+  * 
+  * ** NOTICE **
+  * This method assume new line code is "\r\n".
+  *
+  * @return A line of a unicode string.
+	 * @throws CHARSET_INFORMATION_MISSING if the property 'charset' is empty.
+  */
+	this.readLineAsUnicode = function(){
+		if ( this.getCharset() == "" ){
+		 throw new Exception("CHARSET_INFORMATION_MISSING");
+		}
+		
+		return unicodeConverter.ConvertToUnicode(this.readLine());
+	}
+	
+	/**
+	 * Char* read()
 	 *  read whole content of the file.
 	 *
 	 * @return A string of the file.
@@ -85,6 +127,24 @@ function FDInputStream(file){
 	this.read = function(){
 		this.setOffset(0);
 		return scriptable.read(filesize);
+	}
+	
+	/**
+	 * String readAsUnicode()
+	 *  read whole content of the file as Unicode.
+	 *  You have to set the property 'charset' using the method setCharset()
+	 *  before calling this method.
+	 * 
+	 * @param  charset Character set of the content.
+	 * @return A unicode string of the file.
+	 * @throws CHARSET_INFORMATION_MISSING if the property 'charset' is empty.
+	 */
+	this.readAsUnicode = function(){
+		if ( this.getCharset() == "" ){
+		 throw new Exception("CHARSET_INFORMATION_MISSING");
+		}
+		
+		return unicodeConverter.ConvertToUnicode(this.read());
 	}
 	
 	/**
