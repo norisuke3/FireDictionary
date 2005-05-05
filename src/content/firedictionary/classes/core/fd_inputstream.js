@@ -43,7 +43,7 @@ function FDInputStream(file){
 	
 	/**
 	 * FDInputStream(nsIFile file)
-	 *  Constractor of this class
+	 *  Constructor of this class
 	 *
 	 * @param file
 	 */
@@ -53,7 +53,7 @@ function FDInputStream(file){
 	
 	/**
 	 * setCharset(String charset)
-	 *  set a character set for the file which is given as a attribute of this constractor.
+	 *  set a character set for the file which is given as a attribute of this constructor.
 	 *
 	 * @param charset This is used for both of the method readLineAsUnicode() and the
 	 *                method readAsUnicode().
