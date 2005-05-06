@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dictionaries xmlns="http://www.firedictionary.com/dictionary/information"
+              xmlns:info="http://www.firedictionary.com/dictionary/information">
+
+  <dictionary name="PDICText">
+    <url>http://www.namazu.org/~tsuchiya/sdic/data/gene.html</url>
+    <file-name>GENE.TXT</file-name>
+    <charset>Shift_JIS</charset>
+  </dictionary>
+
+</dictionaries>
