@@ -79,6 +79,19 @@ function FDConfig(dir){
  }
  
  /**
+  * String getDefaultDictinoaryName()
+  *  Return a name of the default dictionary which is written in the configuration file.
+  *
+  * @return a name of the default dictionary
+  */
+ this.getDefaultDictionaryName = function(){
+ 	var xpath = "string(/info:firedictinoary/info:default-dictionary-name)";
+ 	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
+ 	
+ 	return result.stringValue == "" ? null : result.stringValue ; 	
+ }
+ 
+ /**
   * String getURL(String dicName)
   *  Return an URL where we can get the dictionary mentioned by the attribute 'dicName'.
   *
@@ -87,7 +100,7 @@ function FDConfig(dir){
   *         In case no dictinoary name in the configuration file, return null.
   */
  this.getURL = function(dicName){
- 	var xpath = "string(/info:dictionaries/info:dictionary[@name = '" + dicName + "']/info:url)";
+ 	var xpath = "string(/info:firedictinoary/info:dictionaries/info:dictionary[@name = '" + dicName + "']/info:url)";
  	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
  	
  	return result.stringValue == "" ? null : result.stringValue ;
@@ -101,7 +114,7 @@ function FDConfig(dir){
   * @return A file name of the dictionary.
   */
  this.getFileName = function(dicName){
- 	var xpath = "string(/info:dictionaries/info:dictionary[@name = '" + dicName + "']/info:file-name)";
+ 	var xpath = "string(/info:firedictinoary/info:dictionaries/info:dictionary[@name = '" + dicName + "']/info:file-name)";
  	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
  	
  	return result.stringValue == "" ? null : result.stringValue ;
@@ -115,7 +128,7 @@ function FDConfig(dir){
   * @return a character set of the dictinoary.
   */
  this.getCharset = function(dicName){
- 	var xpath = "string(/info:dictionaries/info:dictionary[@name = '" + dicName + "']/info:charset)";
+ 	var xpath = "string(/info:firedictinoary/info:dictionaries/info:dictionary[@name = '" + dicName + "']/info:charset)";
  	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
  	
  	return result.stringValue == "" ? null : result.stringValue ;
