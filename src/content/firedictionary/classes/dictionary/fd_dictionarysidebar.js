@@ -45,13 +45,16 @@ FDDictionarySidebar.FD_MODE_WORD_PICKEDUP = 2;
  */
 function FDDictionarySidebar(_fdDictionaryMode){
 	var sidebar = top.document.getElementById("sidebar");
+	var dictionaryFactory = new FDDictionaryFactory();
+	var config = new FDConfig(getResourceDirectory());
 	var dic;
+	var fdDictionaryMode;
 	
 	// Initialize dictionary.
- var dir = new FDDirectory("ProfD");
- dir.changeDirectory("FireDictionary"); 
- var file = dir.createFileInstance("GENE.TXT");
- dic = PDICText.getInstance(file);
+ var dicName = getDictionaryName(); 
+ var fileName = config.getFileName(dicName);
+ var charset = config.getCharset(dicName);
+ dic = dictionaryFactory.newDictionary(dicName, fileName, charset);
  
 	/**
 	 * FDDictionarySidebar(int _fdDictionaryMode)
@@ -74,7 +77,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
 					fdDictionaryMode != this.FD_MODE_WORD_PICKEDUP ){
 					throw new Exception("INVALID_DICTIONARY_MODE");
 	}
-	var fdDictionaryMode = _fdDictionaryMode;
+	fdDictionaryMode = _fdDictionaryMode;
 	
  /**
   * Boolean isActive()
@@ -257,5 +260,31 @@ function FDDictionarySidebar(_fdDictionaryMode){
  	return "[ " + keyword + " ]\n  " +
 	        result + "\n" +
 	        "-----------------------------------------\n";
+ }
+ 
+ /**
+  * FDDirectory getResourceDirectory()
+  *
+  * @return a directory object whose directory contains resource file.
+  */
+ function getResourceDirectory(){
+  var dir = new FDDirectory("ProfD");
+  dir.changeDirectory("FireDictionary");
+  if(!dir.changeDirectory("res")){
+  	dir.createNewDirectory("res");
+  }
+  
+  return dir;
+ }
+ 
+ /**
+  * String getDictinoaryName()
+  *
+  * @return A name of dictionary.
+  */
+ function getDictionaryName(){
+ 	// Now, just return the default dictionary name which is written in configuration file.
+ 	// In the future, there are some possibility : the name might be chosen in the User Interface.
+ 	return config.getDefaultDictionaryName();
  }
 }

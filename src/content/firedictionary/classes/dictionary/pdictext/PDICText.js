@@ -37,8 +37,7 @@
 /**
  * Class for using PDIC Text type dictionary.
  */
-function PDICText(file){
-	var charset = "Shift_JIS";
+function PDICText(file, charset){
 	var indexFileName = "indexPDICText.txt";
 	var istream;
 	var indexes = new Array();
@@ -262,14 +261,14 @@ function PDICText(file){
 PDICText.instance = null;
 
 /**
- * getInstance(FDFile file)
+ * getInstance(FDFile file, String charset)
  * 
  * @return singleton object of PDICText which is initialized.
  */
-PDICText.getInstance = function(file) {
+PDICText.getInstance = function(file, charset) {
 	try{
     if (PDICText.instance == null) {
-        PDICText.instance = new PDICText(file);
+        PDICText.instance = new PDICText(file, charset);
     }
     return this.instance;
     

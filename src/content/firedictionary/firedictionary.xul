@@ -47,6 +47,8 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_permanent.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_inputstream.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/exception.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionaryfactory.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionarysidebar.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/pdictext/PDICText.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/firedictionary.js"/>
