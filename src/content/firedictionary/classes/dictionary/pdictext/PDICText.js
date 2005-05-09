@@ -50,10 +50,10 @@ function PDICText(file, charset){
 	 *  Set the dictionary file object.
 	 *
 	 * @param path full path name of a dictionary file you use.
-	 * @throws FILE_MISSING_EXCEPTION when there is no file.
+	 * @throws DICTINOARY_FILE_MISSING_EXCEPTION when there is no file.
 	 */
 	if( !file.exists() ){
-		throw new Exception("FILE_MISSING_EXCEPTION");
+		throw new Exception("DICTINOARY_FILE_MISSING_EXCEPTION");
 	}
 	
 	// Initialize input stream.
@@ -266,16 +266,8 @@ PDICText.instance = null;
  * @return singleton object of PDICText which is initialized.
  */
 PDICText.getInstance = function(file, charset) {
-	try{
-    if (PDICText.instance == null) {
-        PDICText.instance = new PDICText(file, charset);
-    }
-    return this.instance;
-    
-	}catch(e){
-		if ( e == "FILE_MISSING_EXCEPTION" ) {
- 		alert("No dictionary file");
- 		
- 	}
-	}
+ if (PDICText.instance == null) {
+  PDICText.instance = new PDICText(file, charset);
+ }
+ return this.instance;
 }

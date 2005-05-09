@@ -47,14 +47,20 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	var sidebar = top.document.getElementById("sidebar");
 	var dictionaryFactory = new FDDictionaryFactory();
 	var config = new FDConfig(getResourceDirectory());
-	var dic;
+	var dic = null;
 	var fdDictionaryMode;
 	
 	// Initialize dictionary.
  var dicName = getDictionaryName(); 
  var fileName = config.getFileName(dicName);
  var charset = config.getCharset(dicName);
- dic = dictionaryFactory.newDictionary(dicName, fileName, charset);
+ try{
+  dic = dictionaryFactory.newDictionary(dicName, fileName, charset);
+ }catch(e){
+		if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
+ 		dic = null
+ 	}
+ }
  
 	/**
 	 * FDDictionarySidebar(int _fdDictionaryMode)
@@ -108,7 +114,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  this.lookup = function(){
  	getPickupWordLabel().value = "";
  	
- 	if( this.isActive() ){
+ 	if( this.isActive() && dic != null){
  		var keyword = getKeywordTextbox().value;
  		if( keyword != ""){
  			getResultTextbox().value = _lookup(keyword);
@@ -121,7 +127,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Regist the result to history.
   */
  this.registHistory = function(){
- 	if ( this.isActive() ){
+ 	if ( this.isActive() && dic != null){
  		var keyword = getKeywordTextbox().value;
  		var result = getResultTextbox().value;
  		
