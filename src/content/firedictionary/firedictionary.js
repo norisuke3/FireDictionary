@@ -53,3 +53,10 @@ function lookup(event){
 function regist(event){
 	dicSidebar.registHistory();
 }
+
+/**
+ * initialize()
+ */
+function initialize(){
+	dicSidebar.initialize();
+}

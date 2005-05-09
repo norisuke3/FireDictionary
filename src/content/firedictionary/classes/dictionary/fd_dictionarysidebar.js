@@ -85,6 +85,21 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	}
 	fdDictionaryMode = _fdDictionaryMode;
 	
+	/**
+	 * initialize()
+	 *  Initialize dictionary sidebar. If there is no dictionary file, this
+	 *  method change the sidebar to the installation mode for dictinoary file.
+	 */
+	this.initialize = function(){
+		if (dic != null) {
+			
+		}else{
+			
+		}
+		
+		alert("Find : " + getSidebarFindTab().selected + ", Install : " + getSidebarInstallTab().selected);
+	}
+	
  /**
   * Boolean isActive()
   *  @return a boolean value whether dictionary sidebar is active or not.

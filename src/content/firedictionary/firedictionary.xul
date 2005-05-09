@@ -40,7 +40,7 @@
 
 <window title="firedictionary"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		onload="top.document.getElementById('content').reload()">
+		onload="top.document.getElementById('content').reload();initialize();">
 		
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
@@ -57,8 +57,7 @@
     
       <tabs>
         <tab label="Find"/>
-        <tab label="History"/>
-        <tab label="Study Words"/>
+        <!-- <tab label="History"/> -->
       </tabs>
       
       <tabpanels flex="1">
@@ -84,11 +83,10 @@
           </vbox>
         </tabpanel>
         
+        <!--
         <tabpanel>
         </tabpanel>
-        
-        <tabpanel>
-        </tabpanel>
+        -->
         
 	  </tabpanels>
 	  
