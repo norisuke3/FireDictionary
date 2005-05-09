@@ -91,13 +91,10 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	 *  method change the sidebar to the installation mode for dictinoary file.
 	 */
 	this.initialize = function(){
-		if (dic != null) {
-			
-		}else{
-			
+		if (dic == null) {
+			getInstallationPanel().style.display = ""
+			getMainTab().style.display = "none"
 		}
-		
-		alert("Find : " + getSidebarFindTab().selected + ", Install : " + getSidebarInstallTab().selected);
 	}
 	
  /**
@@ -170,6 +167,14 @@ function FDDictionarySidebar(_fdDictionaryMode){
  
  function getPickupWordLabel(){
  	return sidebar.contentDocument.getElementById("dictionary-pickup-word");
+ }
+ 
+ function getInstallationPanel(){
+ 	return sidebar.contentDocument.getElementById("firedictionary-installation-panel");
+ }
+ 
+ function getMainTab(){
+ 	return sidebar.contentDocument.getElementById("firedictionary-maintab");
  }
  
  /**

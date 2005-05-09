@@ -66,7 +66,7 @@ function initialize(){
  dirTemp.createNewDirectory("tmp");
 
  // Make a temporary directory empty.
- dirTemp.remove(true);
+ //dirTemp.remove(true);
 }
 
 /**
