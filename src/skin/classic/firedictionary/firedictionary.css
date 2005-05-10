@@ -36,6 +36,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+.firedictionary-installer > * { font-size:10pt; }
 .firedictionary-topspacer { height:6pt; }
 .firedictionary-keyword > label, .firedictionary-keyword > textbox { font-size:13pt; }
 .firedictionary-message { font-size:11pt; }
