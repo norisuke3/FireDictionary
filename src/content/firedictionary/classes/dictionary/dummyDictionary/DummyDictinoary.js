@@ -34,38 +34,46 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
-/**
- * Factory class for dictinoary object.
- */
-function FDDictionaryFactory(){
- var dir = new FDDirectory("ProfD");
- dir.changeDirectory("FireDictionary"); 
-
- /**
-  * Dictionary newDictionary(String dictionaryName, String fileName, String charset)
-  *  Instanciate dictionary object whose name is correspond to the attribute 'name'
-  *
-  * @param dictionaryName a dictionary name
-  * @param fileName a name of the dictinoary file.
-  * @param charset The character set of the dictinoary file.
-  * @return dictionary object
-  */
- this.newDictionary = function(dictionaryName, fileName, charset){
- 	var dic;
- 	
- 	switch(dictionaryName){
- 	 case "PDICText":
-     var file = dir.createFileInstance(fileName);      
-     dic = PDICText.getInstance(file, charset);
-     break;
-   
-   case "DummyDictionary":
-     dic = new DummyDictionary();
-     break;
-     
-   default:
- 	}
- 	
-  return dic;
- }  
+function DummyDictionary(){
+		/**
+	 * String lookup(String keyword)
+	 *  Return the dummy string which is made by the keyword.
+	 *
+	 * @param keyword A word you want to look up in this dictionary.
+	 * @return A mean of the keyword, but actually it's just dummy data.
+	 */
+	this.lookup = function(keyword){
+		// If you want to know the behavior that the instance of FDDictionarySidebar
+		// calls the method 'createIndex' of this class, uncomment the following line.
+		//throw new Exception("INDEX_MISSING_EXCEPTION");
+		
+  var first = keyword.substr(0, 1);
+  var last = keyword.substr(-1, 1);
+  var length = keyword.length;
+  
+  var s = "The word '" + keyword + "' is \n" +
+          "started with '" + first + "' and\n" +
+          "ended with '" + last + "'.\n" +
+          "The length is " + length;
+  
+  return s;
+	}
+	
+	/**
+	 * String next()
+	 * Return the next one to the word you've looked up.
+	 */
+	this.next = function(){
+		return "";
+	}
+	
+	/**
+	 * createIndex()
+	 *  Create indexes of this dictionary from index file or dictionary itself.
+	 *  This method is called by the instance of FDDictionarySidebar when a exception
+	 *  'INDEX_MISSING_EXCEPTION' was thrown in the method 'lookup' of this class.
+	 */
+	this.createIndex = function(){
+		alert("You've sent a exception 'INDEX_MISSING_EXCEPTION' in the 'lookup' method, haven't you?");
+	}
 }
