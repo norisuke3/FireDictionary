@@ -47,6 +47,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	var sidebar = top.document.getElementById("sidebar");
 	var dictionaryFactory = new FDDictionaryFactory();
 	var config = new FDConfig(getResourceDirectory());
+	var history = new FDWordHistory();
 	var dic = null;
 	var fdDictionaryMode;
 	
@@ -148,8 +149,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  		var result = getResultTextbox().value;
  		
  		if ( !keyword.match(/^( |\n)*$/i) && result != ""){
- 			getHistoryTextbox().value = _history(keyword, result) +
- 			                            getHistoryTextbox().value;
+ 			history.registWord(keyword, result);
  		}
  	}
  }
@@ -163,10 +163,6 @@ function FDDictionarySidebar(_fdDictionaryMode){
  
  function getResultTextbox(){
  	return sidebar.contentDocument.getElementById("dictionary-result");
- }
- 
- function getHistoryTextbox(){
- 	return sidebar.contentDocument.getElementById("dictionary-result-history");
  }
  
  function getPickupWordLabel(){
@@ -281,19 +277,6 @@ function FDDictionarySidebar(_fdDictionaryMode){
 		}
 		
 		return result;
- }
- 
- /**
-  * String _history(String keyword, String result)
-  *
-  * @param keyword Dictionary keyword.
-  * @paran result Result of dictionary.
-  * @return Strings to be registed to history.
-  */
- function _history(keyword, result){
- 	return "[ " + keyword + " ]\n  " +
-	        result + "\n" +
-	        "-----------------------------------------\n";
  }
  
  /**
