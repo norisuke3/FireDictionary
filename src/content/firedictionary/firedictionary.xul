@@ -50,11 +50,16 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionaryfactory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionarysidebar.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionaryinstaller.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/pdictext/PDICText.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/firedictionary.js"/>
     
-    <vbox id="firedictionary-installation-panel" flex="1" style="display:none;">
-      <label value="Installation"/>
+    <vbox id="firedictionary-installation-panel" flex="1">
+      <description>
+        FireDictionary Dictionary contents installation.
+      </description>
+      <label value="Click here:" control="install-button"/>
+      <button id="install-button" label="Install" onclick="install()"/>
     </vbox>
     
     <tabbox id="firedictionary-maintab" flex="1">

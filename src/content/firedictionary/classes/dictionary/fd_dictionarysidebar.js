@@ -91,9 +91,13 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	 *  method change the sidebar to the installation mode for dictinoary file.
 	 */
 	this.initialize = function(){
-		if (dic == null) {
-			getInstallationPanel().style.display = ""
-			getMainTab().style.display = "none"
+		var installationURI = "chrome://firedictionary/locale/install/" + dicName + ".htm"
+		
+		getInstallationPanel().style.display = ( dic == null ? "" : "none" );
+		getMainTab().style.display = ( dic == null ? "none" : "" );
+		
+		if ( dic == null ){
+			getTabBrowser().loadURI(installationURI);
 		}
 	}
 	
@@ -175,6 +179,10 @@ function FDDictionarySidebar(_fdDictionaryMode){
  
  function getMainTab(){
  	return sidebar.contentDocument.getElementById("firedictionary-maintab");
+ }
+ 
+ function getTabBrowser(){
+ 	return top.document.getElementById("content");
  }
  
  /**

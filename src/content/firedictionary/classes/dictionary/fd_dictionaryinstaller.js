@@ -33,42 +33,40 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
+
+/**
+ * A class for dictionary contents installer.
+ */
+function FDDictionaryInstaller(){
+ var picker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+ var dir = new FDDirectory("ProfD").createNewDirectory("FireDictionary");
  
-//////////// global variables /////////////////////
+ /**
+  * Boolean install()
+  *  Start install a dictionary contents.
+  *
+  * @return true : success, false : not success.
+  */
+ this.install = function(){
+ 	var result = false;
+ 	
+ 	try{
+  	picker.init(window, "Install", picker.modeOpen);
+ 	 picker.appendFilter("text file" + " (*.txt)", "*.txt");
+ 	 picker.appendFilters(picker.filterAll);
 
-var dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_ENTERERD);								// Dictinoary sidebar object.
-
-///////////////////////////////////////////////////
-
-/**
- * lookup(event)
- */
-function lookup(event){
- 	dicSidebar.lookup();
-}
-
-/**
- * regist(event)
- */
-function regist(event){
-	dicSidebar.registHistory();
-}
-
-/**
- * initialize()
- */
-function initialize(){
-	dicSidebar.initialize();
-}
-
-//
-// Event handler  ///////////////////////////////////////////////////////
-//
-
-function install(){
-	var installer = new FDDictionaryInstaller();
-	
-	if(installer.install()){
-		alert("FireDictionary is installed successfully!");
-	}
+ 	 var showResult = picker.show();
+ 	 if(showResult == picker.returnOK) {
+ 	 	var file = picker.file;
+ 	 	file.copyTo(dir, null);
+	 	
+ 	 	result = true;
+ 	 }
+ 	}catch(e){
+ 		result = false;
+ 		alert(e);
+ 	}
+	 
+	 return result;
+ }
 }
