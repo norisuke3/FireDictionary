@@ -38,6 +38,9 @@
  * Class for using PDIC Text type dictionary.
  */
 function PDICText(file, charset){
+	var	URI = Components.classes["@mozilla.org/network/standard-url;1"].createInstance(Components.interfaces.nsIURI);
+	var IOService = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
+	var scriptableIStream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
 	var indexFileName = "indexPDICText." + file.getFile().leafName.toLowerCase();
 	var istream;
 	var indexes = new Array();
@@ -122,14 +125,17 @@ function PDICText(file, charset){
 	 */
 	this.createIndex = function(){
 		if ( !fileIndex.exists() ){
-			// Create index from dictionary itself.
-			createIndexFromDictionary();
-			
-		} else {
-			// Craete index from index file.
-			createIndexFromIndexFile()
-			
+			// Try to copy the index file from chrome. If it's failure, the index is
+			// created from the dictionary content file itself.
+			if ( !copyIndexFromChrome() ){
+			 // Create index from dictionary itself.
+			 createIndexFromDictionary();
+			 return;
+			}		
 		}
+		
+		// Craete index from index file.
+		createIndexFromIndexFile();
 	}
 	
 	//
@@ -192,6 +198,37 @@ function PDICText(file, charset){
 		// Create index file.
 		fileIndex.write(s);
 		
+	}
+	
+	/**
+	 * Boolean copyIndexFromChrome()
+	 *  Copy an index file from chrome 'chrome://firedictionary/content/indexPDICText.gene.txt
+	 *
+	 * @return True if it's success.
+	 */
+	function copyIndexFromChrome(){
+  var dir = new FDDirectory("ProfD");
+  var result = true;
+  dir.changeDirectory("FireDictionary");
+ 	URI.spec = "chrome://firedictionary/content/indexPDICText.gene.txt";
+ 	
+ 	try{
+  	var stream = IOService.newChannelFromURI(URI).open();
+  	scriptableIStream.init(stream);
+ 	
+  	var content = scriptableIStream.read(scriptableIStream.available())
+ 	
+  	scriptableIStream.close();
+  	stream.close();
+ 	
+  	var file = dir.createFileInstance(indexFileName);
+  	file.write(content);
+ 	
+ 	} catch(e) {
+ 		result = false;
+ 	}
+ 	
+ 	return result;
 	}
  
  /**
