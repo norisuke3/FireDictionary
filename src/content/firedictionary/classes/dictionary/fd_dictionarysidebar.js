@@ -58,13 +58,15 @@ function FDDictionarySidebar(_fdDictionaryMode){
  try{
   dic = dictionaryFactory.newDictionary(dicName, fileName, charset);
  }catch(e){
- 	try{
- 	 dic = dictionaryFactory.newDictionary(dicName, fileName.toLowerCase(), charset);
- 	}catch(e){
- 		if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
-  		dic = null
-  	}
- 	}
+  if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
+   	try{
+ 	   dic = dictionaryFactory.newDictionary(dicName, fileName.toLowerCase(), charset);
+ 	  }catch(e){
+ 	  	if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
+  		  dic = null
+    	}
+ 	  }
+  }
  }
  
 	/**
