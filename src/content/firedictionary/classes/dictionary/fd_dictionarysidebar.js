@@ -58,8 +58,12 @@ function FDDictionarySidebar(_fdDictionaryMode){
  try{
   dic = dictionaryFactory.newDictionary(dicName, fileName, charset);
  }catch(e){
-		if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
- 		dic = null
+ 	try{
+ 	 dic = dictionaryFactory.newDictionary(dicName, fileName.toLowerCase(), charset);
+ 	}catch(e){
+ 		if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
+  		dic = null
+  	}
  	}
  }
  
