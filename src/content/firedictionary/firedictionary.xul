@@ -37,6 +37,9 @@
    - ***** END LICENSE BLOCK ***** -->
  
 <?xml-stylesheet href="chrome://firedictionary/skin/" type="text/css"?>
+    
+<!--locale-->
+<!DOCTYPE window SYSTEM "chrome://firedictionary/locale/firedictionary.dtd">
 
 <window title="firedictionary"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -55,7 +58,7 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/pdictext/PDICText.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/dummyDictionary/DummyDictinoary.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/firedictionary.js"/>
-    
+
     <vbox class="firedictionary-installer" id="firedictionary-installation-panel" flex="1">
       <description>
         FireDictionary Dictionary contents installation.
@@ -64,43 +67,57 @@
       <button id="install-button" label="Install" onclick="install()"/>
     </vbox>
     
-    <tabbox id="firedictionary-maintab" flex="1">
-    
-      <tabs>
-        <tab label="Find"/>
-        <!-- <tab label="History"/> -->
-      </tabs>
+    <vbox id="firedictionary-mainbox" flex="1">
+      <toolbox class="plain">
+        <toolbar>
+          <spacer flex="1"/>
+            <toolbarbutton id="toolsMenuButton" type="menu" label="&menu.tools;">
+              <menupopup>
+                <menuitem label="&menu.clearHistory;" oncommand="clearHistory()"/>
+                <menuseparator/>
+                <menuitem label="&menu.homepage;" oncommand="loadHomePage()"/>
+              </menupopup>
+            </toolbarbutton>
+        </toolbar>
+      </toolbox>
+
+      <tabbox id="firedictionary-maintab" flex="1">
       
-      <tabpanels flex="1">
-        <tabpanel orient="vertical" flex="1">
-	      <spacer class="firedictionary-topspacer"/>
-	      <hbox class="firedictionary-keyword">
-	        <label value="Keyword :"/>
-	        <label id="dictionary-pickup-word" value=""/>
-	      </hbox>
-	      <hbox class="firedictionary-keyword">
-	        <textbox id="dictionary-keyword" flex="1" onkeyup="lookup(event)"/>
-	        <button label="Regist" oncommand="regist(event)"/>
-	      </hbox>
-	      <vbox class="firedictionary-message" flex="1">
-	        <textbox id="dictionary-result" 
-	      		     multiline="true"
-	      		     readonly="true"
-	      		     flex="1"/>
-	        <textbox id="dictionary-result-history" 
-	      		     multiline="true"
-	      		     readonly="true"
-	      		     flex="2"/>
-          </vbox>
-        </tabpanel>
+        <tabs>
+          <tab label="Find"/>
+          <!-- <tab label="History"/> -->
+        </tabs>
         
-        <!--
-        <tabpanel>
-        </tabpanel>
-        -->
+        <tabpanels flex="1">
+          <tabpanel orient="vertical" flex="1">
+            <spacer class="firedictionary-topspacer"/>
+            <hbox class="firedictionary-keyword">
+              <label value="Keyword :"/>
+              <label id="dictionary-pickup-word" value=""/>
+            </hbox>
+            <hbox class="firedictionary-keyword">
+              <textbox id="dictionary-keyword" flex="1" onkeyup="lookup(event)"/>
+              <button label="Regist" oncommand="regist(event)"/>
+            </hbox>
+            <vbox class="firedictionary-message" flex="1">
+              <textbox id="dictionary-result" 
+                         multiline="true"
+                         readonly="true"
+                         flex="1"/>
+              <textbox id="dictionary-result-history" 
+                         multiline="true"
+                         readonly="true"
+                         flex="2"/>
+            </vbox>
+          </tabpanel>
         
-	  </tabpanels>
-	  
-    </tabbox>
-    
+          <!--
+          <tabpanel>
+          </tabpanel>
+          -->
+          
+        </tabpanels>
+        
+      </tabbox>
+    </vbox>
 </window>

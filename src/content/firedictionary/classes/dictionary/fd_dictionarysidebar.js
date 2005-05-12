@@ -95,11 +95,13 @@ function FDDictionarySidebar(_fdDictionaryMode){
 		var installationURI = "chrome://firedictionary/locale/install/" + dicName + ".htm"
 		
 		getInstallationPanel().style.display = ( dic == null ? "" : "none" );
-		getMainTab().style.display = ( dic == null ? "none" : "" );
+		getMainBox().style.display = ( dic == null ? "none" : "" );
 		
 		if ( dic == null ){
 			getTabBrowser().loadURI(installationURI);
 		}
+		
+		history.initialize();
 	}
 	
  /**
@@ -153,6 +155,14 @@ function FDDictionarySidebar(_fdDictionaryMode){
  		}
  	}
  }
+ 
+ /**
+  * clearHistory()
+  *  Clear the history of words and delete the history file.
+  */
+ this.clearHistory = function(){
+ 	history.clear();
+ }
 	
 	//
  // Private method ///////////////////////////////////////////////////////
@@ -173,8 +183,8 @@ function FDDictionarySidebar(_fdDictionaryMode){
  	return sidebar.contentDocument.getElementById("firedictionary-installation-panel");
  }
  
- function getMainTab(){
- 	return sidebar.contentDocument.getElementById("firedictionary-maintab");
+ function getMainBox(){
+ 	return sidebar.contentDocument.getElementById("firedictionary-mainbox");
  }
  
  function getTabBrowser(){

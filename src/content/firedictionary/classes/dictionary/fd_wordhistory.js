@@ -38,22 +38,60 @@
  * A class for words history.
  */
 function FDWordHistory(){
+	var unicodeConverter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 	var sidebar = top.document.getElementById("sidebar");
+	var charset = "UTF-8";
+	unicodeConverter.charset = charset;
+	
+	/**
+	 * initialize()
+	 *  Load the words which is stored to history file.
+	 */
+	this.initialize = function(){
+		var file = getHistoryFile();
+		
+		if( file.exists() ){
+			var istream = new FDInputStream(file.getFile());
+			istream.setCharset(charset);
+			setText(istream.readAsUnicode());
+			
+		} else {
+			file.create();
+			
+		}
+	}
 	
 	/**
 	 * registWord(String keyword, String result)
 	 */
-	this.registWord = function(keyword, result){
-		getHistoryTextbox().value = history(keyword, result) +
-		                            getHistoryTextbox().value;
+	this.registWord = function(keyword, result){		
+		addText(history(keyword, result));
+		getHistoryFile().write(unicodeConverter.ConvertFromUnicode(getText()));
+	}
+	
+	/**
+	 * clear()
+	 *  Clear the history and delete the history file.
+	 */
+	this.clear = function(){
+		setText("");
+		getHistoryFile().remove();
 	}
 	
 	//
  // Private method ///////////////////////////////////////////////////////
  //
  
- function getHistoryTextbox(){
- 	return sidebar.contentDocument.getElementById("dictionary-result-history");
+ function setText(s){
+ 	sidebar.contentDocument.getElementById("dictionary-result-history").value = s;
+ }
+ 
+ function getText(){
+ 	return sidebar.contentDocument.getElementById("dictionary-result-history").value;
+ }
+ 
+ function addText(s){
+ 	setText(s + getText());
  }
  
  /**
@@ -68,5 +106,16 @@ function FDWordHistory(){
 	        result + "\n" +
 	        "-----------------------------------------\n";
  }
-	
+ 
+ /**
+  * FDFile getHistoryFile()
+  *  Return a file instance of 'history.txt'
+  *
+  * @return a file instance of 'History.txt'
+  */
+ function getHistoryFile(){
+  var dir = new FDDirectory("ProfD");
+  dir.changeDirectory("FireDictionary");
+  return dir.createFileInstance("history.txt"); 	
+ }	
 }

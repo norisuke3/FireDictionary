@@ -69,6 +69,23 @@ function install(){
 	var installer = new FDDictionaryInstaller();
 	
 	if(installer.install()){
-		alert("FireDictionary is installed successfully!");
+		alert("FireDictionary has been installed successfully!");
 	}
+}
+
+/**
+ * clearHistory()
+ *  Clear the history of words and delete the history file. 
+ */
+function clearHistory(){
+	dicSidebar.clearHistory();
+}
+
+/**
+ * loadHomePage()
+ *  Load the homepage of FireDictionary. 
+ *   (http://www.firedictionary.com/)
+ */
+function loadHomePage(){
+	top.document.getElementById("content").loadURI("http://www.firedictionary.com/")
 }
