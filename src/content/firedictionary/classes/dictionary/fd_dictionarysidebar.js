@@ -162,6 +162,9 @@ function FDDictionarySidebar(_fdDictionaryMode){
   */
  this.clearHistory = function(){
  	history.clear();
+ 	
+ 	// At this time, clear the temporary files.
+ 	clearTempFiles();
  }
 	
 	//
@@ -313,5 +316,17 @@ function FDDictionarySidebar(_fdDictionaryMode){
  	// Now, just return the default dictionary name which is written in configuration file.
  	// In the future, there are some possibility : the name might be chosen in the User Interface.
  	return config.getDefaultDictionaryName();
+ }
+ 
+ /**
+  * clearTempFiles()
+  *  remove temporary files which is in the directory 'tmp'.
+  */
+ function clearTempFiles(){
+ 	var 	dirTemp = new FDDirectory("ProfD");
+  dirTemp.createNewDirectory("FireDictionary");
+  dirTemp.createNewDirectory("tmp");
+
+  dirTemp.remove(true);
  }
 }
