@@ -38,7 +38,7 @@
  * Class for using PDIC Text type dictionary.
  */
 function PDICText(file, charset){
-	var indexFileName = "indexPDICText.txt";
+	var indexFileName = "indexPDICText." + file.getFile().leafName.toLowerCase();
 	var istream;
 	var indexes = new Array();
 	var fileIndex;
