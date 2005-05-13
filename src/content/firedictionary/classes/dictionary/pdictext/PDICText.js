@@ -38,9 +38,6 @@
  * Class for using PDIC Text type dictionary.
  */
 function PDICText(file, charset){
-	var	URI = Components.classes["@mozilla.org/network/standard-url;1"].createInstance(Components.interfaces.nsIURI);
-	var IOService = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
-	var scriptableIStream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
 	var indexFileName = "indexPDICText." + file.getFile().leafName.toLowerCase();
 	var istream;
 	var indexes = new Array();
@@ -207,28 +204,13 @@ function PDICText(file, charset){
 	 * @return True if it's success.
 	 */
 	function copyIndexFromChrome(){
+		var source = "chrome://firedictionary/content/" + indexFileName
+		var emitter = new FDInstallFileEmitter(source);		
   var dir = new FDDirectory("ProfD");
-  var result = true;
+  
   dir.changeDirectory("FireDictionary");
- 	URI.spec = "chrome://firedictionary/content/indexPDICText.gene.txt";
- 	
- 	try{
-  	var stream = IOService.newChannelFromURI(URI).open();
-  	scriptableIStream.init(stream);
- 	
-  	var content = scriptableIStream.read(scriptableIStream.available())
- 	
-  	scriptableIStream.close();
-  	stream.close();
- 	
-  	var file = dir.createFileInstance(indexFileName);
-  	file.write(content);
- 	
- 	} catch(e) {
- 		result = false;
- 	}
- 	
- 	return result;
+  
+ 	return emitter.emitTo(dir);
 	}
  
  /**

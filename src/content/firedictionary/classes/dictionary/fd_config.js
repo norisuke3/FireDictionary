@@ -38,13 +38,10 @@
   * A class for configuration file whose name is 'dictionary-config.xml'
   */
 function FDConfig(dir){
-	var	URI = Components.classes["@mozilla.org/network/standard-url;1"].createInstance(Components.interfaces.nsIURI);
-	var IOService = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
-	var scriptableIStream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
- var filenameConfig = "dictionary-config.xml"
+	var filenameConfig = "dictionary-config.xml"
  
 	var file = dir.createFileInstance(filenameConfig); 
- if ( !file.exists() ) createConfigFile(dir, filenameConfig); 	
+ if ( !file.exists() ) createConfigFile(dir); 	
  var istream = new FDInputStream(file.getFile());
  istream.setCharset("UTF-8");
  
@@ -139,22 +136,13 @@ function FDConfig(dir){
  //
  
  /**
-  * function createConfigFile(FDDirectory dir, String name)
+  * function createConfigFile(FDDirectory dir)
   *
   * @param dir
-  * @param naem
   */
- function createConfigFile(dir, name){
- 	URI.spec = "chrome://firedictionary/content/classes/dictionary/res/dictionary-config.xml";
- 	var stream = IOService.newChannelFromURI(URI).open();
- 	scriptableIStream.init(stream);
- 	
- 	var content = scriptableIStream.read(scriptableIStream.available())
- 	
- 	scriptableIStream.close();
- 	stream.close();
- 	
- 	var file = dir.createFileInstance(name);
- 	file.write(content);
+ function createConfigFile(dir){
+ 	var source = "chrome://firedictionary/content/classes/dictionary/res/dictionary-config.xml"
+ 	var emitter = new FDInstallFileEmitter(source);
+ 	emitter.emitTo(dir);
  }
 }
