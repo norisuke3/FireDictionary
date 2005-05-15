@@ -62,7 +62,7 @@
 
     <vbox class="firedictionary-installer" id="firedictionary-installation-panel" flex="1">
       <description>
-        FireDictionary Dictionary contents installation.
+        &install.box.description;
       </description>
       <label value="Click here:" control="install-button"/>
       <button id="install-button" label="Install" onclick="install()"/>
