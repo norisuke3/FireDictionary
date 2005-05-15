@@ -1,3 +1,4 @@
 content firedictionry jar:chrome/firedictionry.jar!/content/
 locale firedictionary ja-JP jar:chrome/firedictionary.jar!/locale/ja-JP/
+locale firedictionary en-US jar:chrome/firedictionary.jar!/locale/en-US/
 skin firedictionary classic/1.0 jar:chrome/firedictionary.jar!/skin/classic/

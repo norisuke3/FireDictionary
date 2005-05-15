@@ -47,6 +47,8 @@ registerChrome(CONTENT | DELAYED_CHROME,
   targetFolder, "content/firedictionary/");
 registerChrome(LOCALE | DELAYED_CHROME,
   targetFolder, "locale/ja-JP/firedictionary/");
+registerChrome(LOCALE | DELAYED_CHROME,
+  targetFolder, "locale/en-US/firedictionary/");
 registerChrome(SKIN | DELAYED_CHROME,
   targetFolder, "skin/classic/firedictionary/");
   
