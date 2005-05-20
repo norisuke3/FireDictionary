@@ -10,6 +10,7 @@
 
 <project name="deployment_firedictionary" default="makeInstaller">
 	<property name="target" value="firefox.exe"/>
+	<property name="version" value="0.8"/>
 	<property environment="env"/>
 	<property name="chromePath" value="${env.CHROME}"/>
     <description>
@@ -51,11 +52,44 @@
 		</jar>
 	</target>
 
+
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: makeDownloadFiles
+         - - - - - - - - - - - - - - - - - -->
+	<target name="makeDownloadFiles" depends="makeInstaller">
+		<mkdir dir="download"/>
+		
+		<copy todir="download">
+			<fileset dir=".">
+				<include name="firedictionary.xpi"/>
+				<include name="update.rdf"/>
+			</fileset>
+		</copy>
+		
+		<tar destfile="download/firedictionary-${version}.tar.gz"
+			 basedir="."
+			 longfile="gnu"
+			 compression = "gzip">
+			<include name="src/**" />
+		</tar>
+		
+		<zip destfile="download/firedictionary-${version}.zip">
+			<fileset dir=".">
+				<include name="src/**" />
+			</fileset>
+		</zip>
+		
+		<copy file="download/firedictionary.xpi"
+		      tofile="download/firedictionary-${version}.xpi"/>
+	</target>
+         	
     <!-- - - - - - - - - - - - - - - - - - 
           target: clean
          - - - - - - - - - - - - - - - - - -->
 	<target name="clean">
 		<delete dir="chrome"/>
 		<delete file="firedictionary.xpi"/>
+		<delete dir="download"/>
 	</target>
 </project>
