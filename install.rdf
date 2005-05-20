@@ -59,7 +59,7 @@
     <em:description>Cool dictionary on the sidebar.</em:description>
     <em:creator>Noriaki Hamamoto</em:creator>
     <em:homepageURL>http://www.firedictionary.com/</em:homepageURL>
-    <!--<em:updateURL>http://www.bengoodger.com/software/mb/umo/update.rdf</em:updateURL>-->
+    <em:updateURL>http://www.firedictionary.com/download/update.rdf</em:updateURL>
 
     <!-- Front End Integration Hooks (used by Extension Manager)-->
     <!--<em:optionsURL>chrome://newext2/content/options.xul</em:optionsURL>-->
