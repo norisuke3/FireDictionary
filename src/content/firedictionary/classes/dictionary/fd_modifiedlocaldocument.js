@@ -90,6 +90,7 @@ function FDModifiedLocalDocument(document, tabId, dir){
  	resolve(element.getElementsByTagName("link"), "href", URI);
  	resolve(element.getElementsByTagName("a"), "href", URI);
  	resolve(element.getElementsByTagName("img"), "src", URI);
+ 	resolve(element.getElementsByTagName("frame"), "src", URI);
  }
 
  /*
