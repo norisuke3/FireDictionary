@@ -91,6 +91,8 @@ function FDModifiedLocalDocument(document, tabId, dir){
  	resolve(element.getElementsByTagName("a"), "href", URI);
  	resolve(element.getElementsByTagName("img"), "src", URI);
  	resolve(element.getElementsByTagName("frame"), "src", URI);
+ 	resolve(element.getElementsByTagName("iframe"), "src", URI);
+ 	resolve(element.getElementsByTagName("embed"), "src", URI);
  }
 
  /*
