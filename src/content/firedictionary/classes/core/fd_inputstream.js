@@ -72,6 +72,14 @@ function FDInputStream(file){
 		return unicodeConverter.charset;
 	}
 	
+	/**
+	 * close()
+	 *  Close this input stream.
+	 */
+	this.close = function(){
+		scriptable.close();
+	}
+	
  /**
   * Char* readLine();
   *  read line.
