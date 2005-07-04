@@ -35,73 +35,62 @@
  * ***** END LICENSE BLOCK ***** */
  
 /**
- * A class for words history.
+ * A virtual class for a class which deal with dom document, so you MUST NOT
+ * create the instance of this class.
  */
-function FDWordHistory(){
-	var sidebar = top.document.getElementById("sidebar");
-	
-	/**
-	 * initialize()
-	 *  Load the words which is stored to history file.
-	 */
-	this.initialize = function(){
-	 var xmlHistory = new FDXmlHistory();
-		var file = getHistoryFile();
-		
-		if( file.exists() ){
-			xmlHistory.readFromFile(file);
-			setText(xmlHistory.serializeToString());
-			
-		}
-	}
-	
-	/**
-	 * registWord(String keyword, String result)
-	 */
-	this.registWord = function(keyword, result){
-	 var xmlHistory = new FDXmlHistory();
-		var file = getHistoryFile();
-		
-		if( file.exists() ){
-			xmlHistory.readFromFile(file);
-		}
-		
-		xmlHistory.addItem(keyword, result);
-		setText(xmlHistory.serializeToString());
-		
-		xmlHistory.writeToFile(file);
-	}
-	
-	/**
-	 * clear()
-	 *  Clear the history and delete the history file.
-	 */
-	this.clear = function(){
-		getHistoryFile().remove();
-		setText("");
-	}
-	
-	//
- // Private method ///////////////////////////////////////////////////////
- //
- 
- function setText(s){
- 	sidebar.contentDocument.getElementById("dictionary-result-history").value = s;
+function FDDomBase(){
+ var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
+ var serializer = new XMLSerializer();
+	var charset = "UTF-8";
+
+ this.domDocument = Components.classes["@mozilla.org/xul/xul-document;1"].createInstance(Components.interfaces.nsIDOMDocument);
+  
+ /**
+  * Element getElement()
+  *
+  * @return a root element of the xml for a history item.
+  */
+ this.getElement = function(){
+ 	return this.domDocument.documentElement;
  }
- 
- function getText(){
- 	return sidebar.contentDocument.getElementById("dictionary-result-history").value;
+	
+ /**
+  * String serializeToString()
+  *
+  * @return serialized dom tree.
+  */
+ this.serializeToString = function(){
+ 	return serializer.serializeToString(this.getElement());
  }
  
  /**
-  * FDFile getHistoryFile()
-  *  Return a file instance of 'history.txt'
+  * writeToFile(FDFile file)
+  *  write the dom tree to a file. If the file is already exist, it's overridden.
   *
-  * @return a file instance of 'History.txt'
+  * @param file
   */
- function getHistoryFile(){
-  var dir = new FDDirectory("ProfD");
-  dir.changeDirectory("FireDictionary");
-  return dir.createFileInstance("history.xml"); 	
- }	
+ this.writeToFile = function(file){
+		file.create();
+ 	
+  ostream.init(file.getFile(), 2, 0x200, false); // open as "write only"
+ 	serializer.serializeToStream(this.getElement(), ostream, charset);
+  ostream.close();
+ }
+ 
+ /**
+  * readFromFile(FDFile file)
+  *  read a xml from a file.
+  *
+  * @param file
+  */
+ this.readFromFile = function(file){
+ 	var parser = new DOMParser();
+ 	
+		var istream = new FDInputStream(file.getFile());
+		istream.setCharset(charset);
+		
+		this.domDocument = parser.parseFromString(istream.readAsUnicode(), "text/xml");
+		
+		istream.close();
+ }
 }

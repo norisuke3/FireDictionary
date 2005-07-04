@@ -35,73 +35,68 @@
  * ***** END LICENSE BLOCK ***** */
  
 /**
- * A class for words history.
+ * A class for a xml element of a history item.
  */
-function FDWordHistory(){
-	var sidebar = top.document.getElementById("sidebar");
-	
-	/**
-	 * initialize()
-	 *  Load the words which is stored to history file.
-	 */
-	this.initialize = function(){
-	 var xmlHistory = new FDXmlHistory();
-		var file = getHistoryFile();
-		
-		if( file.exists() ){
-			xmlHistory.readFromFile(file);
-			setText(xmlHistory.serializeToString());
-			
-		}
-	}
-	
-	/**
-	 * registWord(String keyword, String result)
-	 */
-	this.registWord = function(keyword, result){
-	 var xmlHistory = new FDXmlHistory();
-		var file = getHistoryFile();
-		
-		if( file.exists() ){
-			xmlHistory.readFromFile(file);
-		}
-		
-		xmlHistory.addItem(keyword, result);
-		setText(xmlHistory.serializeToString());
-		
-		xmlHistory.writeToFile(file);
-	}
-	
-	/**
-	 * clear()
-	 *  Clear the history and delete the history file.
-	 */
-	this.clear = function(){
-		getHistoryFile().remove();
-		setText("");
-	}
-	
-	//
- // Private method ///////////////////////////////////////////////////////
- //
+function FDXmlHistoryItem(){
+ var ns = "http://www.firedictionary.com/history"
  
- function setText(s){
- 	sidebar.contentDocument.getElementById("dictionary-result-history").value = s;
- }
+ /**
+  * FDXmlHistoryItem()
+  *  Constructor of this class.
+  *  Initialize a dom tree with an Item element.
+  */
+ FDDomBase.call(this);
  
- function getText(){
- 	return sidebar.contentDocument.getElementById("dictionary-result-history").value;
+	// Add a top node.
+ var item = this.domDocument.createElementNS(ns, "hs:item");
+ this.domDocument.appendChild(item);
+ 
+ // add timestamp element
+ var timestamp = this.domDocument.createElementNS(ns, "hs:timestamp");
+ timestamp.appendChild(this.domDocument.createTextNode(new Date().getTime()));
+ item.appendChild(timestamp);
+ 
+ /**
+  * setKeyword(String keyword)
+  *
+  * @param keyword
+  */
+ this.setKeyword = function(keyword){
+ 	var element = this.domDocument.createElementNS(ns, "hs:keyword");
+ 	element.appendChild(this.domDocument.createTextNode(keyword));
+ 	item.insertBefore(element, timestamp);
  }
  
  /**
-  * FDFile getHistoryFile()
-  *  Return a file instance of 'history.txt'
+  * setResult(String result)
   *
-  * @return a file instance of 'History.txt'
+  * @param result
   */
- function getHistoryFile(){
-  var dir = new FDDirectory("ProfD");
-  dir.changeDirectory("FireDictionary");
-  return dir.createFileInstance("history.xml"); 	
- }	
+ this.setResult = function(result){
+ 	var element = this.domDocument.createElementNS(ns, "hs:result");
+ 	element.appendChild(this.domDocument.createTextNode(result));
+ 	item.insertBefore(element, timestamp);
+ }
+ 
+ /**
+  * setUrl(String url)
+  *
+  * @param url
+  */
+ this.setUrl = function(url){
+ 	var element = this.domDocument.createElementNS(ns, "hs:url");
+ 	element.appendChild(this.domDocument.createTextNode(url));
+ 	item.insertBefore(element, timestamp);
+ }
+ 
+ /**
+  * setTitle(String title)
+  *
+  * @param title
+  */
+ this.setTitle = function(title){
+ 	var element = this.domDocument.createElementNS(ns, "hs:title");
+ 	element.appendChild(this.domDocument.createTextNode(title));
+ 	item.insertBefore(element, timestamp);
+ }
 }

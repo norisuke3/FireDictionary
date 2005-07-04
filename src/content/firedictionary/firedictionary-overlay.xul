@@ -44,7 +44,10 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_permanent.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_inputstream.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_installfileemitter.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_dombase.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/exception.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/xml/fd_xmlhistoryitem.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/xml/fd_xmlhistory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_TextNodeArray.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_htmlparser.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_modifiedlocaldocument.js"/>

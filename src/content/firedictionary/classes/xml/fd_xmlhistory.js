@@ -35,73 +35,47 @@
  * ***** END LICENSE BLOCK ***** */
  
 /**
- * A class for words history.
+ * A class for a xml element of a history which can contain history items.
  */
-function FDWordHistory(){
-	var sidebar = top.document.getElementById("sidebar");
-	
-	/**
-	 * initialize()
-	 *  Load the words which is stored to history file.
-	 */
-	this.initialize = function(){
-	 var xmlHistory = new FDXmlHistory();
-		var file = getHistoryFile();
-		
-		if( file.exists() ){
-			xmlHistory.readFromFile(file);
-			setText(xmlHistory.serializeToString());
-			
-		}
-	}
-	
-	/**
-	 * registWord(String keyword, String result)
-	 */
-	this.registWord = function(keyword, result){
-	 var xmlHistory = new FDXmlHistory();
-		var file = getHistoryFile();
-		
-		if( file.exists() ){
-			xmlHistory.readFromFile(file);
-		}
-		
-		xmlHistory.addItem(keyword, result);
-		setText(xmlHistory.serializeToString());
-		
-		xmlHistory.writeToFile(file);
-	}
-	
-	/**
-	 * clear()
-	 *  Clear the history and delete the history file.
-	 */
-	this.clear = function(){
-		getHistoryFile().remove();
-		setText("");
-	}
-	
-	//
- // Private method ///////////////////////////////////////////////////////
- //
- 
- function setText(s){
- 	sidebar.contentDocument.getElementById("dictionary-result-history").value = s;
- }
- 
- function getText(){
- 	return sidebar.contentDocument.getElementById("dictionary-result-history").value;
- }
+function FDXmlHistory(){
+ var ns = "http://www.firedictionary.com/history"
  
  /**
-  * FDFile getHistoryFile()
-  *  Return a file instance of 'history.txt'
-  *
-  * @return a file instance of 'History.txt'
+  * FDXmlHistory()
+  *  Constructor of this class.
+  *  Initialize a dom tree.
   */
- function getHistoryFile(){
-  var dir = new FDDirectory("ProfD");
-  dir.changeDirectory("FireDictionary");
-  return dir.createFileInstance("history.xml"); 	
- }	
+ FDDomBase.call(this);
+
+	// Add a top node.
+ var top = this.domDocument.createElementNS(ns, "hs:firedictionary"); 
+ this.domDocument.appendChild(top);
+ 
+ // Add a history node.
+ var history = this.domDocument.createElementNS(ns, "hs:history");
+ top.appendChild(history);
+ 
+ // Add a items node.
+ var items = this.domDocument.createElementNS(ns, "hs:items");
+ history.appendChild(items);
+ 
+ 
+ /**
+  * addItem(String keyword, String result)
+  *
+  * @param keyword Dictionary keyword.
+  * @paran result Result of dictionary.
+  * @return added element.
+  */
+ this.addItem = function(keyword, result){
+ 	var items = this.domDocument.getElementsByTagName("items").item(0);
+ 	var item = new FDXmlHistoryItem();
+ 	
+ 	item.setKeyword(keyword);
+ 	item.setResult(result);
+ 	
+  items.appendChild(item.getElement());
+  
+  return item;
+ }
 }
