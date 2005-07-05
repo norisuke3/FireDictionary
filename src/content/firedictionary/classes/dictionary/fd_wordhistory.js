@@ -50,7 +50,7 @@ function FDWordHistory(){
 		
 		if( file.exists() ){
 			xmlHistory.readFromFile(file);
-			setText(xmlHistory.serializeToString());
+		 setText(formatHistory(xmlHistory));
 			
 		}
 	}
@@ -67,7 +67,7 @@ function FDWordHistory(){
 		}
 		
 		xmlHistory.addItem(keyword, result);
-		setText(xmlHistory.serializeToString());
+		setText(formatHistory(xmlHistory));
 		
 		xmlHistory.writeToFile(file);
 	}
@@ -103,5 +103,47 @@ function FDWordHistory(){
   var dir = new FDDirectory("ProfD");
   dir.changeDirectory("FireDictionary");
   return dir.createFileInstance("history.xml"); 	
- }	
+ }
+ 
+ /**
+  * Document getHistoryStylesheetFile()
+  *  Return DOMDocument object which contains stylesheet.
+  *
+  * @return DOMDocument object which contains stylesheet of 'history.xsl'
+  */
+ function getHistoryStylesheetFile(){
+  var dir = new FDDirectory("ProfD");
+  dir.changeDirectory("FireDictionary");
+  var file = dir.createFileInstance("history.xsl");
+  
+  if( !file.exists() ) createHistoryStylesheetFile(dir);
+  
+  return file;
+ }
+ 
+ /**
+  * function createConfigFile(FDDirectory dir)
+  *
+  * @param dir
+  */
+ function createHistoryStylesheetFile(dir){
+ 	var source = "chrome://firedictionary/content/classes/dictionary/res/history.xsl"
+ 	var emitter = new FDInstallFileEmitter(source);
+ 	emitter.emitTo(dir);
+ }
+ 
+ /**
+  * String formatHistory(FDXmlHistory history)
+  */
+ function formatHistory(history){
+  var transformer = new XSLTProcessor();
+  var xsl = new FDDomBase();
+  var fragment;
+  
+  xsl.readFromFile(getHistoryStylesheetFile());
+  transformer.importStylesheet(xsl.getElement());
+  fragment = transformer.transformToFragment(history.getElement(), document);
+  
+  return fragment.firstChild.nodeValue;
+ }
 }
