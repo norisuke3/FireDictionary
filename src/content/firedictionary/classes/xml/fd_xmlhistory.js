@@ -74,7 +74,11 @@ function FDXmlHistory(){
  	item.setKeyword(keyword);
  	item.setResult(result);
  	
-  items.appendChild(item.getElement());
+ 	if ( !items.hasChildNodes() ){
+   items.appendChild(item.getElement());
+ 	} else {
+ 		items.insertBefore(item.getElement(), items.firstChild);
+ 	}
   
   return item;
  }
