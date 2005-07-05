@@ -35,8 +35,7 @@
  * ***** END LICENSE BLOCK ***** */
  
 /**
- * A virtual class for a class which deal with dom document, so you MUST NOT
- * create the instance of this class.
+ * A class which deal with dom document
  */
 function FDDomBase(){
  var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
