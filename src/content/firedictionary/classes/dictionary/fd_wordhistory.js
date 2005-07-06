@@ -66,6 +66,11 @@ function FDWordHistory(){
 			xmlHistory.readFromFile(file);
 		}
 		
+		// If the keyword is registered just before, do noghing and return.
+		if ( xmlHistory.getLastAddedItem().getKeyword() == keyword ){
+			return;
+		}
+		
 		xmlHistory.addItem(keyword, result);
 		setText(formatHistory(xmlHistory));
 		
@@ -141,8 +146,8 @@ function FDWordHistory(){
   var fragment;
   
   xsl.readFromFile(getHistoryStylesheetFile());
-  transformer.importStylesheet(xsl.getElement());
-  fragment = transformer.transformToFragment(history.getElement(), document);
+  transformer.importStylesheet(xsl.getDocumentElement());
+  fragment = transformer.transformToFragment(history.getDocumentElement(), document);
   
   return fragment.firstChild.nodeValue;
  }

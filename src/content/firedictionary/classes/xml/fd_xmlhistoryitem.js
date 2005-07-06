@@ -68,6 +68,16 @@ function FDXmlHistoryItem(){
  }
  
  /**
+  * String getKeyword()
+  *  Return a string of keyword. If there are no keyword in this tree, return null.
+  *
+  * @return keyword
+  */
+ this.getKeyword = function(){
+ 	return this.getTextContent("keyword");
+ }
+ 
+ /**
   * setResult(String result)
   *
   * @param result
@@ -76,6 +86,16 @@ function FDXmlHistoryItem(){
  	var element = this.domDocument.createElementNS(ns, "hs:result");
  	element.appendChild(this.domDocument.createTextNode(result));
  	item.insertBefore(element, timestamp);
+ }
+ 
+ /**
+  * String getResult()
+  *  Return a string of result. If there are no result in this tree, return null.
+  *
+  * @return result
+  */
+ this.getResult = function(){
+ 	return this.getTextContent("result");
  }
  
  /**
@@ -90,6 +110,16 @@ function FDXmlHistoryItem(){
  }
  
  /**
+  * String getUrl()
+  *  Return a string of url. If there are no url in this tree, return null.
+  *
+  * @return url
+  */
+ this.getUrl = function(){
+ 	return this.getTextContent("url");
+ }
+ 
+ /**
   * setTitle(String title)
   *
   * @param title
@@ -98,5 +128,43 @@ function FDXmlHistoryItem(){
  	var element = this.domDocument.createElementNS(ns, "hs:title");
  	element.appendChild(this.domDocument.createTextNode(title));
  	item.insertBefore(element, timestamp);
+ }
+ 
+ /**
+  * String getTitle()
+  *  Return a string of title. If there are no title in this tree, return null.
+  *
+  * @return title
+  */
+ this.getTitle = function(){
+ 	return this.getTextContent("title");
+ }
+ 
+ /**
+  * String getTimestamp()
+  *  Return a string of timestamp. If there are no timestamp in this tree, return null.
+  *
+  * @return timestamp
+  */
+ this.getTimestamp = function(){
+ 	return this.getTextContent("timestamp");
+ }
+ 
+ /**
+  * String getTextContent(String elementName)
+  *  Return the text content of an element whose name is passed as a attribute 'elementName'
+  *
+  * @param element name
+  * @return text content
+  */
+ this.getTextContent = function(elementName){
+ 	var nodes = this.domDocument.getElementsByTagNameNS(ns, elementName);
+ 	var result = null;
+ 	
+ 	if ( nodes.length != 0 ){
+ 		result = nodes.item(0).textContent;
+ 	}
+ 	
+ 	return result;
  }
 }

@@ -75,11 +75,30 @@ function FDXmlHistory(){
  	item.setResult(result);
  	
  	if ( !items.hasChildNodes() ){
-   items.appendChild(item.getElement());
+   items.appendChild(item.getDocumentElement());
  	} else {
- 		items.insertBefore(item.getElement(), items.firstChild);
+ 		items.insertBefore(item.getDocumentElement(), items.firstChild);
  	}
   
   return item;
+ }
+ 
+ /**
+  * FDXmlHistoryItem getLastAddedItem()
+  *  Return an item object which added last time. If there are no items, return null.
+  *
+  * @return an item object which added last time.
+  */
+ this.getLastAddedItem = function(){
+ 	var items = this.domDocument.getElementsByTagName("items").item(0);
+ 	var item = new FDXmlHistoryItem();
+ 	var result = null;
+ 	
+ 	if ( items.hasChildNodes() ){
+ 		item.setDocumentElement(items.firstChild);
+ 		result = item;
+ 	}
+ 	
+ 	return result;
  }
 }

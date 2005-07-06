@@ -45,12 +45,23 @@ function FDDomBase(){
  this.domDocument = Components.classes["@mozilla.org/xul/xul-document;1"].createInstance(Components.interfaces.nsIDOMDocument);
   
  /**
-  * Element getElement()
+  * Element getDocumentElement()
   *
   * @return a root element of the xml for a history item.
   */
- this.getElement = function(){
+ this.getDocumentElement = function(){
  	return this.domDocument.documentElement;
+ }
+ 
+ /**
+  * setDocumentElement(Element element)
+  *
+  * @param a element which will be a document Element of this tree.
+  */
+ this.setDocumentElement = function(element){
+  this.domDocument = Components.classes["@mozilla.org/xul/xul-document;1"].createInstance(Components.interfaces.nsIDOMDocument);
+  
+  this.domDocument.appendChild(element);
  }
 	
  /**
@@ -59,7 +70,18 @@ function FDDomBase(){
   * @return serialized dom tree.
   */
  this.serializeToString = function(){
- 	return serializer.serializeToString(this.getElement());
+ 	return serializer.serializeToString(this.getDocumentElement());
+ }
+ 
+ /**
+  * parseFromString(String s)
+  *
+  * @param a string of an xml which will be a document of this class.
+  */
+ this.parseFromString = function(s){
+ 	var parser = new DOMParser();
+ 	
+ 	this.domDocument = parser.parseFromString(s, "text/xml");
  }
  
  /**
@@ -72,7 +94,7 @@ function FDDomBase(){
 		file.create();
  	
   ostream.init(file.getFile(), 2, 0x200, false); // open as "write only"
- 	serializer.serializeToStream(this.getElement(), ostream, charset);
+ 	serializer.serializeToStream(this.getDocumentElement(), ostream, charset);
   ostream.close();
  }
  
@@ -82,13 +104,11 @@ function FDDomBase(){
   *
   * @param file
   */
- this.readFromFile = function(file){
- 	var parser = new DOMParser();
- 	
+ this.readFromFile = function(file){ 	
 		var istream = new FDInputStream(file.getFile());
 		istream.setCharset(charset);
 		
-		this.domDocument = parser.parseFromString(istream.readAsUnicode(), "text/xml");
+		this.parseFromString(istream.readAsUnicode());
 		
 		istream.close();
  }
