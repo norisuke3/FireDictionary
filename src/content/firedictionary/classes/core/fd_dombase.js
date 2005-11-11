@@ -61,7 +61,7 @@ function FDDomBase(){
  this.setDocumentElement = function(element){
   this.domDocument = Components.classes["@mozilla.org/xul/xul-document;1"].createInstance(Components.interfaces.nsIDOMDocument);
   
-  this.domDocument.appendChild(element);
+  this.domDocument.appendChild(element.cloneNode(true));
  }
 	
  /**
