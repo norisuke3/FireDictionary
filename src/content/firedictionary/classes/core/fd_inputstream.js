@@ -133,7 +133,7 @@ function FDInputStream(file){
 	 * @return A string of the file.
 	 */
 	this.read = function(){
-		this.setOffset(0);
+		this.setOffset(0, 0);
 		return scriptable.read(filesize);
 	}
 	
