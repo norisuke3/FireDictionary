@@ -67,7 +67,8 @@ function FDWordHistory(){
 		}
 		
 		// If the keyword is registered just before, do noghing and return.
-		if ( xmlHistory.getLastAddedItem().getKeyword() == keyword ){
+		var lastWord = xmlHistory.getLastAddedItem();
+		if ( lastWord != null && lastWord.getKeyword() == keyword ){
 			return;
 		}
 		
