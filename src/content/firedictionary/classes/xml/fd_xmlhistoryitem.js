@@ -36,6 +36,14 @@
  
 /**
  * A class for a xml element of a history item.
+ * The element 'item' can contain following elements.
+ *
+ *   keyword
+ *   result
+ *   url
+ *   title
+ *   category
+ *   timestamp
  */
 function FDXmlHistoryItem(){
  var ns = "http://www.firedictionary.com/history"
@@ -138,6 +146,27 @@ function FDXmlHistoryItem(){
   */
  this.getTitle = function(){
  	return this.getTextContent("title");
+ }
+ 
+ /**
+  * setCategory(String category)
+  *
+  * @param category
+  */
+ this.setCategory = function(category){
+ 	var element = this.domDocument.createElementNS(ns, "hs:category");
+ 	element.appendChild(this.domDocument.createTextNode(category));
+ 	item.insertBefore(element, timestamp);
+ }
+ 
+ /**
+  * String getCategory()
+  *  Return a string of category. If there are no category in this tree, return null.
+  *
+  * @return category
+  */
+ this.getCategory = function(){
+ 	return this.getTextContent("category");
  }
  
  /**

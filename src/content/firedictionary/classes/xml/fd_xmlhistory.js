@@ -73,6 +73,9 @@ function FDXmlHistory(){
  	
  	item.setKeyword(keyword);
  	item.setResult(result);
+ 	item.setUrl("");
+ 	item.setTitle("");
+ 	item.setCategory("");
  	
  	if ( !items.hasChildNodes() ){
    items.appendChild(item.getDocumentElement());
