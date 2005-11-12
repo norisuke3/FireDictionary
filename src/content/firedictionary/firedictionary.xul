@@ -54,6 +54,7 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/exception.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/xml/fd_xmlhistoryitem.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/xml/fd_xmlhistory.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/legacy/fd_historytranslator.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionaryfactory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_wordhistory.js"/>
