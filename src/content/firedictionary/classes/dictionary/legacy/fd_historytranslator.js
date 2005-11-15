@@ -39,13 +39,27 @@
  * a new xml style.
  */
  function FDHistoryTranslator(oldfile){
- 	/**
-	  * FDHistoryTranslator(FDFile oldfile)
-	  *  Constructor of this class.
-	  *
-	  * @param oldfile file ocject which refer the old history file.
-	  */
-		
+ 	var istream = new FDInputStream(oldfile.getFile());
+	 var xmlHistory = new FDXmlHistory();
+	 var history;
+	 var lines;
+	 var i;
+  istream.setCharset("UTF-8");
+  
+	/**
+  * FDHistoryTranslator(FDFile oldfile)
+  *  Constructor of this class.
+  *
+  * @param oldfile file ocject which refer the old history file.
+  */
+  history = istream.readAsUnicode();
+  lines = history.split("\n");
+	 for ( i=0 ; i<lines.length - 2 ; i+=3 ){
+	 	xmlHistory.addItem(
+	 					lines[i].substring(2, lines[i].length - 2),
+	 					lines[i+1]
+	 	);
+	 }
 		
  	/**
  	 * Return the XML document of the history.
@@ -53,5 +67,6 @@
  	 * @return the XML document of the history
  	 */
  	this.getXmlHistory = function(){
+ 		return xmlHistory;
  	}
  }
