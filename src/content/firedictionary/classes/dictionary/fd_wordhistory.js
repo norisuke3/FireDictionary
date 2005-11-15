@@ -52,6 +52,15 @@ function FDWordHistory(){
 			xmlHistory.readFromFile(file);
 		 setText(formatHistory(xmlHistory));
 			
+		} else {
+			var oldfile = getHistoryFileEx();
+			if( oldfile.exists() ){
+				var translator = new FDHistoryTranslator(oldfile);
+				xmlHistory = translator.getXmlHistory();
+				
+ 		 setText(formatHistory(xmlHistory));
+ 		 xmlHistory.writeToFile(file);
+			}
 		}
 	}
 	
@@ -83,6 +92,9 @@ function FDWordHistory(){
 	 *  Clear the history and delete the history file.
 	 */
 	this.clear = function(){
+		var oldfile = getHistoryFileEx();
+		
+		if ( oldfile.exists() ) oldfile.remove();		
 		getHistoryFile().remove();
 		setText("");
 	}
@@ -101,14 +113,29 @@ function FDWordHistory(){
  
  /**
   * FDFile getHistoryFile()
-  *  Return a file instance of 'history.txt'
+  *  Return a file instance of 'history.xml'
   *
-  * @return a file instance of 'History.txt'
+  * @return a file instance of 'History.xml'
   */
  function getHistoryFile(){
   var dir = new FDDirectory("ProfD");
   dir.changeDirectory("FireDictionary");
   return dir.createFileInstance("history.xml"); 	
+ }
+ 
+ /**
+  * FDFile getHistoryFileEx()
+  *  -- This method is for the old style history file, which is written in
+  *  -- plain text and used until FireDictionry 0.8.2.
+  * 
+  *  Return a file instance of 'history.txt'
+  *
+  * @return a file instance of 'History.txt'
+  */
+ function getHistoryFileEx(){
+  var dir = new FDDirectory("ProfD");
+  dir.changeDirectory("FireDictionary");
+  return dir.createFileInstance("history.txt"); 	
  }
  
  /**
