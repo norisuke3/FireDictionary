@@ -38,11 +38,11 @@
  * Class for using PDIC Text type dictionary.
  */
 function PDICText(file, charset){
-	var indexFileName = "indexPDICText." + file.getFile().leafName.toLowerCase();
+	var indexCharLength = 5;										          // index depth
+	var indexFileName = "indexPDICText" + indexCharLength + "." + file.getFile().leafName.toLowerCase();
 	var istream;
 	var indexes = new Array();
 	var fileIndex;
-	var indexCharLength = 3;
 	
 	/**
 	 * PDICText(FDFile file)
