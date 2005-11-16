@@ -54,10 +54,10 @@
   */
   history = istream.readAsUnicode();
   lines = history.split("\n");
-	 for ( i=0 ; i<lines.length - 2 ; i+=3 ){
+	 for ( i=lines.length - 2 ; i>0 ; i-=3 ){
 	 	xmlHistory.addItem(
-	 					lines[i].substring(2, lines[i].length - 2),
-	 					lines[i+1]
+	 					lines[i-2].substring(2, lines[i-2].length - 2),
+	 					lines[i-1]
 	 	);
 	 }
 		
