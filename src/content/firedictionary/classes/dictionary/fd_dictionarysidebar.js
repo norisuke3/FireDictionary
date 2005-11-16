@@ -305,10 +305,8 @@ function FDDictionarySidebar(_fdDictionaryMode){
   */
  function getResourceDirectory(){
   var dir = new FDDirectory("ProfD");
-  dir.changeDirectory("FireDictionary");
-  if(!dir.changeDirectory("res")){
-  	dir.createNewDirectory("res");
-  }
+  dir.createNewDirectory("FireDictionary");
+ 	dir.createNewDirectory("res");
   
   return dir;
  }
