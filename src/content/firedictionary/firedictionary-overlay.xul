@@ -87,8 +87,4 @@
 	<keyset id="mainKeyset">
 		<key id="key_openDictionarySidebar" command="viewFireDictionarySidebar"  key="M" modifiers="alt" />
 	</keyset>
-
-	<!-- Tab Browser (Add onmouseover event) -->
-	<tabbrowser id="content"
-	            onmouseover="sendContentWord(event)"/>
 </overlay>

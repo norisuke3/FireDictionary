@@ -36,11 +36,7 @@
  
 //////////// global variables /////////////////////
 
-var gLocalTmpURL = "";
-var gLocalDocumentURLs = new Array();
-var tabbrowser;																										// Tab browser element.
 var dicSidebar;																										// Dictinoary sidebar object.
-var dirTemp;																													// Temporary directory.
 
 ///////////////////////////////////////////////////
 
@@ -49,44 +45,52 @@ var dirTemp;																													// Temporary directory.
  *  function to initialize FireDictionary environment.
  */
 function initialize(){
-	// Initialize tab browser and events.
-	tabbrowser = document.getElementById("content");
-
-	if ( tabbrowser ) {
-		tabbrowser.addEventListener("load", initDictionaryMode, true);
-		tabbrowser.addEventListener("click", sendWordToHistory, true);
-	}
-	
+	// Initialize events.
+	addEventListener("click", sendWordToHistory, false);
+	addEventListener("mousemove", sendContentWord, false);
+                     
 	// Initialize dictionary sidebar object.
 	dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
-	
-	// Initialize temporary directory.
- dirTemp = new FDDirectory("ProfD");
- dirTemp.createNewDirectory("FireDictionary");
- dirTemp.createNewDirectory("tmp");
-
- // Make a temporary directory empty.
- //dirTemp.remove(true);
 }
 
 /**
  * getWordFromEvent(Event event)
+ *  Extract a keyword from mouse over event.
  *
  * @param event
  */
 function getWordFromEvent(event){
-	 var word = "";
-	 
-	 if(event.target.hasChildNodes()){
-	 	var child = event.target.firstChild;
-	 	
-	 	if(child.nodeType == Node.TEXT_NODE){
-    word = child.nodeValue;
-    if ( word.match(/^( |\n)*$/i) ) word = "";
-	  }
-	 }
-	 
+	var parent = event.rangeParent;
+ var offset = event.rangeOffset;
+ var range;
+ var word = "";
+ var str = "";
+ var start = offset;
+ var end = offset + 1;
+ var REWord = /\w/;
+ 
+ if (parent == null || parent.nodeType != Node.TEXT_NODE)
 	 return word;
+ 
+ range = parent.ownerDocument.createRange();
+ range.selectNode(parent);
+ str = range.toString();
+ 
+ if(offset < 0 || offset >= str.length)
+  return word;
+    
+ if(!REWord.test(str.substring(start, start + 1)))
+  return word;
+     
+ while(start > 0 && REWord.test(str.substring(start - 1, start)))
+ 	start--;
+
+ while(end < str.length && REWord.test(str.substring(end, end + 1)))
+ 	end++;
+
+ word = str.substring(start, end);
+	 
+ return word;
 }
 
 //
@@ -99,6 +103,8 @@ function getWordFromEvent(event){
  * @param event
  */
 function sendContentWord(event){
+ if ( !dicSidebar.isActive() ) return;
+ 
 	var keyword = getWordFromEvent(event);
 	
 	dicSidebar.setKeyword(keyword);
@@ -112,24 +118,4 @@ function sendContentWord(event){
 function sendWordToHistory(){
 	dicSidebar.registHistory();
 	return false;
-}
-
-/**
- * initDictionaryMode()
- */
-function initDictionaryMode(){
-	var targetDocument = tabbrowser.contentDocument;
-	var url = targetDocument.URL;
-	var tabId = tabbrowser.selectedTab.linkedPanel;
-	var localFileURL;
-	
-	if( dicSidebar.isActive() && url.match(/http|file/i) && !gLocalDocumentURLs[url] ){
-		
- 	var localDocument = new FDModifiedLocalDocument(targetDocument, tabId, dirTemp);
- 	localFileURL = localDocument.getFileURL();
- 	gLocalDocumentURLs[localFileURL] = "true";
-	 
-	 // Load the created file.
-	 tabbrowser.loadURI(localFileURL);
-	}
 }

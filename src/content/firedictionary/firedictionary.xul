@@ -43,7 +43,7 @@
 
 <window title="firedictionary"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		onload="top.document.getElementById('content').reload();initialize();">
+		onload="initialize();">
 		
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
@@ -90,7 +90,7 @@
       
         <tabs>
           <tab label="Find"/>
-          <!-- <tab label="History"/> -->
+          <tab label="Paste Board"/>
         </tabs>
         
         <tabpanels flex="1">
@@ -116,10 +116,22 @@
             </vbox>
           </tabpanel>
         
-          <!--
-          <tabpanel>
+          <tabpanel orient="vertical" flex="1">
+            <spacer class="firedictionary-topspacer"/>
+            <hbox class="firedictionary-pasteboard">
+              <label value="Title :"/>
+            </hbox>
+            <hbox class="firedictionary-pasteboard">
+              <textbox id="dictionary-pasteboard-title" flex="1"/>
+              <button label="Generate" oncommand="loadGeneratedPage()"/>
+            </hbox>
+            <vbox class="firedictionary-message" flex="1">
+              <textbox id="dictionary-pasteboard-textbox" 
+                         multiline="true"
+                         flex="1"/>
+            </vbox>
+          
           </tabpanel>
-          -->
           
         </tabpanels>
         

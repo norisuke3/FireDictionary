@@ -37,6 +37,7 @@
 //////////// global variables /////////////////////
 
 var dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_ENTERERD);								// Dictinoary sidebar object.
+var dirTemp;																													// Temporary directory.
 
 ///////////////////////////////////////////////////
 
@@ -59,6 +60,11 @@ function regist(event){
  */
 function initialize(){
 	dicSidebar.initialize();
+	
+	// Initialize temporary directory.
+ dirTemp = new FDDirectory("ProfD");
+ dirTemp.createNewDirectory("FireDictionary");
+ dirTemp.createNewDirectory("tmp");
 }
 
 //
@@ -79,6 +85,19 @@ function install(){
  */
 function clearHistory(){
 	dicSidebar.clearHistory();
+}
+
+/**
+ * loadGeneratedPage()
+ *  Load the generated page from paste board.
+ */
+function loadGeneratedPage(){
+	var tabbrowser = top.document.getElementById("content");
+	var file = dirTemp.createFileInstance("temp.html");
+	
+	file.write("<html><body>test</body></html>");
+	
+	tabbrowser.loadURI(file.getURL());
 }
 
 /**
