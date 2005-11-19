@@ -65,11 +65,12 @@ function FDWordHistory(){
 	}
 	
 	/**
-	 * registWord(String keyword, String result)
+	 * registWord(String keyword, String result, String url, String title)
 	 */
-	this.registWord = function(keyword, result){
-	 var xmlHistory = new FDXmlHistory();
+	this.registWord = function(keyword, result, url, title){
 		var file = getHistoryFile();
+	 var xmlHistory = new FDXmlHistory();
+ 	var item;
 		
 		if( file.exists() ){
 			xmlHistory.readFromFile(file);
@@ -80,10 +81,17 @@ function FDWordHistory(){
 		if ( lastWord != null && lastWord.getKeyword() == keyword ){
 			return;
 		}
+ 	
+ 	item = new FDXmlHistoryItem();
+ 	item.setKeyword(keyword);
+ 	item.setResult(result);
+ 	item.setUrl(url);
+ 	item.setTitle(title);
+ 	item.setCategory(getDate());
 		
-		xmlHistory.addItem(keyword, result);
+		xmlHistory.addHistoryItem(item);
+		
 		setText(formatHistory(xmlHistory));
-		
 		xmlHistory.writeToFile(file);
 	}
 	
@@ -178,5 +186,17 @@ function FDWordHistory(){
   fragment = transformer.transformToFragment(history.getDocumentElement(), document);
   
   return fragment.firstChild.nodeValue;
+ }
+ 
+ /**
+  * String getDate()
+  *  return a string which express current date. The format is "yyyy/mm/dd".
+  *
+  * @return a string of date.
+  */
+ function getDate(){
+ 	var today = new Date();
+ 	
+ 	return today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
  }
 }
