@@ -68,7 +68,6 @@ function FDXmlHistory(){
   * @return added element.
   */
  this.addItem = function(keyword, result){
- 	var items = this.domDocument.getElementsByTagName("items").item(0);
  	var item = new FDXmlHistoryItem();
  	
  	item.setKeyword(keyword);
@@ -77,13 +76,26 @@ function FDXmlHistory(){
  	item.setTitle("");
  	item.setCategory("");
  	
+ 	this.addHistoryItem(item);
+  
+  return item;
+ }
+ 
+ /**
+  * FDXmlHistoryItem addHistoryItem(FDXmlHistoryItem item)
+  *
+  * @param item a object of history item
+  */
+ this.addHistoryItem = function(item){
+ 	var items = this.domDocument.getElementsByTagName("items").item(0);
+ 	
  	if ( !items.hasChildNodes() ){
    items.appendChild(item.getDocumentElement());
  	} else {
  		items.insertBefore(item.getDocumentElement(), items.firstChild);
  	}
-  
-  return item;
+ 	
+ 	return item;
  }
  
  /**
