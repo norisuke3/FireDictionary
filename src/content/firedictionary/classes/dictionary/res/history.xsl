@@ -25,5 +25,8 @@
 -----------------------------------------
 </xsl:template>
     
+  <xsl:template match="hs:url"/>
+  <xsl:template match="hs:title"/>
+  <xsl:template match="hs:category"/>
   <xsl:template match="hs:timestamp"/>
 </xsl:stylesheet>
