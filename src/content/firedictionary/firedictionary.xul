@@ -63,7 +63,10 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/pdictext/PDICText.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/dummyDictionary/DummyDictinoary.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/firedictionary.js"/>
-
+    
+    <stringbundle id="fd-localized-strings" 
+                  src="chrome://firedictionary/locale/fd-localized-strings.properties"/>
+                  
     <vbox class="firedictionary-installer" id="firedictionary-installation-panel" flex="1">
       <description>
         &install.box.description;
