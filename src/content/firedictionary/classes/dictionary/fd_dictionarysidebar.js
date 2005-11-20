@@ -51,6 +51,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	var dic = null;
 	var fdDictionaryMode;
 	var mLastKeyword = "";
+	var mKeyword = "";
 	var mUrl;			                      // Keyword Information
 	var mTitle;	                      // Keyword Information
 	
@@ -130,9 +131,15 @@ function FDDictionarySidebar(_fdDictionaryMode){
   * @param keyword
   */
  this.setKeyword = function(keyword){
- 	if ( this.isActive() && keyword != ""){
- 		getKeywordTextbox().value = keyword;
- 	}
+ 	mKeyword = keyword;
+ }
+ 
+ /**
+  * setKeywordFromTextbox()
+  *  set a keyword from text box.
+  */
+ this.setKeywordFromTextbox = function(){
+ 	mKeyword = getKeywordTextbox().value;
  }
  
  /**
@@ -151,13 +158,13 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Lookup the dictionary using a word in keyword textbox.
   */
  this.lookup = function(){
- 	getPickupWordLabel().value = "";
- 	
  	if( this.isActive() && dic != null){
- 		var keyword = getKeywordTextbox().value;
- 		if( keyword != "" && keyword != mLastKeyword){
- 			getResultTextbox().value = _lookup(keyword);
- 			mLastKeyword = keyword;
+ 		if( mKeyword != "" && mKeyword != mLastKeyword){
+ 			getKeywordTextbox().value = mKeyword;
+ 	  getPickupWordLabel().value = "";
+ 			getResultTextbox().value = _lookup(mKeyword);
+ 			
+ 			mLastKeyword = mKeyword;
  		}
  	}
  }

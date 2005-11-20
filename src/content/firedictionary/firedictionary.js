@@ -45,7 +45,8 @@ var dirTemp;																													// Temporary directory.
  * lookup(event)
  */
 function lookup(event){
- 	dicSidebar.lookup();
+	dicSidebar.setKeywordFromTextbox(); 
+ dicSidebar.lookup();
 }
 
 /**
