@@ -45,9 +45,13 @@ var dicSidebar;																										// Dictinoary sidebar object.
  *  function to initialize FireDictionary environment.
  */
 function initialize(){
-	// Initialize events.
-	addEventListener("click", sendWordToHistory, false);
-	addEventListener("mousemove", sendContentWord, false);
+		// Initialize tab browser and events.
+	var tabbrowser = document.getElementById("content");
+
+	if ( tabbrowser ) {
+	 tabbrowser.addEventListener("click", sendWordToHistory, false);
+ 	tabbrowser.addEventListener("mousemove", sendContentWord, false);
+	}	
                      
 	// Initialize dictionary sidebar object.
 	dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
@@ -106,7 +110,10 @@ function sendContentWord(event){
  if ( !dicSidebar.isActive() ) return;
  
 	var keyword = getWordFromEvent(event);
+	var url = event.view.document.URL;
+	var title = event.view.document.title;
 	
+	dicSidebar.setKeywordInformation(url, title);
 	dicSidebar.setKeyword(keyword);
 	dicSidebar.lookup();
 }

@@ -52,6 +52,7 @@ function lookup(event){
  * regist(event)
  */
 function regist(event){
+	dicSidebar.setKeywordInformation("", "");
 	dicSidebar.registHistory();
 }
 

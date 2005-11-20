@@ -50,6 +50,9 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	var history = new FDWordHistory();
 	var dic = null;
 	var fdDictionaryMode;
+	var mLastKeyword = "";
+	var mUrl;			                      // Keyword Information
+	var mTitle;	                      // Keyword Information
 	
 	// Initialize dictionary.
  var dicName = getDictionaryName(); 
@@ -133,6 +136,17 @@ function FDDictionarySidebar(_fdDictionaryMode){
  }
  
  /**
+  * setKeywordInformation(String url, String title)
+  *
+  * @param url			The URL of a document which the keyword is belonging to.
+  * @param title The title of a document which the keyword is belonging to. 
+  */
+ this.setKeywordInformation = function(url, title){
+ 	mUrl = url;
+ 	mTitle = title;
+ }
+ 
+ /**
   * lookup()
   *  Lookup the dictionary using a word in keyword textbox.
   */
@@ -141,8 +155,9 @@ function FDDictionarySidebar(_fdDictionaryMode){
  	
  	if( this.isActive() && dic != null){
  		var keyword = getKeywordTextbox().value;
- 		if( keyword != ""){
+ 		if( keyword != "" && keyword != mLastKeyword){
  			getResultTextbox().value = _lookup(keyword);
+ 			mLastKeyword = keyword;
  		}
  	}
  }
@@ -157,7 +172,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  		var result = getResultTextbox().value;
  		
  		if ( !keyword.match(/^( |\n)*$/i) && result != ""){
- 			history.registWord(keyword, result);
+ 			history.registWord(keyword, result, mUrl, mTitle);
  		}
  	}
  }
@@ -167,6 +182,11 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Clear the history of words and delete the history file.
   */
  this.clearHistory = function(){
+ 	var strbundle=document.getElementById("fd-localized-strings");
+  var msgConfirmation=strbundle.getString("confirmationToDeleteHistory");
+  
+ 	if( !window.confirm(msgConfirmation) ) return;
+ 	
  	history.clear();
  	
  	// At this time, clear the temporary files.
