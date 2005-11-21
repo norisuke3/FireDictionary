@@ -57,6 +57,7 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/legacy/fd_historytranslator.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionaryfactory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_pasteboard.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_wordhistory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionarysidebar.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionaryinstaller.js"/>
@@ -91,12 +92,12 @@
 
       <tabbox id="firedictionary-maintab" flex="1">
       
-        <tabs>
+        <tabs id="firedictionary-tabs">
           <tab label="Find"/>
           <tab label="Paste Board"/>
         </tabs>
         
-        <tabpanels flex="1">
+        <tabpanels id="firedictionary-tabpanels" flex="1">
           <tabpanel orient="vertical" flex="1">
             <spacer class="firedictionary-topspacer"/>
             <hbox class="firedictionary-keyword">

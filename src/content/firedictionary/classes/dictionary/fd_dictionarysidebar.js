@@ -200,8 +200,22 @@ function FDDictionarySidebar(_fdDictionaryMode){
  	clearTempFiles();
  }
 	
+	/**
+	 * selectTab(int tabIndex)
+	 */
+	this.selectTab = function(tabIndex){
+		getTabPanels().selectedIndex = tabIndex;
+		getTabs().selectedIndex = tabIndex;
+	}
+	
+	
+	
 	//
  // Private method ///////////////////////////////////////////////////////
+ //
+ 
+ // 
+ // --- functions for obtaining a reference of a gadget in Find tab. ---
  //
  function getKeywordTextbox(){
  	return sidebar.contentDocument.getElementById("dictionary-keyword");
@@ -215,6 +229,9 @@ function FDDictionarySidebar(_fdDictionaryMode){
  	return sidebar.contentDocument.getElementById("dictionary-pickup-word");
  }
  
+ // 
+ // --- functions for obtaining a reference of other xul elements. ---
+ // 
  function getInstallationPanel(){
  	return sidebar.contentDocument.getElementById("firedictionary-installation-panel");
  }
@@ -225,6 +242,14 @@ function FDDictionarySidebar(_fdDictionaryMode){
  
  function getTabBrowser(){
  	return top.document.getElementById("content");
+ }
+ 
+ function getTabPanels(){
+ 	return sidebar.contentDocument.getElementById("firedictionary-tabpanels");
+ }
+ 
+ function getTabs(){
+ 	return sidebar.contentDocument.getElementById("firedictionary-tabs");
  }
  
  /**

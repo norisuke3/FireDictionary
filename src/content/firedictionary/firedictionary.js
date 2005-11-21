@@ -94,12 +94,14 @@ function clearHistory(){
  *  Load the generated page from paste board.
  */
 function loadGeneratedPage(){
+	var pasteboard = new FDPasteBoard();
 	var tabbrowser = top.document.getElementById("content");
 	var file = dirTemp.createFileInstance("temp.html");
 	
-	file.write("<html><body>test</body></html>");
+	file.write(pasteboard.getContentAsHtml());
 	
 	tabbrowser.loadURI(file.getURL());
+	dicSidebar.selectTab(0);
 }
 
 /**
