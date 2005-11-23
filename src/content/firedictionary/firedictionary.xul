@@ -80,6 +80,7 @@
       <toolbox class="plain">
         <toolbar>
           <spacer flex="1"/>
+            <toolbarbutton id="fd-mouseovermode-indicator" oncommand="flipSwitch()" status="on"/>
             <toolbarbutton id="toolsMenuButton" type="menu" label="&menu.tools;">
               <menupopup>
                 <menuitem label="&menu.clearHistory;" oncommand="clearHistory()"/>

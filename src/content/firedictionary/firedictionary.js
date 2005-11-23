@@ -112,3 +112,11 @@ function loadGeneratedPage(){
 function loadHomePage(){
 	top.document.getElementById("content").loadURI("http://www.firedictionary.com/")
 }
+
+/**
+ * flipSwitch()
+ *  change the switch of mouse over mode.
+ */
+function flipSwitch(){
+	dicSidebar.flipMouseOverModeSwitch();
+}

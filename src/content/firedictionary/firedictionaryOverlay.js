@@ -107,7 +107,7 @@ function getWordFromEvent(event){
  * @param event
  */
 function sendContentWord(event){
- if ( !dicSidebar.isActive() ) return;
+ if ( !dicSidebar.isActive() || !dicSidebar.getMouseOverMode() ) return;
  
 	var keyword = getWordFromEvent(event);
 	var url = event.view.document.URL;
@@ -123,6 +123,8 @@ function sendContentWord(event){
  *  Send the word to Find History.
  */
 function sendWordToHistory(){
+ if ( !dicSidebar.getMouseOverMode() ) return;
+ 
 	dicSidebar.registHistory();
 	return false;
 }

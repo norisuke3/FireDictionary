@@ -208,6 +208,29 @@ function FDDictionarySidebar(_fdDictionaryMode){
 		getTabs().selectedIndex = tabIndex;
 	}
 	
+	/**
+	 * flipMouseOverModeSwitch()
+	 *  Change the switch of mouse over function.
+	 */
+	this.flipMouseOverModeSwitch = function(){
+		var mode = getMouseOverModeIndicator().getAttribute("status");
+		
+		if ( mode == "on" ){
+			mode = "off";
+		} else {
+			mode = "on";
+		}
+		
+		getMouseOverModeIndicator().setAttribute("status", mode);
+	}
+	
+	/**
+	 * Boolean getMouseOverMode()
+	 *  return the status of mouse over mode.
+	 */
+	this.getMouseOverMode = function(){
+		return (getMouseOverModeIndicator().getAttribute("status") == "on");
+	}
 	
 	
 	//
@@ -242,6 +265,10 @@ function FDDictionarySidebar(_fdDictionaryMode){
  
  function getTabBrowser(){
  	return top.document.getElementById("content");
+ }
+ 
+ function getMouseOverModeIndicator(){
+ 	return sidebar.contentDocument.getElementById("fd-mouseovermode-indicator");
  }
  
  function getTabPanels(){

@@ -41,3 +41,9 @@
 .firedictionary-keyword > label, .firedictionary-keyword > textbox,
 .firedictionary-pasteboard > label, .firedictionary-pasteboard > textbox { font-size:13pt; }
 .firedictionary-message { font-size:11pt; }
+toolbarbutton#fd-mouseovermode-indicator[status="on"] {
+  list-style-image: url("chrome://firedictionary/skin/on.png");
+}
+toolbarbutton#fd-mouseovermode-indicator[status="off"] {
+  list-style-image: url("chrome://firedictionary/skin/off.png");
+}
