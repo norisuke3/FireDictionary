@@ -65,9 +65,16 @@ function FDWordHistory(){
 	}
 	
 	/**
-	 * registWord(String keyword, String result, String url, String title, String sentence)
+	 * registWord(
+	 *     String keyword,
+	 *     String result,
+	 *     String url,
+	 *     String title,
+	 *     String sentence,
+	 *     String pickedupword
+	 * )
 	 */
-	this.registWord = function(keyword, result, url, title, sentence){
+	this.registWord = function(keyword, result, url, title, sentence, pickedupword){
 		var file = getHistoryFile();
 	 var xmlHistory = new FDXmlHistory();
  	var item;
@@ -88,6 +95,7 @@ function FDWordHistory(){
  	item.setUrl(url);
  	item.setTitle(title);
  	item.setSentence(sentence);
+ 	item.setPickedUpWord(pickedupword);
  	item.setCategory(getDate());
 		
 		xmlHistory.addHistoryItem(item);

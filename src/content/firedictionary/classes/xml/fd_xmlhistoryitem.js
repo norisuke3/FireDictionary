@@ -170,6 +170,27 @@ function FDXmlHistoryItem(){
  }
  
  /**
+  * String getPickedUpWord()
+  *  Return a string of pickedupword. If there are no pickedupword in this tree, return null.
+  *
+  * @return pickedupword
+  */
+ this.getPickedUpWord = function(){
+ 	return this.getTextContent("pickedupword");
+ }
+ 
+ /**
+  * setPickedUpWord(String pickedupword)
+  *
+  * @param pickedupword
+  */
+ this.setPickedUpWord = function(pickedupword){
+ 	var element = this.domDocument.createElementNS(ns, "hs:pickedupword");
+ 	element.appendChild(this.domDocument.createTextNode(pickedupword));
+ 	item.insertBefore(element, timestamp);
+ }
+ 
+ /**
   * setCategory(String category)
   *
   * @param category

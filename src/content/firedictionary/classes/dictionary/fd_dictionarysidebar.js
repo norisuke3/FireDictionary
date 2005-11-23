@@ -52,6 +52,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	var fdDictionaryMode;
 	var mLastKeyword = "";
 	var mKeyword = "";
+	var mPickedUpWord = ""            // Keyword Information (the declention of the word will remain.)
 	var mUrl;			                      // Keyword Information
 	var mTitle;	                      // Keyword Information
 	var mSentence;						              // Keyword Information
@@ -133,6 +134,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
   */
  this.setKeyword = function(keyword){
  	mKeyword = keyword;
+ 	mPickedUpWord = keyword;
  }
  
  /**
@@ -182,7 +184,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  		var result = getResultTextbox().value;
  		
  		if ( !keyword.match(/^( |\n)*$/i) && result != ""){
- 			history.registWord(keyword, result, mUrl, mTitle, mSentence);
+ 			history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord);
  		}
  	}
  }

@@ -28,6 +28,7 @@
   <xsl:template match="hs:url"/>
   <xsl:template match="hs:title"/>
   <xsl:template match="hs:sentence"/>
+  <xsl:template match="hs:pickedupword"/>
   <xsl:template match="hs:category"/>
   <xsl:template match="hs:timestamp"/>
 </xsl:stylesheet>

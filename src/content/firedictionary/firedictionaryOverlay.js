@@ -67,74 +67,55 @@ function getWordFromEvent(event){
 	var parent = event.rangeParent;
  var offset = event.rangeOffset;
  var range;
- var word = "";
+ var result = new Array("", "");
  var str = "";
  var start = offset;
  var end = offset + 1;
  var REWord = /\w/;
  
  if (parent == null || parent.nodeType != Node.TEXT_NODE)
-	 return word;
+	 return result;
  
  range = parent.ownerDocument.createRange();
  range.selectNode(parent);
  str = range.toString();
  
  if(offset < 0 || offset >= str.length)
-  return word;
+  return result;
     
  if(!REWord.test(str.substring(start, start + 1)))
-  return word;
-     
+  return result;
+ 
+ // Extract the keyword.
  while(start > 0 && REWord.test(str.substring(start - 1, start)))
  	start--;
 
  while(end < str.length && REWord.test(str.substring(end, end + 1)))
  	end++;
 
- word = str.substring(start, end);
-	 
- return word;
-}
-
-/**
- * getSentenceFromEvent(Event event)
- *  Extract a sentence which contains the keyword from mouse over event.
- *
- * @param event
- */
-function getSentenceFromEvent(event){
-	var parent = event.rangeParent;
- var offset = event.rangeOffset;
- var range;
- var sentence = "";
- var str = "";
- var start = offset;
- var end = offset + 1;
- var REWord = /[^\.]/;
- 
- if (parent == null || parent.nodeType != Node.TEXT_NODE)
-	 return sentence;
- 
- range = parent.ownerDocument.createRange();
- range.selectNode(parent);
- str = range.toString();
- 
- if(offset < 0 || offset >= str.length)
-  return sentence;
-    
- if(!REWord.test(str.substring(start, start + 1)))
-  return sentence;
-     
- while(start > 0 && REWord.test(str.substring(start - 1, start)))
+ result[0] = str.substring(start, end);
+	
+	// Extract sentence which contains the kyeword.
+ REWord = /[A-Z]/;
+ while(start > 0 && 
+       !(str.substring(start - 1, start) == "." &&
+        str.substring(start, start + 1) == " " &&
+        REWord.test(str.substring(start + 1, start + 2))
+       )
+      )
  	start--;
 
- while(end < str.length && REWord.test(str.substring(end, end + 1)))
+ while(end < str.length &&
+       !(str.substring(end, end + 1) == "." &&
+        str.substring(end + 1, end + 2) == " " &&
+        REWord.test(str.substring(end + 2, end + 3))
+       )
+      )
  	end++;
 
- sentence = str.substring(start, end);
-	 
- return sentence;
+ result[1] = str.substring(start, end);
+	
+ return result;
 }
 
 //
@@ -149,8 +130,9 @@ function getSentenceFromEvent(event){
 function sendContentWord(event){
  if ( !dicSidebar.isActive() || !dicSidebar.getMouseOverMode() ) return;
  
-	var keyword = getWordFromEvent(event);
-	var sentence = getSentenceFromEvent(event) + ".";
+ var resultArray = getWordFromEvent(event);
+	var keyword = resultArray[0];
+	var sentence = resultArray[1] + (resultArray[1].substr(-1, 1) == "." ? "" : ".");
 	var url = event.view.document.URL;
 	var title = event.view.document.title;
 	
