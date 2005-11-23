@@ -149,6 +149,27 @@ function FDXmlHistoryItem(){
  }
  
  /**
+  * setSentence(String sentence)
+  *
+  * @param sentence
+  */
+ this.setSentence = function(sentence){
+ 	var element = this.domDocument.createElementNS(ns, "hs:sentence");
+ 	element.appendChild(this.domDocument.createTextNode(sentence));
+ 	item.insertBefore(element, timestamp);
+ }
+ 
+ /**
+  * String getSentence()
+  *  Return a string of sentence. If there are no sentence in this tree, return null.
+  *
+  * @return sentence
+  */
+ this.getSentence = function(){
+ 	return this.getTextContent("sentence");
+ }
+ 
+ /**
   * setCategory(String category)
   *
   * @param category

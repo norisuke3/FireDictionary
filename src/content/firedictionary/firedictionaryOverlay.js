@@ -97,6 +97,46 @@ function getWordFromEvent(event){
  return word;
 }
 
+/**
+ * getSentenceFromEvent(Event event)
+ *  Extract a sentence which contains the keyword from mouse over event.
+ *
+ * @param event
+ */
+function getSentenceFromEvent(event){
+	var parent = event.rangeParent;
+ var offset = event.rangeOffset;
+ var range;
+ var sentence = "";
+ var str = "";
+ var start = offset;
+ var end = offset + 1;
+ var REWord = /[^\.]/;
+ 
+ if (parent == null || parent.nodeType != Node.TEXT_NODE)
+	 return sentence;
+ 
+ range = parent.ownerDocument.createRange();
+ range.selectNode(parent);
+ str = range.toString();
+ 
+ if(offset < 0 || offset >= str.length)
+  return sentence;
+    
+ if(!REWord.test(str.substring(start, start + 1)))
+  return sentence;
+     
+ while(start > 0 && REWord.test(str.substring(start - 1, start)))
+ 	start--;
+
+ while(end < str.length && REWord.test(str.substring(end, end + 1)))
+ 	end++;
+
+ sentence = str.substring(start, end);
+	 
+ return sentence;
+}
+
 //
 // Event handler  ///////////////////////////////////////////////////////
 //
@@ -110,10 +150,11 @@ function sendContentWord(event){
  if ( !dicSidebar.isActive() || !dicSidebar.getMouseOverMode() ) return;
  
 	var keyword = getWordFromEvent(event);
+	var sentence = getSentenceFromEvent(event) + ".";
 	var url = event.view.document.URL;
 	var title = event.view.document.title;
 	
-	dicSidebar.setKeywordInformation(url, title);
+	dicSidebar.setKeywordInformation(url, title, sentence);
 	dicSidebar.setKeyword(keyword);
 	dicSidebar.lookup();
 }

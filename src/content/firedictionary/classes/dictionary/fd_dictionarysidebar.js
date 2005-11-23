@@ -54,6 +54,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	var mKeyword = "";
 	var mUrl;			                      // Keyword Information
 	var mTitle;	                      // Keyword Information
+	var mSentence;						              // Keyword Information
 	
 	// Initialize dictionary.
  var dicName = getDictionaryName(); 
@@ -143,14 +144,16 @@ function FDDictionarySidebar(_fdDictionaryMode){
  }
  
  /**
-  * setKeywordInformation(String url, String title)
+  * setKeywordInformation(String url, String title, String sentence)
   *
   * @param url			The URL of a document which the keyword is belonging to.
   * @param title The title of a document which the keyword is belonging to. 
+  * @param sentence A sentence which contains the keyword.
   */
- this.setKeywordInformation = function(url, title){
+ this.setKeywordInformation = function(url, title, sentence){
  	mUrl = url;
  	mTitle = title;
+ 	mSentence = sentence;
  }
  
  /**
@@ -179,7 +182,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  		var result = getResultTextbox().value;
  		
  		if ( !keyword.match(/^( |\n)*$/i) && result != ""){
- 			history.registWord(keyword, result, mUrl, mTitle);
+ 			history.registWord(keyword, result, mUrl, mTitle, mSentence);
  		}
  	}
  }
