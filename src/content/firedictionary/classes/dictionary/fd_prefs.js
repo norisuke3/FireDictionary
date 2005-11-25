@@ -55,11 +55,20 @@ FDPrefs.prototype.setCharPref = function(name, value){
 
 /**
  * String getCharPref(name)
- *  get a value of the preference
+ *  get a value of the preference. If there is no value related to the name,
+ *  return null.
  *
  * @param name a name of the preference
- * @return a value of it.
+ * @return a value of it, or null if there is no value related to the name.
  */
 FDPrefs.prototype.getCharPref = function(name){
- return this.mBranch.getCharPref(name);
+ var value;
+ 
+ try{
+  value = this.mBranch.getCharPref(name);
+ } catch(e) {
+  value = null;
+ }
+ 
+ return value;
 }
