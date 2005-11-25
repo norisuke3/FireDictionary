@@ -90,6 +90,14 @@ function clearHistory(){
 }
 
 /**
+ * viewHistory()
+ *  View the history in the browser as a html.
+ */
+function viewHistory(){
+	dicSidebar.viewHistory();
+}
+
+/**
  * loadGeneratedPage()
  *  Load the generated page from paste board.
  */

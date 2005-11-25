@@ -48,6 +48,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	var dictionaryFactory = new FDDictionaryFactory();
 	var config = new FDConfig(getResourceDirectory());
 	var history = new FDWordHistory();
+	var prefs = new FDPrefs();
 	var dic = null;
 	var fdDictionaryMode;
 	var mLastKeyword = "";
@@ -105,6 +106,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
 	 */
 	this.initialize = function(){
 		var installationURI = "chrome://firedictionary/locale/install/" + dicName + ".htm"
+		var mouseovermode;
 		
 		getInstallationPanel().style.display = ( dic == null ? "" : "none" );
 		getMainBox().style.display = ( dic == null ? "none" : "" );
@@ -112,7 +114,15 @@ function FDDictionarySidebar(_fdDictionaryMode){
 		if ( dic == null ){
 			getTabBrowser().loadURI(installationURI);
 		}
+	    
+	    // initialize mouse over mode indicator.
+	    mouseovermode = prefs.getCharPref("mouse-over-mode");
+	    getMouseOverModeIndicator().setAttribute(
+	        "status", 
+	        mouseovermode == null || mouseovermode == "on" ? "on" : "off"
+	    );
 		
+		// initialize history.
 		history.initialize();
 	}
 	
@@ -204,6 +214,14 @@ function FDDictionarySidebar(_fdDictionaryMode){
  	// At this time, clear the temporary files.
  	clearTempFiles();
  }
+ 
+/**
+ * viewHistory()
+ *  View the history in the browser as a html.
+ */
+ this.viewHistory = function(){
+ 	//history.view();
+ }
 	
 	/**
 	 * selectTab(int tabIndex)
@@ -227,6 +245,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
 		}
 		
 		getMouseOverModeIndicator().setAttribute("status", mode);
+	    prefs.setCharPref("mouse-over-mode", mode);
 	}
 	
 	/**
