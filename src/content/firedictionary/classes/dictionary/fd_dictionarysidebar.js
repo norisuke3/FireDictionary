@@ -44,21 +44,21 @@ FDDictionarySidebar.FD_MODE_WORD_PICKEDUP = 2;
  * A class for dictionary sidebar.
  */
 function FDDictionarySidebar(_fdDictionaryMode){
-	var sidebar = top.document.getElementById("sidebar");
-	var dictionaryFactory = new FDDictionaryFactory();
-	var config = new FDConfig(getResourceDirectory());
-	var history = new FDWordHistory();
-	var prefs = new FDPrefs();
-	var dic = null;
-	var fdDictionaryMode;
-	var mLastKeyword = "";
-	var mKeyword = "";
-	var mPickedUpWord = ""            // Keyword Information (the declention of the word will remain.)
-	var mUrl;			                      // Keyword Information
-	var mTitle;	                      // Keyword Information
-	var mSentence;						              // Keyword Information
-	
-	// Initialize dictionary.
+ var sidebar = top.document.getElementById("sidebar");
+ var dictionaryFactory = new FDDictionaryFactory();
+ var config = new FDConfig(getResourceDirectory());
+ var history = new FDWordHistory();
+ var prefs = new FDPrefs();
+ var dic = null;
+ var fdDictionaryMode;
+ var mLastKeyword = "";
+ var mKeyword = "";
+ var mPickedUpWord = ""            // Keyword Information (the declention of the word will remain.)
+ var mUrl;                         // Keyword Information
+ var mTitle;                       // Keyword Information
+ var mSentence;                    // Keyword Information
+ 
+ // Initialize dictionary.
  var dicName = getDictionaryName(); 
  var fileName = config.getFileName(dicName);
  var charset = config.getCharset(dicName);
@@ -66,20 +66,20 @@ function FDDictionarySidebar(_fdDictionaryMode){
   dic = dictionaryFactory.newDictionary(dicName, fileName, charset);
  }catch(e){
   if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
-   	try{
- 	   dic = dictionaryFactory.newDictionary(dicName, fileName.toLowerCase(), charset);
- 	  }catch(e){
- 	  	if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
-  		  dic = null
-    	}
- 	  }
+    try{
+     dic = dictionaryFactory.newDictionary(dicName, fileName.toLowerCase(), charset);
+    }catch(e){
+     if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
+      dic = null
+     }
+    }
   }
  }
  
-	/**
-	 * FDDictionarySidebar(int _fdDictionaryMode)
-	 *  Constructor of this class.
-	 *  The argument _fdDictionaryMode express dictionary mode.
+ /**
+  * FDDictionarySidebar(int _fdDictionaryMode)
+  *  Constructor of this class.
+  *  The argument _fdDictionaryMode express dictionary mode.
   *  This value should be chosen from below.
   *
   *   FD_MODE_WORD_ENTERERD   The keyword is enterd by user from sidebar.
@@ -87,45 +87,45 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *
   *  When the constant FD_MODE_WORD_PICKUPED is used, Looking up will be
   *  rerun with modified word if there is no result in the dicitonary.
-	 *
-	 * @param  fdDictionaryMode A constant which express dictinoary mode.
-	 * @throws INVALID_DICTIONARY_MODE This exception is thrown when the 
-	 *         argument fdDictionaryMode is invalid.
-	 */
-	if ( 
-					fdDictionaryMode != this.FD_MODE_WORD_ENTERERD &&
-					fdDictionaryMode != this.FD_MODE_WORD_PICKEDUP ){
-					throw new Exception("INVALID_DICTIONARY_MODE");
-	}
-	fdDictionaryMode = _fdDictionaryMode;
-	
-	/**
-	 * initialize()
-	 *  Initialize dictionary sidebar. If there is no dictionary file, this
-	 *  method change the sidebar to the installation mode for dictinoary file.
-	 */
-	this.initialize = function(){
-		var installationURI = "chrome://firedictionary/locale/install/" + dicName + ".htm"
-		var mouseovermode;
-		
-		getInstallationPanel().style.display = ( dic == null ? "" : "none" );
-		getMainBox().style.display = ( dic == null ? "none" : "" );
-		
-		if ( dic == null ){
-			getTabBrowser().loadURI(installationURI);
-		}
-	    
-	    // initialize mouse over mode indicator.
-	    mouseovermode = prefs.getCharPref("mouse-over-mode");
-	    getMouseOverModeIndicator().setAttribute(
-	        "status", 
-	        mouseovermode == null || mouseovermode == "on" ? "on" : "off"
-	    );
-		
-		// initialize history.
-		history.initialize();
-	}
-	
+  *
+  * @param  fdDictionaryMode A constant which express dictinoary mode.
+  * @throws INVALID_DICTIONARY_MODE This exception is thrown when the 
+  *         argument fdDictionaryMode is invalid.
+  */
+ if ( 
+  fdDictionaryMode != this.FD_MODE_WORD_ENTERERD &&
+  fdDictionaryMode != this.FD_MODE_WORD_PICKEDUP ){
+  throw new Exception("INVALID_DICTIONARY_MODE");
+ }
+ fdDictionaryMode = _fdDictionaryMode;
+ 
+ /**
+  * initialize()
+  *  Initialize dictionary sidebar. If there is no dictionary file, this
+  *  method change the sidebar to the installation mode for dictinoary file.
+  */
+ this.initialize = function(){
+  var installationURI = "chrome://firedictionary/locale/install/" + dicName + ".htm"
+  var mouseovermode;
+  
+  getInstallationPanel().style.display = ( dic == null ? "" : "none" );
+  getMainBox().style.display = ( dic == null ? "none" : "" );
+  
+  if ( dic == null ){
+   getTabBrowser().loadURI(installationURI);
+  }
+     
+  // initialize mouse over mode indicator.
+  mouseovermode = prefs.getCharPref("mouse-over-mode");
+  getMouseOverModeIndicator().setAttribute(
+      "status", 
+      mouseovermode == null || mouseovermode == "on" ? "on" : "off"
+  );
+  
+  // initialize history.
+  history.initialize();
+ }
+ 
  /**
   * Boolean isActive()
   *  @return a boolean value whether dictionary sidebar is active or not.
@@ -134,7 +134,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
   var sidebarBox = top.document.getElementById("sidebar-box");
   sidebarcommand = sidebarBox.getAttribute("sidebarcommand");
   
- 	return (sidebarcommand == "viewFireDictionarySidebar");
+  return (sidebarcommand == "viewFireDictionarySidebar");
  }
  
  /**
@@ -143,8 +143,8 @@ function FDDictionarySidebar(_fdDictionaryMode){
   * @param keyword
   */
  this.setKeyword = function(keyword){
- 	mKeyword = keyword;
- 	mPickedUpWord = keyword;
+  mKeyword = keyword;
+  mPickedUpWord = keyword;
  }
  
  /**
@@ -152,20 +152,20 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  set a keyword from text box.
   */
  this.setKeywordFromTextbox = function(){
- 	mKeyword = getKeywordTextbox().value;
+  mKeyword = getKeywordTextbox().value;
  }
  
  /**
   * setKeywordInformation(String url, String title, String sentence)
   *
-  * @param url			The URL of a document which the keyword is belonging to.
+  * @param url   The URL of a document which the keyword is belonging to.
   * @param title The title of a document which the keyword is belonging to. 
   * @param sentence A sentence which contains the keyword.
   */
  this.setKeywordInformation = function(url, title, sentence){
- 	mUrl = url;
- 	mTitle = title;
- 	mSentence = sentence;
+  mUrl = url;
+  mTitle = title;
+  mSentence = sentence;
  }
  
  /**
@@ -173,15 +173,15 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Lookup the dictionary using a word in keyword textbox.
   */
  this.lookup = function(){
- 	if( this.isActive() && dic != null){
- 		if( mKeyword != "" && mKeyword != mLastKeyword){
- 			getKeywordTextbox().value = mKeyword;
- 	  getPickupWordLabel().value = "";
- 			getResultTextbox().value = _lookup(mKeyword);
- 			
- 			mLastKeyword = mKeyword;
- 		}
- 	}
+  if( this.isActive() && dic != null){
+   if( mKeyword != "" && mKeyword != mLastKeyword){
+    getKeywordTextbox().value = mKeyword;
+    getPickupWordLabel().value = "";
+    getResultTextbox().value = _lookup(mKeyword);
+    
+    mLastKeyword = mKeyword;
+   }
+  }
  }
  
  /**
@@ -189,14 +189,14 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Regist the result to history.
   */
  this.registHistory = function(){
- 	if ( this.isActive() && dic != null){
- 		var keyword = getKeywordTextbox().value;
- 		var result = getResultTextbox().value;
- 		
- 		if ( !keyword.match(/^( |\n)*$/i) && result != ""){
- 			history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord);
- 		}
- 	}
+  if ( this.isActive() && dic != null){
+   var keyword = getKeywordTextbox().value;
+   var result = getResultTextbox().value;
+   
+   if ( !keyword.match(/^( |\n)*$/i) && result != ""){
+    history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord);
+   }
+  }
  }
  
  /**
@@ -204,15 +204,15 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Clear the history of words and delete the history file.
   */
  this.clearHistory = function(){
- 	var strbundle=document.getElementById("fd-localized-strings");
+  var strbundle=document.getElementById("fd-localized-strings");
   var msgConfirmation=strbundle.getString("confirmationToDeleteHistory");
   
- 	if( !window.confirm(msgConfirmation) ) return;
- 	
- 	history.clear();
- 	
- 	// At this time, clear the temporary files.
- 	clearTempFiles();
+  if( !window.confirm(msgConfirmation) ) return;
+  
+  history.clear();
+  
+  // At this time, clear the temporary files.
+  clearTempFiles();
  }
  
 /**
@@ -220,44 +220,44 @@ function FDDictionarySidebar(_fdDictionaryMode){
  *  View the history in the browser as a html.
  */
  this.viewHistory = function(){
- 	//history.view();
+  //history.view();
  }
-	
-	/**
-	 * selectTab(int tabIndex)
-	 */
-	this.selectTab = function(tabIndex){
-		getTabPanels().selectedIndex = tabIndex;
-		getTabs().selectedIndex = tabIndex;
-	}
-	
-	/**
-	 * flipMouseOverModeSwitch()
-	 *  Change the switch of mouse over function.
-	 */
-	this.flipMouseOverModeSwitch = function(){
-		var mode = getMouseOverModeIndicator().getAttribute("status");
-		
-		if ( mode == "on" ){
-			mode = "off";
-		} else {
-			mode = "on";
-		}
-		
-		getMouseOverModeIndicator().setAttribute("status", mode);
-	    prefs.setCharPref("mouse-over-mode", mode);
-	}
-	
-	/**
-	 * Boolean getMouseOverMode()
-	 *  return the status of mouse over mode.
-	 */
-	this.getMouseOverMode = function(){
-		return (getMouseOverModeIndicator().getAttribute("status") == "on");
-	}
-	
-	
-	//
+ 
+ /**
+  * selectTab(int tabIndex)
+  */
+ this.selectTab = function(tabIndex){
+  getTabPanels().selectedIndex = tabIndex;
+  getTabs().selectedIndex = tabIndex;
+ }
+ 
+ /**
+  * flipMouseOverModeSwitch()
+  *  Change the switch of mouse over function.
+  */
+ this.flipMouseOverModeSwitch = function(){
+  var mode = getMouseOverModeIndicator().getAttribute("status");
+  
+  if ( mode == "on" ){
+   mode = "off";
+  } else {
+   mode = "on";
+  }
+  
+  getMouseOverModeIndicator().setAttribute("status", mode);
+     prefs.setCharPref("mouse-over-mode", mode);
+ }
+ 
+ /**
+  * Boolean getMouseOverMode()
+  *  return the status of mouse over mode.
+  */
+ this.getMouseOverMode = function(){
+  return (getMouseOverModeIndicator().getAttribute("status") == "on");
+ }
+ 
+ 
+ //
  // Private method ///////////////////////////////////////////////////////
  //
  
@@ -265,42 +265,42 @@ function FDDictionarySidebar(_fdDictionaryMode){
  // --- functions for obtaining a reference of a gadget in Find tab. ---
  //
  function getKeywordTextbox(){
- 	return sidebar.contentDocument.getElementById("dictionary-keyword");
+  return sidebar.contentDocument.getElementById("dictionary-keyword");
  }
  
  function getResultTextbox(){
- 	return sidebar.contentDocument.getElementById("dictionary-result");
+  return sidebar.contentDocument.getElementById("dictionary-result");
  }
  
  function getPickupWordLabel(){
- 	return sidebar.contentDocument.getElementById("dictionary-pickup-word");
+  return sidebar.contentDocument.getElementById("dictionary-pickup-word");
  }
  
  // 
  // --- functions for obtaining a reference of other xul elements. ---
  // 
  function getInstallationPanel(){
- 	return sidebar.contentDocument.getElementById("firedictionary-installation-panel");
+  return sidebar.contentDocument.getElementById("firedictionary-installation-panel");
  }
  
  function getMainBox(){
- 	return sidebar.contentDocument.getElementById("firedictionary-mainbox");
+  return sidebar.contentDocument.getElementById("firedictionary-mainbox");
  }
  
  function getTabBrowser(){
- 	return top.document.getElementById("content");
+  return top.document.getElementById("content");
  }
  
  function getMouseOverModeIndicator(){
- 	return sidebar.contentDocument.getElementById("fd-mouseovermode-indicator");
+  return sidebar.contentDocument.getElementById("fd-mouseovermode-indicator");
  }
  
  function getTabPanels(){
- 	return sidebar.contentDocument.getElementById("firedictionary-tabpanels");
+  return sidebar.contentDocument.getElementById("firedictionary-tabpanels");
  }
  
  function getTabs(){
- 	return sidebar.contentDocument.getElementById("firedictionary-tabs");
+  return sidebar.contentDocument.getElementById("firedictionary-tabs");
  }
  
  /**
@@ -310,29 +310,29 @@ function FDDictionarySidebar(_fdDictionaryMode){
   * @return A word which is the result of dictionary lookup.
   */
  function _lookup(keyword){
- 	var result = "";
- 	
- 	try {
- 		result = dic.lookup(keyword);
- 		
- 		// When there is no result in the dictionary and the dictionary mode is
- 		// FD_MODE_WORD_PICKEDUP, try agin with modified keyword.
- 		if ( result == "" && fdDictionaryMode == FDDictionarySidebar.FD_MODE_WORD_PICKEDUP){
- 			result = lookupwithModifiedKeyword(keyword);
- 		}
- 		
- 		return result;
- 	 
- 	} catch(e) {
- 		if ( e == "INDEX_MISSING_EXCEPTION" ) {
- 			
-   	dic.createIndex();
-   	return _lookup(keyword);
-   	
+  var result = "";
+  
+  try {
+   result = dic.lookup(keyword);
+   
+   // When there is no result in the dictionary and the dictionary mode is
+   // FD_MODE_WORD_PICKEDUP, try agin with modified keyword.
+   if ( result == "" && fdDictionaryMode == FDDictionarySidebar.FD_MODE_WORD_PICKEDUP){
+    result = lookupwithModifiedKeyword(keyword);
+   }
+   
+   return result;
+   
+  } catch(e) {
+   if ( e == "INDEX_MISSING_EXCEPTION" ) {
+    
+    dic.createIndex();
+    return _lookup(keyword);
+    
    } else {
-   	throw e;
- 		}
- 	}
+    throw e;
+   }
+  }
  }
  
  /**
@@ -342,63 +342,63 @@ function FDDictionarySidebar(_fdDictionaryMode){
   * @return A word which is the result of dictionary lookup.
   */
  function lookupwithModifiedKeyword(keyword){
- 	var modified = keyword.toLowerCase();
+  var modified = keyword.toLowerCase();
   var result = dic.lookup(modified);
   
-		if ( result == "" && keyword.substr(-1, 1) == "s" ){
-			modified = keyword.substr(0, keyword.length - 1);
-			result = dic.lookup(modified);
-		}
+  if ( result == "" && keyword.substr(-1, 1) == "s" ){
+   modified = keyword.substr(0, keyword.length - 1);
+   result = dic.lookup(modified);
+  }
   
-		if ( result == "" && keyword.substr(-2, 2) == "ed" ){
-			modified = keyword.substr(0, keyword.length - 2);
-			result = dic.lookup(modified);
-			
-			if ( result == "" && keyword.substr(-3, 3) == "ied" ){
-			 modified = keyword.substr(0, keyword.length - 3) + "y";
-			 result = dic.lookup(modified);				
-			}
-		}
+  if ( result == "" && keyword.substr(-2, 2) == "ed" ){
+   modified = keyword.substr(0, keyword.length - 2);
+   result = dic.lookup(modified);
+   
+   if ( result == "" && keyword.substr(-3, 3) == "ied" ){
+    modified = keyword.substr(0, keyword.length - 3) + "y";
+    result = dic.lookup(modified);    
+   }
+  }
   
-		if ( result == "" && keyword.substr(-2, 2) == "er" ){
-			modified = keyword.substr(0, keyword.length - 2);
-			result = dic.lookup(modified);
-		}
+  if ( result == "" && keyword.substr(-2, 2) == "er" ){
+   modified = keyword.substr(0, keyword.length - 2);
+   result = dic.lookup(modified);
+  }
   
-		if ( result == "" && keyword.substr(-3, 3) == "ing" ){
-			modified = keyword.substr(0, keyword.length - 3);
-			result = dic.lookup(modified);
-			
-			if( result == "" ){
-				// for double consonant. ex.)filterring, preferring, bannning, etc...
-				if(keyword.substr(-4, 1) == keyword.substr(-5, 1)){
-			  modified = keyword.substr(0, keyword.length - 4);
-			  result = dic.lookup(modified);
-			  
-				} else {
-			  modified = keyword.substr(0, keyword.length - 3) + "e";
-			  result = dic.lookup(modified);
-				}
-			}
-		}
+  if ( result == "" && keyword.substr(-3, 3) == "ing" ){
+   modified = keyword.substr(0, keyword.length - 3);
+   result = dic.lookup(modified);
+   
+   if( result == "" ){
+    // for double consonant. ex.)filterring, preferring, bannning, etc...
+    if(keyword.substr(-4, 1) == keyword.substr(-5, 1)){
+     modified = keyword.substr(0, keyword.length - 4);
+     result = dic.lookup(modified);
+     
+    } else {
+     modified = keyword.substr(0, keyword.length - 3) + "e";
+     result = dic.lookup(modified);
+    }
+   }
+  }
   
-		if ( result == "" && keyword.substr(-1, 1) == "d" ){
-			modified = keyword.substr(0, keyword.length - 1);
-			result = dic.lookup(modified);
-		}
+  if ( result == "" && keyword.substr(-1, 1) == "d" ){
+   modified = keyword.substr(0, keyword.length - 1);
+   result = dic.lookup(modified);
+  }
   
-		if ( result == "" && keyword.substr(-1, 1) == "r" ){
-			modified = keyword.substr(0, keyword.length - 1);
-			result = dic.lookup(modified);
-		}
-		
-		// After process only the case when the word found.
-		if ( result != ""){
-			getPickupWordLabel().value = keyword;
-			getKeywordTextbox().value = modified;
-		}
-		
-		return result;
+  if ( result == "" && keyword.substr(-1, 1) == "r" ){
+   modified = keyword.substr(0, keyword.length - 1);
+   result = dic.lookup(modified);
+  }
+  
+  // After process only the case when the word found.
+  if ( result != ""){
+   getPickupWordLabel().value = keyword;
+   getKeywordTextbox().value = modified;
+  }
+  
+  return result;
  }
  
  /**
@@ -409,7 +409,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  function getResourceDirectory(){
   var dir = new FDDirectory("ProfD");
   dir.createNewDirectory("FireDictionary");
- 	dir.createNewDirectory("res");
+  dir.createNewDirectory("res");
   
   return dir;
  }
@@ -420,9 +420,9 @@ function FDDictionarySidebar(_fdDictionaryMode){
   * @return A name of dictionary.
   */
  function getDictionaryName(){
- 	// Now, just return the default dictionary name which is written in configuration file.
- 	// In the future, there are some possibility : the name might be chosen in the User Interface.
- 	return config.getDefaultDictionaryName();
+  // Now, just return the default dictionary name which is written in configuration file.
+  // In the future, there are some possibility : the name might be chosen in the User Interface.
+  return config.getDefaultDictionaryName();
  }
  
  /**
@@ -430,7 +430,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  remove temporary files which is in the directory 'tmp'.
   */
  function clearTempFiles(){
- 	var 	dirTemp = new FDDirectory("ProfD");
+  var  dirTemp = new FDDirectory("ProfD");
   dirTemp.createNewDirectory("FireDictionary");
   dirTemp.createNewDirectory("tmp");
 
