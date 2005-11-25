@@ -1,5 +1,6 @@
 <!ENTITY menu.tools			"ツール">
 <!ENTITY menu.clearHistory		"履歴の消去">
+<!ENTITY menu.viewHistory		"履歴の表示">
 <!ENTITY menu.homepage			"ホームページ">
 
 <!ENTITY install.box.description	"辞書コンテンツのインストール">

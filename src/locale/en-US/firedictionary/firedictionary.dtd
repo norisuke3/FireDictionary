@@ -1,5 +1,6 @@
 <!ENTITY menu.tools			"Tools">
 <!ENTITY menu.clearHistory		"Clear History">
+<!ENTITY menu.viewHistory		"View History">
 <!ENTITY menu.homepage			"FireDictionary Web Site">
 
 <!ENTITY install.box.description	"Instllation for dictionary contents.">
