@@ -220,7 +220,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  *  View the history in the browser as a html.
  */
  this.viewHistory = function(){
-  //history.view();
+  history.view();
  }
  
  /**

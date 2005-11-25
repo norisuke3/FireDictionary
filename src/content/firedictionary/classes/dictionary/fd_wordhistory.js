@@ -38,7 +38,8 @@
  * A class for words history.
  */
 function FDWordHistory(){
-	var sidebar = top.document.getElementById("sidebar");
+ var sidebar = top.document.getElementById("sidebar");
+ var urlWordHistoryAndExcerpts = "chrome://firedictionary/content/view/WordHistoryAndExcerpt.html";
 	
 	/**
 	 * initialize()
@@ -115,8 +116,16 @@ function FDWordHistory(){
 		getHistoryFile().remove();
 		setText("");
 	}
+
+/**
+ * view()
+ *  View the history in the browser as a html.
+ */
+ this.view = function(){
+  top.document.getElementById("content").loadURI(urlWordHistoryAndExcerpts);
+ }
 	
-	//
+ //
  // Private method ///////////////////////////////////////////////////////
  //
  
