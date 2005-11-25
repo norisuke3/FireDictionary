@@ -253,6 +253,11 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  return the status of mouse over mode.
   */
  this.getMouseOverMode = function(){
+  var modeIndicator = getMouseOverModeIndicator();
+  
+  if ( modeIndicator == null )
+   return false;
+ 
   return (getMouseOverModeIndicator().getAttribute("status") == "on");
  }
  
