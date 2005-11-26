@@ -97,7 +97,7 @@ function FDWordHistory(){
  	item.setTitle(title);
  	item.setSentence(sentence);
  	item.setPickedUpWord(pickedupword);
- 	item.setCategory(getDate());
+ 	item.setCategory("");
 		
 		xmlHistory.addHistoryItem(item);
 		
@@ -165,56 +165,31 @@ function FDWordHistory(){
  }
  
  /**
-  * Document getHistoryStylesheetFile()
-  *  Return DOMDocument object which contains stylesheet.
-  *
-  * @return DOMDocument object which contains stylesheet of 'history.xsl'
-  */
- function getHistoryStylesheetFile(){
-  var dir = new FDDirectory("ProfD");
-  dir.changeDirectory("FireDictionary");
-  var file = dir.createFileInstance("history.xsl");
-  
-  if( !file.exists() ) createHistoryStylesheetFile(dir);
-  
-  return file;
- }
- 
- /**
-  * function createConfigFile(FDDirectory dir)
-  *
-  * @param dir
-  */
- function createHistoryStylesheetFile(dir){
- 	var source = "chrome://firedictionary/content/classes/dictionary/res/history.xsl"
- 	var emitter = new FDInstallFileEmitter(source);
- 	emitter.emitTo(dir);
- }
- 
- /**
   * String formatHistory(FDXmlHistory history)
   */
  function formatHistory(history){
+  var urlXsl = "chrome://firedictionary/content/classes/dictionary/res/history.xsl"
   var transformer = new XSLTProcessor();
-  var xsl = new FDDomBase();
   var fragment;
   
-  xsl.readFromFile(getHistoryStylesheetFile());
-  transformer.importStylesheet(xsl.getDocumentElement());
+  transformer.importStylesheet(getXMLDocument(urlXsl));
   fragment = transformer.transformToFragment(history.getDocumentElement(), document);
   
   return fragment.firstChild.nodeValue;
  }
- 
+
  /**
-  * String getDate()
-  *  return a string which express current date. The format is "yyyy/mm/dd".
+  * Document getXMLDocument(String url)
   *
-  * @return a string of date.
+  * @param url
+  * @return XML Document
   */
- function getDate(){
- 	var today = new Date();
- 	
- 	return today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
+ function getXMLDocument(url){
+   var xmlHttpRequest = new XMLHttpRequest();
+   
+   xmlHttpRequest.open("GET", url, false);
+   xmlHttpRequest.send(null); 
+
+   return xmlHttpRequest.responseXML;
  }
 }

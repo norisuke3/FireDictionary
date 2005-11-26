@@ -64,6 +64,11 @@ function FDXmlHistoryItem(){
  timestamp.appendChild(this.domDocument.createTextNode(new Date().getTime()));
  item.appendChild(timestamp);
  
+ // add date element
+ var date = this.domDocument.createElementNS(ns, "hs:date");
+ date.appendChild(this.domDocument.createTextNode(getDate()));
+ item.insertBefore(date, timestamp);
+ 
  /**
   * setKeyword(String keyword)
   *
@@ -72,7 +77,7 @@ function FDXmlHistoryItem(){
  this.setKeyword = function(keyword){
  	var element = this.domDocument.createElementNS(ns, "hs:keyword");
  	element.appendChild(this.domDocument.createTextNode(keyword));
- 	item.insertBefore(element, timestamp);
+ 	item.insertBefore(element, date);
  }
  
  /**
@@ -93,7 +98,7 @@ function FDXmlHistoryItem(){
  this.setResult = function(result){
  	var element = this.domDocument.createElementNS(ns, "hs:result");
  	element.appendChild(this.domDocument.createTextNode(result));
- 	item.insertBefore(element, timestamp);
+ 	item.insertBefore(element, date);
  }
  
  /**
@@ -114,7 +119,7 @@ function FDXmlHistoryItem(){
  this.setUrl = function(url){
  	var element = this.domDocument.createElementNS(ns, "hs:url");
  	element.appendChild(this.domDocument.createTextNode(url));
- 	item.insertBefore(element, timestamp);
+ 	item.insertBefore(element, date);
  }
  
  /**
@@ -135,7 +140,7 @@ function FDXmlHistoryItem(){
  this.setTitle = function(title){
  	var element = this.domDocument.createElementNS(ns, "hs:title");
  	element.appendChild(this.domDocument.createTextNode(title));
- 	item.insertBefore(element, timestamp);
+ 	item.insertBefore(element, date);
  }
  
  /**
@@ -156,7 +161,7 @@ function FDXmlHistoryItem(){
  this.setSentence = function(sentence){
  	var element = this.domDocument.createElementNS(ns, "hs:sentence");
  	element.appendChild(this.domDocument.createTextNode(sentence));
- 	item.insertBefore(element, timestamp);
+ 	item.insertBefore(element, date);
  }
  
  /**
@@ -187,7 +192,7 @@ function FDXmlHistoryItem(){
  this.setPickedUpWord = function(pickedupword){
  	var element = this.domDocument.createElementNS(ns, "hs:pickedupword");
  	element.appendChild(this.domDocument.createTextNode(pickedupword));
- 	item.insertBefore(element, timestamp);
+ 	item.insertBefore(element, date);
  }
  
  /**
@@ -198,7 +203,7 @@ function FDXmlHistoryItem(){
  this.setCategory = function(category){
  	var element = this.domDocument.createElementNS(ns, "hs:category");
  	element.appendChild(this.domDocument.createTextNode(category));
- 	item.insertBefore(element, timestamp);
+ 	item.insertBefore(element, date);
  }
  
  /**
@@ -237,5 +242,21 @@ function FDXmlHistoryItem(){
  	}
  	
  	return result;
+ }
+	
+ //
+ // Private method ///////////////////////////////////////////////////////
+ //
+ 
+ /**
+  * String getDate()
+  *  return a string which express current date. The format is "yyyy/mm/dd".
+  *
+  * @return a string of date.
+  */
+ function getDate(){
+ 	var today = new Date();
+ 	
+ 	return today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
  }
 }
