@@ -174,8 +174,8 @@ function FDDictionarySidebar(_fdDictionaryMode){
   */
  this.lookup = function(){
   if( this.isActive() && dic != null){
+   getKeywordTextbox().value = mKeyword;
    if( mKeyword != "" && mKeyword != mLastKeyword){
-    getKeywordTextbox().value = mKeyword;
     getPickupWordLabel().value = "";
     getResultTextbox().value = _lookup(mKeyword);
     
