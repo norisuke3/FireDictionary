@@ -50,7 +50,12 @@
                 <em>---- <xsl:value-of select="../hs:title"/></em>
               </xsl:element>
               <br />
-              <p><xsl:value-of select="../hs:category"/></p><br />
+              <p>
+                <xsl:if test="../hs:category != ''">
+                  [ <xsl:value-of select="../hs:category"/> ]
+                </xsl:if>
+                <xsl:value-of select="../hs:date"/>
+              </p><br />
             </div>
           </p>
         </font>
