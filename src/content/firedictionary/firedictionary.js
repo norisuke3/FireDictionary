@@ -105,10 +105,12 @@ function loadGeneratedPage(){
 	var pasteboard = new FDPasteBoard();
 	var tabbrowser = top.document.getElementById("content");
 	var file = dirTemp.createFileInstance("temp.html");
+	var tab;
 	
 	file.write(pasteboard.getContentAsHtml());
 	
-	tabbrowser.loadURI(file.getURL());
+	tab = tabbrowser.addTab(file.getURL());
+	tabbrowser.selectedTab = tab;
 	dicSidebar.selectTab(0);
 }
 
@@ -118,7 +120,10 @@ function loadGeneratedPage(){
  *   (http://www.firedictionary.com/)
  */
 function loadHomePage(){
-	top.document.getElementById("content").loadURI("http://www.firedictionary.com/")
+ var tabbrowser = top.document.getElementById("content");
+ var tab = tabbrowser.addTab("http://www.firedictionary.com/");
+ 
+ tabbrowser.selectedTab = tab;
 }
 
 /**

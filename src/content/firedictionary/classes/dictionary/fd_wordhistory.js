@@ -123,7 +123,10 @@ function FDWordHistory(){
  *  View the history in the browser as a html.
  */
  this.view = function(){
-  top.document.getElementById("content").loadURI(urlWordHistoryAndExcerpts);
+  var tabbrowser = top.document.getElementById("content");
+  var tab = tabbrowser.addTab(urlWordHistoryAndExcerpts);
+ 
+  tabbrowser.selectedTab = tab;
  }
 	
  //
