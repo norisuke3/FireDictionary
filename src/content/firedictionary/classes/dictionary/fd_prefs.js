@@ -72,3 +72,39 @@ FDPrefs.prototype.getCharPref = function(name){
  
  return value;
 }
+
+/**
+ * setUniCharPref(String name, String value)
+ *  set a preference with a Unicode String type value.
+ *
+ * @param name a name of the preference
+ * @param value a value of the preference which type is Unicode.
+ */
+FDPrefs.prototype.setUniCharPref = function(name, value){
+ var nsISupportsString = Components.interfaces.nsISupportsString;
+ var string = Components.classes["@mozilla.org/supports-string;1"].createInstance(nsISupportsString);
+
+ string.data = value;
+ this.mBranch.setComplexValue(name, nsISupportsString, string); 
+}
+
+/**
+ * String getUniCharPref(String name)
+ *  get a value of the preference. If there is no value related to the name,
+ *  return null.
+ *
+ * @param name a name of the preference
+ * @return a value of it, or null if there is no value related to the name.
+ */
+FDPrefs.prototype.getUniCharPref = function(name){
+ var nsISupportsString = Components.interfaces.nsISupportsString;
+ var value;
+ 
+ try{
+  value = this.mBranch.getComplexValue(name, nsISupportsString).data;
+ } catch(e) {
+  value = null;
+ }
+ 
+ return value;
+}

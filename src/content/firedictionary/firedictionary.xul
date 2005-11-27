@@ -86,6 +86,7 @@
               <menupopup>
                 <menuitem label="&menu.viewHistory;" oncommand="viewHistory()"/>
                 <menuitem label="&menu.clearHistory;" oncommand="clearHistory()"/>
+                <menuitem label="&menu.setWordCategory;" oncommand="setCategory()"/>
                 <menuseparator/>
                 <menuitem label="&menu.homepage;" oncommand="loadHomePage()"/>
               </menupopup>

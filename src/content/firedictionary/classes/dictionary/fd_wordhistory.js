@@ -76,6 +76,7 @@ function FDWordHistory(){
 	 * )
 	 */
 	this.registWord = function(keyword, result, url, title, sentence, pickedupword){
+	 var prefs = new FDPrefs();
 		var file = getHistoryFile();
 	 var xmlHistory = new FDXmlHistory();
  	var item;
@@ -97,7 +98,7 @@ function FDWordHistory(){
  	item.setTitle(title);
  	item.setSentence(sentence);
  	item.setPickedUpWord(pickedupword);
- 	item.setCategory("");
+ 	item.setCategory(prefs.getUniCharPref("category"));
 		
 		xmlHistory.addHistoryItem(item);
 		

@@ -128,3 +128,12 @@ function loadHomePage(){
 function flipSwitch(){
 	dicSidebar.flipMouseOverModeSwitch();
 }
+
+/**
+ * setCategory()
+ *  Open a dialog to set a category for the keywords.
+ */
+function setCategory(){
+ var dialogURL = "chrome://firedictionary/content/inputCategory.xul"
+ window.openDialog(dialogURL, "inputCategory", "chrome");
+}
