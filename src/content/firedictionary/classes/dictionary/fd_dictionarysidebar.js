@@ -173,9 +173,9 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Lookup the dictionary using a word in keyword textbox.
   */
  this.lookup = function(){
-  if( this.isActive() && dic != null){
+  if( this.isActive() && dic != null && mKeyword != mLastKeyword){
    getKeywordTextbox().value = mKeyword;
-   if( mKeyword != "" && mKeyword != mLastKeyword){
+   if( mKeyword != "" ){
     getPickupWordLabel().value = "";
     getResultTextbox().value = _lookup(mKeyword);
     
