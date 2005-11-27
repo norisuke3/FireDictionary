@@ -83,36 +83,39 @@ function getWordFromEvent(event){
  if(offset < 0 || offset >= str.length)
   return result;
     
- if(!REWord.test(str.substring(start, start + 1)))
+ if(!REWord.test(str.charAt(start)))
   return result;
  
  // Extract the keyword.
- while(start > 0 && REWord.test(str.substring(start - 1, start)))
+ while(start > 0 && REWord.test(str.charAt(start - 1)))
  	start--;
 
- while(end < str.length && REWord.test(str.substring(end, end + 1)))
+ while(end < str.length && REWord.test(str.charAt(end)))
  	end++;
 
  result[0] = str.substring(start, end);
 	
-	// Extract sentence which contains the kyeword.
+ // Extract sentence which contains the kyeword.
  REWord = /[A-Z]/;
  while(start > 0 && 
-       !(str.substring(start - 1, start) == "." &&
-        str.substring(start, start + 1) == " " &&
-        REWord.test(str.substring(start + 1, start + 2))
+       !(str.charAt(start - 1) == "." &&
+        str.charAt(start) == " " &&
+        REWord.test(str.charAt(start + 1))
        )
       )
  	start--;
 
  while(end < str.length &&
-       !(str.substring(end, end + 1) == "." &&
-        str.substring(end + 1, end + 2) == " " &&
-        REWord.test(str.substring(end + 2, end + 3))
+       !(str.charAt(end) == "." &&
+        str.charAt(end + 1) == " " &&
+        REWord.test(str.charAt(end + 2))
        )
       )
  	end++;
-
+ 
+ 
+ while(str.charAt(end - 1) == " ") end--;
+ 
  result[1] = str.substring(start, end);
 	
  return result;
@@ -132,7 +135,7 @@ function sendContentWord(event){
  
  var resultArray = getWordFromEvent(event);
 	var keyword = resultArray[0];
-	var sentence = resultArray[1] + (resultArray[1].substr(-1, 1) == "." ? "" : ".");
+	var sentence = resultArray[1];
 	var url = event.view.document.URL;
 	var title = event.view.document.title;
 	
