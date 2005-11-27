@@ -135,5 +135,5 @@ function flipSwitch(){
  */
 function setCategory(){
  var dialogURL = "chrome://firedictionary/content/inputCategory.xul"
- window.openDialog(dialogURL, "inputCategory", "chrome");
+ window.openDialog(dialogURL, "inputCategory", "chrome, centerscreen, dependent, dialog, modal");
 }
