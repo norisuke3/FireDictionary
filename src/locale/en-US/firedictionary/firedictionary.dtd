@@ -2,5 +2,9 @@
 <!ENTITY menu.clearHistory		"Clear History">
 <!ENTITY menu.viewHistory		"View History">
 <!ENTITY menu.homepage			"FireDictionary Web Site">
+<!ENTITY menu.setWordCategory           "Set a word category">
+
+<!ENTITY label.category                 "Category : ">
+<!ENTITY tips.category                  "To keep the words in your mind for long time and vividly, It's better to decide a category as a clause like a 'in the library with my friends John' than simple words 'sports news'.">
 
 <!ENTITY install.box.description	"Instllation for dictionary contents.">
