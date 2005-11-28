@@ -39,11 +39,31 @@ function initialize(category, date, keyword, firstLetterOfTheKeyword){
  Init('history-Keywords-List.xsl', 'word-list');
  Init('history-Categories.xsl', 'categories');
  Init('history-date-List.xsl', 'date-list');
+ 
+ // set stylesheet
+ var prefs = new FDPrefs;
+ var name = prefs.getCharPref("firedictionary-stylesheet-type");
+ 
+ setStylesheet(name);
 }
 
 function setFilter(category, date, keyword, firstLetterOfTheKeyword){
  Init('history-Words-and-Excerpts.xsl', 'history', category, date, keyword, firstLetterOfTheKeyword);
  Init('history-Keywords-List.xsl', 'word-list', category, date, keyword, firstLetterOfTheKeyword);
+}
+
+function setStylesheet(name){
+ var prefs = new FDPrefs;
+ var base = "chrome://firedictionary/skin/";
+ 
+ if( !name ){
+  url = base + "history-default.css";
+ } else {
+  prefs.setCharPref("firedictionary-stylesheet-type", name);
+  url = base + name;
+ }
+ 
+ document.getElementsByTagName("link")[0].href = url;
 }
 
 function getNonNullString(s){

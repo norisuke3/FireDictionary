@@ -37,19 +37,31 @@
 <html>
 <head>
 <title>Word history and excerpts@FireDictionary</title>
-<link rel="stylesheet" type="text/css" href="chrome://firedictionary/skin/history.css">
+<link rel="stylesheet" type="text/css" href="chrome://firedictionary/skin/history-default.css">
 <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
 <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
 <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_permanent.js"/>
+<script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
 <script type="application/x-javascript" src="history.js"/>
 </head>
 <body onload="initialize()">
   <table width='100%' border='0'>
     <tr>
       <td width='8%'>&nbsp;</td>
-      <td class="history-title" colspan="4">
+      <td class="history-title">
         &nbsp;Word history and excerpts
       </td>
+      <td width='8%'>&nbsp;</td>
+      <td width='8%'>
+        style : 
+        <form name="form"> 
+          <select name="style" onChange="setStylesheet(form.style.value)"> 
+            <option value="history-default.css">default</option>
+            <option value="history-cream.css">cream</option>
+          </select> 
+        </form>      
+      </td>
+      <td width='8%'>&nbsp;</td>
     </tr>
 
     <tr class="main">
