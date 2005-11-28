@@ -106,7 +106,7 @@
                 [ <xsl:value-of select="../hs:category"/> ]
               </xsl:if>
               <xsl:value-of select="../hs:date"/>
-            </p><br />
+            </p><br /><br />
           </div>
         </p>
       </td>
