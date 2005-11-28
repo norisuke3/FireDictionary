@@ -67,14 +67,17 @@ function FDXmlHistory(){
   * @paran result Result of dictionary.
   * @return added element.
   */
- this.addItem = function(keyword, result){
+ this.addItem = function(keyword, result, category){
+    var strbundle=document.getElementById("fd-localized-strings");
  	var item = new FDXmlHistoryItem();
+ 	
+ 	if ( !category ) category = strbundle.getString("unclassified");
  	
  	item.setKeyword(keyword);
  	item.setResult(result);
  	item.setUrl("");
  	item.setTitle("");
- 	item.setCategory("");
+ 	item.setCategory(category);
  	
  	this.addHistoryItem(item);
   

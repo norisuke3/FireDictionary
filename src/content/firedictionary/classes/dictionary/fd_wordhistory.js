@@ -80,7 +80,10 @@ function FDWordHistory(){
 		var file = getHistoryFile();
 	 var xmlHistory = new FDXmlHistory();
  	var item;
-		
+ 	var category = prefs.getUniCharPref("category");
+    
+	if ( !category || category == "" ) category = "Unclassified";
+	
 		if( file.exists() ){
 			xmlHistory.readFromFile(file);
 		}
@@ -98,7 +101,7 @@ function FDWordHistory(){
  	item.setTitle(title);
  	item.setSentence(sentence);
  	item.setPickedUpWord(pickedupword);
- 	item.setCategory(prefs.getUniCharPref("category"));
+ 	item.setCategory(category);
 		
 		xmlHistory.addHistoryItem(item);
 		
