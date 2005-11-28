@@ -37,3 +37,21 @@
 a:hover {
 	background-color: #FFFF99;
 }
+
+.main {
+    vertical-align:top;
+}
+
+#history {
+    max-width:600px;
+}
+
+div#categories > span,
+div#date-list > span {
+    background-color: #CCFFFF;
+}
+
+div#categories > span:hover,
+div#date-list > span:hover  {
+    background-color: #66CCFF;
+}

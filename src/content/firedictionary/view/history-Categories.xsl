@@ -49,25 +49,23 @@
   </xsl:template>
 
   <xsl:template match="hs:items">
-    <xsl:apply-templates select="hs:item
-        [not(string($keyword)) or hs:keyword=$keyword]
-        [not(string($date)) or hs:date=$date]
-        [not(string($category)) or hs:category=$category]
-        [not(string($first-letter-of-the-keyword)) or starts-with(hs:keyword, $first-letter-of-the-keyword)]
-    ">
-      <xsl:sort select="./hs:keyword" data-type="text" order="ascending"/>
+    <xsl:apply-templates select="hs:item">
+      <xsl:sort select="./hs:category" data-type="text" order="ascending"/>
     </xsl:apply-templates>
   </xsl:template>
   
   <xsl:template match="hs:item">
-    <xsl:element name="a">
-      <xsl:attribute name="href">
-        <xsl:value-of select="concat('#', hs:timestamp)"/>
-      </xsl:attribute>
-      <font size='-1' face='Arial, Helvetica, sans-serif'>
-        <xsl:value-of select="hs:keyword"/>
-      </font>
-    </xsl:element>
-    <xsl:text  xml:space="preserve"> </xsl:text>
+    <xsl:param name="buffer" select="hs:category"/>
+    <xsl:if test=". = ../hs:item[hs:category=$buffer][1]">
+      <xsl:element name="span">
+        <xsl:attribute name="class">history-filter-item</xsl:attribute>
+        <xsl:attribute name="onclick">setFilter('<xsl:value-of select="hs:category"/>');
+        </xsl:attribute>
+        <font size='-1' face='Arial, Helvetica, sans-serif'>
+          <xsl:value-of select="hs:category"/>
+        </font>
+      </xsl:element>
+      <br />
+    </xsl:if>
   </xsl:template>
 </xsl:stylesheet>

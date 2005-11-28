@@ -34,17 +34,38 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
-function initialize(){
+function initialize(category, date, keyword, firstLetterOfTheKeyword){
  Init('history-Words-and-Excerpts.xsl', 'history');
  Init('history-Keywords-List.xsl', 'word-list');
+ Init('history-Categories.xsl', 'categories');
+ Init('history-date-List.xsl', 'date-list');
 }
 
-function Init(xslName, id){
+function setFilter(category, date, keyword, firstLetterOfTheKeyword){
+ Init('history-Words-and-Excerpts.xsl', 'history', category, date, keyword, firstLetterOfTheKeyword);
+ Init('history-Keywords-List.xsl', 'word-list', category, date, keyword, firstLetterOfTheKeyword);
+}
+
+function getNonNullString(s){
+ return (s == null) ? "" : s;
+}
+
+function Init(xslName, id, category_, date_, keyword_, firstLetterOfTheKeyword_){
   var transformer = new XSLTProcessor();
   var xmlDoc = getXMLDocument(getHistoryFile().getURL());
+ 
+  var category = getNonNullString(category_);
+  var date = getNonNullString(date_);
+  var keyword = getNonNullString(keyword_);
+  var firstLetterOfTheKeyword = getNonNullString(firstLetterOfTheKeyword_);
+  
   
   // load a style sheet.
   transformer.importStylesheet(getXMLDocument(xslName));
+  transformer.setParameter(null, "category", category);
+  transformer.setParameter(null, "date", date);
+  transformer.setParameter(null, "keyword", keyword);
+  transformer.setParameter(null, "first-letter-of-the-keyword", firstLetterOfTheKeyword);
   var fragment = transformer.transformToFragment(xmlDoc, document);
 
   document.getElementById(id).innerHTML = "";
