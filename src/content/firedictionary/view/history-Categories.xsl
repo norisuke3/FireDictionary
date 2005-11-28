@@ -49,23 +49,26 @@
   </xsl:template>
 
   <xsl:template match="hs:items">
-    <xsl:apply-templates select="hs:item">
-      <xsl:sort select="./hs:category" data-type="text" order="ascending"/>
-    </xsl:apply-templates>
+    <table class="page-sidebar">
+      <tr><td class="sidebar-title">Category</td></tr>
+      
+      <xsl:apply-templates select="hs:item">
+        <xsl:sort select="./hs:category" data-type="text" order="ascending"/>
+      </xsl:apply-templates>
+    </table>
   </xsl:template>
   
   <xsl:template match="hs:item">
     <xsl:param name="buffer" select="hs:category"/>
     <xsl:if test=". = ../hs:item[hs:category=$buffer][1]">
-      <xsl:element name="span">
-        <xsl:attribute name="class">history-filter-item</xsl:attribute>
-        <xsl:attribute name="onclick">setFilter('<xsl:value-of select="hs:category"/>');
-        </xsl:attribute>
-        <font size='-1' face='Arial, Helvetica, sans-serif'>
-          <xsl:value-of select="hs:category"/>
-        </font>
-      </xsl:element>
-      <br />
+      <tr>
+        <xsl:element name="td">
+          <xsl:attribute name="class">history-filter-item</xsl:attribute>
+          <xsl:attribute name="onclick">setFilter('<xsl:value-of select="hs:category"/>');
+          </xsl:attribute>
+            <xsl:value-of select="hs:category"/>
+        </xsl:element>
+      </tr>
     </xsl:if>
   </xsl:template>
 </xsl:stylesheet>

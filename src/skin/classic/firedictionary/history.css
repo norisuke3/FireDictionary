@@ -46,12 +46,26 @@ a:hover {
     max-width:600px;
 }
 
-div#categories > span,
-div#date-list > span {
+table {width: 100%; padding: 5;}
+table.page-sidebar td {
+	padding: 0;
+	margin: 0px;
+	border-width: 0;
+	vertical-align: top;
+	font-family: Arial, Helvetica, sans-serif;
+	
     background-color: #CCFFFF;
+    font-size: small;
 }
 
-div#categories > span:hover,
-div#date-list > span:hover  {
+table.page-sidebar td:hover {
     background-color: #66CCFF;
+}
+
+table.page-sidebar td.sidebar-title{
+    height: 10px;
+    text-align: center;
+    background-color: #CCCCFF;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }

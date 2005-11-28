@@ -49,23 +49,26 @@
   </xsl:template>
 
   <xsl:template match="hs:items">
-    <xsl:apply-templates select="hs:item">
-      <xsl:sort select="./hs:date" data-type="text" order="descending"/>
-    </xsl:apply-templates>
+    <table class="page-sidebar">
+      <tr><td class="sidebar-title">Date</td></tr>
+      
+      <xsl:apply-templates select="hs:item">
+        <xsl:sort select="./hs:date" data-type="text" order="descending"/>
+      </xsl:apply-templates>
+    </table>
   </xsl:template>
   
   <xsl:template match="hs:item">
     <xsl:param name="buffer" select="hs:date"/>
     <xsl:if test=". = ../hs:item[hs:date=$buffer][1]">
-      <xsl:element name="span">
-        <xsl:attribute name="class">history-filter-item</xsl:attribute>
-        <xsl:attribute name="onclick">setFilter(null, '<xsl:value-of select="hs:date"/>');
-        </xsl:attribute>
-        <font size='-1' face='Arial, Helvetica, sans-serif'>
+      <tr>
+        <xsl:element name="td">
+          <xsl:attribute name="class">history-filter-item</xsl:attribute>
+          <xsl:attribute name="onclick">setFilter(null, '<xsl:value-of select="hs:date"/>');
+          </xsl:attribute>
           <xsl:value-of select="hs:date"/>
-        </font>
-      </xsl:element>
-      <br />
+        </xsl:element>
+      </tr>
     </xsl:if>
   </xsl:template>
 </xsl:stylesheet>
