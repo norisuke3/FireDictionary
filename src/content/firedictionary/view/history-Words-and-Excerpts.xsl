@@ -69,16 +69,10 @@
            <xsl:value-of select="hs:timestamp"/>
          </xsl:attribute>
       </xsl:element>
-      <font size='-1' face='Arial, Helvetica, sans-serif'>
-        <strong>
-          <xsl:value-of select="hs:keyword"/>
-        </strong>
-      </font>
+      <strong><xsl:value-of select="hs:keyword"/></strong>
     </td>
     <td>
-      <font size='-1' face='Arial, Helvetica, sans-serif'>
-        <xsl:value-of select="hs:result"/>
-      </font>
+      <xsl:value-of select="hs:result"/>
     </td>
     </tr>
     <xsl:apply-templates select="hs:sentence"/>
@@ -93,30 +87,28 @@
       <td>
       </td>
       <td>
-        <font size='-1' face='Arial, Helvetica, sans-serif'>
-          <p>
-            <xsl:value-of select="$sentence1"/>
-            <font color="#FF0000"><xsl:value-of select="$pickedup"/></font>
-            <xsl:value-of select="$sentence2"/>
-          </p>
-          <p>
-            <div align="right">
-              <xsl:element name="a">
-                <xsl:attribute name="href">
-                  <xsl:value-of select="../hs:url"/>
-                </xsl:attribute>
-                <em>---- <xsl:value-of select="../hs:title"/></em>
-              </xsl:element>
-              <br />
-              <p>
-                <xsl:if test="../hs:category != ''">
-                  [ <xsl:value-of select="../hs:category"/> ]
-                </xsl:if>
-                <xsl:value-of select="../hs:date"/>
-              </p><br />
-            </div>
-          </p>
-        </font>
+        <p>
+          <xsl:value-of select="$sentence1"/>
+          <font color="#FF0000"><xsl:value-of select="$pickedup"/></font>
+          <xsl:value-of select="$sentence2"/>
+        </p>
+        <p>
+          <div align="right">
+            <xsl:element name="a">
+              <xsl:attribute name="href">
+                <xsl:value-of select="../hs:url"/>
+              </xsl:attribute>
+              <em>---- <xsl:value-of select="../hs:title"/></em>
+            </xsl:element>
+            <br />
+            <p>
+              <xsl:if test="../hs:category != ''">
+                [ <xsl:value-of select="../hs:category"/> ]
+              </xsl:if>
+              <xsl:value-of select="../hs:date"/>
+            </p><br />
+          </div>
+        </p>
       </td>
     </tr>
   </xsl:template>

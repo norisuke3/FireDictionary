@@ -33,7 +33,15 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
- 
+
+body {
+    background-color: #FFFFFF;
+}
+
+a {
+    font-size: small;
+}
+
 a:hover {
 	background-color: #FFFF99;
 }
@@ -46,16 +54,27 @@ a:hover {
     max-width:600px;
 }
 
-table {width: 100%; padding: 5;}
+td.history-title{
+	font-size: large;
+	font-weight: bold;
+	padding-top: 65px;
+	padding-bottom: 65px;
+}
+
+table {
+	font-family: "Arial", "Helvetica", "sans-serif";
+    font-size: small;
+    width: 100%;
+    padding: 5;
+}
+
 table.page-sidebar td {
 	padding: 0;
 	margin: 0px;
 	border-width: 0;
 	vertical-align: top;
-	font-family: Arial, Helvetica, sans-serif;
 	
     background-color: #CCFFFF;
-    font-size: small;
 }
 
 table.page-sidebar td:hover {

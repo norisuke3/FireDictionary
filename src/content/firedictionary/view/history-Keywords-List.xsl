@@ -64,9 +64,7 @@
       <xsl:attribute name="href">
         <xsl:value-of select="concat('#', hs:timestamp)"/>
       </xsl:attribute>
-      <font size='-1' face='Arial, Helvetica, sans-serif'>
-        <xsl:value-of select="hs:keyword"/>
-      </font>
+      <xsl:value-of select="hs:keyword"/>
     </xsl:element>
     <xsl:text  xml:space="preserve"> </xsl:text>
   </xsl:template>
