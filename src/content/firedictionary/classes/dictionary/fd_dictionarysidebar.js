@@ -220,6 +220,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  *  View the history in the browser as a html.
  */
  this.viewHistory = function(){
+  this.turnOffMouseOverMode();
   history.view();
  }
  
@@ -245,8 +246,18 @@ function FDDictionarySidebar(_fdDictionaryMode){
   }
   
   getMouseOverModeIndicator().setAttribute("status", mode);
-     prefs.setCharPref("mouse-over-mode", mode);
+  prefs.setCharPref("mouse-over-mode", mode);
  }
+ 
+ /**
+  *  turnOffMouseOverMode()
+  *   Turn off the mouse over mode switch()
+  */
+ this.turnOffMouseOverMode = function(){
+  var mode = "off";
+  
+  getMouseOverModeIndicator().setAttribute("status", mode);
+  prefs.setCharPref("mouse-over-mode", mode); }
  
  /**
   * Boolean getMouseOverMode()
