@@ -75,20 +75,25 @@ function setFilter(category, date, keyword, firstLetterOfTheKeyword){
  */
 function initServerInformation(){
  var parameters = new Array(1);
- var xml = getXMLDocument('index.xml');
  var xsl = getXMLDocument('history-server-information.xsl');
  var xslGetNumber = getXMLDocument("numberOfInfo.xsl");
+ var url = "http://www.firedictionary.com/ad/";
  
- var fragment = getXMLFragment(xml, xslGetNumber);
- var maxNum = fragment.textContent;
- var num = Math.floor(Math.random() * maxNum) + 1;
+ try{
+  var xml = getXMLDocument(url);
  
- parameters[0] = new Array("number", num);
+  var fragment = getXMLFragment(xml, xslGetNumber);
+  var maxNum = fragment.textContent;
+  var num = Math.floor(Math.random() * maxNum) + 1;
  
- fragment = getXMLFragment(xml, xsl, parameters);
+  parameters[0] = new Array("number", num);
  
- document.getElementById('server-infomation').innerHTML = "";
- document.getElementById('server-infomation').appendChild(fragment);
+  fragment = getXMLFragment(xml, xsl, parameters);
+ 
+  document.getElementById('server-infomation').innerHTML = "";
+  document.getElementById('server-infomation').appendChild(fragment);
+ } catch(e) {
+ }
 }
 
 /**

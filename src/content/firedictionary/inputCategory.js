@@ -49,10 +49,19 @@ function initialize(){
 function doOK(){
  var prefs = new FDPrefs();
  var category = document.getElementById("category");
-
- prefs.setUniCharPref("category", category.value);
+ var strbundle=document.getElementById("fd-localized-strings");
+ var errorMessage = strbundle.getString("error.usingIllegalCharacter");
+ var result = true;
  
- return true; 
+ if( category.value.indexOf("\"") == -1 ){
+  prefs.setUniCharPref("category", category.value);
+  
+ } else{
+  alert(errorMessage);
+  result = false;
+ }
+ 
+ return result; 
 }
 
 function doCancel(){
