@@ -43,7 +43,7 @@
  * @param firstLetterOfTheKeyword
  */
 function initialize(category, date, keyword, firstLetterOfTheKeyword){
- Init('history-Words-and-Excerpts.xsl', 'history');
+ Init(getStylesheetOfMainArea(), 'history');
  Init('history-Keywords-List.xsl', 'word-list');
  Init('history-Categories.xsl', 'categories');
  Init('history-date-List.xsl', 'date-list');
@@ -51,8 +51,11 @@ function initialize(category, date, keyword, firstLetterOfTheKeyword){
  // set stylesheet
  var prefs = new FDPrefs;
  var name = prefs.getCharPref("firedictionary-stylesheet-type");
+
+ document.getElementById("form-color").value=name;
  
- setHtmlStylesheet(name);
+ setColor(name);
+ 
  
  initServerInformation()
 }
@@ -66,8 +69,20 @@ function initialize(category, date, keyword, firstLetterOfTheKeyword){
  * @param firstLetterOfTheKeyword
  */
 function setFilter(category, date, keyword, firstLetterOfTheKeyword){
- Init('history-Words-and-Excerpts.xsl', 'history', category, date, keyword, firstLetterOfTheKeyword);
+ Init(getStylesheetOfMainArea(), 'history', category, date, keyword, firstLetterOfTheKeyword);
  Init('history-Keywords-List.xsl', 'word-list', category, date, keyword, firstLetterOfTheKeyword);
+}
+
+/**
+ * getStylesheetOfMainArea()
+ */
+function getStylesheetOfMainArea(){
+ var prefs = new FDPrefs;
+ var stylesheet = prefs.getCharPref("firedictionary-history-main-stylesheet");
+ 
+ if(!stylesheet) stylesheet = "history-Words-and-Excerpts.xsl";
+
+ return stylesheet;
 }
 
 /**
@@ -191,11 +206,11 @@ function getXMLDocument(url){
 }
 
 /**
- * setHtmlStylesheet(String name)
+ * setColor(String name)
  * 
  * @param name
  */
-function setHtmlStylesheet(name){
+function setColor(name){
  var prefs = new FDPrefs;
  var base = "chrome://firedictionary/skin/";
  
@@ -207,4 +222,19 @@ function setHtmlStylesheet(name){
  }
  
  document.getElementsByTagName("link")[0].href = url;
+}
+
+/**
+ * setStyle(String name)
+ * 
+ * @param name
+ */
+function setStyle(name){
+ var prefs = new FDPrefs;
+ 
+ if (name){
+  prefs.setCharPref("firedictionary-history-main-stylesheet", name);
+ }
+ 
+ Init(getStylesheetOfMainArea(), 'history');
 }

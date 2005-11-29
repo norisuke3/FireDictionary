@@ -61,13 +61,22 @@
       </td>
       <td width='8%'>&nbsp;</td>
       <td width='8%'>
-        style : 
-        <form name="form"> 
-          <select name="style" onChange="setHtmlStylesheet(form.style.value)"> 
+        color : 
+        <form name="form" id="form-color"> 
+          <select name="color" onChange="setColor(form.color.value)"> 
             <option value="history-default.css">default</option>
             <option value="history-cream.css">cream</option>
           </select> 
-        </form>      
+        </form>
+        
+        style : 
+        <form name="form2" id="form-style"> 
+          <select name="style" onChange="setStyle(form2.style.value)"> 
+            <option value="history-Words-and-Excerpts.xsl">default</option>
+            <option value="history-Words.xsl">keyword - result</option>
+            <option value="history-Words-cvs.xsl">csv</option>
+          </select> 
+        </form>
       </td>
       <td width='8%'>&nbsp;</td>
     </tr>

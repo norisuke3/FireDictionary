@@ -44,7 +44,7 @@
   
   <xsl:template match="hs:item">
     <tr>
-    <td width='100'>
+    <td width='100' class='words-lists'>
       <xsl:element name="a">
          <xsl:attribute name="name">
            <xsl:value-of select="hs:timestamp"/>
@@ -52,45 +52,9 @@
       </xsl:element>
       <strong><xsl:value-of select="hs:keyword"/></strong>
     </td>
-    <td>
+    <td class='words-lists'>
       <xsl:value-of select="hs:result"/>
     </td>
-    </tr>
-    <xsl:apply-templates select="hs:sentence"/>
-  </xsl:template>
-  
-  <xsl:template match="hs:sentence">
-    <xsl:variable name="sentence" select="."/>
-    <xsl:variable name="pickedup" select="concat(' ', ../hs:pickedupword, ' ')"/>
-    <xsl:variable name="sentence1" select="substring-before($sentence, $pickedup)"/>
-    <xsl:variable name="sentence2" select="substring-after($sentence, $pickedup)"/>
-    <tr>
-      <td>
-      </td>
-      <td>
-        <p>
-          <xsl:value-of select="$sentence1"/>
-          <font color="#FF0000"><xsl:value-of select="$pickedup"/></font>
-          <xsl:value-of select="$sentence2"/>
-        </p>
-        <p>
-          <div align="right">
-            <xsl:element name="a">
-              <xsl:attribute name="href">
-                <xsl:value-of select="../hs:url"/>
-              </xsl:attribute>
-              <em>---- <xsl:value-of select="../hs:title"/></em>
-            </xsl:element>
-            <br />
-            <p>
-              <xsl:if test="../hs:category != ''">
-                [ <xsl:value-of select="../hs:category"/> ]
-              </xsl:if>
-              <xsl:value-of select="../hs:date"/>
-            </p><br /><br />
-          </div>
-        </p>
-      </td>
     </tr>
   </xsl:template>
 </xsl:stylesheet>

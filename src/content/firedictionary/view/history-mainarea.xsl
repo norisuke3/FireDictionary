@@ -39,58 +39,26 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:hs="http://www.firedictionary.com/history">
-  <xsl:include href="history-mainarea.xsl"/>
   
+  <xsl:param name="category"></xsl:param>
+  <xsl:param name="date"></xsl:param>
+  <xsl:param name="keyword"></xsl:param>
+  <xsl:param name="first-letter-of-the-keyword"></xsl:param>
   
-  <xsl:template match="hs:item">
-    <tr>
-    <td width='100'>
-      <xsl:element name="a">
-         <xsl:attribute name="name">
-           <xsl:value-of select="hs:timestamp"/>
-         </xsl:attribute>
-      </xsl:element>
-      <strong><xsl:value-of select="hs:keyword"/></strong>
-    </td>
-    <td>
-      <xsl:value-of select="hs:result"/>
-    </td>
-    </tr>
-    <xsl:apply-templates select="hs:sentence"/>
+  <xsl:template match="/">
+          <table>
+            <xsl:apply-templates select="hs:firedictionary/hs:history/hs:items"/>
+          </table>
   </xsl:template>
   
-  <xsl:template match="hs:sentence">
-    <xsl:variable name="sentence" select="."/>
-    <xsl:variable name="pickedup" select="concat(' ', ../hs:pickedupword, ' ')"/>
-    <xsl:variable name="sentence1" select="substring-before($sentence, $pickedup)"/>
-    <xsl:variable name="sentence2" select="substring-after($sentence, $pickedup)"/>
-    <tr>
-      <td>
-      </td>
-      <td>
-        <p>
-          <xsl:value-of select="$sentence1"/>
-          <font color="#FF0000"><xsl:value-of select="$pickedup"/></font>
-          <xsl:value-of select="$sentence2"/>
-        </p>
-        <p>
-          <div align="right">
-            <xsl:element name="a">
-              <xsl:attribute name="href">
-                <xsl:value-of select="../hs:url"/>
-              </xsl:attribute>
-              <em>---- <xsl:value-of select="../hs:title"/></em>
-            </xsl:element>
-            <br />
-            <p>
-              <xsl:if test="../hs:category != ''">
-                [ <xsl:value-of select="../hs:category"/> ]
-              </xsl:if>
-              <xsl:value-of select="../hs:date"/>
-            </p><br /><br />
-          </div>
-        </p>
-      </td>
-    </tr>
+  <xsl:template match="hs:items">
+    <xsl:apply-templates select="hs:item
+        [not(string($keyword)) or hs:keyword=$keyword]
+        [not(string($date)) or hs:date=$date]
+        [not(string($category)) or hs:category=$category]
+        [not(string($first-letter-of-the-keyword)) or starts-with(hs:keyword, $first-letter-of-the-keyword)]
+    ">
+    </xsl:apply-templates>
   </xsl:template>
+
 </xsl:stylesheet>
