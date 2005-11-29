@@ -41,7 +41,9 @@
                xmlns:ad="http://www.firedictionary.com/advertisement">
   <xsl:param name="number">1</xsl:param>
   <xsl:template match="/">
-    <xsl:apply-templates select="ad:firedictionary/ad:advertisements"/>
+    <xsl:if test="ad:firedictionary/ad:advertisements/ad:advertisement[$number]/ad:enable='true'">
+      <xsl:apply-templates select="ad:firedictionary/ad:advertisements"/>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="ad:advertisements">
