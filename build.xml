@@ -10,7 +10,7 @@
 
 <project name="deployment_firedictionary" default="makeInstaller">
 	<property name="target" value="firefox.exe"/>
-	<property name="version" value="0.8.3"/>
+	<property name="version" value="0.9"/>
 	<property environment="env"/>
 	<property name="chromePath" value="${env.CHROME}"/>
     <description>
