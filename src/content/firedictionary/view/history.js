@@ -33,7 +33,12 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
- 
+
+var gCategory;
+var gDate;
+var gKeyword;
+var gFirstLetterOfTheKeyword;
+
 /**
  * initialize(category, date, keyword, firstLetterOfTheKeyword)
  * 
@@ -71,6 +76,11 @@ function initialize(category, date, keyword, firstLetterOfTheKeyword){
 function setFilter(category, date, keyword, firstLetterOfTheKeyword){
  Init(getStylesheetOfMainArea(), 'history', category, date, keyword, firstLetterOfTheKeyword);
  Init('history-Keywords-List.xsl', 'word-list', category, date, keyword, firstLetterOfTheKeyword);
+ 
+ gCategory = category;
+ gDate = date;
+ gKeyword = keyword;
+ gFirstLetterOfTheKeyword = firstLetterOfTheKeyword;
 }
 
 /**
@@ -236,5 +246,5 @@ function setStyle(name){
   prefs.setCharPref("firedictionary-history-main-stylesheet", name);
  }
  
- Init(getStylesheetOfMainArea(), 'history');
+ Init(getStylesheetOfMainArea(), 'history', gCategory, gDate, gKeyword, gFirstLetterOfTheKeyword);
 }
