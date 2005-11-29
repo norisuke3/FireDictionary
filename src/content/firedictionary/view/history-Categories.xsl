@@ -64,7 +64,7 @@
       <tr>
         <xsl:element name="td">
           <xsl:attribute name="class">history-filter-item</xsl:attribute>
-          <xsl:attribute name="onclick">setFilter('<xsl:value-of select="hs:category"/>');
+          <xsl:attribute name="onclick">setFilter(&quot;<xsl:value-of select="hs:category"/>&quot;);
           </xsl:attribute>
             <xsl:value-of select="hs:category"/>
         </xsl:element>
