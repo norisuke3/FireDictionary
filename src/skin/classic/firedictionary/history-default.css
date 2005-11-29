@@ -84,30 +84,37 @@ table.page-sidebar td:hover {
 table.page-sidebar td.sidebar-title{
     height: 10px;
     text-align: center;
-    background-color: #CCCCFF;
     padding-top: 3px;
     padding-bottom: 3px;
+    
+    background-color: #CCCCFF;
 }
 
 table#server-information{
     border-collapse: collapse;
-    border: thin solid #CCCCFF;
     padding: 0px;
+    
+    border: thin solid #6666FF;
 }
 
 #information{
-    background-color: #CCFFFF;
+    background-color: #FFFFFF;
 }
 
 #information td{
-    padding:10px;
+    padding-top:7px;
+    padding-bottom:7px;
+    padding-left:15px;
 }
 
 #information p{
    margin:0px;
+   margin-bottom:7px;
 }
 
 #caption{
     text-align: right;
-    background-color: #CCCCFF;
+    font-size: x-small;
+    
+    background-color: #6666FF;
 }

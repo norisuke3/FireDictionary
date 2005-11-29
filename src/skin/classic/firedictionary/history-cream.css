@@ -57,13 +57,13 @@ table.page-sidebar td.sidebar-title{
 }
 
 table#server-information{
-    border: thin solid #66ff66;
+    border: thin solid #00CC00;
 }
 
 #information{
-    background-color: #ffff66;
+    background-color: #FFFF99;
 }
 
 #caption{
-    background-color: #66ff66;
+    background-color: #00CC00;
 }
