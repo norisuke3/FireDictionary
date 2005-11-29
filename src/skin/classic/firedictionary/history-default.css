@@ -57,7 +57,7 @@ a:hover {
 td.history-title{
 	font-size: large;
 	font-weight: bold;
-	padding-top: 65px;
+	padding-top: 45px;
 	padding-bottom: 65px;
 }
 
@@ -87,4 +87,27 @@ table.page-sidebar td.sidebar-title{
     background-color: #CCCCFF;
     padding-top: 3px;
     padding-bottom: 3px;
+}
+
+table#server-information{
+    border-collapse: collapse;
+    border: thin solid #CCCCFF;
+    padding: 0px;
+}
+
+#information{
+    background-color: #CCFFFF;
+}
+
+#information td{
+    padding:10px;
+}
+
+#information p{
+   margin:0px;
+}
+
+#caption{
+    text-align: right;
+    background-color: #CCCCFF;
 }

@@ -47,6 +47,14 @@
 <body onload="initialize()">
   <table width='100%' border='0'>
     <tr>
+      <td>&nbsp;</td>
+      <td>
+        <div id="server-infomation"/>
+      </td>
+      <td colspan="3">&nbsp;</td>
+    </tr>
+    
+    <tr>
       <td width='8%'>&nbsp;</td>
       <td class="history-title">
         &nbsp;Word history and excerpts
@@ -55,7 +63,7 @@
       <td width='8%'>
         style : 
         <form name="form"> 
-          <select name="style" onChange="setStylesheet(form.style.value)"> 
+          <select name="style" onChange="setHtmlStylesheet(form.style.value)"> 
             <option value="history-default.css">default</option>
             <option value="history-cream.css">cream</option>
           </select> 

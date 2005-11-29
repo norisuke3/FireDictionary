@@ -34,6 +34,14 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
+/**
+ * initialize(category, date, keyword, firstLetterOfTheKeyword)
+ * 
+ * @param category
+ * @param date
+ * @param keyword
+ * @param firstLetterOfTheKeyword
+ */
 function initialize(category, date, keyword, firstLetterOfTheKeyword){
  Init('history-Words-and-Excerpts.xsl', 'history');
  Init('history-Keywords-List.xsl', 'word-list');
@@ -44,52 +52,110 @@ function initialize(category, date, keyword, firstLetterOfTheKeyword){
  var prefs = new FDPrefs;
  var name = prefs.getCharPref("firedictionary-stylesheet-type");
  
- setStylesheet(name);
+ setHtmlStylesheet(name);
+ 
+ initServerInformation()
 }
 
+/**
+ * setFilter(category, date, keyword, firstLetterOfTheKeyword)
+ * 
+ * @param category
+ * @param date
+ * @param keyword
+ * @param firstLetterOfTheKeyword
+ */
 function setFilter(category, date, keyword, firstLetterOfTheKeyword){
  Init('history-Words-and-Excerpts.xsl', 'history', category, date, keyword, firstLetterOfTheKeyword);
  Init('history-Keywords-List.xsl', 'word-list', category, date, keyword, firstLetterOfTheKeyword);
 }
 
-function setStylesheet(name){
- var prefs = new FDPrefs;
- var base = "chrome://firedictionary/skin/";
+/**
+ * initServerInformation()
+ */
+function initServerInformation(){
+ var parameters = new Array(1);
+ var xml = getXMLDocument('index.xml');
+ var xsl = getXMLDocument('history-server-information.xsl');
+ var xslGetNumber = getXMLDocument("numberOfInfo.xsl");
  
- if( !name ){
-  url = base + "history-default.css";
- } else {
-  prefs.setCharPref("firedictionary-stylesheet-type", name);
-  url = base + name;
- }
+ var fragment = getXMLFragment(xml, xslGetNumber);
+ var maxNum = fragment.textContent;
+ var num = Math.floor(Math.random() * maxNum) + 1;
  
- document.getElementsByTagName("link")[0].href = url;
+ parameters[0] = new Array("number", num);
+ 
+ fragment = getXMLFragment(xml, xsl, parameters);
+ 
+ document.getElementById('server-infomation').innerHTML = "";
+ document.getElementById('server-infomation').appendChild(fragment);
 }
+
+/**
+ * Init(xslName, id, category, date, keyword, firstLetterOfTheKeyword)
+ * 
+ * @param xslName
+ * @param id
+ * @param category
+ * @param date
+ * @param keyword
+ * @param firstLetterOfTheKeyword
+ */
+function Init(xslName, id, category, date, keyword, firstLetterOfTheKeyword){
+ var parameters = new Array(4);
+ var xml = getXMLDocument(getHistoryFile().getURL());
+ var xsl = getXMLDocument(xslName);
+ var fragment;
+
+ parameters[0] = new Array("category", category)
+ parameters[1] = new Array("date", date)
+ parameters[2] = new Array("keyword", keyword)
+ parameters[3] = new Array("first-letter-of-the-keyword", firstLetterOfTheKeyword)
+ 
+ fragment = getXMLFragment(xml, xsl, parameters);
+ 
+ document.getElementById(id).innerHTML = "";
+ document.getElementById(id).appendChild(fragment);
+}
+
+/**
+ * XMLDocumentFragment getXMLFragment(XMLDocument xml, XMLDocument xsl, Array parameters)
+ *
+ * @param xml 
+ * @param xsl
+ * @param parameters Array of xsl transform parameters.
+ *                   This array is two dimensions and contains a name and a value.
+ *                   If a parameter is null, it is replaced as empty string.
+ * @return result of the transformation.
+ */
+function getXMLFragment(xml, xsl, parameters){
+ var transformer = new XSLTProcessor();
+ var i;
+ 
+ transformer.importStylesheet(xsl);
+ 
+ if( parameters ) {
+  for( i=0 ; i<parameters.length ; i++){
+   transformer.setParameter(
+       null,
+       parameters[i][0],
+       getNonNullString(parameters[i][1])
+   );
+  }
+ }
+  
+ return transformer.transformToFragment(xml, document);
+}
+
+/**
+ * String getNonNullString(String s)
+ * 
+ * @param any string
+ * @return result
+ */
 
 function getNonNullString(s){
  return (s == null) ? "" : s;
-}
-
-function Init(xslName, id, category_, date_, keyword_, firstLetterOfTheKeyword_){
-  var transformer = new XSLTProcessor();
-  var xmlDoc = getXMLDocument(getHistoryFile().getURL());
- 
-  var category = getNonNullString(category_);
-  var date = getNonNullString(date_);
-  var keyword = getNonNullString(keyword_);
-  var firstLetterOfTheKeyword = getNonNullString(firstLetterOfTheKeyword_);
-  
-  
-  // load a style sheet.
-  transformer.importStylesheet(getXMLDocument(xslName));
-  transformer.setParameter(null, "category", category);
-  transformer.setParameter(null, "date", date);
-  transformer.setParameter(null, "keyword", keyword);
-  transformer.setParameter(null, "first-letter-of-the-keyword", firstLetterOfTheKeyword);
-  var fragment = transformer.transformToFragment(xmlDoc, document);
-
-  document.getElementById(id).innerHTML = "";
-  document.getElementById(id).appendChild(fragment);
 }
  
 /**
@@ -117,4 +183,23 @@ function getXMLDocument(url){
   xmlHttpRequest.send(null);
 
   return xmlHttpRequest.responseXML;
+}
+
+/**
+ * setHtmlStylesheet(String name)
+ * 
+ * @param name
+ */
+function setHtmlStylesheet(name){
+ var prefs = new FDPrefs;
+ var base = "chrome://firedictionary/skin/";
+ 
+ if( !name ){
+  url = base + "history-default.css";
+ } else {
+  prefs.setCharPref("firedictionary-stylesheet-type", name);
+  url = base + name;
+ }
+ 
+ document.getElementsByTagName("link")[0].href = url;
 }
