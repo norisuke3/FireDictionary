@@ -81,6 +81,20 @@ table.page-sidebar td:hover {
     background-color: #66CCFF;
 }
 
+table.page-sidebar td.sidebar-title-stretchable{
+    height: 10px;
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    
+    background-color: #CCCCFF;
+}
+
+table.page-sidebar td.sidebar-title-stretchable:hover{
+    background-color: #9999CC;
+    color: #CCCCCC;
+}
+
 table.page-sidebar td.sidebar-title{
     height: 10px;
     text-align: center;
@@ -88,6 +102,13 @@ table.page-sidebar td.sidebar-title{
     padding-bottom: 3px;
     
     background-color: #CCCCFF;
+}
+
+table.page-sidebar td.controlpanel{
+    padding-top: 10px;
+    padding-left: 10px;
+    
+    background-color: #CCFFFF;
 }
 
 table#server-information{

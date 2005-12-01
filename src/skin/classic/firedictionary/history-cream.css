@@ -52,8 +52,21 @@ table.page-sidebar td:hover {
     background-color: #99FFCC;
 }
 
+table.page-sidebar td.sidebar-title-stretchable{
+    background-color: #66ff66;
+}
+
+table.page-sidebar td.sidebar-title-stretchable:hover{
+    background-color: #99FFCC;
+    color: #000000;
+}
+
 table.page-sidebar td.sidebar-title{
     background-color: #66ff66;
+}
+
+table.page-sidebar td.controlpanel{
+    background-color: #ffff66;
 }
 
 table#server-information{

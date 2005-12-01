@@ -38,6 +38,7 @@ var gCategory;
 var gDate;
 var gKeyword;
 var gFirstLetterOfTheKeyword;
+var gControlPanelEnable;
 
 /**
  * initialize(category, date, keyword, firstLetterOfTheKeyword)
@@ -48,19 +49,19 @@ var gFirstLetterOfTheKeyword;
  * @param firstLetterOfTheKeyword
  */
 function initialize(category, date, keyword, firstLetterOfTheKeyword){
+ gControlPanelEnable = false;
+ 
  Init(getStylesheetOfMainArea(), 'history');
  Init('history-Keywords-List.xsl', 'word-list');
  Init('history-Categories.xsl', 'categories');
  Init('history-date-List.xsl', 'date-list');
+ Init('history-controlpanel.xsl', 'controlpanel')
  
  // set stylesheet
  var prefs = new FDPrefs;
  var name = prefs.getCharPref("firedictionary-stylesheet-type");
-
- document.getElementById("form-color").value=name;
  
  setColor(name);
- 
  
  initServerInformation()
 }
@@ -247,4 +248,27 @@ function setStyle(name){
  }
  
  Init(getStylesheetOfMainArea(), 'history', gCategory, gDate, gKeyword, gFirstLetterOfTheKeyword);
+}
+
+function streachSidebar(){
+ var prefs = new FDPrefs;
+ var parameters = new Array(1);
+ var xml = getXMLDocument(getHistoryFile().getURL());
+ var xsl = getXMLDocument('history-controlpanel.xsl');
+ var id = 'controlpanel';
+ var fragment;
+
+ gControlPanelEnable = !gControlPanelEnable;
+ 
+ parameters[0] = new Array("enable", gControlPanelEnable)
+ 
+ fragment = getXMLFragment(xml, xsl, parameters);
+ 
+ document.getElementById(id).innerHTML = "";
+ document.getElementById(id).appendChild(fragment);
+ 
+ if( gControlPanelEnable ) {
+  document.getElementById("form-color").firstChild.value = prefs.getCharPref("firedictionary-stylesheet-type");
+  document.getElementById("form-style").firstChild.value = prefs.getCharPref("firedictionary-history-main-stylesheet");
+ }
 }

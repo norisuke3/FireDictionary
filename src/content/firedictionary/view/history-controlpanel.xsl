@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
 <!-- ***** BEGIN LICENSE BLOCK *****
    - Version: MPL 1.1/GPL 2.0/LGPL 2.1
    -
@@ -33,55 +35,41 @@
    - the terms of any one of the MPL, the GPL or the LGPL.
    -
    - ***** END LICENSE BLOCK ***** -->
-   
-<html>
-<head>
-<title>Word history and excerpts@FireDictionary</title>
-<link rel="stylesheet" type="text/css" href="chrome://firedictionary/skin/history-default.css">
-<script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
-<script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
-<script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_permanent.js"/>
-<script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
-<script type="application/x-javascript" src="history.js"/>
-</head>
-<body onload="initialize()">
-  <table width='100%' border='0'>
-    <tr>
-      <td>&nbsp;</td>
-      <td>
-        <div id="server-infomation"/>
-      </td>
-      <td colspan="3">&nbsp;</td>
-    </tr>
-    
-    <tr>
-      <td width='8%'>&nbsp;</td>
-      <td class="history-title">
-        &nbsp;Word history and excerpts
-      </td>
-      <td width='8%'>&nbsp;</td>
-      <td width='8%'>&nbsp;</td>
-      <td width='8%'>&nbsp;</td>
-    </tr>
 
-    <tr class="main">
-      <td width='8%'>&nbsp;</td>
-      
-      <td>
-        <div id="history"></div>
-      </td>
-      
-      <td width='5%'>&nbsp;</td>
-      
-      <td width='15%'">
-        <p><div id="controlpanel"></div></p>
-        <p><div id="categories"></div></p>
-        <p><div id="date-list"></div></p>
-        <p><div id="word-list"></div></p>
-      </td>
-      
-      <td width='7%'>&nbsp;</td>
-    </tr>
-  </table>
-</body>
-</html>
+<xsl:stylesheet version="1.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:hs="http://www.firedictionary.com/history">
+  <xsl:param name="enable">false</xsl:param>
+  
+  <xsl:template match="/">
+    <table class="page-sidebar">
+      <tr>
+        <td class="sidebar-title-stretchable" onclick="streachSidebar()">Control Panel</td>
+      </tr>
+      <xsl:if test="$enable='true'">
+        <tr>
+          <td class="controlpanel">
+            color : 
+            <form name="form" id="form-color"> 
+              <select name="color" onChange="setColor(form.color.value)"> 
+                <option value="history-default.css">default</option>
+                <option value="history-cream.css">cream</option>
+              </select> 
+            </form>
+        
+            style : 
+            <form name="form2" id="form-style"> 
+              <select name="style" onChange="setStyle(form2.style.value)"> 
+                <option value="history-Words-and-Excerpts.xsl">default</option>
+                <option value="history-Words.xsl">keyword - result</option>
+                <option value="history-Words-cvs.xsl">csv</option>
+              </select> 
+            </form>
+    
+          </td>
+        </tr>
+      </xsl:if>
+    </table>
+  </xsl:template>
+
+</xsl:stylesheet>
