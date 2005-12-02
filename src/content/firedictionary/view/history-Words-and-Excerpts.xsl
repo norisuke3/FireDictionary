@@ -61,7 +61,7 @@
   
   <xsl:template match="hs:sentence">
     <xsl:variable name="sentence" select="."/>
-    <xsl:variable name="pickedup" select="concat(' ', ../hs:pickedupword, ' ')"/>
+    <xsl:variable name="pickedup" select="../hs:pickedupword"/>
     <xsl:variable name="sentence1" select="substring-before($sentence, $pickedup)"/>
     <xsl:variable name="sentence2" select="substring-after($sentence, $pickedup)"/>
     <tr>
