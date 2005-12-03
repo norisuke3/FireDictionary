@@ -52,10 +52,10 @@ function initialize(category, date, keyword, firstLetterOfTheKeyword){
  gControlPanelEnable = false;
  
  Init(getStylesheetOfMainArea(), 'history');
- Init('history-Keywords-List.xsl', 'word-list');
- Init('history-Categories.xsl', 'categories');
- Init('history-date-List.xsl', 'date-list');
- Init('history-controlpanel.xsl', 'controlpanel')
+ Init('sidebar/history-Keywords-List.xsl', 'word-list');
+ Init('sidebar/history-Categories.xsl', 'categories');
+ Init('sidebar/history-date-List.xsl', 'date-list');
+ Init('sidebar/history-controlpanel.xsl', 'controlpanel')
  
  // set stylesheet
  var prefs = new FDPrefs;
@@ -76,7 +76,7 @@ function initialize(category, date, keyword, firstLetterOfTheKeyword){
  */
 function setFilter(category, date, keyword, firstLetterOfTheKeyword){
  Init(getStylesheetOfMainArea(), 'history', category, date, keyword, firstLetterOfTheKeyword);
- Init('history-Keywords-List.xsl', 'word-list', category, date, keyword, firstLetterOfTheKeyword);
+ Init('sidebar/history-Keywords-List.xsl', 'word-list', category, date, keyword, firstLetterOfTheKeyword);
  
  gCategory = category;
  gDate = date;
@@ -91,7 +91,8 @@ function getStylesheetOfMainArea(){
  var prefs = new FDPrefs;
  var stylesheet = prefs.getCharPref("firedictionary-history-main-stylesheet");
  
- if(!stylesheet) stylesheet = "history-Words-and-Excerpts.xsl";
+ if(!stylesheet) stylesheet = "main/history-Words-and-Excerpts.xsl";
+ if( !stylesheet.match(/^main\//) ) stylesheet = "main/" + stylesheet;
 
  return stylesheet;
 }
@@ -101,8 +102,8 @@ function getStylesheetOfMainArea(){
  */
 function initServerInformation(){
  var parameters = new Array(1);
- var xsl = getXMLDocument('history-server-information.xsl');
- var xslGetNumber = getXMLDocument("numberOfInfo.xsl");
+ var xsl = getXMLDocument('server-info/history-server-information.xsl');
+ var xslGetNumber = getXMLDocument("server-info/numberOfInfo.xsl");
  var url = "http://www.firedictionary.com/ad/";
  
  try{
@@ -254,7 +255,7 @@ function streachSidebar(){
  var prefs = new FDPrefs;
  var parameters = new Array(1);
  var xml = getXMLDocument(getHistoryFile().getURL());
- var xsl = getXMLDocument('history-controlpanel.xsl');
+ var xsl = getXMLDocument('sidebar/history-controlpanel.xsl');
  var id = 'controlpanel';
  var fragment;
 

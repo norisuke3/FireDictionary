@@ -39,37 +39,20 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:hs="http://www.firedictionary.com/history">
-  <xsl:param name="enable">false</xsl:param>
+  <xsl:include href="history-mainarea.xsl"/>
   
-  <xsl:template match="/">
-    <table class="page-sidebar">
-      <tr>
-        <td class="sidebar-title-stretchable" onclick="streachSidebar()">Control Panel</td>
-      </tr>
-      <xsl:if test="$enable='true'">
-        <tr>
-          <td class="controlpanel">
-            color : 
-            <form name="form" id="form-color"> 
-              <select name="color" onChange="setColor(form.color.value)"> 
-                <option value="history-default.css">default</option>
-                <option value="history-cream.css">cream</option>
-              </select> 
-            </form>
-        
-            style : 
-            <form name="form2" id="form-style"> 
-              <select name="style" onChange="setStyle(form2.style.value)"> 
-                <option value="history-Words-and-Excerpts.xsl">default</option>
-                <option value="history-Words.xsl">keyword - result</option>
-                <option value="history-Words-cvs.xsl">csv</option>
-              </select> 
-            </form>
-    
-          </td>
-        </tr>
-      </xsl:if>
-    </table>
+  
+  <xsl:template match="hs:item">
+    <tr>
+    <td width='100' class='words-lists'>
+      <xsl:element name="a">
+         <xsl:attribute name="name">
+           <xsl:value-of select="hs:timestamp"/>
+         </xsl:attribute>
+      </xsl:element>
+      <strong><xsl:value-of select="hs:keyword"/></strong>
+    </td>
+    <td class='words-lists'></td>
+    </tr>
   </xsl:template>
-
 </xsl:stylesheet>
