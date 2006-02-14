@@ -48,11 +48,13 @@ function FDPasteBoard(){
 	 * @return a pasted content which is formated as a html.
 	 */
 	this.getContentAsHtml = function(){
-		var title = unicodeConverter.ConvertFromUnicode(this.getTitle());
-		var content = unicodeConverter.ConvertFromUnicode(this.getContent().replace(/\n/g, "<br>\n"));
+		var title = unicodeConverter.ConvertFromUnicode(this.getTitle())
+					+ unicodeConverter.Finish();
+		var content = unicodeConverter.ConvertFromUnicode(this.getContent().replace(/\n/g, "<br>\n")) +
+					   unicodeConverter.Finish();
 		var result;
 		
-		result = "<html><head><title>" + title +
+		result = "<html><head><meta http-equiv='content-type' content='text/html; charset=UTF-8' /><title>" + title +
 	          "</title></head><body>" +
 	          "<table width='530' border='0'>" +
            "<tr>" +
