@@ -82,7 +82,7 @@ function FDOutputStream(file){
   *
   * @param s Text you want to write into the file.
   */
- this.function = write(s){ 
+ this.write = function(s){ 
   mFile.create();
   
   stream.init(mFile, 2, 0x200, false); // open the file as "write only"
@@ -98,7 +98,7 @@ function FDOutputStream(file){
   *
   * @param s Unicode text you want to write into the file.
   */
- this.function = writeAsUnicode(s){
+ this.writeAsUnicode = function(s){
   if ( this.getCharset() == "" ){
    throw new Exception("CHARSET_INFORMATION_MISSING");
   }
