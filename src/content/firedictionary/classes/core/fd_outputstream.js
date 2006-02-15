@@ -35,6 +35,7 @@
  * ***** END LICENSE BLOCK ***** */
  
 function FDOutputStream(file){
+ var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
  var stream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
  var unicodeConverter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
  
@@ -45,6 +46,7 @@ function FDOutputStream(file){
   * @param file
   */
  var mFile = file;
+ aFile.initWithPath(file.path);
  
  /**
   * setCharset(String charset)
@@ -82,8 +84,12 @@ function FDOutputStream(file){
   *
   * @param s Text you want to write into the file.
   */
- this.write = function(s){ 
-  mFile.create();
+ this.write = function(s){
+  if (mFile.exists()){
+   mFile.remove(true);
+  }
+  
+  mFile.create(aFile.NORMAL_FILE_TYPE, 0666);
   
   stream.init(mFile, 2, 0x200, false); // open the file as "write only"
   stream.write(s, s.length);
@@ -104,6 +110,6 @@ function FDOutputStream(file){
   }
   var os = unicodeConverter.ConvertFromUnicode(s) + unicodeConverter.Finish();
   
-  write(os);
+  this.write(os);
  }
 }
