@@ -43,6 +43,7 @@ function PDICText(file, charset){
 	var istream;
 	var indexes = new Array();
 	var fileIndex;
+	var mCharset = charset
 	
 	/**
 	 * PDICText(FDFile file)
@@ -75,6 +76,7 @@ function PDICText(file, charset){
 		var indexChar;
 		var index;
 		var line;
+		var definition;
 		
 		// In a case there is no index.
 		if(indexes.length == 0){
@@ -96,13 +98,12 @@ function PDICText(file, charset){
 		// Lookup a mean.
 		istream.setOffset(0, index.from);
 		while( istream.getOffset() < index.to ){
-			line = istream.readLine();
+			line = istream.readLineAsUnicode();
+			definition = istream.readLineAsUnicode();
 			
 			if( line == keyword ){
-				return istream.readLineAsUnicode();
+				return definition;
 			}
-			
-			istream.readLine(); 						// skip Japanese line
 		}
 		
 		return "";	 
@@ -149,7 +150,8 @@ function PDICText(file, charset){
  	if ( !fileIndex.exists() ) throw new Exception("INDEX_FILE_MISSING_EXCEPTION");
  	
  	var istream = new FDInputStream(fileIndex.getFile());
- 	var s = istream.read();
+ 	istream.setCharset(mCharset);
+ 	var s = istream.readAsUnicode();
  	
  	var _array = s.match(/([^;]+);/g);
  	
@@ -176,6 +178,8 @@ function PDICText(file, charset){
 		var firstIndexChar = "A";
 		var indexChar;
 		var s = "";															// String for Index file content.
+		var ostream = new FDOutputStream(fileIndex.getFile());
+		ostream.setCharset(mCharset);
 		
 		findFirstOffset(firstIndexChar);
 		
@@ -193,8 +197,7 @@ function PDICText(file, charset){
 		}
 		
 		// Create index file.
-		fileIndex.write(s);
-		
+		ostream.writeAsUnicode(s);
 	}
 	
 	/**
@@ -222,11 +225,11 @@ function PDICText(file, charset){
  function findFirstOffset(firstIndexChar){
  	var offset = 0;
  	istream.setOffset(0, 0);
- 	var line = istream.readLine();
+ 	var line = istream.readLineAsUnicode();
  	
  	while( line.charAt(0) != firstIndexChar ){
  		offset = istream.getOffset();
- 		line = istream.readLine();
+ 		line = istream.readLineAsUnicode();
  	}
  	
  	istream.setOffset(0, offset);
@@ -243,14 +246,14 @@ function PDICText(file, charset){
  	if ( !indexCharLength ) indexCharLength = 1;
  	var offset = pos;
  	istream.setOffset(0, pos);
- 	var line = istream.readLine();
+ 	var line = istream.readLineAsUnicode();
  	var indexKey = line.substr(0, indexCharLength);
- 	istream.readLine() 						// skip Japanese line
+ 	istream.readLineAsUnicode() 						// skip Japanese line
  	
  	while(line.substr(0, indexCharLength) == indexKey ){
  		offset = istream.getOffset();
- 		line = istream.readLine();
- 		istream.readLine();  			// skip Japanese line
+ 		line = istream.readLineAsUnicode();
+ 		istream.readLineAsUnicode();  			// skip Japanese line
  	}
  	istream.setOffset(0, offset);
  	
