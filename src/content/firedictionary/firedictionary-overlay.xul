@@ -58,7 +58,6 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_wordhistory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionarysidebar.js"/>
-    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_sidebargadget.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/pdictext/PDICText.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/dummyDictionary/DummyDictinoary.js"/>
     

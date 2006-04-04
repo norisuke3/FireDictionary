@@ -48,31 +48,6 @@
 
 .firedictionary-message { font-size:11pt; }
 
-/*
- * Undo Button
- */
-toolbarbutton#fd-undo-history[disabled="false"] {
-  list-style-image: url("chrome://firedictionary/skin/undo.png");
-}
-
-toolbarbutton#fd-undo-history[disabled="true"] {
-  list-style-image: url("chrome://firedictionary/skin/undo_disable.png");
-}
-
-/*
- * Redo Button
- */
-toolbarbutton#fd-redo-history[disabled="false"] {
-  list-style-image: url("chrome://firedictionary/skin/redo.png");
-}
-
-toolbarbutton#fd-redo-history[disabled="true"] {
-  list-style-image: url("chrome://firedictionary/skin/redo_disable.png");
-}
-
-/*
- * Mouseover Mode Indicator
- */
 toolbarbutton#fd-mouseovermode-indicator[status="on"] {
   list-style-image: url("chrome://firedictionary/skin/on.png");
 }

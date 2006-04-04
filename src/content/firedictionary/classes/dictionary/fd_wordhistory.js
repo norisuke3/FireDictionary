@@ -40,8 +40,6 @@
 function FDWordHistory(){
  var sidebar = top.document.getElementById("sidebar");
  var urlWordHistoryAndExcerpts = "chrome://firedictionary/content/view/WordHistoryAndExcerpt.html";
-	var mUndoBuffer = new FDXmlHistory();
-	var mHistoryCount = 0;                         // a number of history
 	
 	/**
 	 * initialize()
@@ -54,7 +52,6 @@ function FDWordHistory(){
 		if( file.exists() ){
 			xmlHistory.readFromFile(file);
 		 setText(formatHistory(xmlHistory));
-			mHistoryCount = xmlHistory.getItemCount();
 			
 		} else {
 			var oldfile = getHistoryFileEx();
@@ -75,14 +72,17 @@ function FDWordHistory(){
 	 *     String url,
 	 *     String title,
 	 *     String sentence,
-	 *     String pickedupword,
-	 *     String category
+	 *     String pickedupword
 	 * )
 	 */
-	this.registWord = function(keyword, result, url, title, sentence, pickedupword, category){
+	this.registWord = function(keyword, result, url, title, sentence, pickedupword){
+	 var prefs = new FDPrefs();
 		var file = getHistoryFile();
 	 var xmlHistory = new FDXmlHistory();
  	var item;
+ 	var category = prefs.getUniCharPref("category");
+    
+	if ( !category || category == "" ) category = "Unclassified";
 	
 		if( file.exists() ){
 			xmlHistory.readFromFile(file);
@@ -107,8 +107,6 @@ function FDWordHistory(){
 		
 		setText(formatHistory(xmlHistory));
 		xmlHistory.writeToFile(file);
-		
-		mHistoryCount = xmlHistory.getItemCount();
 	}
 	
 	/**
@@ -121,17 +119,6 @@ function FDWordHistory(){
 		if ( oldfile.exists() ) oldfile.remove();		
 		getHistoryFile().remove();
 		setText("");
-		
-		mUndoBuffer = new FDXmlHistory();
-		mHistoryCount = 0;
-	}
-	
-	/**
-	 * resetUndoBuffer()
-	 *  reset undo buffer.
-	 */
-	this.resetUndoBuffer = function(){
-		mUndoBuffer = new FDXmlHistory();
 	}
 
 /**
@@ -143,74 +130,6 @@ function FDWordHistory(){
   var tab = tabbrowser.addTab(urlWordHistoryAndExcerpts);
  
   tabbrowser.selectedTab = tab;
- }
- 
- /**
-  * undoHistory()
-  *  undo a process of registering a word to the history.
-  **/
- this.undoHistory = function(){
-		var file = getHistoryFile();
-	 var xmlHistory = new FDXmlHistory();
-	 var item;
-	 
-		if( !file.exists() ){
-		 return;
-		}
-		
-		xmlHistory.readFromFile(file);
-		
-		item = xmlHistory.removeLastAddedItem();
-		if( item ){
-		 mUndoBuffer.addHistoryItem(item);
-		}
-				
-		setText(formatHistory(xmlHistory));
-		xmlHistory.writeToFile(file);
-		mHistoryCount = xmlHistory.getItemCount();
- }
-  
- /**
-  * redoHistory()
-  *  redo a process of registering a word to the history.
-  */
- this.redoHistory = function(){
-		var file = getHistoryFile();
-	 var xmlHistory = new FDXmlHistory();
-	 var item;
-	
-		if( file.exists() ){
-			xmlHistory.readFromFile(file);
-		}
-		
-		item = mUndoBuffer.removeLastAddedItem();
-		if( item ){
-		 xmlHistory.addHistoryItem(item);
-		}
-				
-		setText(formatHistory(xmlHistory));
-		xmlHistory.writeToFile(file);
-		mHistoryCount = xmlHistory.getItemCount();
- }
- 
- /**
-  * int getHistoryCount()
-  *  return amount of registered words to the history.
-  *
-  * @return amount of registered words to the history.
-  */
- this.getHistoryCount = function(){
-		return mHistoryCount;
- }
- 
- /**
-  * int getUndoBufferCount()
-  *  return amount of registered words to the undo buffer.
-  *
-  * @return amount of registered words to the undo buffer.
-  */
- this.getUndoBufferCount = function(){
-  return mUndoBuffer.getItemCount();
  }
 	
  //
@@ -259,10 +178,6 @@ function FDWordHistory(){
   var urlXsl = "chrome://firedictionary/content/classes/dictionary/res/history.xsl"
   var transformer = new XSLTProcessor();
   var fragment;
-  
-  if ( history.getItemCount() == 0 ){
-   return "";
-  }
   
   transformer.importStylesheet(getXMLDocument(urlXsl));
   fragment = transformer.transformToFragment(history.getDocumentElement(), document);
