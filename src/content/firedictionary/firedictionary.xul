@@ -63,6 +63,7 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionarysidebar.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionaryinstaller.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_sidebargadget.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/pdictext/PDICText.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/dummyDictionary/DummyDictinoary.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/firedictionary.js"/>
@@ -81,6 +82,8 @@
     <vbox id="firedictionary-mainbox" flex="1">
       <toolbox class="plain">
         <toolbar>
+          <toolbarbutton id="fd-undo-history" oncommand="undoHistory()" disabled="true"/>
+          <toolbarbutton id="fd-redo-history" oncommand="redoHistory()" disabled="true"/>
           <spacer flex="1"/>
             <toolbarbutton id="fd-mouseovermode-indicator" oncommand="flipSwitch()" status="on"/>
             <toolbarbutton id="toolsMenuButton" type="menu" label="&menu.tools;">

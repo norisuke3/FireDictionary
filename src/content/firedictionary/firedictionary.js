@@ -142,3 +142,17 @@ function setCategory(){
  var dialogURL = "chrome://firedictionary/content/inputCategory.xul"
  window.openDialog(dialogURL, "inputCategory", "chrome, centerscreen, dependent, dialog, modal");
 }
+
+/**
+ * undoHistory()
+ */
+function undoHistory(){
+ dicSidebar.undoHistory();
+}
+ 
+/**
+ * redoHistory()
+ */
+function redoHistory(){
+ dicSidebar.redoHistory();
+}
