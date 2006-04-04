@@ -103,9 +103,9 @@ function FDXmlHistory(){
  
  /**
   * FDXmlHistoryItem getLastAddedItem()
-  *  Return an item object which added last time. If there are no items, return null.
+  *  Return an item object which is added last time. If there are no items, return null.
   *
-  * @return an item object which added last time.
+  * @return an item object which is added last time.
   */
  this.getLastAddedItem = function(){
  	var items = this.domDocument.getElementsByTagName("items").item(0);
@@ -118,5 +118,39 @@ function FDXmlHistory(){
  	}
  	
  	return result;
+ }
+ 
+ /**
+  * FDXmlHistoryItem removeLastAddedItem()
+  *  remove an item object which is added last time. If there are no items, return null.
+  *
+  * @return the removed item.
+  */
+ this.removeLastAddedItem = function(){
+ 	var items = this.domDocument.getElementsByTagName("items").item(0);
+ 	var item = new FDXmlHistoryItem();
+ 	var result = null;
+ 	
+ 	if ( items.hasChildNodes() ){
+ 		item.setDocumentElement(items.firstChild);
+ 		result = item;
+ 		
+ 		// remove the last one
+ 		items.removeChild(items.firstChild);
+ 	}
+ 	
+ 	return result;
+ }
+ 
+ /**
+  * int getItemCount()
+  *  return amount of item elements.
+  *
+  * @return amount of item elements
+  */
+ this.getItemCount = function(){
+ 	var items = this.domDocument.getElementsByTagName("items").item(0);
+ 	
+ 	return items.childNodes.length;
  }
 }

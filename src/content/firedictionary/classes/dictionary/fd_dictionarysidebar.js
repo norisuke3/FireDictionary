@@ -58,6 +58,9 @@ function FDDictionarySidebar(_fdDictionaryMode){
  var mTitle;                       // Keyword Information
  var mSentence;                    // Keyword Information
  
+ // declare sidebar gadgets
+ var mIndicatorMouseOverMode;
+ 
  // Initialize dictionary.
  var dicName = getDictionaryName(); 
  var fileName = config.getFileName(dicName);
@@ -103,10 +106,15 @@ function FDDictionarySidebar(_fdDictionaryMode){
   * initialize()
   *  Initialize dictionary sidebar. If there is no dictionary file, this
   *  method change the sidebar to the installation mode for dictinoary file.
+  *  Moreover, initialize sidebar gadget objects.
   */
  this.initialize = function(){
+	 var prefs = new FDPrefs();
   var installationURI = "chrome://firedictionary/locale/install/" + dicName + ".htm"
   var mouseovermode;
+  
+  // initialize sidebar gadget objects
+  mIndicatorMouseOverMode = new FDSidebarGadget("fd-mouseovermode-indicator");
   
   getInstallationPanel().style.display = ( dic == null ? "" : "none" );
   getMainBox().style.display = ( dic == null ? "none" : "" );
@@ -117,13 +125,23 @@ function FDDictionarySidebar(_fdDictionaryMode){
      
   // initialize mouse over mode indicator.
   mouseovermode = prefs.getCharPref("mouse-over-mode");
-  getMouseOverModeIndicator().setAttribute(
+  mIndicatorMouseOverMode.setAttribute(
       "status", 
       mouseovermode == null || mouseovermode == "on" ? "on" : "off"
   );
   
+  // set preference
+  prefs.setCharPref("resetUndoBuffer", "false");
+  
   // initialize history.
   history.initialize();
+  
+  // update undo and redo button state
+  updateUndoRedoButtonState(
+   history.getHistoryCount(),
+   history.getUndoBufferCount()
+  )
+  
  }
  
  /**
@@ -190,11 +208,24 @@ function FDDictionarySidebar(_fdDictionaryMode){
   */
  this.registHistory = function(){
   if ( this.isActive() && dic != null){
+ 	 var prefs = new FDPrefs();
    var keyword = getKeywordTextbox().value;
    var result = getResultTextbox().value;
+ 	 var category = prefs.getUniCharPref("category");
+    
+	  if ( !category || category == "" ) category = "Unclassified";
    
    if ( !keyword.match(/^( |\n)*$/i) && result != ""){
-    history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord);
+    history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord, category);
+  
+    // update undo and redo button state
+    updateUndoRedoButtonState(
+     history.getHistoryCount(),
+     history.getUndoBufferCount()
+    )
+    
+    // set preference
+    prefs.setCharPref("resetUndoBuffer", "true");
    }
   }
  }
@@ -210,6 +241,12 @@ function FDDictionarySidebar(_fdDictionaryMode){
   if( !window.confirm(msgConfirmation) ) return;
   
   history.clear();
+  
+  // update undo and redo button state
+  updateUndoRedoButtonState(
+   history.getHistoryCount(),
+   history.getUndoBufferCount()
+  )
   
   // At this time, clear the temporary files.
   clearTempFiles();
@@ -237,7 +274,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Change the switch of mouse over function.
   */
  this.flipMouseOverModeSwitch = function(){
-  var mode = getMouseOverModeIndicator().getAttribute("status");
+  var mode = mIndicatorMouseOverMode.getAttribute("status");
   
   if ( mode == "on" ){
    mode = "off";
@@ -245,7 +282,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
    mode = "on";
   }
   
-  getMouseOverModeIndicator().setAttribute("status", mode);
+  mIndicatorMouseOverMode.setAttribute("status", mode);
   prefs.setCharPref("mouse-over-mode", mode);
  }
  
@@ -256,7 +293,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  this.turnOffMouseOverMode = function(){
   var mode = "off";
   
-  getMouseOverModeIndicator().setAttribute("status", mode);
+  mIndicatorMouseOverMode.setAttribute("status", mode);
   prefs.setCharPref("mouse-over-mode", mode); }
  
  /**
@@ -264,12 +301,46 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  return the status of mouse over mode.
   */
  this.getMouseOverMode = function(){
-  var modeIndicator = getMouseOverModeIndicator();
+  var modeIndicator = new FDSidebarGadget("fd-mouseovermode-indicator");
   
-  if ( modeIndicator == null )
+  if ( modeIndicator.isNull() )
    return false;
  
-  return (getMouseOverModeIndicator().getAttribute("status") == "on");
+  return (modeIndicator.getAttribute("status") == "on");
+ }
+ 
+ /**
+  * undoHistory()
+  *  undo a process of registering a word to the history.
+  **/
+ this.undoHistory = function(){
+	 var prefs = new FDPrefs();
+	 if ( prefs.getCharPref("resetUndoBuffer") == "true" ){
+	  history.resetUndoBuffer();
+	  prefs.setCharPref("resetUndoBuffer", "false");
+	 }
+	 
+  history.undoHistory();
+  
+  // update undo and redo button state
+  updateUndoRedoButtonState(
+   history.getHistoryCount(),
+   history.getUndoBufferCount()
+  )
+ }
+  
+ /**
+  * redoHistory()
+  *  redo a process of registering a word to the history.
+  */
+ this.redoHistory = function(){
+  history.redoHistory();
+  
+  // update undo and redo button state
+  updateUndoRedoButtonState(
+   history.getHistoryCount(),
+   history.getUndoBufferCount()
+  )
  }
  
  
@@ -305,10 +376,6 @@ function FDDictionarySidebar(_fdDictionaryMode){
  
  function getTabBrowser(){
   return top.document.getElementById("content");
- }
- 
- function getMouseOverModeIndicator(){
-  return sidebar.contentDocument.getElementById("fd-mouseovermode-indicator");
  }
  
  function getTabPanels(){
@@ -464,5 +531,31 @@ function FDDictionarySidebar(_fdDictionaryMode){
   dirTemp.createNewDirectory("tmp");
 
   dirTemp.remove(true);
+ }
+ 
+ /**
+  * updateUndoRedoButtonState(int countHistory, int countBuffer)
+  *  update states of Undo button and Redo button.
+  *
+  *  @param countHistory a number of registered words in history
+  *  @param countBuffer a number of depth in undo buffer
+  */
+ function updateUndoRedoButtonState(countHistory, countBuffer){
+  var buttonUndo = new FDSidebarGadget("fd-undo-history");
+  var buttonRedo = new FDSidebarGadget("fd-redo-history");
+  
+  // set a state of undo button
+  if ( countHistory == 0 ){
+   buttonUndo.disable();
+  } else {
+   buttonUndo.enable();
+  }
+  
+  // set a state of redo button
+  if ( countBuffer == 0 ){
+   buttonRedo.disable();
+  } else {
+   buttonRedo.enable();
+  }
  }
 }
