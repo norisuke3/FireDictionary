@@ -8,6 +8,6 @@
 <!ENTITY label.category                 "Category : ">
 <!ENTITY tips.category                  "To recall your previous searches more easily, it's recommended that you use a complete clause explaining your situation or your projects' name rather than individual words. ">
 
-<!ENTITY label.dictionaryName           "Dictionary Name : ">
+<!ENTITY label.dictionaryName           "Dictionary Name to use : ">
 
 <!ENTITY install.box.description	"Instllation for dictionary contents.">
