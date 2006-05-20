@@ -3,17 +3,20 @@
 <firedictinoary xmlns="http://www.firedictionary.com/dictionary/information"
                 xmlns:info="http://www.firedictionary.com/dictionary/information">
 
+  <config-version>2.0</config-version>
   <default-dictionary-name>PDICText</default-dictionary-name>
   
   <dictionaries>
 
     <dictionary name="PDICText">
+      <format>PDICText</format>
       <url>http://www.namazu.org/~tsuchiya/sdic/data/gene.html</url>
       <file-name>GENE.TXT</file-name>
       <charset>Shift_JIS</charset>
     </dictionary>
 
     <dictionary name="DummyDictionary">
+      <format>DummyDictionary</format>
       <url></url>
       <file-name></file-name>
       <charset></charset>

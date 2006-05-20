@@ -62,7 +62,11 @@ function FDDictionarySidebar(_fdDictionaryMode){
  var mIndicatorMouseOverMode;
  
  // Initialize dictionary.
- var dicName = getDictionaryName(); 
+ var dicName = getDictionaryName();
+ if(!config.verifyProperVersion()){
+  config.remove();
+  config = new FDConfig(getResourceDirectory());
+ }
  var fileName = config.getFileName(dicName);
  var charset = config.getCharset(dicName);
  try{

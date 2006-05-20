@@ -38,10 +38,11 @@
   * A class for configuration file whose name is 'dictionary-config.xml'
   */
 function FDConfig(dir){
-	var filenameConfig = "dictionary-config.xml"
- 
+	var filenameConfig = "dictionary-config.xml";
+	var properVersion = "2.0";                      // a proper version of the configuration file.
+	
 	var file = dir.createFileInstance(filenameConfig); 
- if ( !file.exists() ) createConfigFile(dir); 	
+ if ( !file.exists() ) createConfigFile(dir);
  var istream = new FDInputStream(file.getFile());
  istream.setCharset("UTF-8");
  
@@ -57,7 +58,7 @@ function FDConfig(dir){
  // Initialize XPath objects.
  var evaluator = new XPathEvaluator();
  var nsresolver = evaluator.createNSResolver(document.documentElement);
- 
+  
  /**
   * Array getDictionaryNames()
   *  Return an array of dictionary names which are written in the configuration file.
@@ -76,6 +77,29 @@ function FDConfig(dir){
  }
  
  /**
+  * String getConfigVersion()
+  *  Return a config file version which is written in the configuration file.
+  *
+  * @return a config file version
+  */
+ this.getConfigVersion = function(){
+ 	var xpath = "string(/info:firedictinoary/info:config-version)";
+ 	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
+ 	
+ 	return result.stringValue == "" ? null : result.stringValue ; 	
+ }
+ 
+ /**
+  * Boolean verifyProperVersion()
+  *  Verify a version of the configuration file which is whether proper or not.
+  *
+  *@return true - proper version, false - incorrect version
+  */
+ this.verifyProperVersion = function(){
+  return this.getConfigVersion() == properVersion;
+ }
+ 
+ /**
   * String getDefaultDictinoaryName()
   *  Return a name of the default dictionary which is written in the configuration file.
   *
@@ -86,6 +110,21 @@ function FDConfig(dir){
  	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
  	
  	return result.stringValue == "" ? null : result.stringValue ; 	
+ }
+ 
+ /**
+  * String getFormat(String dicName)
+  *  Return a format name mentioned by the attribute 'format'. The name decide a module
+  *  for using dictionary file.
+  *
+  * @param dicName a name of the dictionary 
+  * @return a format name for a module.
+  */
+ this.getFormat = function(dicName){
+ 	var xpath = "string(/info:firedictinoary/info:dictionaries/info:dictionary[@name = '" + dicName + "']/info:format)";
+ 	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
+ 	
+ 	return result.stringValue == "" ? null : result.stringValue ;
  }
  
  /**
@@ -129,6 +168,18 @@ function FDConfig(dir){
  	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
  	
  	return result.stringValue == "" ? null : result.stringValue ;
+ }
+ 
+ /**
+  * remove()
+  *  remove the configuration file.
+  */
+ this.remove = function(){
+  istream.close();
+  istream = null;
+  
+  file.remove();
+  file = null;
  }
 	
 	//
