@@ -144,6 +144,15 @@ function setCategory(){
 }
 
 /**
+ * openDictionaryConfig()
+ *  Open a dialog to configure the dictionary.
+ */
+function openDictionaryConfig(){
+ var dialogURL = "chrome://firedictionary/content/dictionaryConfig.xul"
+ window.openDialog(dialogURL, "dictionaryConfig", "chrome, centerscreen, dependent, dialog, modal");
+}
+
+/**
  * undoHistory()
  */
 function undoHistory(){

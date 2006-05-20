@@ -88,6 +88,8 @@
             <toolbarbutton id="fd-mouseovermode-indicator" oncommand="flipSwitch()" status="on"/>
             <toolbarbutton id="toolsMenuButton" type="menu" label="&menu.tools;">
               <menupopup>
+                <menuitem label="&menu.dictionoaryConfiguration;" oncommand="openDictionaryConfig()"/>
+                <menuseparator/>
                 <menuitem label="&menu.viewHistory;" oncommand="viewHistory()"/>
                 <menuitem label="&menu.clearHistory;" oncommand="clearHistory()"/>
                 <menuseparator/>
