@@ -37,8 +37,8 @@
 /**
  * Class for using PDIC Text type dictionary.
  */
-function PDICText(file, charset){
-	var indexCharLength = 5;										          // index depth
+function PDICText(file, charset, indexDepth){
+	var indexCharLength = indexDepth;										          // index depth
 	var indexFileName = "indexPDICText" + indexCharLength + "." + file.getFile().leafName.toLowerCase();
 	var istream;
 	var indexes = new Array();
@@ -46,7 +46,7 @@ function PDICText(file, charset){
 	var mCharset = charset
 	
 	/**
-	 * PDICText(FDFile file)
+	 * PDICText(FDFile file, String charset, Integer indexDepth)
 	 *  Constructor of this class.
 	 *  Set the dictionary file object.
 	 *
@@ -283,13 +283,13 @@ function PDICText(file, charset){
 PDICText.instance = null;
 
 /**
- * getInstance(FDFile file, String charset)
+ * getInstance(FDFile file, String charset, Integer indexDepth)
  * 
  * @return singleton object of PDICText which is initialized.
  */
-PDICText.getInstance = function(file, charset) {
+PDICText.getInstance = function(file, charset, indexDepth) {
  if (PDICText.instance == null) {
-  PDICText.instance = new PDICText(file, charset);
+  PDICText.instance = new PDICText(file, charset, indexDepth);
  }
  return this.instance;
 }

@@ -71,12 +71,14 @@ function FDDictionarySidebar(_fdDictionaryMode){
  var fileName = config.getFileName(dicName);
  var charset = config.getCharset(dicName);
  var format = config.getFormat(dicName);
+ var indexDepth = config.getIndexDepth(dicName);
+ 
  try{
-  dic = dictionaryFactory.newDictionary(format, fileName, charset);
+  dic = dictionaryFactory.newDictionary(format, indexDepth, fileName, charset);
  }catch(e){
   if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
     try{
-     dic = dictionaryFactory.newDictionary(format, fileName.toLowerCase(), charset);
+     dic = dictionaryFactory.newDictionary(format, indexDepth, fileName.toLowerCase(), charset);
     }catch(e){
      if ( e == "DICTINOARY_FILE_MISSING_EXCEPTION" ) {
       dic = null

@@ -10,6 +10,7 @@
 
     <dictionary name="PDICText">
       <format>PDICText</format>
+      <index-depth>5</index-depth>
       <url>http://www.namazu.org/~tsuchiya/sdic/data/gene.html</url>
       <file-name>GENE.TXT</file-name>
       <charset>Shift_JIS</charset>
@@ -17,6 +18,7 @@
 
     <dictionary name="DummyDictionary">
       <format>DummyDictionary</format>
+      <index-depth></index-depth>
       <url></url>
       <file-name></file-name>
       <charset></charset>

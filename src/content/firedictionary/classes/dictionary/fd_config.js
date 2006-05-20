@@ -128,6 +128,19 @@ function FDConfig(dir){
  }
  
  /**
+  * Integer getIndexDepth(String dicName)
+  *  Return an index depth mentioned by an attribute 'index-depth'.
+  *
+  * @param dicName a name of the dictionary 
+  */
+ this.getIndexDepth = function(dicName){
+ 	var xpath = "string(/info:firedictinoary/info:dictionaries/info:dictionary[@name = '" + dicName + "']/info:index-depth)";
+ 	var result = evaluator.evaluate(xpath, document, nsresolver, 0, null);
+ 	
+ 	return result.stringValue == "" ? null : result.stringValue ;
+ }
+ 
+ /**
   * String getURL(String dicName)
   *  Return an URL where we can get the dictionary mentioned by the attribute 'dicName'.
   *
