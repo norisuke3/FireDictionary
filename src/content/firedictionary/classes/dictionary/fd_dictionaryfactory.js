@@ -42,18 +42,18 @@ function FDDictionaryFactory(){
  dir.changeDirectory("FireDictionary"); 
 
  /**
-  * Dictionary newDictionary(String dictionaryName, String fileName, String charset)
+  * Dictionary newDictionary(String format, String fileName, String charset)
   *  Instanciate dictionary object whose name is correspond to the attribute 'name'
   *
-  * @param dictionaryName a dictionary name
+  * @param format a format of the dictionary.
   * @param fileName a name of the dictinoary file.
   * @param charset The character set of the dictinoary file.
   * @return dictionary object
   */
- this.newDictionary = function(dictionaryName, fileName, charset){
+ this.newDictionary = function(format, fileName, charset){
  	var dic;
  	
- 	switch(dictionaryName){
+ 	switch(format){
  	 case "PDICText":
      var file = dir.createFileInstance(fileName);      
      dic = PDICText.getInstance(file, charset);
