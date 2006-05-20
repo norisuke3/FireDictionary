@@ -40,8 +40,24 @@
  */
 function initialize(){
  var prefs = new FDPrefs();
+ var config = new FDConfig(window.arguments[0]);
  var dictionaryName = document.getElementById("dictionary-name");
+ var menuPopUp=document.createElement("menupopup");
+	var dicNames = config.getDictionaryNames();
  
+ // create menu items.
+ for( i=0 ; i < dicNames.length ; i++ ){
+  var menuItem=document.createElement("menuitem");
+
+  menuItem.setAttribute( "label" , dicNames[i]);
+  menuItem.setAttribute( "value" , dicNames[i]);
+
+  menuPopUp.appendChild(menuItem);
+ }
+ 
+ dictionaryName.appendChild(menuPopUp);
+ 
+ // set the value.
  dictionaryName.value = prefs.getUniCharPref("dictionary-name");
 }
 

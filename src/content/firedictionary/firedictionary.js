@@ -149,7 +149,11 @@ function setCategory(){
  */
 function openDictionaryConfig(){
  var dialogURL = "chrome://firedictionary/content/dictionaryConfig.xul"
- window.openDialog(dialogURL, "dictionaryConfig", "chrome, centerscreen, dependent, dialog, modal");
+ window.openDialog(
+  dialogURL,
+  "dictionaryConfig",
+  "chrome, centerscreen, dependent, dialog, modal",
+  dicSidebar.resourceDirectory);
 }
 
 /**

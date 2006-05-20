@@ -49,17 +49,15 @@
         ondialogcancel="return doCancel();"
         onload="initialize();">
 
+
+<script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_inputstream.js"/>
 <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
+<script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
 <script type="application/x-javascript" src="dictionaryConfig.js"/>
 
 <vbox id="category-box">
  <label value="&label.dictionaryName;" control="dictionary-name"/>
- <menulist id="dictionary-name">
-   <menupopup>
-     <menuitem label="PDICText" value="PDICText"/>
-     <menuitem label="DummyDictionary" value="DummyDictionary"/>
-   </menupopup>
- </menulist>
+ <menulist id="dictionary-name"/>
 </vbox>
  
 </dialog>

@@ -44,9 +44,10 @@ FDDictionarySidebar.FD_MODE_WORD_PICKEDUP = 2;
  * A class for dictionary sidebar.
  */
 function FDDictionarySidebar(_fdDictionaryMode){
+ this.resourceDirectory = getResourceDirectory();
  var sidebar = top.document.getElementById("sidebar");
  var dictionaryFactory = new FDDictionaryFactory();
- var config = new FDConfig(getResourceDirectory());
+ var config = new FDConfig(this.resourceDirectory);
  var history = new FDWordHistory();
  var prefs = new FDPrefs();
  var dic = null;
@@ -65,7 +66,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
  var dicName = getDictionaryName();
  if(!config.verifyProperVersion()){
   config.remove();
-  config = new FDConfig(getResourceDirectory());
+  config = new FDConfig(this.resourceDirectory);
  }
  var fileName = config.getFileName(dicName);
  var charset = config.getCharset(dicName);
