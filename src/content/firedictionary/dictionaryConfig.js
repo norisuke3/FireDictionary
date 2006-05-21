@@ -41,8 +41,7 @@
 function initialize(){
  var prefs = new FDPrefs();
  var config = new FDConfig(window.arguments[0]);
- var dictionaryName = document.getElementById("dictionary-name");
- var menuPopUp=document.createElement("menupopup");
+ var menuPopUp=document.getElementById("dictionary-list");
 	var dicNames = config.getDictionaryNames();
  
  // create menu items.
@@ -55,12 +54,30 @@ function initialize(){
   menuPopUp.appendChild(menuItem);
  }
  
- dictionaryName.appendChild(menuPopUp);
- 
- // set the value.
- dictionaryName.value = prefs.getUniCharPref("dictionary-name");
+ // set the values.
+ var dicName = prefs.getUniCharPref("dictionary-name");
+ document.getElementById("dictionary-name").value = dicName;
+ refleshWindow(dicName);
 }
 
+/**
+ * refleshWindow(String dicName)
+ *
+ *@dicName a dictionary name.
+ */
+function refleshWindow(dicName){
+ var config = new FDConfig(window.arguments[0]);
+ 
+ document.getElementById("format").value = config.getFormat(dicName);
+ document.getElementById("index-depth").value = config.getIndexDepth(dicName);
+ document.getElementById("file-name").value = config.getFileName(dicName);
+ document.getElementById("url").value = config.getURL(dicName); 
+ document.getElementById("charset").value = config.getCharset(dicName);
+ 
+ document.getElementById("url").setAttribute("href", config.getURL(dicName));
+}
+ 
+ 
 /**
  * doOK()
  */

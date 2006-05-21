@@ -60,7 +60,44 @@
 
 <vbox id="category-box">
  <label value="&label.dictionaryName;" control="dictionary-name"/>
- <menulist id="dictionary-name"/>
+ <menulist id="dictionary-name">
+  <menupopup id="dictionary-list" 
+	         onpopuphidden="refleshWindow(document.getElementById('dictionary-name').value)"/>
+ </menulist>
+ 
+ <hbox style="height: 5px;"/>
+ <hbox>
+  <label style="width: 5px;"/>
+  <label value="Format : " style="font-weight: bold;" flex="1"/>
+  <label id="format"/>
+  <label style="width: 5px;"/>
+ </hbox>
+ <hbox>
+  <label style="width: 5px;"/>
+  <label value="Index depth : " style="font-weight: bold;" flex="1"/>
+  <label id="index-depth"/>
+  <label style="width: 5px;"/>
+ </hbox>
+ <hbox>
+  <label style="width: 5px;"/>
+  <label value="File name : " style="font-weight: bold;" flex="1"/>
+  <label id="file-name"/>
+  <label style="width: 5px;"/>
+ </hbox>
+ <hbox>
+  <label style="width: 5px;"/>
+  <label value="URL : " style="font-weight: bold;" flex="1"/>
+  <label id="url" class="text-link"/>
+  <label style="width: 5px;"/>
+ </hbox>
+ <hbox>
+  <label style="width: 5px;"/>
+  <label value="Charset : " style="font-weight: bold;" flex="1"/>
+  <label id="charset"/>
+  <label style="width: 5px;"/>
+ </hbox>
+ <hbox style="height: 5px;"/>
+ 
 </vbox>
  
 </dialog>
