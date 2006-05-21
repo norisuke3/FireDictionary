@@ -55,6 +55,9 @@
 <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
 <script type="application/x-javascript" src="dictionaryConfig.js"/>
 
+<stringbundle id="fd-localized-strings" 
+              src="chrome://firedictionary/locale/fd-localized-strings.properties"/>
+
 <vbox id="category-box">
  <label value="&label.dictionaryName;" control="dictionary-name"/>
  <menulist id="dictionary-name"/>

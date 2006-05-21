@@ -61,16 +61,25 @@ function initialize(){
  dictionaryName.value = prefs.getUniCharPref("dictionary-name");
 }
 
+/**
+ * doOK()
+ */
 function doOK(){
  var prefs = new FDPrefs();
+ var strbundle=document.getElementById("fd-localized-strings");
+ var message = strbundle.getString("message.toActivateDictionary");
  var dictionaryName = document.getElementById("dictionary-name");
  var result = true;
  
  prefs.setUniCharPref("dictionary-name", dictionaryName.value);
  
+ alert(message);
  return result; 
 }
 
+/**
+ * doCancel()
+ */
 function doCancel(){
   return true; 
 }
