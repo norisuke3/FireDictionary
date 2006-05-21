@@ -4,11 +4,11 @@
                 xmlns:info="http://www.firedictionary.com/dictionary/information">
 
   <config-version>2.0</config-version>
-  <default-dictionary-name>PDICText</default-dictionary-name>
+  <default-dictionary-name>GENE95</default-dictionary-name>
   
   <dictionaries>
 
-    <dictionary name="PDICText">
+    <dictionary name="GENE95">
       <format>PDICText</format>
       <index-depth>5</index-depth>
       <url>http://www.namazu.org/~tsuchiya/sdic/data/gene.html</url>
