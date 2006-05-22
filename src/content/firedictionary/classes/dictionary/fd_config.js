@@ -43,8 +43,6 @@ function FDConfig(dir){
 	
 	var file = dir.createFileInstance(filenameConfig); 
  if ( !file.exists() ) createConfigFile(dir);
- var istream = new FDInputStream(file.getFile());
- istream.setCharset("UTF-8");
  
  /**
   * FDConfig(FDDirectory dir)
@@ -52,12 +50,42 @@ function FDConfig(dir){
   *
   * @param dir A directory which contains the file 'dictionary-config.xml'.
   */
- var parser = new DOMParser();
- var document = parser.parseFromString(istream.readAsUnicode(), "text/xml");
+ FDDomBase.call(this);
+ this.readFromFile(file);
+ var document = this.domDocument;
  
  // Initialize XPath objects.
  var evaluator = new XPathEvaluator();
- var nsresolver = evaluator.createNSResolver(document.documentElement);
+ var nsresolver = evaluator.createNSResolver(this.getDocumentElement());
+ 
+ /**
+  * appendDictionary(String dicName, String format, Integer indexDepth, String url, String fileName, String charset)
+  *  append a dictionary element to dictionaries element in the configuration file.
+  *
+  * @param name A name of the dictionary
+  * @param format A format of the dictionary which should be written as <support-format> element
+  *        in the configuration file. The format decide a module for using dictionary file.
+  * @param indexDepth a depth of an index for the dictionary
+  * @param url An URL where we can get the dictionary
+  * @param fileName A file name of the dictionary
+  * @param charset A character set of the dictinoary
+  */
+ this.appendDictionary = function(dicName, format, indexDepth, url, fileName, charset){
+  var dictionaries = document.getElementsByTagName("dictionaries")[0];
+  var elementDictionary = document.createElement("dictionary");
+  
+  elementDictionary.setAttribute("name", dicName);
+  elementDictionary.appendChild(this.createElementwithTextNode("format", format));
+  elementDictionary.appendChild(this.createElementwithTextNode("index-depth", indexDepth));
+  elementDictionary.appendChild(this.createElementwithTextNode("url", url));
+  elementDictionary.appendChild(this.createElementwithTextNode("file-name", fileName));
+  elementDictionary.appendChild(this.createElementwithTextNode("charset", charset));
+  
+  dictionaries.appendChild(elementDictionary);
+  
+  // write to file.
+  this.writeToFile(file);
+ }
   
  /**
   * Array getDictionaryNames()
@@ -205,11 +233,7 @@ function FDConfig(dir){
   *  remove the configuration file.
   */
  this.remove = function(){
-  istream.close();
-  istream = null;
-  
   file.remove();
-  file = null;
  }
 	
 	//
