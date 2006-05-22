@@ -49,11 +49,17 @@
         ondialogcancel="return doCancel();"
         onload="initialize();">
 
-
-<script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_inputstream.js"/>
-<script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
-<script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
-<script type="application/x-javascript" src="dictionaryConfig.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_permanent.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_installfileemitter.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_inputstream.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_outputstream.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_dombase.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/exception.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
+    <script type="application/x-javascript" src="dictionaryConfig.js"/>
 
 <stringbundle id="fd-localized-strings" 
               src="chrome://firedictionary/locale/fd-localized-strings.properties"/>
