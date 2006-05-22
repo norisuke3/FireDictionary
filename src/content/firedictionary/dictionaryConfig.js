@@ -41,7 +41,7 @@
 function initialize(){
  var prefs = new FDPrefs();
  var config = new FDConfig(window.arguments[0]);
- var menuPopUp=document.getElementById("dictionary-list");
+ var menuPopUp = document.getElementById("dictionary-list");
 	var dicNames = config.getDictionaryNames();
  
  // create menu items.
