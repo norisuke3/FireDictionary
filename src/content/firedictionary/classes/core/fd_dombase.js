@@ -112,4 +112,20 @@ function FDDomBase(){
 		
 		istream.close();
  }
+ 
+ /**
+  * Element createElementwithTextNode(String elementName, String text)
+  *  create an element which has a text node as a child.
+  *
+  * @param elementName a name of the element
+  * @param text text contained as a text node
+  */
+ this.createElementwithTextNode = function(elementName, text){
+  var element = this.domDocument.createElement(elementName);
+  var textNode = this.domDocument.createTextNode(text);
+  
+  element.appendChild(textNode);
+  
+  return element;
+ }
 }
