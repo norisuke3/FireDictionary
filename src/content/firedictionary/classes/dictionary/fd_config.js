@@ -77,6 +77,23 @@ function FDConfig(dir){
  }
  
  /**
+  * Array getSupportFormats()
+  *  Return an array of support formats which are written in the configuration file.
+  *
+  * @return an array of support formats.
+  */
+ this.getSupportFormats = function(){
+  var formats = new Array();
+  var nodes = document.getElementsByTagName("support-format");
+  
+  for( i=0 ; i < nodes.length ; i++ ){
+  	formats.push(nodes[i].firstChild.nodeValue);
+  }
+  
+  return formats;
+ }
+ 
+ /**
   * String getConfigVersion()
   *  Return a config file version which is written in the configuration file.
   *

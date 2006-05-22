@@ -26,4 +26,9 @@
 
   </dictionaries>
   
+  <support-formats>
+    <support-format>PDICText</support-format>
+    <support-format>DummyDictionary</support-format>
+  </support-formats>
+
 </firedictinoary>
