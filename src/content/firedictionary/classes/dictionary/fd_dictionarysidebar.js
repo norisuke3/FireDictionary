@@ -62,12 +62,15 @@ function FDDictionarySidebar(_fdDictionaryMode){
  // declare sidebar gadgets
  var mIndicatorMouseOverMode;
  
- // Initialize dictionary.
- var dicName = getDictionaryName();
+ // Override configuration file if it's old version.
  if(!config.verifyProperVersion()){
   config.remove();
   config = new FDConfig(this.resourceDirectory);
  }
+ 
+ // Initialize dictionary.
+ var dicName = getDictionaryName();
+ 
  var fileName = config.getFileName(dicName);
  var charset = config.getCharset(dicName);
  var format = config.getFormat(dicName);
