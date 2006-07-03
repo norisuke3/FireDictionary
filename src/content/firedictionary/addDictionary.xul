@@ -114,7 +114,7 @@
    <label value="File name : " style="font-weight: bold;"/>
   </vbox>
   <vbox width="300"><hbox>
-   <textbox id="file-name" flex="1"/>
+   <textbox id="file-name" flex="1" disabled="true" style="color: black;"/>
    <button label="&label.browse;" oncommand="pickupDictionary()"/>
   </hbox></vbox>
   <label style="width: 5px;"/>
