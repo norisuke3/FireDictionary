@@ -74,11 +74,23 @@ function initialize(){
 //
 
 function install(){
-	var installer = new FDDictionaryInstaller();
-	
-	if(installer.install()){
-		alert("FireDictionary has been installed successfully!");
-	}
+ var installer = new FDDictionaryInstaller();
+
+ try{
+  if(installer.install()){
+   alert("FireDictionary has been installed successfully!");
+  }
+  
+ } catch (e) {
+  var strbundle=document.getElementById("fd-localized-strings");
+  
+  if ( e == "THE_DICTIONARY_HAS_ALREADY_EXISTED" ) {
+   alert(strbundle.getString("error.theDictionaryHasAreadyExists"));
+   
+  } else {
+   throw e;
+  }
+ }
 }
 
 /**

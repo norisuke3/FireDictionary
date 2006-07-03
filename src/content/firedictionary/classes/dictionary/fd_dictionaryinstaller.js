@@ -39,7 +39,7 @@
  */
 function FDDictionaryInstaller(){
  var picker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
- var dir = new FDDirectory("ProfD").createNewDirectory("FireDictionary");
+ var showResult = 99999;	// picker's return value
  
  /**
   * Boolean install()
@@ -48,25 +48,67 @@ function FDDictionaryInstaller(){
   * @return true : success, false : not success.
   */
  this.install = function(){
- 	var result = false;
- 	
- 	try{
-  	picker.init(window, "Install", picker.modeOpen);
- 	 picker.appendFilter("text file" + " (*.txt)", "*.txt");
- 	 picker.appendFilters(picker.filterAll);
+  this.pickupDictionary();
+  return this.copyDictionary();
+ }
+ 
+ /**
+  * pickupDictionary()
+  *	 Pick up a dictionary using a file picker.
+  */
+ this.pickupDictionary = function(){
+  picker.init(window, "Install", picker.modeOpen);
+  picker.appendFilter("text file" + " (*.txt)", "*.txt");
+  picker.appendFilters(picker.filterAll);
 
- 	 var showResult = picker.show();
- 	 if(showResult == picker.returnOK) {
- 	 	var file = picker.file;
- 	 	file.copyTo(dir, null);
-	 	
- 	 	result = true;
- 	 }
- 	}catch(e){
- 		result = false;
- 		alert(e);
- 	}
-	 
-	 return result;
+  showResult = picker.show();
+ }
+ 
+ /**
+  * copyDictionary
+  *  copy a dictionary file to the FireDictionary profile folder.
+  *
+  * @return true : success, false : not success
+  * @throw THE_DICTIONARY_HAS_ALREADY_EXISTED
+  */
+ this.copyDictionary = function(){
+  var dir = new FDDirectory("ProfD").createNewDirectory("FireDictionary");
+  var result = false;
+  
+  try{
+   if ( showResult == picker.returnOK ) {
+    var file = picker.file;
+    file.copyTo(dir, null)
+   
+    result = true;
+   }
+   
+  } catch(e) {
+   if ( e.toString().indexOf("0x80520008") != -1 ){
+    throw new Exception("THE_DICTIONARY_HAS_ALREADY_EXISTED");
+   } else {
+    throw e;
+   }
+   
+   result = false;
+  }
+  
+  return result;
+ }
+ 
+ /**
+  * String getFilename()
+  *  a file name of the dictionary.
+  *
+  *  @return a file name of the dictionary
+  */
+ this.getFilename = function(){
+  var filename = ""
+  
+  if ( showResult == picker.returnOK ) {
+   filename = picker.file.leafName;
+  }
+  
+  return filename;
  }
 }
