@@ -9,5 +9,9 @@
 <!ENTITY tips.category                  "単語を覚えるのに自分の今ある状況を付加情報として記しておくのは非常に有効な方法です。カテゴリの値としては、「国際ニュース」のような単純な名詞より、「図書館にて期末試験に向けて勉強中。親友のトムと。」のような文のほうが記憶力を助けます。">
 
 <!ENTITY label.dictionaryName           "使用する辞書 : ">
+<!ENTITY label.add                      "追加...">
+<!ENTITY label.addDictionary            "辞書の追加">
+<!ENTITY label.DictionaryName           "辞書の名前 :">
+<!ENTITY label.browse                   "参照...">
 
 <!ENTITY install.box.description	"辞書コンテンツのインストール">

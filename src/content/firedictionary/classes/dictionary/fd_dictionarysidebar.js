@@ -524,9 +524,6 @@ function FDDictionarySidebar(_fdDictionaryMode){
   * @return A name of dictionary.
   */
  function getDictionaryName(){
-  // Now, just return the default dictionary name which is written in configuration file.
-  // In the future, there are some possibility : the name might be chosen in the User Interface
-  
   if ( prefs.getUniCharPref("dictionary-name") == null ){
    prefs.setUniCharPref("dictionary-name", config.getDefaultDictionaryName());
   }

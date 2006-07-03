@@ -34,79 +34,87 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
+ var installer;
+ 
 /**
  * initialize()
  *  set a Default value of the dictionary-name text box
  */
 function initialize(){
- var prefs = new FDPrefs();
- 
- createMenuItem();
- 
- // set the values.
- var dicName = prefs.getUniCharPref("dictionary-name");
- document.getElementById("dictionary-name").value = dicName;
- refleshWindow(dicName);
-}
-
-/**
- * createMenuItems()
- */
-function createMenuItem(){
  var config = new FDConfig(window.arguments[0]);
- var menuPopUp = document.getElementById("dictionary-list");
- var dicNames = config.getDictionaryNames();
+ var menuPopUp = document.getElementById("format-list");
+ var formats = config.getSupportFormats();
  
- // If there are old menue items, remove them first.
- var oldItems = menuPopUp.childNodes;
- var itemLength = oldItems.length
- for( i=0 ; i < itemLength ; i++ ){
-  menuPopUp.removeChild(oldItems.item(0));
- }
+ installer = new FDDictionaryInstaller();
  
  // create menu items.
- for( i=0 ; i < dicNames.length ; i++ ){
+ for( i=0 ; i < formats.length ; i++ ){
   var menuItem=document.createElement("menuitem");
 
-  menuItem.setAttribute( "label" , dicNames[i]);
-  menuItem.setAttribute( "value" , dicNames[i]);
-
+  menuItem.setAttribute("label" , formats[i]);
+  menuItem.setAttribute("value" , formats[i]);
+  
   menuPopUp.appendChild(menuItem);
  }
-}
+ 
+ //set default value.
+ document.getElementById("format").value = formats[0];
+} 
 
 /**
- * refleshWindow(String dicName)
- *
- *@dicName a dictionary name.
+ * pickupDictionary()
  */
-function refleshWindow(dicName){
- var config = new FDConfig(window.arguments[0]);
- 
- document.getElementById("format").value = config.getFormat(dicName);
- document.getElementById("index-depth").value = config.getIndexDepth(dicName);
- document.getElementById("file-name").value = config.getFileName(dicName);
- document.getElementById("url").value = config.getURL(dicName); 
- document.getElementById("charset").value = config.getCharset(dicName);
- 
- document.getElementById("url").setAttribute("href", config.getURL(dicName));
-}
- 
- 
+function pickupDictionary(){
+ installer.pickupDictionary();
+ document.getElementById("file-name").value = installer.getFilename();
+} 
+
 /**
  * doOK()
  */
 function doOK(){
- var prefs = new FDPrefs();
- var strbundle=document.getElementById("fd-localized-strings");
- var message = strbundle.getString("message.toActivateDictionary");
- var dictionaryName = document.getElementById("dictionary-name");
- var result = true;
+ var config = new FDConfig(window.arguments[0]);
+ var dicName = document.getElementById("fd-dictionary-name").value;
+ var format = document.getElementById("format").value;
+ var indexDepth = document.getElementById("index-depth").value;
+ var fileName = document.getElementById("file-name").value;
+ var url = document.getElementById("url").value;
+ var charset = document.getElementById("charset").value;
+ var result = false;
  
- prefs.setUniCharPref("dictionary-name", dictionaryName.value);
- 
- alert(message);
- return result; 
+ try{
+  if (
+   dicName == "" ||
+   indexDepth == "" ||
+   fileName == "" ||
+   charset == "" ||
+   indexDepth.search(/^\d+$/) == -1
+  ) {
+   throw new Exception("MANDATORY_FIELD_IS_MISSING");
+  
+  } else {
+   installer.copyDictionary();
+   config.appendDictionary(dicName, format, indexDepth, url, fileName, charset);
+  
+  }
+  result = true; 
+  
+ } catch(e) {
+  var strbundle=document.getElementById("fd-localized-strings");
+  
+  if ( e == "MANDATORY_FIELD_IS_MISSING" ) {
+   alert(strbundle.getString("error.mandatoryFields"));
+   
+  } else if ( e == "THE_DICTIONARY_HAS_ALREADY_EXISTED" ) {
+   alert(strbundle.getString("error.theDictionaryHasAreadyExists"));
+   
+  } else {
+   throw e;
+  }
+  
+ } finally {
+  return result;
+ }
 }
 
 /**
@@ -114,19 +122,4 @@ function doOK(){
  */
 function doCancel(){
   return true; 
-}
-
-/**
- * openAddDictionary()
- *  Open a dialog to add a dictionary.
- */
-function openAddDictionary(){
- var dialogURL = "chrome://firedictionary/content/addDictionary.xul"
- window.openDialog(
-  dialogURL,
-  "addDictionary",
-  "chrome, centerscreen, dependent, dialog, modal",
-  window.arguments[0]);
-  
- createMenuItem();
 }

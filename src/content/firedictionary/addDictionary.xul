@@ -42,7 +42,7 @@
 <!--locale-->
 <!DOCTYPE window SYSTEM "chrome://firedictionary/locale/firedictionary.dtd">
 
-<dialog id="dictionaryConfig" title="&menu.dictionoaryConfiguration;"
+<dialog id="addDictionary" title="&label.addDictionary;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
         ondialogaccept="return doOK();"
@@ -59,55 +59,102 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/exception.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_config.js"/>
-    <script type="application/x-javascript" src="dictionaryConfig.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_dictionaryinstaller.js"/>
+    <script type="application/x-javascript" src="addDictionary.js"/>
 
 <stringbundle id="fd-localized-strings" 
               src="chrome://firedictionary/locale/fd-localized-strings.properties"/>
 
 <vbox id="category-box">
- <label value="&label.dictionaryName;" control="dictionary-name"/>
- <menulist id="dictionary-name">
-  <menupopup id="dictionary-list" 
-	         onpopuphidden="refleshWindow(document.getElementById('dictionary-name').value)"/>
- </menulist>
+ <label value="&label.DictionaryName;" control="dictionary-name"/>
+ <textbox id="fd-dictionary-name"/>
  
  <hbox style="height: 5px;"/>
- <hbox>
+ 
+ <hbox align="center">
   <label style="width: 5px;"/>
-  <label value="Format : " style="font-weight: bold;" flex="1"/>
-  <label id="format"/>
-  <label style="width: 5px;"/>
- </hbox>
- <hbox>
-  <label style="width: 5px;"/>
-  <label value="Index depth : " style="font-weight: bold;" flex="1"/>
-  <label id="index-depth"/>
-  <label style="width: 5px;"/>
- </hbox>
- <hbox>
-  <label style="width: 5px;"/>
-  <label value="File name : " style="font-weight: bold;" flex="1"/>
-  <label id="file-name"/>
+  <vbox flex="1">
+   <label value="Format : " style="font-weight: bold;"/>
+  </vbox>
+  <vbox width="300">
+   <menulist id="format">
+    <menupopup id="format-list"/>
+   </menulist>
+  </vbox>
   <label style="width: 5px;"/>
  </hbox>
- <hbox>
+ 
+ <hbox align="center">
   <label style="width: 5px;"/>
-  <label value="URL : " style="font-weight: bold;" flex="1"/>
-  <label id="url" class="text-link"/>
+  <vbox flex="1">
+   <label value="Index depth : " style="font-weight: bold;" flex="1"/>
+  </vbox>
+  <vbox width="300">
+   <menulist id="index-depth" editable="true">
+    <menupopup>
+     <menuitem label="1"/>
+     <menuitem label="2"/>
+     <menuitem label="3"/>
+     <menuitem label="4"/>
+     <menuitem label="5" selected="true"/>
+     <menuitem label="6"/>
+     <menuitem label="7"/>
+     <menuitem label="8"/>
+     <menuitem label="9"/>
+     <menuitem label="10"/>
+    </menupopup>
+   </menulist>
+  </vbox>
   <label style="width: 5px;"/>
  </hbox>
- <hbox>
+ 
+ <hbox align="center">
   <label style="width: 5px;"/>
-  <label value="Charset : " style="font-weight: bold;" flex="1"/>
-  <label id="charset"/>
+  <vbox flex="1">
+   <label value="File name : " style="font-weight: bold;"/>
+  </vbox>
+  <vbox width="300"><hbox>
+   <textbox id="file-name" flex="1"/>
+   <button label="&label.browse;" oncommand="pickupDictionary()"/>
+  </hbox></vbox>
   <label style="width: 5px;"/>
  </hbox>
+ 
+ <hbox align="center">
+  <label style="width: 5px;"/>
+  <vbox flex="1">
+   <label value="URL* : " style="font-weight: bold;"/>
+  </vbox>
+  <vbox width="300">
+   <textbox id="url" flex="1"/>
+  </vbox>
+  <label style="width: 5px;"/>
+ </hbox>
+ 
+ <hbox align="center">
+  <label style="width: 5px;"/>
+  <vbox flex="1">
+   <label value="Charset : " style="font-weight: bold;" flex="1"/>
+  </vbox>
+  <vbox width="300">
+   <menulist id="charset" editable="true">
+    <menupopup>
+     <menuitem label="Shift_JIS"/>
+     <menuitem label="UTF-8"/>
+    </menupopup>
+   </menulist>
+  </vbox>
+  <label style="width: 5px;"/>
+ </hbox>
+ 
+ <hbox align="center">
+  <label style="width: 5px;"/>
+  <label value="* : optional"/>
+  <label style="width: 5px;"/>
+ </hbox>
+ 
  <hbox style="height: 5px;"/>
  
- <hbox>
-  <vbox flex="1"/>
-  <button label="&label.add;" oncommand="openAddDictionary()"/>
- </hbox>
 </vbox>
  
 </dialog>
