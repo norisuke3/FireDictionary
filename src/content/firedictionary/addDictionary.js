@@ -106,8 +106,13 @@ function doOK(){
    alert(strbundle.getString("error.mandatoryFields"));
    
   } else if ( e == "THE_DICTIONARY_HAS_ALREADY_EXISTED" ) {
-   alert(strbundle.getString("error.theDictionaryHasAreadyExists"));
+   // alert(strbundle.getString("error.theDictionaryHasAreadyExists"));
    
+   // this is no problem because we might need to make new index profile for different
+   // index depth with same dictionary file.
+   config.appendDictionary(dicName, format, indexDepth, url, fileName, charset);
+   
+   result = true;
   } else {
    throw e;
   }
