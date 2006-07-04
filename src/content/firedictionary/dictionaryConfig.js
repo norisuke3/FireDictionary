@@ -130,3 +130,23 @@ function openAddDictionary(){
   
  createMenuItem();
 }
+
+/**
+ * removeDictionary()
+ */
+function removeDictionary(){
+ var config = new FDConfig(window.arguments[0]);
+ var strbundle=document.getElementById("fd-localized-strings");
+
+ if ( document.getElementById("dictionary-name").value == "GENE95" ){
+  alert(strbundle.getString("message.youCantDeleteGENE95"));
+ } else {
+ 
+  config.removeDictionary(document.getElementById("dictionary-name").value);
+ 
+  var names = config.getDictionaryNames();
+  document.getElementById("dictionary-name").value = names[0];
+ 
+  createMenuItem();
+ }
+}

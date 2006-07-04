@@ -106,6 +106,7 @@
  
  <hbox>
   <vbox flex="1"/>
+  <button label="&label.delete;" oncommand="removeDictionary()"/>
   <button label="&label.add;" oncommand="openAddDictionary()"/>
  </hbox>
 </vbox>

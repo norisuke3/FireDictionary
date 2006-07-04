@@ -86,6 +86,26 @@ function FDConfig(dir){
   // write to file.
   this.writeToFile(file);
  }
+ 
+ /**
+  * removeDictionary(String dicName)
+  */
+ this.removeDictionary = function(dicName){
+  var dictionaries = document.getElementsByTagName("dictionaries")[0];
+  var childNodes = dictionaries.childNodes;
+  
+  for ( i=0 ; i<childNodes.length ; i++ ){
+   if ( childNodes.item(i).nodeType == 1 ) {
+    if ( childNodes.item(i).getAttribute("name") == dicName ) {
+     dictionaries.removeChild(childNodes.item(i));
+     break;
+    }
+   }
+  }
+  
+  // write to file.
+  this.writeToFile(file);
+ }
   
  /**
   * Array getDictionaryNames()

@@ -10,6 +10,7 @@
 
 <!ENTITY label.dictionaryName           "Dictionary Name to use : ">
 <!ENTITY label.add                      "add...">
+<!ENTITY label.delete                   "delete...">
 <!ENTITY label.addDictionary            "Add dictionary">
 <!ENTITY label.DictionaryName           "Dictionary name :">
 <!ENTITY label.browse                   "Browse...">

@@ -10,6 +10,7 @@
 
 <!ENTITY label.dictionaryName           "使用する辞書 : ">
 <!ENTITY label.add                      "追加...">
+<!ENTITY label.delete                   "削除...">
 <!ENTITY label.addDictionary            "辞書の追加">
 <!ENTITY label.DictionaryName           "辞書の名前 :">
 <!ENTITY label.browse                   "参照...">
