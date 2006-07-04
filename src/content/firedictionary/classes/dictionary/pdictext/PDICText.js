@@ -44,6 +44,7 @@ function PDICText(file, charset, indexDepth){
 	var indexes = new Array();
 	var fileIndex;
 	var mCharset = charset
+	var mFile = file;
 	
 	/**
 	 * PDICText(FDFile file, String charset, Integer indexDepth)
@@ -181,7 +182,9 @@ function PDICText(file, charset, indexDepth){
 		var ostream = new FDOutputStream(fileIndex.getFile());
 		ostream.setCharset(mCharset);
 		
-		findFirstOffset(firstIndexChar);
+		if ( mFile.getFile().leafName.toUpperCase() == "GENE.TXT" ) {
+		 findFirstOffset(firstIndexChar);
+		}
 		
 		while(istream.available() > 0){
  		var item = new IndexItem();    // IndexItem is a inner class of this class.
