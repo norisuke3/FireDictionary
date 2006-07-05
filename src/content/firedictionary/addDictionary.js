@@ -74,6 +74,7 @@ function pickupDictionary(){
  */
 function doOK(){
  var config = new FDConfig(window.arguments[0]);
+ var dicNames = config.getDictionaryNames();
  var dicName = document.getElementById("fd-dictionary-name").value;
  var format = document.getElementById("format").value;
  var indexDepth = document.getElementById("index-depth").value;
@@ -83,6 +84,13 @@ function doOK(){
  var result = false;
  
  try{
+  // check the dictionary name entered if it's already used or not.
+  for( i=0 ; i < dicNames.length ; i++ ){
+   if ( dicNames[i] == dicName ) {
+    throw new Exception("THE_NAME_HAS_ALREADY_USED");
+   }
+  }
+  
   if (
    dicName == "" ||
    indexDepth == "" ||
@@ -113,7 +121,10 @@ function doOK(){
    config.appendDictionary(dicName, format, indexDepth, url, fileName, charset);
    
    result = true;
-  } else {
+  } else if ( e == "THE_NAME_HAS_ALREADY_USED" ){
+   alert(strbundle.getString("error.theNameHasAlreadyBeenRegistered") + "  \"" + dicName + "\"");
+   
+  }else {
    throw e;
   }
   
