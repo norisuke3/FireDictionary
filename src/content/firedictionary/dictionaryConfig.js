@@ -136,13 +136,21 @@ function openAddDictionary(){
  */
 function removeDictionary(){
  var config = new FDConfig(window.arguments[0]);
- var strbundle=document.getElementById("fd-localized-strings");
-
- if ( document.getElementById("dictionary-name").value == "GENE95" ){
-  alert(strbundle.getString("message.youCantDeleteGENE95"));
- } else {
+ var stringBundle = document.getElementById("fd-localized-strings");
+ var message = stringBundle.getString("message.youCantDeleteGENE95");
+ var messageConfirm = stringBundle.getString("confirmationToDeleteDictionary");
+ var dicName = document.getElementById("dictionary-name").value;
  
-  config.removeDictionary(document.getElementById("dictionary-name").value);
+ if ( dicName == "GENE95" ){
+  alert(message);
+  
+ } else {
+  // Confirm to delete.
+  if ( ! window.confirm(messageConfirm + "  \"" + dicName + "\"") ){
+   return;
+  }
+ 
+  config.removeDictionary(dicName);
  
   var names = config.getDictionaryNames();
   document.getElementById("dictionary-name").value = names[0];
