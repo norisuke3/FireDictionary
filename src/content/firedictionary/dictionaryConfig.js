@@ -34,6 +34,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
+ var firstDicName;
+ 
 /**
  * initialize()
  *  set a Default value of the dictionary-name text box
@@ -44,9 +46,9 @@ function initialize(){
  createMenuItem();
  
  // set the values.
- var dicName = prefs.getUniCharPref("dictionary-name");
- document.getElementById("dictionary-name").value = dicName;
- refleshWindow(dicName);
+ firstDicName = prefs.getUniCharPref("dictionary-name");
+ document.getElementById("dictionary-name").value = firstDicName;
+ refleshWindow(firstDicName);
 }
 
 /**
@@ -103,9 +105,11 @@ function doOK(){
  var dictionaryName = document.getElementById("dictionary-name");
  var result = true;
  
- prefs.setUniCharPref("dictionary-name", dictionaryName.value);
+ if ( firstDicName != dictionaryName.value ) {
+  prefs.setUniCharPref("dictionary-name", dictionaryName.value);
+  alert(message);
+ }
  
- alert(message);
  return result; 
 }
 
