@@ -91,5 +91,6 @@
 		<delete dir="chrome"/>
 		<delete file="firedictionary.xpi"/>
 		<delete dir="download"/>
+		<delete dir="jsdoc"/>
 	</target>
 </project>
