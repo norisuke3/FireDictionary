@@ -36,18 +36,8 @@
  
 //////////// global variables /////////////////////
 
-var dicSidebar;																										// Dictinoary sidebar object.
+var dicSidebar;
 
-// define a test for non-space characters
-var gREWord = /\S/;
-
-// define range to test for CJK (chinese/japanese/korean) characters
-var gRECJK = /[\u2E80-\uFE4F]/;
-
-// define ranges for punctuation characters to be excluded from words
-// this should be everything except hyphens/dashes
-var gREPunct = /[\u0020-\u002c\u002e-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007e\u2000-\u200f\u2015-\u206f\u3000-\u303f\ufe30-\ufe4f\ufe50-\ufe6b\uff01-\uff0f\uff1a-\uff20\uff3b-\uff40\uff5b-\uff65\uffe0-\uffee]/;
- 
 ///////////////////////////////////////////////////
 
 /**
@@ -66,128 +56,6 @@ function initialize(){
 	// Initialize dictionary sidebar object.
 	dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
 }
-
-/**
- * getWordFromEvent(Event event)
- *  Extract a keyword from mouse over event.
- *
- * @param event
- */
-function getWordFromEvent(event){
-	var parent = event.rangeParent;
- var offset = event.rangeOffset;
- var range;
- var result = new Array("", "");
- var str = "";
- var offsets = new Offsets(offset, offset + 1);
- var REWord = /[A-Z]/;
- 
- if (parent == null || parent.nodeType != Node.TEXT_NODE)
-	 return result;
-
- range = parent.ownerDocument.createRange();
- range.selectNode(parent);
- str = range.toString();
- 
- if(offset < 0 || offset >= str.length)
-  return result;
-
- if(!gREWord.test(str.charAt(offsets.start)) || gREPunct.test(str.charAt(offsets.start)))
-  return result;
-
- // determine a offsets for the keyword.
- if(gRECJK.test(str.charAt(offsets.start))) {
-  offsets = getEasternAsiaKeywordOffsets(str, offsets);
-  
- } else {
-  offsets = getWesternKeywordOffsets(str, offsets);
-  
- }
-
- result[0] = str.substring(offsets.start, offsets.end);
-	
- // Extract sentence which contains the kyeword.
- while(offsets.start > 0 && 
-       !(str.charAt(offsets.start - 1) == "." &&
-        str.charAt(offsets.start) == " " &&
-        REWord.test(str.charAt(offsets.start + 1))
-       )
-      )
- 	offsets.start--;
-
- while(offsets.end < str.length &&
-       !(str.charAt(offsets.end) == "." &&
-        str.charAt(offsets.end + 1) == " " &&
-        REWord.test(str.charAt(offsets.end + 2))
-       )
-      )
- 	offsets.end++;
- 
- 
- while(str.charAt(offsets.end - 1) == " ") offsets.end--;
- 
- result[1] = str.substring(offsets.start, offsets.end);
-	
- return result;
-}
- 
-//
-// Helper functions  ///////////////////////////////////////////////////////
-//
-
-/**
- * Offsets getEasternAsiaKeywordOffsets(String str, Offsets offsets)
- *  Determine offsets for East Asian Keyword from context sentence.
- *  CJK characters are not normally separated by spaces, so just take
- *  a fixed number of characters up until the next space or non CJK char 
- *  Extract up to 3 more characters beyond the current
- *  This should be enough for most compounds in Chinese
- *
- * @param str context sentence
- * @param offsets start offsets
- * @return result offsets for Eastern Asian keyword.
- */
-function getEasternAsiaKeywordOffsets(str, offsets){
- var result = new Offsets(offsets.start, offsets.end);
- var cnt = 0;
-
- while(cnt < 3 &&
-       result.end < str.length &&
-       gRECJK.test(str.charAt(result.end)) &&
-       gREWord.test(str.charAt(result.end)) &&
-       !gREPunct.test(str.charAt(result.end))) {
-  result.end++;
-  cnt++;
- }
- 
- return result;
-}
-
-/**
- * Offsets getWesternKeywordOffsets(String str, Offsets offsets)
- *  Determine offsets for Western Keyword from  context sentence.
- *
- * @param str context sentence
- * @param offsets start offsets
- * @return result offsets for Western keyword.
- */
-function getWesternKeywordOffsets(str, offsets){
- var result = new Offsets(offsets.start, offsets.end);
- 
- while(result.start > 0 &&
-       !gRECJK.test(str.charAt(result.start - 1)) &&
-       gREWord.test(str.charAt(result.start - 1)) &&
-       !gREPunct.test(str.charAt(result.start - 1))
-  )	result.start--;
-
-   while(result.end < str.length &&
-       !gRECJK.test(str.charAt(result.end)) &&
-       gREWord.test(str.charAt(result.end)) &&
-       !gREPunct.test(str.charAt(result.end))
-   )	result.end++;
- 
- return result;
-}
  
 //
 // Event handler  ///////////////////////////////////////////////////////
@@ -201,9 +69,10 @@ function getWesternKeywordOffsets(str, offsets){
 function sendContentWord(event){
  if ( !dicSidebar.isActive() || !dicSidebar.getMouseOverMode() ) return;
  
- var resultArray = getWordFromEvent(event);
-	var keyword = resultArray[0];
-	var sentence = resultArray[1];
+	var extractor = new FDSentenceExtractor(event);
+	
+	var keyword = extractor.getKeyword();
+	var sentence = extractor.getSentence();
 	var url = event.view.document.URL;
 	var title = event.view.document.title;
 	
@@ -221,20 +90,4 @@ function sendWordToHistory(){
  
 	dicSidebar.registHistory();
 	return false;
-}
- 
-//
-// Inner class  /////////////////////////////////////////////////////////
-//
- 
-/**
- * Class Offsets
- */
-function Offsets(start_, end_){
-	this.start = start_;
-	this.end = end_;
-	
-	this.toString = function(){
-		return this.start + "," + this.end;
-	}
 }
