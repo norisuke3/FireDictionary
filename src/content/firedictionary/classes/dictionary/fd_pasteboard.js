@@ -74,7 +74,7 @@ function FDPasteBoard(){
 	 * @return a content text in the Paste Board.
 	 */
 	this.getContent = function(){
-		return getPasteBoardTextbox().value;
+		return escapeText(getPasteBoardTextbox().value);
 	}
 	
 	/**
@@ -83,7 +83,7 @@ function FDPasteBoard(){
 	 * @return a title the Paste Board.
 	 */
 	this.getTitle = function(){
-		 return getPasteBoardTitleTextbox().value;
+		 return escapeText(getPasteBoardTitleTextbox().value);
 	}
 	
 	//
@@ -95,5 +95,24 @@ function FDPasteBoard(){
  
  function getPasteBoardTitleTextbox(){
  	return sidebar.contentDocument.getElementById("dictionary-pasteboard-title");
+ }
+ 
+ /**
+  * String escapeText(String text)
+  *   Change the following characters to escape
+  *     &  ->  &amp;
+  *     <  ->  &lt;
+  *     >  ->  &gt;
+  *     "  ->  &quot;
+  *     '  ->  &#39;
+  */
+ function escapeText(text){
+	text = text.replace(/&/g, "&amp;");
+	text = text.replace(/</g, "&lt;");
+	text = text.replace(/>/g, "&gt;");
+	text = text.replace(/"/g, "&quot;");
+	text = text.replace(/'/g, "&#39;");
+	
+	return text
  }
 }
