@@ -50,6 +50,9 @@ function FDSentenceExtractor(event){
 	// this should be everything except hyphens/dashes
 	var gREPunct = /[\u0020-\u002c\u002e-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007e\u2000-\u200f\u2015-\u206f\u3000-\u303f\ufe30-\ufe4f\ufe50-\ufe6b\uff01-\uff0f\uff1a-\uff20\uff3b-\uff40\uff5b-\uff65\uffe0-\uffee]/;
 	
+	var gREWesternTerminator = /[.!?]/
+	var gREEasternAsiaTerminator = /[\u3002\uff01\uff1f]/
+	
 	var mKeyword = "";
 	var mSentence = "";
 	
@@ -126,22 +129,27 @@ function FDSentenceExtractor(event){
 		// Extract sentence which contains the kyeword.
 		while(offsets.start > 0 && 
 			!(
-				str.charAt(offsets.start - 1) == "." &&
+				gREWesternTerminator.test(str.charAt(offsets.start - 1)) &&
 				str.charAt(offsets.start) == " " &&
 				REWord.test(str.charAt(offsets.start + 1))
+			) &&
+			!(
+				gREEasternAsiaTerminator.test(str.charAt(offsets.start - 1))
 			)
 		)
 		offsets.start--;
 		
 		while(offsets.end < str.length &&
 			!(
-				str.charAt(offsets.end) == "." &&
-				str.charAt(offsets.end + 1) == " " &&
-				REWord.test(str.charAt(offsets.end + 2))
+				gREWesternTerminator.test(str.charAt(offsets.end - 1)) &&
+				str.charAt(offsets.end) == " " &&
+				REWord.test(str.charAt(offsets.end + 1))
+			) &&
+			!(
+				gREEasternAsiaTerminator.test(str.charAt(offsets.end - 1))
 			)
 		)
 		offsets.end++;
-		
 		
 		while(str.charAt(offsets.end - 1) == " ") offsets.end--;
 		
