@@ -45,9 +45,12 @@ var dicSidebar;
  *  function to initialize FireDictionary environment.
  */
 function initialize(){
-		// Initialize tab browser and events.
+	var prefs;
+	var acceptEmptyDefinitionInd;
+	
+	// Initialize tab browser and events.
 	var tabbrowser = document.getElementById("content");
-
+	
 	if ( tabbrowser ) {
 	 tabbrowser.addEventListener("click", sendWordToHistory, false);
  	tabbrowser.addEventListener("mousemove", sendContentWord, false);
@@ -55,6 +58,14 @@ function initialize(){
                      
 	// Initialize dictionary sidebar object.
 	dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
+	
+	// Initialize preference.
+	prefs = new FDPrefs();
+	acceptEmptyDefinitionInd = prefs.getCharPref("accept-empty-definition-ind");
+	
+	if ( !acceptEmptyDefinitionInd || acceptEmptyDefinitionInd != "true"){
+		prefs.setCharPref("accept-empty-definition-ind", "false");
+	}
 }
  
 //

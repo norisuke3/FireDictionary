@@ -217,29 +217,36 @@ function FDDictionarySidebar(_fdDictionaryMode){
   * registHistory()
   *  Regist the result to history.
   */
- this.registHistory = function(){
-  if ( this.isActive() && dic != null){
- 	 var prefs = new FDPrefs();
-   var keyword = getKeywordTextbox().value;
-   var result = getResultTextbox().value;
- 	 var category = prefs.getUniCharPref("category");
-    
-	  if ( !category || category == "" ) category = "Unclassified";
+this.registHistory = function(){
+	var prefs;
+	var keyword;
+	var result;
+	var category;
+	var acceptEmptyDefinitionInd;
+
+	if ( !this.isActive() || dic == null) return;
+	
+	prefs = new FDPrefs();
+	keyword = getKeywordTextbox().value;
+	result = getResultTextbox().value;
+	category = prefs.getUniCharPref("category");
+	acceptEmptyDefinitionInd = prefs.getCharPref("accept-empty-definition-ind");
+	
+	if ( !category || category == "" ) category = "Unclassified";
    
-   if ( !keyword.match(/^( |\n)*$/i) && result != ""){
-    history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord, category);
+	if ( !keyword.match(/^( |\n)*$/i) && ( result != "" || acceptEmptyDefinitionInd == "true")){
+		history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord, category);
   
-    // update undo and redo button state
-    updateUndoRedoButtonState(
-     history.getHistoryCount(),
-     history.getUndoBufferCount()
-    )
-    
-    // set preference
-    prefs.setCharPref("resetUndoBuffer", "true");
-   }
-  }
- }
+		// update undo and redo button state
+		updateUndoRedoButtonState(
+			history.getHistoryCount(),
+			history.getUndoBufferCount()
+		);
+
+		// set preference
+		prefs.setCharPref("resetUndoBuffer", "true");
+	}
+}
  
  /**
   * clearHistory()
