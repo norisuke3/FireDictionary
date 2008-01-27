@@ -90,7 +90,7 @@ function FDXmlHistory(){
   * @param item a object of history item
   */
  this.addHistoryItem = function(item){
- 	var items = this.domDocument.getElementsByTagName("items").item(0);
+ 	var items = this.domDocument.getElementsByTagNameNS("http://www.firedictionary.com/history", "items").item(0);
  	
  	if ( !items.hasChildNodes() ){
    items.appendChild(item.getDocumentElement());
@@ -108,7 +108,7 @@ function FDXmlHistory(){
   * @return an item object which is added last time.
   */
  this.getLastAddedItem = function(){
- 	var items = this.domDocument.getElementsByTagName("items").item(0);
+ 	var items = this.domDocument.getElementsByTagNameNS("http://www.firedictionary.com/history", "items").item(0);
  	var item = new FDXmlHistoryItem();
  	var result = null;
  	
@@ -127,7 +127,7 @@ function FDXmlHistory(){
   * @return the removed item.
   */
  this.removeLastAddedItem = function(){
- 	var items = this.domDocument.getElementsByTagName("items").item(0);
+ 	var items = this.domDocument.getElementsByTagNameNS("http://www.firedictionary.com/history", "items").item(0);
  	var item = new FDXmlHistoryItem();
  	var result = null;
  	
@@ -149,8 +149,8 @@ function FDXmlHistory(){
   * @return amount of item elements
   */
  this.getItemCount = function(){
- 	var items = this.domDocument.getElementsByTagName("items").item(0);
- 	
+     var items = this.domDocument.getElementsByTagNameNS("http://www.firedictionary.com/history", "items").item(0);
+
  	return items.childNodes.length;
  }
 }

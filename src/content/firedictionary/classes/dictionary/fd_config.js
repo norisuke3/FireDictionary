@@ -71,7 +71,7 @@ function FDConfig(dir){
   * @param charset A character set of the dictinoary
   */
  this.appendDictionary = function(dicName, format, indexDepth, url, fileName, charset){
-  var dictionaries = document.getElementsByTagName("dictionaries")[0];
+  var dictionaries = document.getElementsByTagNameNS("http://www.firedictionary.com/dictionary/information", "dictionaries")[0];
   var elementDictionary = document.createElement("dictionary");
   
   elementDictionary.setAttribute("name", dicName);
@@ -91,7 +91,7 @@ function FDConfig(dir){
   * removeDictionary(String dicName)
   */
  this.removeDictionary = function(dicName){
-  var dictionaries = document.getElementsByTagName("dictionaries")[0];
+  var dictionaries = document.getElementsByTagNameNS("http://www.firedictionary.com/dictionary/information", "dictionaries")[0];
   var childNodes = dictionaries.childNodes;
   
   for ( i=0 ; i<childNodes.length ; i++ ){
@@ -115,7 +115,7 @@ function FDConfig(dir){
   */
  this.getDictionaryNames = function(){
  	var dicNames = new Array();
- 	var nodes = document.getElementsByTagName("dictionary");
+ 	var nodes = document.getElementsByTagNameNS("http://www.firedictionary.com/dictionary/information", "dictionary");
  	
   for( i=0 ; i < nodes.length ; i++ ){
   	dicNames.push(nodes[i].getAttribute("name"));
@@ -132,7 +132,7 @@ function FDConfig(dir){
   */
  this.getSupportFormats = function(){
   var formats = new Array();
-  var nodes = document.getElementsByTagName("support-format");
+  var nodes = document.getElementsByTagNameNS("http://www.firedictionary.com/dictionary/information", "support-format");
   
   for( i=0 ; i < nodes.length ; i++ ){
   	formats.push(nodes[i].firstChild.nodeValue);
