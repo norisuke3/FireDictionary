@@ -4,7 +4,7 @@
                 xmlns:hs="http://www.firedictionary.com/history">
   
   <xsl:template match="/">
-    <xsl:apply-template select="hs:firedictionary/hs:history/hs:items/hs:item" />
+    <xsl:apply-templates select="hs:firedictionary/hs:history/hs:items/hs:item" />
   </xsl:template>
   
   <xsl:template match="hs:item">[ <xsl:value-of select="hs:keyword"/> ]
