@@ -91,11 +91,12 @@ function FDXmlHistory(){
   */
  this.addHistoryItem = function(item){
  	var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
- 	
+        var newNode = this.domDocument.importNode(item.getDocumentElement(), true)
+
  	if ( !items.hasChildNodes() ){
- 		items.appendChild(item.getDocumentElement());
+ 		items.appendChild(newNode);
  	} else {
- 		items.insertBefore(item.getDocumentElement(), items.firstChild);
+ 		items.insertBefore(newNode, items.firstChild);
  	}
  	
  	return item;
