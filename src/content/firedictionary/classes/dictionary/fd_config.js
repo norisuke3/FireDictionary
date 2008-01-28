@@ -73,14 +73,14 @@ function FDConfig(dir){
   */
  this.appendDictionary = function(dicName, format, indexDepth, url, fileName, charset){
   var dictionaries = document.getElementsByTagNameNS(ns, "dictionaries")[0];
-  var elementDictionary = document.createElement("dictionary");
+  var elementDictionary = document.createElementNS(ns, "dictionary");
   
   elementDictionary.setAttribute("name", dicName);
-  elementDictionary.appendChild(this.createElementwithTextNode("format", format));
-  elementDictionary.appendChild(this.createElementwithTextNode("index-depth", indexDepth));
-  elementDictionary.appendChild(this.createElementwithTextNode("url", url));
-  elementDictionary.appendChild(this.createElementwithTextNode("file-name", fileName));
-  elementDictionary.appendChild(this.createElementwithTextNode("charset", charset));
+  elementDictionary.appendChild(this.createElementwithTextNodeNS(ns, "format", format));
+  elementDictionary.appendChild(this.createElementwithTextNodeNS(ns, "index-depth", indexDepth));
+  elementDictionary.appendChild(this.createElementwithTextNodeNS(ns, "url", url));
+  elementDictionary.appendChild(this.createElementwithTextNodeNS(ns, "file-name", fileName));
+  elementDictionary.appendChild(this.createElementwithTextNodeNS(ns, "charset", charset));
   
   dictionaries.appendChild(elementDictionary);
   

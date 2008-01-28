@@ -41,6 +41,7 @@
  *  set a Default value of the dictionary-name text box
  */
 function initialize(){
+ var ns = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
  var config = new FDConfig(window.arguments[0]);
  var menuPopUp = document.getElementById("format-list");
  var formats = config.getSupportFormats();
@@ -49,7 +50,7 @@ function initialize(){
  
  // create menu items.
  for( i=0 ; i < formats.length ; i++ ){
-  var menuItem=document.createElement("menuitem");
+  var menuItem=document.createElementNS(ns, "menuitem");
 
   menuItem.setAttribute("label" , formats[i]);
   menuItem.setAttribute("value" , formats[i]);

@@ -55,6 +55,7 @@ function initialize(){
  * createMenuItems()
  */
 function createMenuItem(){
+ var ns = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
  var config = new FDConfig(window.arguments[0]);
  var menuPopUp = document.getElementById("dictionary-list");
  var dicNames = config.getDictionaryNames();
@@ -68,7 +69,7 @@ function createMenuItem(){
  
  // create menu items.
  for( i=0 ; i < dicNames.length ; i++ ){
-  var menuItem=document.createElement("menuitem");
+   var menuItem=document.createElementNS(ns, "menuitem");
 
   menuItem.setAttribute( "label" , dicNames[i]);
   menuItem.setAttribute( "value" , dicNames[i]);
