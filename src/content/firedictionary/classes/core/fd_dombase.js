@@ -59,9 +59,12 @@ function FDDomBase(){
   * @param a element which will be a document Element of this tree.
   */
  this.setDocumentElement = function(element){
+  var newNode;
+
   this.domDocument = Components.classes["@mozilla.org/xul/xul-document;1"].createInstance(Components.interfaces.nsIDOMDocument);
   
-  this.domDocument.appendChild(element.cloneNode(true));
+  newNode = this.domDocument.importNode(element, true);
+  this.domDocument.appendChild(newNode);
  }
 	
  /**
@@ -114,14 +117,15 @@ function FDDomBase(){
  }
  
  /**
-  * Element createElementwithTextNode(String elementName, String text)
+  * Element createElementwithTextNodeNS(String namespace, String elementName, String text)
   *  create an element which has a text node as a child.
   *
+  * @param namespace a namespace of the element
   * @param elementName a name of the element
   * @param text text contained as a text node
   */
- this.createElementwithTextNode = function(elementName, text){
-  var element = this.domDocument.createElement(elementName);
+  this.createElementwithTextNodeNS = function(namespace, elementName, text){
+  var element = this.domDocument.createElementNS(namespace, elementName);
   var textNode = this.domDocument.createTextNode(text);
   
   element.appendChild(textNode);
