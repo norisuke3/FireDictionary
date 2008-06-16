@@ -47,7 +47,6 @@
 				<include name="chrome/firedictionary.jar"/>
 				<include name="install.rdf"/>
 				<include name="chrome.manifest"/>
-				<include name="install.js"/>
 			</fileset>
 		</jar>
 	</target>
@@ -82,8 +81,20 @@
 		
 		<copy file="download/firedictionary.xpi"
 		      tofile="download/firedictionary-${version}.xpi"/>
+
+	    <antcall target="makeDownloadFiles_For_Addons.Mozilla.org"/>
 	</target>
          	
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: makeDownloadFiles_For_Addons.Mozilla.org
+         - - - - - - - - - - - - - - - - - -->
+	<target name="makeDownloadFiles_For_Addons.Mozilla.org">
+	   <mkdir dir="download.addons.mozilla.org"/>
+	   <style style="tools/copy.xsl"
+                in="install.rdf"
+                out="download.addons.mozilla.org/install.rdf"/>
+	</target>
+	
     <!-- - - - - - - - - - - - - - - - - - 
           target: clean
          - - - - - - - - - - - - - - - - - -->
@@ -91,6 +102,7 @@
 		<delete dir="chrome"/>
 		<delete file="firedictionary.xpi"/>
 		<delete dir="download"/>
+   	    <delete dir="download.addons.mozilla.org"/>
 		<delete dir="jsdoc"/>
 	</target>
 </project>
