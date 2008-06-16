@@ -82,17 +82,28 @@
 		<copy file="download/firedictionary.xpi"
 		      tofile="download/firedictionary-${version}.xpi"/>
 
-	    <antcall target="makeDownloadFiles_For_Addons.Mozilla.org"/>
+	    <antcall target="makeFiles_For_Addons.Mozilla.org"/>
 	</target>
          	
     <!-- - - - - - - - - - - - - - - - - - 
-          target: makeDownloadFiles_For_Addons.Mozilla.org
+          target: makeFiles_For_Addons.Mozilla.org
          - - - - - - - - - - - - - - - - - -->
-	<target name="makeDownloadFiles_For_Addons.Mozilla.org">
-	   <mkdir dir="download.addons.mozilla.org"/>
-	   <style style="tools/copy.xsl"
-                in="install.rdf"
-                out="download.addons.mozilla.org/install.rdf"/>
+	<target name="makeFiles_For_Addons.Mozilla.org">
+        <mkdir dir="download.addons.mozilla.org/temp/chrome"/>
+
+	    <style style="tools/copy.xsl"
+               in="install.rdf"
+               out="download.addons.mozilla.org/temp/install.rdf"/>
+
+        <copy file="chrome/firedictionary.jar"
+             tofile="download.addons.mozilla.org/temp/chrome/firedictionary.jar"/>
+
+        <jar destfile="download.addons.mozilla.org/firedictionary.xpi">
+            <fileset dir="download.addons.mozilla.org/temp">
+                <include name="chrome/firedictionary.jar"/>
+                <include name="install.rdf"/>
+            </fileset>
+		</jar>
 	</target>
 	
     <!-- - - - - - - - - - - - - - - - - - 
