@@ -234,6 +234,9 @@ this.registHistory = function(){
 	
 	if ( !category || category == "" ) category = "Unclassified";
    
+	// load iKnow
+	this.loadIKnow(keyword);
+
 	if ( !keyword.match(/^( |\n)*$/i) && ( result != "" || acceptEmptyDefinitionInd == "true")){
 		history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord, category);
   
@@ -246,6 +249,23 @@ this.registHistory = function(){
 		// set preference
 		prefs.setCharPref("resetUndoBuffer", "true");
 	}
+}
+
+/**
+ * loadIKnow(keyword)
+ *
+ */
+this.loadIKnow = function(keyword){
+    var iKnowResponceLanguageId = "ja";
+    var iKnowCueLanguageId = "en";
+    var url = "http://www.iknow.co.jp/items/matching/" + encodeURI(keyword) +
+              "?translation_language=" + iKnowResponceLanguageId +
+              "&language=" + iKnowCueLanguageId;
+
+    if ( !keyword.match(/^( |\n)*$/i) ){
+	getIKnowBody().setAttribute('src', url);
+	getIKnowThrobber().setAttribute('status', 'on');
+    }
 }
  
  /**
@@ -403,7 +423,15 @@ this.registHistory = function(){
  function getTabs(){
   return sidebar.contentDocument.getElementById("firedictionary-tabs");
  }
- 
+
+ function getIKnowBody(){
+   return sidebar.contentDocument.getElementById("iknow-body");
+ }
+
+ function getIKnowThrobber(){
+   return sidebar.contentDocument.getElementById("iknow-throbber");
+ }
+
  /**
   * String _lookup(String keyword)
   *

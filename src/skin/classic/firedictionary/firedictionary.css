@@ -81,6 +81,33 @@ toolbarbutton#fd-mouseovermode-indicator[status="off"] {
   list-style-image: url("chrome://firedictionary/skin/off.png");
 }
 
+/*
+ * iKnow logo
+ */
+#iknow-logo {
+  list-style-image: url("chrome://firedictionary/skin/balloon_iknow_logo_sm.png");
+  padding-bottom: 3px;
+  padding-right: 5px;
+}
+
+hbox#iknow-header {
+  background-color: #FEFEFE;
+}
+
+#iknow-throbber[status="on"] {
+  list-style-image: url("chrome://global/skin/icons/loading_16.png");
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+}
+
+#iknow-throbber[status="off"] {
+  list-style-image: url("");
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+}
+
 #category-box { width:400px; }
 
 #category-box > label,

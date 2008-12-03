@@ -42,9 +42,9 @@
 <!DOCTYPE window SYSTEM "chrome://firedictionary/locale/firedictionary.dtd">
 
 <window title="firedictionary"
-		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		onload="initialize();">
-		
+                xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+                onload="initialize();">
+                
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_permanent.js"/>
@@ -124,6 +124,20 @@
                          multiline="true"
                          readonly="true"
                          flex="1"/>
+         
+              <!-- iknow pane -->
+              <hbox id="iknow-header">
+                <image id="iknow-throbber" status="off"/>
+                <spacer flex="1"/> 
+                <vbox>
+                  <spacer flex="1"/>
+                  <image id="iknow-logo" onclick="viewIKnow()"/>
+                </vbox>
+              </hbox>
+              <iframe id="iknow-body" src="iknow/index.html"/>
+              <script type="application/x-javascript" src="chrome://firedictionary/content/iknowBody.js"/>
+              <!-- iknow pane end -->
+
               <textbox id="dictionary-result-history" 
                          multiline="true"
                          readonly="true"

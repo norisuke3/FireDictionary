@@ -181,3 +181,13 @@ function undoHistory(){
 function redoHistory(){
  dicSidebar.redoHistory();
 }
+
+/**
+ * viewIKnow()
+ */
+function viewIKnow(){
+  var tabbrowser = top.document.getElementById("content");
+  var tab = tabbrowser.addTab("http://www.iknow.co.jp/");
+ 
+  tabbrowser.selectedTab = tab;
+}
