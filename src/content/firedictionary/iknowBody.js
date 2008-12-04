@@ -39,3 +39,32 @@ iKnowframe.addEventListener('load',
   function(){
     document.getElementById("iknow-throbber").setAttribute('status', 'off');      
   }, true);
+
+iKnowframe.addEventListener('click',
+  function(event){
+    event.preventDefault();
+    openIKnowLink(event);
+  }, true);
+
+
+/**
+ * openIKnowLink(event)
+ *  Opening a new tab in the main browser for an iKnow content.
+ */
+function openIKnowLink(event){
+  var tabbrowser = top.document.getElementById("content");
+  var tab;
+
+  if (( event.target.tagName.toLowerCase() == "a" ) &&
+      ( event.target.getAttribute("class") == "item_link" )){
+    tab = tabbrowser.addTab(event.target.getAttribute("href"));
+    tabbrowser.selectedTab = tab;
+  }
+
+  if (( event.target.tagName.toLowerCase() == "span" ) &&
+      ( event.target.parentNode.tagName.toLowerCase() == "a" ) &&
+      ( event.target.parentNode.getAttribute("class") == "item_link" )){
+    tab = tabbrowser.addTab(event.target.parentNode.getAttribute("href"));
+    tabbrowser.selectedTab = tab;
+  }
+}
