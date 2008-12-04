@@ -61,12 +61,22 @@ function regist(event){
  * initialize()
  */
 function initialize(){
-	dicSidebar.initialize();
+  var prefs = new FDPrefs();
+  var menuUseIKnow = document.getElementById("fd-use-iknow");
+
+ 	dicSidebar.initialize();
 	
 	// Initialize temporary directory.
  dirTemp = new FDDirectory("ProfD");
  dirTemp.createNewDirectory("FireDictionary");
  dirTemp.createNewDirectory("tmp");
+
+  // initialize a status of iknow
+  if (prefs.getCharPref("useIKnow") == null) {
+      prefs.setCharPref("useIKnow", "true");
+  } else {
+    menuUseIKnow.setAttribute("checked", prefs.getCharPref("useIKnow"));
+  }
 }
 
 //
@@ -190,4 +200,16 @@ function viewIKnow(){
   var tab = tabbrowser.addTab("http://www.iknow.co.jp/");
  
   tabbrowser.selectedTab = tab;
+}
+
+/**
+ * checkIKnowMenu()
+ */
+function checkIKnowMenu(){
+  var prefs = new FDPrefs();
+  var menuUseIKnow = document.getElementById("fd-use-iknow");
+ 
+  prefs.setCharPref("useIKnow", menuUseIKnow.getAttribute("checked"));
+
+  dicSidebar.InitIKnowPanel();
 }

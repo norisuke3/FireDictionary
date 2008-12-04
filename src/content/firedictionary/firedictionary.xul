@@ -94,6 +94,7 @@
                 <menuitem label="&menu.clearHistory;" oncommand="clearHistory()"/>
                 <menuseparator/>
                 <menuitem label="&menu.setWordCategory;" oncommand="setCategory()"/>
+                <menuitem id="fd-use-iknow" label="iKnow!" type="checkbox" checked="true" oncommand="checkIKnowMenu()"/>
                 <menuseparator/>
                 <menuitem label="&menu.homepage;" oncommand="loadHomePage()"/>
               </menupopup>

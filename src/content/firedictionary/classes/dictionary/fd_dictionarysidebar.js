@@ -120,7 +120,7 @@ function FDDictionarySidebar(_fdDictionaryMode){
   *  Moreover, initialize sidebar gadget objects.
   */
  this.initialize = function(){
-	 var prefs = new FDPrefs();
+  var prefs = new FDPrefs();
   var installationURI = "chrome://firedictionary/locale/install/" + dicName + ".htm"
   var mouseovermode;
   
@@ -129,6 +129,9 @@ function FDDictionarySidebar(_fdDictionaryMode){
   
   getInstallationPanel().style.display = ( dic == null ? "" : "none" );
   getMainBox().style.display = ( dic == null ? "none" : "" );
+
+  // initialize iKnow panel
+  this.InitIKnowPanel();
   
   if ( dic == null ){
    getTabBrowser().loadURI(installationURI);
@@ -380,6 +383,18 @@ this.loadIKnow = function(keyword){
    history.getUndoBufferCount()
   )
  }
+
+ /**
+  * InitIKnowPanel()
+  *  change shown/hide status of iKnow panel
+  */
+ this.InitIKnowPanel = function(){
+  var prefs = new FDPrefs();
+  var userIKnow = prefs.getCharPref("useIKnow");
+
+  getIKnowHeader().style.display = ( userIKnow == null || userIKnow == "true" ? "" : "none" );
+  getIKnowBody().style.display = ( userIKnow == null || userIKnow == "true" ? "" : "none" );
+ }
  
  
  //
@@ -401,6 +416,18 @@ this.loadIKnow = function(keyword){
   return sidebar.contentDocument.getElementById("dictionary-pickup-word");
  }
  
+ function getIKnowHeader(){
+   return sidebar.contentDocument.getElementById("iknow-header");
+ }
+
+ function getIKnowBody(){
+   return sidebar.contentDocument.getElementById("iknow-body");
+ }
+
+ function getIKnowThrobber(){
+   return sidebar.contentDocument.getElementById("iknow-throbber");
+ }
+
  // 
  // --- functions for obtaining a reference of other xul elements. ---
  // 
@@ -422,14 +449,6 @@ this.loadIKnow = function(keyword){
  
  function getTabs(){
   return sidebar.contentDocument.getElementById("firedictionary-tabs");
- }
-
- function getIKnowBody(){
-   return sidebar.contentDocument.getElementById("iknow-body");
- }
-
- function getIKnowThrobber(){
-   return sidebar.contentDocument.getElementById("iknow-throbber");
  }
 
  /**
