@@ -92,6 +92,13 @@ toolbarbutton#fd-mouseovermode-indicator[status="off"] {
 
 hbox#iknow-header {
   background-color: #FEFEFE;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+iframe#iknow-body {
+  margin-right: 4px;
+  margin-left: 4px;
 }
 
 #iknow-throbber[status="on"] {
