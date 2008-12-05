@@ -93,12 +93,24 @@ function sendContentWord(event){
 }
 
 /**
- * sendWordToHistory()
+ * sendWordToHistory(event)
  *  Send the word to Find History.
  */
-function sendWordToHistory(){
- if ( !dicSidebar.getMouseOverMode() ) return;
- 
-	dicSidebar.registHistory();
-	return false;
+function sendWordToHistory(event){
+  var prefs = new FDPrefs();
+  var escKey = prefs.getCharPref("escape-history-key");
+
+  if ( !dicSidebar.getMouseOverMode() ) return;
+
+  if((escKey == "ctrlKey" && event.ctrlKey) ||
+     (escKey == "altKey"  && event.altKey)  ||
+     (escKey == "shiftKey" && event.shiftKey) 
+  ){
+    dicSidebar.loadIKnow();
+
+  } else {
+    dicSidebar.registHistory();
+  }
+
+  return false;
 }

@@ -238,7 +238,7 @@ this.registHistory = function(){
 	if ( !category || category == "" ) category = "Unclassified";
    
 	// load iKnow
-	this.loadIKnow(keyword);
+	this.loadIKnow();
 
 	if ( !keyword.match(/^( |\n)*$/i) && ( result != "" || acceptEmptyDefinitionInd == "true")){
 		history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord, category);
@@ -258,9 +258,11 @@ this.registHistory = function(){
  * loadIKnow(keyword)
  *
  */
-this.loadIKnow = function(keyword){
-    var iKnowResponceLanguageId = "ja";
-    var iKnowCueLanguageId = "en";
+this.loadIKnow = function(){
+    var keyword = getKeywordTextbox().value;
+    var prefs = new FDPrefs();
+    var iKnowResponceLanguageId = prefs.getCharPref("iknow.responce-language");
+    var iKnowCueLanguageId = prefs.getCharPref("iknow.cue-language");
     var url = "http://www.iknow.co.jp/items/matching/" + encodeURI(keyword) +
               "?translation_language=" + iKnowResponceLanguageId +
               "&language=" + iKnowCueLanguageId;
