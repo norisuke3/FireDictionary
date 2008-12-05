@@ -73,34 +73,12 @@ function initialize(){
 
   // initialize a status of iknow
   initPrefs("useIKnow", "true");
-  initPrefs("iknow.responce-language", "ja");
+  initPrefs("iknow.response-language", "ja");
   initPrefs("iknow.cue-language", "en");
   initPrefs("escape-history-key", "ctrlKey");
 
   menuUseIKnow.setAttribute("checked", prefs.getCharPref("useIKnow"));
 }
-
-/**
- * initPrefs(name, value)
- *  initialize preference of the name with the value. If a value has already set
- *  on the preference, doing nothing and returning false.
- *
- * @param name  A name of a preference
- * @param value A value for the preference.
- * @return  true - successfully set, false - otherwise.
- */
-function initPrefs(name, value){
-  var result = false;
-  var prefs = new FDPrefs();
-
-  if ( prefs.getCharPref(name) == null ) {
-    prefs.setCharPref(name, value);
-    result = true;
-  }
-
-  return result;
-}
-
 
 //
 // Event handler  ///////////////////////////////////////////////////////

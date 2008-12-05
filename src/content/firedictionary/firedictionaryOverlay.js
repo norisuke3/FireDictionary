@@ -45,9 +45,6 @@ var dicSidebar;
  *  function to initialize FireDictionary environment.
  */
 function initialize(){
-	var prefs;
-	var acceptEmptyDefinitionInd;
-	
 	// Initialize tab browser and events.
 	var tabbrowser = document.getElementById("content");
 	
@@ -60,12 +57,7 @@ function initialize(){
 	dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
 	
 	// Initialize preference.
-	prefs = new FDPrefs();
-	acceptEmptyDefinitionInd = prefs.getCharPref("accept-empty-definition-ind");
-	
-	if ( !acceptEmptyDefinitionInd || acceptEmptyDefinitionInd != "true"){
-		prefs.setCharPref("accept-empty-definition-ind", "false");
-	}
+        initPrefs("accept-empty-definition-ind", "false");
 }
  
 //

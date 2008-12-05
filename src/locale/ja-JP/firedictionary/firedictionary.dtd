@@ -2,10 +2,13 @@
 <!ENTITY menu.clearHistory		"履歴の消去">
 <!ENTITY menu.viewHistory		"履歴の表示">
 <!ENTITY menu.homepage			"ホームページ">
-<!ENTITY menu.setWordCategory           "単語カテゴリの設定">
-<!ENTITY menu.dictionoaryConfiguration  "辞書の設定">
+<!ENTITY menu.dictionoaryConfiguration  "辞書の設定...">
+<!ENTITY menu.preferences               "設定...">
+
 
 <!ENTITY label.category                 "カテゴリー : ">
+<!ENTITY label.escapeKey1               "単語をクリックした時に、履歴に単語を登録しないための">
+<!ENTITY label.escapeKey2               "エスケープキー (iKnow!検索のみ行う)">
 <!ENTITY tips.category                  "単語を覚えるのに自分の今ある状況を付加情報として記しておくのは非常に有効な方法です。カテゴリの値としては、「国際ニュース」のような単純な名詞より、「図書館にて期末試験に向けて勉強中。親友のトムと。」のような文のほうが記憶力を助けます。">
 
 <!ENTITY label.dictionaryName           "使用する辞書 : ">
@@ -14,5 +17,11 @@
 <!ENTITY label.addDictionary            "辞書の追加">
 <!ENTITY label.DictionaryName           "辞書の名前 :">
 <!ENTITY label.browse                   "参照...">
+<!ENTITY label.acceptEmptyDefinition    "辞書に無い単語も履歴に登録する">
+<!ENTITY label.cue-language             "読んでいるドキュメントの言語 (cue-language)">
+<!ENTITY label.response-language        "辞書で引きたい言語 (response-language)">
 
 <!ENTITY install.box.description	"辞書コンテンツのインストール">
+
+<!ENTITY tab.basic	                    "基本">
+<!ENTITY tab.category	                "カテゴリ">

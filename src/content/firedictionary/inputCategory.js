@@ -42,8 +42,28 @@
 function initialize(){
  var prefs = new FDPrefs();
  var category = document.getElementById("category");
- 
+
+ var escapeKey = prefs.getCharPref("escape-history-key");
+ var escapeKeyGroup = document.getElementById("fd-escape-key-group");
+
+ var acceptEmptyDefInd = prefs.getCharPref("accept-empty-definition-ind");
+ var chkAcceptEmptyDef = document.getElementById("accept-empty-definition");
+
+ var pCueLanguage = prefs.getCharPref("iknow.cue-language");
+ var pResLanguage = prefs.getCharPref("iknow.response-language");
+ var cueLanguage = document.getElementById("cue-language");
+ var resLanguage = document.getElementById("response-language");
+
  category.value = prefs.getUniCharPref("category");
+
+ escapeKeyGroup.selectedIndex =
+  (escapeKey == "ctrlKey") ? 0 :
+   (escapeKey == "altKey") ? 1 : 2;
+
+ chkAcceptEmptyDef.checked = acceptEmptyDefInd == "true" ? true : false;
+
+ cueLanguage.value = pCueLanguage;
+ resLanguage.value = pResLanguage;
 }
 
 function doOK(){
@@ -51,6 +71,10 @@ function doOK(){
  var category = document.getElementById("category");
  var strbundle=document.getElementById("fd-localized-strings");
  var errorMessage = strbundle.getString("error.usingIllegalCharacter");
+ var escapeKeyGroup = document.getElementById("fd-escape-key-group");
+ var chkAcceptEmptyDef = document.getElementById("accept-empty-definition");
+ var cueLanguage = document.getElementById("cue-language");
+ var resLanguage = document.getElementById("response-language");
  var result = true;
  
  if( category.value.indexOf("\"") == -1 ){
@@ -60,7 +84,17 @@ function doOK(){
   alert(errorMessage);
   result = false;
  }
- 
+
+ // set escape key
+ prefs.setCharPref("escape-history-key", escapeKeyGroup.selectedItem.value);
+
+ // set Accept Empty Definition Indicator
+ prefs.setCharPref("accept-empty-definition-ind", chkAcceptEmptyDef.checked);
+
+ // set iKnow! cue/response language
+ prefs.setCharPref("iknow.cue-language", cueLanguage.value);
+ prefs.setCharPref("iknow.response-language", resLanguage.value);
+
  return result; 
 }
 

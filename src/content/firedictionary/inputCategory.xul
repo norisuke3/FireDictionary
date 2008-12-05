@@ -42,26 +42,103 @@
 <!--locale-->
 <!DOCTYPE window SYSTEM "chrome://firedictionary/locale/firedictionary.dtd">
 
-<dialog id="inputCategory" title="&menu.setWordCategory;"
+<dialog id="inputCategory" title="&menu.preferences;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
         ondialogaccept="return doOK();"
         ondialogcancel="return doCancel();"
         onload="initialize();">
 
-<script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
-<script type="application/x-javascript" src="inputCategory.js"/>
+  <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_prefs.js"/>
+  <script type="application/x-javascript" src="inputCategory.js"/>
+  
+  <stringbundle id="fd-localized-strings" 
+                src="chrome://firedictionary/locale/fd-localized-strings.properties"/>
 
-<stringbundle id="fd-localized-strings" 
-              src="chrome://firedictionary/locale/fd-localized-strings.properties"/>
+  <tabbox>
+    <tabs>
+      <tab label="&tab.basic;"/>
+      <tab label="&tab.category;"/>
+      <tab label="iKnow!"/>
+    </tabs>
+  
+    <tabpanels>
+      <!-- Basic Panel -->
+      <tabpanel>
+        <vbox>
+          <groupbox>
+            <caption>
+              <vbox>
+                <label value="&label.escapeKey1;"/>
+                <label value="&label.escapeKey2;"/>
+              </vbox>
+            </caption>
+            <radiogroup id="fd-escape-key-group">
+              <hbox>
+                <radio id="fd-escape-ctrl" value="ctrlKey" label="Ctrl"/>
+                <radio id="fd-escape-alt" value="altKey" label="Alt"/>
+                <radio id="fd-escape-Shift" value="shiftKey" label="Shift"/>
+              </hbox>
+            </radiogroup>
+          </groupbox>
+          
+          <spacer flex="1"/>
+          <checkbox id="accept-empty-definition" label="&label.acceptEmptyDefinition;"/>
+          <spacer flex="1"/>
+        </vbox>
 
-<vbox id="category-box">
- <label value="&label.category;" control="category"/>
- <textbox id="category"/>
- <description value="Tips!"/>
- <description>
-  &tips.category;
- </description>
- </vbox>
+      </tabpanel>
+
+      <!-- Category Panel -->
+      <tabpanel>
+        <vbox id="category-box">
+         <label value="&label.category;" control="category"/>
+         <textbox id="category"/>
+         <description value="Tips!"/>
+         <description>
+          &tips.category;
+         </description>
+         </vbox>
+      </tabpanel>
+
+      <!-- iKnow! Panel -->
+      <tabpanel>
+        <grid>
+          <columns>
+            <column/>
+            <column/>
+          </columns>
+
+          <rows>
+            <row>
+              <hbox align="center">
+                <label value="&label.cue-language;"/>
+              </hbox>
+              <menulist id="cue-language">
+                <menupopup>
+                  <menuitem label="en" value="en"/>
+                  <menuitem label="ja" value="ja"/>
+                </menupopup>
+              </menulist>
+            </row>
+
+            <row>
+              <hbox align="center">
+                <label value="&label.response-language;"/>
+              </hbox>
+              <menulist id="response-language">
+                <menupopup>
+                  <menuitem label="en" value="en"/>
+                  <menuitem label="ja" value="ja"/>
+                </menupopup>
+              </menulist>
+            </row>
+          </rows>
+        </grid>
+
+      </tabpanel>
+
+    </tabpanels>
+  </tabbox>
  
 </dialog>
