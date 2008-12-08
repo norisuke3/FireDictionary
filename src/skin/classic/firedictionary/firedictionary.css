@@ -102,7 +102,7 @@ iframe#iknow-body {
 }
 
 #iknow-throbber[status="on"] {
-  list-style-image: url("chrome://global/skin/icons/loading_16.png");
+  list-style-image: url("chrome://firedictionary/skin/loading_16.png");
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 5px;

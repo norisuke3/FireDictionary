@@ -19,7 +19,7 @@
 <!ENTITY label.browse                   "参照...">
 <!ENTITY label.acceptEmptyDefinition    "辞書に無い単語も履歴に登録する">
 <!ENTITY label.cue-language             "読んでいるドキュメントの言語 (cue-language)">
-<!ENTITY label.response-language        "辞書で引きたい言語 (response-language)">
+<!ENTITY label.response-language        "辞書での翻訳結果の言語 (response-language)">
 
 <!ENTITY install.box.description	"辞書コンテンツのインストール">
 
