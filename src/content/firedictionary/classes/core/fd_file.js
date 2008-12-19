@@ -110,6 +110,18 @@ function FDFile(name){
  }
  
  /**
+  * int getLastMdifiedTime()
+  *  returning the time when the file was last modifed.
+  *  The value of this function is milliseconds since midnight
+  *  (00:00:00), January 1, 1970 Greenwich Mean Time (GMT).
+  *
+  * @return the time when the file was last modifed.
+  */
+ this.getLastMdifiedTime = function(){
+ 	return this.permanent.lastModifiedTime;
+ };
+
+ /**
   * FDDirectory getParentDirectoryInstance()
   *  Return the directory object of this file.
   *
