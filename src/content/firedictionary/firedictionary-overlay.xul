@@ -38,7 +38,9 @@
 
 <overlay title="firedictionary-sidebar"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/x-javascript" src="chrome://firedictionary/content/firedictionaryOverlay.js"/>
+
+    <script type="application/x-javascript" src="chrome://firedictionary/content/lib/prototype-1.6.0.3.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/firedictionaryOverlay.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_permanent.js"/>
