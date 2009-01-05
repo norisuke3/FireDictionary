@@ -38,9 +38,8 @@
  * A class for a content which is pasted on paste board
  */
 function FDPasteBoard(){
-	var unicodeConverter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 	var sidebar = top.document.getElementById("sidebar");
- unicodeConverter.charset = "UTF-8";
+
  
 	/**
 	 * String getContentAsHtml()
@@ -48,11 +47,9 @@ function FDPasteBoard(){
 	 * @return a pasted content which is formated as a html.
 	 */
 	this.getContentAsHtml = function(){
-		var title = unicodeConverter.ConvertFromUnicode(this.getTitle())
-					+ unicodeConverter.Finish();
-		var content = unicodeConverter.ConvertFromUnicode(this.getContent().replace(/\n/g, "<br>\n")) +
-					   unicodeConverter.Finish();
-		var result;
+	  var title = this.getTitle();
+	  var content = this.getContent().replace(/\n/g, "<br>\n");
+	  var result;
 		
 		result = "<html><head><meta http-equiv='content-type' content='text/html; charset=UTF-8' /><title>" + title +
 	          "</title></head><body>" +
