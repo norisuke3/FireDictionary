@@ -38,6 +38,8 @@ function FDFile(name){
  // private
  var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
  var stream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
+  var unicodeConverter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+  
 	if (aFile && name){
   aFile.initWithPath(name);
 	}
@@ -82,23 +84,31 @@ function FDFile(name){
  }
  
  /**
-  * write(String s)
+  * write(String s[, charset])
   *  Write text to this file. If the file exists, it's overridden, and if
-  *  the file doesn't exist, it's created.
+  *  the file doesn't exist, it's created. 
+  *  If the second argument 'charset' is specified, the file is written as
+  *  the charset.
   *
   * @param s Text you want to write into the file.
+  * @param charset A charset used to write the file.
   */
- this.write = function(s){
- 	if ( this.permanent.exists() ) {
- 		this.remove(true);
- 	}
- 	
- 	this.create();
-  
-  stream.init(this.permanent, 2, 0x200, false); // open as "write only"
-  stream.write(s, s.length);
-  stream.close();
- }
+ this.write = function(s, charset){
+   if( arguments.length > 1){
+     unicodeConverter.charset = charset;
+     s = unicodeConverter.ConvertFromUnicode(s) + unicodeConverter.Finish();
+   }
+
+   if ( this.permanent.exists() ) {
+     this.remove(true);
+   }
+   
+   this.create();
+   
+   stream.init(this.permanent, 2, 0x200, false); // open as "write only"
+   stream.write(s, s.length);
+   stream.close();
+ };
  
  /**
   * int getSize()
