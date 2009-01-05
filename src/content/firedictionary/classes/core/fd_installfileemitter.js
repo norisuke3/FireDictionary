@@ -37,13 +37,24 @@
  /**
   * The role of this class is copying a file from chrome to some directory.
   * It's useful on the installation process.
+  * 
+  * @param uri uri to a file.
+  * @param bin true if it's binary, otherwise it's false. (default: false)
   */
-function FDInstallFileEmitter(uri){
-	var	URL = Components.classes["@mozilla.org/network/standard-url;1"].createInstance(Components.interfaces.nsIURL);
+function FDInstallFileEmitter(uri, bin){
+	var URL = Components.classes["@mozilla.org/network/standard-url;1"].createInstance(Components.interfaces.nsIURL);
 	var IOService = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
-	var scriptableIStream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
-	var fileName = "";
+	var scriptableIStream = Components.classes['@mozilla.org/scriptableinputstream;1'].
+				  createInstance(Components.interfaces.nsIScriptableInputStream);
+	var bstream = Components.classes["@mozilla.org/binaryinputstream;1"].
+			createInstance(Components.interfaces.nsIBinaryInputStream);
+
+        var fileName = "";
 	
+	if (arguments.length < 2 || !bin){
+	  bin = false;
+	}
+  
 	/**
 	 * FDInstallFileEmitter(String uri)
 	 *  Constructor of this class.
@@ -74,29 +85,35 @@ function FDInstallFileEmitter(uri){
 	 * @return true if it's success.
 	 */
 	this.emitTo = function(dir){
-		var result = true;
+	  var result = true;
+	  var content;
 		
-		try{
-  	var stream = IOService.newChannelFromURI(URL).open();
-  	scriptableIStream.init(stream);
- 	
-  	var content = scriptableIStream.read(scriptableIStream.available())
- 	
-  	scriptableIStream.close();
-  	stream.close();
- 	
-  	var file = dir.createFileInstance(fileName);
-  	file.write(content);
- 	
- 	} catch(e) {
- 		if ( file != null ){
-  		file.remove();
- 		}
- 		
- 		result = false;
- 		
- 	}
- 	
-		return result;
-	}
+	  try{
+  	    var stream = IOService.newChannelFromURI(URL).open();
+	    if (bin){
+	      bstream.setInputStream(stream);
+	      content = bstream.readBytes(bstream.available());
+	      bstream.close();
+
+ 	    } else {
+	      scriptableIStream.init(stream);
+	      content = scriptableIStream.read(scriptableIStream.available());
+  	      scriptableIStream.close();
+
+	    }
+
+  	    stream.close();
+ 	    
+  	    var file = dir.createFileInstance(fileName);
+  	    file.write(content);
+
+ 	    
+ 	  } catch(e) {
+ 	    if ( file != null ){
+  	      file.remove();
+ 	    }
+ 	    result = false;
+ 	  }
+	  return result;
+	};
 }
