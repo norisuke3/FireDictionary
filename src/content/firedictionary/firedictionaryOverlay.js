@@ -68,6 +68,7 @@ function emitIKnowFiles(){
   var resources = [
     { name: "iknow-panel.css",              bin: false },
     { name: "iKnow.html",                   bin: false },
+    { name: "empty.html",                   bin: false },
     { name: "sound_play_icon_disabled.png", bin: true },
     { name: "sound_play_icon_over.png",     bin: true },
     { name: "sound_play_icon_up.png",       bin: true }
