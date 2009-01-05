@@ -238,7 +238,7 @@ this.registHistory = function(){
 	if ( !category || category == "" ) category = "Unclassified";
    
 	// load iKnow
-	this.loadIKnow();
+	this.loadIKnow(keyword);
 
 	if ( !keyword.match(/^( |\n)*$/i) && ( result != "" || acceptEmptyDefinitionInd == "true")){
 		history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord, category);
@@ -258,21 +258,120 @@ this.registHistory = function(){
  * loadIKnow(keyword)
  *
  */
-this.loadIKnow = function(){
-    var keyword = getKeywordTextbox().value;
-    var prefs = new FDPrefs();
-    var iKnowResponceLanguageId = prefs.getCharPref("iknow.response-language");
-    var iKnowCueLanguageId = prefs.getCharPref("iknow.cue-language");
-    var url = "http://www.iknow.co.jp/items/matching/" + encodeURI(keyword) +
-              "?translation_language=" + iKnowResponceLanguageId +
-              "&language=" + iKnowCueLanguageId;
+this.loadIKnow = function(keyword){
+  var self = this;
+  var dir = new FDDirectory("ProfD");
+  dir.createNewDirectory("FireDictionary");
+  dir.createNewDirectory("tmp");
+  var file = dir.createFileInstance('result.html');
+  
+  var urlSkin = new FDDirectory("ProfD");
+  urlSkin.createNewDirectory("FireDictionary");
+  urlSkin.createNewDirectory("skin");
+  var url = urlSkin.getURL() + 'iKnow.html';
+  
+  var prefs = new FDPrefs();
+  var params = {
+    language: prefs.getCharPref("iknow.cue-language"),
+    translation_language: prefs.getCharPref("iknow.response-language"),
+    include_sentences: false
+  };
+  var urlMatching = 'http://api.iknow.co.jp/items/matching/' + keyword + '.json?' + 
+		    Object.toQueryString(params);
+  
+  if ( !keyword.match(/^( |\n)*$/i) ){ 
+    getIKnowThrobber().setAttribute('status', 'on');
 
-    if ( !keyword.match(/^( |\n)*$/i) ){
+    new Ajax.Request(urlMatching, {
+      method: 'get',
+      onSuccess: function(transport){
+	file.write(self.createIKnowHTML(transport.responseText), "UTF-8");
+	getIKnowBody().setAttribute('src', '');
 	getIKnowBody().setAttribute('src', url);
-	getIKnowThrobber().setAttribute('status', 'on');
+      },
+      onFailure: function(transport){
+	file.write(self.createIKnowErrorHTML('failure'), "UTF-8");
+	getIKnowBody().setAttribute('src', '');
+	getIKnowBody().setAttribute('src', url);
+      },
+      onException: function(transport, ex){
+	file.write(self.createIKnowErrorHTML('Exception', ex), "UTF-8");
+	getIKnowBody().setAttribute('src', '');
+	getIKnowBody().setAttribute('src', url);
+      }
+    })
+  }
+};
+
+  /**
+   * createIKnowHTML(json)
+   *   Creating an html from the json for iKnow panel.
+   * 
+   * @param json text formated as json
+   * @return html string 
+   */
+  this.createIKnowHTML = function(json){
+    var html;
+    var rowType = ['odd', 'even'];
+    var row = 0;
+    var matchingResults = json.evalJSON(true);
+      
+    html = "<html><head>";
+    html = html + '<link type="text/css" rel="Stylesheet" media="all" href="../skin/iknow-panel.css"/>';
+    html = html + '</head><body>';
+    if (matchingResults.length == 0) {
+      html = html + '<div class="empty_match_result">This item doesn\'t exist yet in the iKnow! item bank.';
+    } else {
+      html = html + '<div id="item_lookup_results"><ul id="rich_item_list">';
+      html = html + matchingResults.collect(function(item){
+	var li = '<li class = "' + rowType[row++ % 2] + ' rich_item">';
+	if (item.cue.sound){
+	  li = li + '<a class="sound_icon" target="sound_player" href="' + item.cue.sound + '"><span>音声再生</span></a>';
+	}else{   // for casees of null, undefnied and ''
+	  li = li + '<a class="sound_icon_disabled"><span>音声再生</span></a>';
+	}
+	li = li + '<a target="_blank" onclick="" class="item_link" href="http://www.iknow.co.jp/items/' + item.id + '">';
+	li = li + '<span lang="en" xml:lang="en" class="cue_text en">' + item.cue.text + '</span>';
+	li = li + '</a>';
+	li = li + '<div class="item_bank_row">';
+	li = li + '  <span class="pos">(' + item.cue.part_of_speech + ')</span>';
+      //    responsees の要素は常に一つ？
+	li = li + '  <span class="response">' + item.responses[0].text + '</span>';
+	li = li + '</div>';
+	li = li + '</li>';
+	return li;
+      }).join('\n');
+
+      html = html + "</ul>";
     }
-}
- 
+    html = html + "</div></body></html>";
+    
+    return html;
+  };
+
+  /**
+   * createIKnowErrorHTML = fucntion(status[, ex])
+   *   Creating an html for a case of Ajax failure and exception.
+   * 
+   * @param status should be either of "failure" or "exception"
+   * @param ex exception object (optional)
+   */
+  this.createIKnowErrorHTML = function(status, ex){
+    var html;
+    
+    html = "<html><head>";
+    html = html + '<link type="text/css" rel="Stylesheet" media="all" href="../skin/iknow-panel.css"/>';
+    html = html + '</head><body>';
+    html = html + '<div class="empty_match_result">Error: during searching<br>';
+    html = html + 'status: ' + status;
+    if (status == 'Exception'){
+      html = html + ', ' + ex.message;
+    }
+    html = html + "</body></html>";
+    
+    return html;
+  };
+  
  /**
   * clearHistory()
   *  Clear the history of words and delete the history file.

@@ -130,7 +130,7 @@ function loadGeneratedPage(){
 	var file = dirTemp.createFileInstance("temp.html");
 	var tab;
 	
-	file.write(pasteboard.getContentAsHtml());
+        file.write(pasteboard.getContentAsHtml(), "UTF-8");
 	
 	tab = tabbrowser.addTab(file.getURL());
 	tabbrowser.selectedTab = tab;

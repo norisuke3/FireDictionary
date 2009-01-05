@@ -58,8 +58,32 @@ function initialize(){
 	
 	// Initialize preference.
         initPrefs("accept-empty-definition-ind", "false");
+  
+	// emit iKnow files: css and png if it's not present
+        emitIKnowFiles();
 }
  
+function emitIKnowFiles(){
+  var sourceURL = "chrome://firedictionary/skin/";
+  var resources = [
+    { name: "iknow-panel.css",              bin: false },
+    { name: "iKnow.html",                   bin: false },
+    { name: "sound_play_icon_disabled.png", bin: true },
+    { name: "sound_play_icon_over.png",     bin: true },
+    { name: "sound_play_icon_up.png",       bin: true }
+  ];
+  var dir = new FDDirectory("ProfD");
+  dir.createNewDirectory("FireDictionary");
+  dir.createNewDirectory("skin");
+
+  resources.each(function(res){
+    if(!(dir.createFileInstance(res.name).exists())){
+      var emitter = new FDInstallFileEmitter(sourceURL + res.name, res.bin);
+      emitter.emitTo(dir);
+    }
+  });
+}
+
 //
 // Event handler  ///////////////////////////////////////////////////////
 //

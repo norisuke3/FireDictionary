@@ -42,7 +42,6 @@ iKnowframe.addEventListener('load',
 
 iKnowframe.addEventListener('click',
   function(event){
-    event.preventDefault();
     openIKnowLink(event);
   }, true);
 
@@ -59,6 +58,8 @@ function openIKnowLink(event){
       ( event.target.getAttribute("class") == "item_link" )){
     tab = tabbrowser.addTab(event.target.getAttribute("href"));
     tabbrowser.selectedTab = tab;
+
+    event.preventDefault();
   }
 
   if (( event.target.tagName.toLowerCase() == "span" ) &&
@@ -66,5 +67,7 @@ function openIKnowLink(event){
       ( event.target.parentNode.getAttribute("class") == "item_link" )){
     tab = tabbrowser.addTab(event.target.parentNode.getAttribute("href"));
     tabbrowser.selectedTab = tab;
+
+    event.preventDefault();
   }
 }
