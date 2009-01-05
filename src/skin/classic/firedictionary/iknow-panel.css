@@ -1,0 +1,1319 @@
+body {background: #f0f2f5}
+body.home {background: #fff}
+form {margin: 0; padding: 0}
+input {}
+.checkbox_cell input, input.checkbox, input.radio {border: none}
+.container_center input {padding: 4px}
+.container_center input.text_field {width: 52%}
+select {background-color: #ffffff; margin: 0; padding: 0; color: #333}
+textarea {background-color: #ffffff; padding: 4px; width: 95%; color:#333; font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-size: 100%; display: block}
+#invite_message_form textarea {width: 400px; margin: 0 0 1em}
+#invite_message_form .error_notice {margin-bottom: 4px}
+.items_search_admin textarea {width: 55%}
+.textarea {width: 95%; height: 500px}
+label {margin: 0; padding: 0}
+.container_center label {display: block}
+input.text {color: #595959; width: 150px; vertical-align: middle}
+input.button, .error_page a.link_button {width: auto; padding: .5em 10px; margin-top: 2px; color: #fff; font-weight: bold; background: #0689D0; -moz-border-radius: 4px; -webkit-border-radius: 4px; border: none; cursor: pointer}
+input.icon_search {background: #fff url(../images/icon_find_search.gif) no-repeat 3px 4px; border: 1px solid #ccc; margin: 5px 5px 5px 0; padding: 5px 0 3px; text-indent: 20px; width: 180px}
+.filter_block input.icon_search{ font-size: 100%; *margin-left: -20px}
+input.button[disabled] {color: #aaa; background: #ccc}
+.form_row {margin-bottom: 10px}
+.form_row h4 {margin: 0; padding: 0}
+.admin_menu {padding: .5em 0}
+.admin_menu a {font-weight: bold; color: #fff; font-size: 90%}
+.header_links {color: #ccc}
+.header_links span, .top_options em {font-size: 85%; color: #666}
+.top_options em {font-style: normal; line-height: 22px}
+.header_links a {margin: 0 4px}
+.header_links a span, a.invite span {padding: 0 0 4px 20px; font-size: 85%; color: #0689D0 }
+a.invite span {background:transparent url(../images/icons/famfamfam/group_add.gif) no-repeat 0 0; padding-left: 20px; line-height: 20px}
+a.help {padding: 0 0 4px 0}
+a.help span {padding: 0 0 4px 0}
+a.login span {padding: 0 0 4px 0}
+a.logout span {padding: 0 0 4px 0}
+a.signup span {padding: 0 0 4px 0}
+.users .panel_plain form .button {margin: 0; padding: 0 .25em; width: auto; height: 28px; overflow: visible}
+textarea.comment {height: 200px; width: 95%; color: #333; padding: 5px}
+input.entry {border: 1px solid #d5d5d5; color: #333; width: 95%}
+textarea.entry {height: 200px; color: #333}
+.global_panel input.button {height: 90%}
+.global_panel input.text {height: 120%}
+input.images {vertical-align: bottom}
+select.select {background-color: #FFF; color: #333; vertical-align: bottom}
+.more_link {float: right; display: inline; font-weight: bold}
+.fieldWithErrors input, .fieldWithErrors textarea {border: 2px solid #ff8282}
+.error_block {}
+#errorExplanation {margin: 1em; border: 2px solid red; padding: 0 0 1em; background-color: #f0f0f0}
+#errorExplanation h2 {padding: 5px; background-color: #c00; color: #fff; text-align: left; font-weight: 700; font-size: 1.2em}
+#errorExplanation p {padding: 5px; color: #333; font-weight: 700}
+#errorExplanation ul {margin-left: 15px; padding-left: 5px}
+#errorExplanation ul li {list-style: square}
+.brclear {clear: both; height: 0; margin: 0; font-size: 1px; line-height: 0; overflow: hidden}
+.clearboth{ clear: both}
+.clearleft {clear: left}
+.clearright {clear: right}
+.align_right_inline {float: right; display: inline}
+.align_left_inline {float: left; display: inline}
+.clr:after, .clrright:after, .clrleft:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0}
+.clrright:after{ clear: right}
+.clrleft:after{ clear: left}
+.clr, .clrright, .clrleft {*display: inline-block}
+.clr:empty, .clrright:empty, .clrleft:empty {display: block}
+html[xmlns] .hide {display: none}
+* html .hide{ display: none}
+.no_padding {padding: 0}
+p.reply {margin: 1em 0}
+.reply_buttons {padding: 0 0 20px}
+.formError, ul.error_block {color: red; margin-bottom: 1em}
+.spacer {height: 9px}
+img {border: none}
+hr {border: none; background-color: #ccc; color: #fff; height: 1px; margin-bottom:10px; margin-top:5px; clear: both}
+.error_notice li, #error_notice {color: #aa6666}
+#status_notice, .status_notice, #flash_notice, .recommended {border: 1px solid #a6dea2; padding:0.6em 0.6em 0.6em 2em; margin: 1em 0; background: #d3f8d0 url(../images/icons_notices.gif) 5px -342px no-repeat; font-weight: 700; color: #6a6; -moz-border-radius: 10px; -webkit-border-radius: 10px}
+.error_notice ul, .error_notice li {margin: 0 !important}
+.status_notice.warning, #status_notice.warning {border: 1px solid #C9AB00; background: #FFF8CF url(../images/icons_notices.gif) no-repeat scroll 5px 8px; color: #7D6A00; padding-left: 30px}
+.relative_container {position: relative; width: 600px; margin: 0 auto; clear: both; text-align: center; z-index: 1000}
+.notice_background, .error_background, #error_notice{ border: 1px solid #f0e5b5; background: #ffffcc; position: absolute; width: 600px; -moz-border-radius: 6px; -webkit-border-radius: 6px; display: block; z-index: 400; margin: -.75em 0 0; height: 50px; opacity: 0.95; filter:alpha(opacity: 95); -moz-opacity: 0.95; -khtml-opacity: 0.95; left: 0}
+#error_notice{ left: 220px; padding: 10px; height: auto; top: 5px}
+#flash_accept .notice_background {background: #DFFFE0; border-color: #C3DFC4}
+.error_background, #error_notice {background:#FFC4BF; border-color: #EF8D86}
+#confirm_email_notice .notice_background {position: relative; width: 975px; padding: .5em 0; margin: 0 auto 0 !important; height: auto; text-align: center}
+#confirm_email_notice {width: 100%; float: left; display: inline; padding: .75em 0}
+* html #confirm_email_notice .notice_background {margin-left: 25px}
+.notice {padding:1em 12px; margin:0; z-index: 420; margin: -.5em 0 0; left: 0}
+.relative_container .notice{ position: absolute; width: 575px}
+.notice p, #confirm_email_notice .notice_background p {text-align: left; margin: 0 25px; font-size: 85%; font-weight: bold}
+.notice a.btn_cancel, .notice_error a.btn_cancel {display:block; margin:-.6em -.5em 0; padding: 12px 7px; background: url(../images/icons_notices.gif) 0 -750px no-repeat; float:right; *position: absolute; text-indent: -5000px}
+.notice a:hover.btn_cancel, .notice_error a:hover.btn_cancel {background-position:0 -800px}
+.notice a.btn_cancel span {display:none}
+span.icon_16, .icon_16, span.help a.icon_16 {width:16px; height:16px; display: block; float:left; background-image: url(../images/icons_notices.gif?1); background-repeat: no-repeat; margin: 0 5px 0 0; text-indent: -3000px}
+.notice_error div.icon_16 {text-indent: 0}
+div.icon_16 {width: auto; height: 16px; display: inline; float: none; font-weight: bold; font-size: 90%; padding: 0 0 .5em 20px; line-height: 2}
+.icon_error {background-position: 0 0;}
+.icon_delete {background-position: 0 -50px;}
+.icon_cancel {background-position: 0 -100px;}
+.icon_warning {background-position: 0 -150px;}
+.icon_info {background-position: 0 -200px;}
+.icon_help, span.help a.icon_help {background-position: 0 -250px;}
+.icon_reminder {background-position: 0 -300px;}
+.icon_accept {background-position: 0 -350px;}
+.icon_cross {background-position: 0 -400px;}
+.icon_flag {background-position: 0 -450px;}
+.icon_stop {background-position: 0 -500px;}
+.icon_star {background-position: 0 -550px;}
+.icon_comment {background-position: 0 -600px;}
+.icon_time {background-position: 0 -650px;}
+.icon_shield {background-position: 0 -700px;}
+.icon_video {background-position: 0 -850px;}
+.banner_blogparts, .banner_skype_campaign {text-align: center; padding: 0 0 5px 0}
+.help_link {float: right; display: block; width: auto; margin: 0.7em 10px 0; padding: 0; font-size: 85%; position: relative; z-index: 1000; font-weight:bold; margin:0.5em 10px 0}
+.dictionary h4 {margin-top: 10px; text-indent: 20px; background: url('../images/icon_speaker.gif') no-repeat}
+.subtitle_txt {width: 350px; padding-left: 35px; padding-top: 7px; padding-bottom: 10px; color: #5a5a5a}
+.addword h4 {margin-top: 10px; text-indent: 0; background: none}
+#notifications_panel .message_center li {background-image: url('../images/icons_notifications.gif'); background-position: 10px 5px; background-repeat: no-repeat; margin: 0 2px; padding: 5px 0 5px 30px}
+#notifications_panel .message_center li.friend_request {background-color: #ffc; background-position: 10px -84px; background-repeat: no-repeat}
+#notifications_panel .message_center li.announcement {background-color: #ffc; background-position: 10px -534px; background-repeat: no-repeat}
+#notifications_panel .message_center li.user {background-color: #ffc; background-position: 10px 6px}
+#notifications_panel .message_center li.channel_notification {background: url('../images/icon_small_announce.gif') center left no-repeat}
+#notifications_panel li.nomessage{ margin: 0 2px; padding: 5px 0 5px 30px; background-position: 10px 6px; background-repeat:no-repeat; background-image: url('../images/nomessage.gif')}
+.message_actions {margin-top: 15px}
+.message_actions a {display: block; line-height: 2em; text-indent: 25px}
+.message_actions li a {background: url('../images/icons_message_actions.gif') no-repeat}
+.message_actions .comments a{ background-position: 5px -26px}
+.message_actions .friend_requests a{ background-position: 5px -72px}
+.message_actions .invitations a{ background-position: 5px -118px}
+.message_actions .mails a{ background-position: 5px -164px}
+.message_actions .news a{ background-position: 5px -210px}
+.message_actions .announcements a{ background-position: 5px -256px}
+.message_actions .recommendations a{ background-position: 5px -299px}
+.message_actions .active a {font-weight: 700}
+.message_actions .active, .message_actions .active span{ background: url(../images/ui_skin_panel_clear.gif) no-repeat 0 0; display: block}
+.message_actions span{ display: block; border: none; height: 2em}
+.message_actions .active{ background-position: left bottom; background-color: #f6f6f6}
+.mypage_messages .profile_heading {display: none}
+#tab {margin: 0 0 0 1px; line-height: normal; font-size: 105%; position: absolute; width: 750px}
+.tabs ul {margin: 5px 0 0; list-style: none}
+.tabs li {display: inline; float: left; margin: 0 4px 0 0; padding: 0}
+.tabs a {float: left; margin: 0; padding: 0 0 2px 8px}
+.tabs a span {float: left; display: block; padding: 9px 12px 7px 4px; font-size: 95%; font-weight: 700; color: #727272; width: auto; word-wrap: break-word}
+.tabs a:hover span {color: #333}
+.tabs li.current a {background-position: 0 -150px}
+.tabs li.current a span {background-position: 100% -150px; padding-bottom: 5px; color: #444546}
+.tabs a:hover, .tabs a:active {background-position: 0 -150px; text-decoration: none}
+.tabs a:hover span {background-position: 100% -150px}
+.tabs li.disabled a {background-position: left top; cursor: default}
+.tabs li.disabled a span {color: #ccc; background-position: right top; cursor: default}
+.clear_tabs, #tab .tabs {line-height: normal; margin: 0}
+#tab .tabs {height: 2.5em; border-bottom: 1px solid #dfdfdf}
+.panel_login .clear_tabs {border-top: none; height: 23px}
+.clear_tabs ul {list-style: none; margin: 0 0 0 -1px}
+.clear_tabs .tabs li a {background: transparent url('../images/apps_menu_divider.gif') repeat-y right top; cursor: pointer}
+.panel_login .clear_tabs .tabs li a {background: none; cursor: pointer}
+.clear_tabs .tabs li a span {background: none}
+.clear_tabs .tabs li a:hover {background: transparent url('../images/apps_menu_divider.gif') repeat-y right top}
+.clear_tabs .tabs li a:hover span {background: none}
+.clear_tabs .tabs li{ margin-right: -2px}
+.clear_tabs .tabs li#openid_tab span{ padding-left: 15px}
+.clear_tabs .tabs li.selected, .clear_tabs .tabs li.current{ position: relative; margin: -10px 0 0 -2px; top: 0.28em}
+.clear_tabs .tabs li.selected a, .clear_tabs .tabs li.selected a:hover, .clear_tabs .tabs li.current a, .clear_tabs .tabs li.current a:hover {background: #fff url('../images/list_ui_skin.png?1') no-repeat 0 -200px; font-size: 120%; padding: 0 0 0 8px}
+.clear_tabs .tabs li.selected a span, .clear_tabs .tabs li.selected a:hover span, .clear_tabs .tabs li.current a span, .clear_tabs .tabs li.current a:hover span {background: #fff url('../images/list_ui_skin.png?1') no-repeat 100% -200px; padding: 15px 15px 7px 10px; color: #000}
+.nude_tabs {float: left; width: 150px}
+.lists_main .nude_tabs {float: none; width: auto; padding: .5em 0 2em 0}
+.lists_main .nude_tabs ul {margin: 0}
+.nude_tabs ul {margin: 7px 0 7px 7px}
+.nude_tabs ul li {float: left; margin: 0 10px 0 0}
+.nude_tabs ul li a {padding: 2px 6px; display: block; font-weight: bold; font-size: 110%; text-decoration: none}
+.nude_tabs ul li a.selected, .nude_tabs ul li.selected a, .nude_tabs ul li a:hover {background: #999; color: #fff; -moz-border-radius: 4px; -webkit-border-radius: 4px}
+.lists_main .nude_tabs ul li a.selected, .lists_main .nude_tabs ul li a:hover {background: #0689D0}
+.lists_main .nude_tabs ul li a {padding: 2px 10px }
+.recommended_course {width: 460px; overflow: hidden; zoom:1; display: block; height: 21px}
+.flat_tabs {line-height: normal; height: 1.8em; font-size: 90%; margin: 0; float: left}
+.invert_tabs .flat_tabs {float: right; margin: 0 .3em 0 0}
+.flat_tabs .tabs {margin: .5em 0 0 .6em}
+.flat_tabs .tabs li a {background: none; cursor: pointer}
+.flat_tabs .tabs li a span {background: none; padding: .5em 1em .4em 0}
+#study_courses .flat_tabs .tabs li a span {padding: .8em 1em .6em 0; font-size: 110%; color: #333}
+.flat_tabs .tabs li a:hover {background: none}
+.flat_tabs .tabs li.selected a, .flat_tabs .tabs li.selected a:hover {background: #fff url('../images/list_ui_skin.png?1') no-repeat 0 -910px; font-size: 100%; font-family: verdana,clean,sans-serif}
+.flat_tabs .tabs li.selected a span, .flat_tabs .tabs li.selected a:hover span {background: #fff url('../images/list_ui_skin.png?1') no-repeat 100% -910px}
+.chart_container .invert_tabs .flat_tabs {height: 1.8em}
+.invert_tabs .flat_tabs .tabs li.selected a, .flat_tabs .tabs li.selected a:hover {background: #fff url('../images/list_ui_skin.png?1') no-repeat 0 -947px; font-size: 100%; font-family: verdana,clean,sans-serif}
+.invert_tabs .flat_tabs .tabs li.selected a span, .flat_tabs .tabs li.selected a:hover span {background: #fff url('../images/list_ui_skin.png?1') no-repeat 100% -947px}
+.toggle_tabs {position: relative; margin: -20px 0 0 8px; line-height: normal; z-index: 100; top: 1px; font-family: Arial, Helvetica, sans-serif}
+.toggle_tabs .tabs a {background: url('../images/tab_med_left.gif') no-repeat left top; padding: 0 0 0 8px; margin: 0 2px 0 0}
+.toggle_tabs .tabs a span {background: url('../images/tab_med_right.gif') no-repeat right top; padding: 6px 6px 1px 0; font-size: 85%; line-height: 13px}
+.toggle_tabs .tabs li.current a span {padding-bottom: 3px; color: #444546}
+.toggle_tabs .tabs li.current a {border-bottom: none}
+.paging {background: #fff; border: none; padding: 0 0 10px 0}
+#diary_entries .paging {float:left; width: 100%}
+.paging_left {padding: 0; float: left}
+.paging_right {float: right}
+.paging .dropdown {margin: 0 5px}
+.paging a {display: inline; padding: 2px 4px; margin: 2px}
+.paging a:hover, .paging a.selected, .pagination .current {background: #0689D0; color: #fff; text-decoration: none; display: inline}
+.pagination span, .pagination a{ padding: 2px 4px; font-weight: bold}
+.pagination .disabled{ color: #999; font-weight: normal}
+a.graphic_button, .edit, .editor_ok_button, .invite_submit_button, input.button {background:#fff url(../images/btn_bg_edit.png) repeat-x 0 -68px; border:1px solid #7EBDE0; color: #0077B8; display: block; float: left; line-height: 1; padding: 5px 20px; font-weight: bold; font-size: 100%; margin-right: 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px}
+input.button {float: none; cursor: pointer}
+.invite_submit_button {width: 11em}
+.editor_ok_button {padding: 5px 15px; margin: .3em 5px 0 0}
+a.edit:hover, .editor_ok_button:hover, .invite_submit_button:hover {background-position: 0 -3px; border: 1px solid #C8AD5B; color: #666; text-decoration: none}
+.invite_submit_button_love {background: url(../images/invitefriend_love_btn1_off.gif) no-repeat; font-size: 100%; margin: 0 10px 110px 44px; padding: 22px 23px !important; text-indent: -3000px; border: none; display: block; width: 180px}
+.invite_submit_button_love:hover {background:url(../images/invitefriend_love_btn1_on.gif) no-repeat; text-decoration: none; text-indent: -3000px}
+.site_blog .edit_blog {margin: 0 0 1em}
+.edit_small {background: #fff url(../images/btn_user_actions.gif) no-repeat scroll 0 3px; padding: 5px 0px 5px 30px; font-weight: bold; margin: 0 5px 1em 0}
+a.edit_small:hover {background-position: 0 -57px; border: none; text-decoration: underline}
+a.delete_small {color: #333; font-weight: 700}
+a.delete_small:hover {color: #0077b8; text-decoration: underline}
+a.cancel{ padding: 5px 0 0 3px; float: left}
+.btn_cancel {margin: 0 0 -20px -2px; background: #FFFFFF; font-weight:bold; padding: 6px 20px 6px 30px; background: url('../images/btn_user_actions.gif') no-repeat 0 -897px}
+.btn_cancel:hover {background-position: 0 -957px}
+.container_center input.edit, input.edit {padding: 5px 20px; *padding: 10px 20px 5px}
+.lang_ja .edit,.lang_ja .edit_link {letter-spacing: 0.1em}
+.edit_link {display: block; float: left; padding: 5px 20px}
+.lang_ja {}
+.user_actions a {display: block; background: url('../images/btns_med.png') no-repeat; width: 165px; margin: 0 auto}
+.user_actions .block_user a {background: none; display: inline; width: auto; font-size: 80%; color: #aaa; font-weight: 700}
+.user_actions a:hover {text-decoration: none; background-position: 0 -90px}
+.user_actions .block_user a:hover {color: #666}
+.user_actions .my_profile a {text-decoration: none; background: url('../images/btns_med.png') 0 0 no-repeat; cursor: default}
+.user_actions .my_profile a:hover {text-decoration: none; background: url('../images/btns_med.png') 0 0 no-repeat; cursor: default}
+.user_actions a span {display: block; color: #666; font-size: 85%; font-weight: bold; padding: 6px 0; text-align: center}
+.user_actions .skype_chat a span {padding:7px 20px 9px 0}
+a.small_plus {display: block; background-image: url('../images/button_small_plus.gif'); background-repeat: no-repeat; background-position: 0 0; padding: 1px 0 4px 19px; font-weight: 700}
+a.add {display: block; background-image: url('../images/icons_read_write.gif'); background-repeat: no-repeat; background-position: 0 0; padding: 0 0 0 20px; font-weight: 700; color: #ff8d20}
+a.add:hover {background-position: 0 -50px}
+a.write {display: block; background-image: url('../images/btn_user_actions.gif?'); background-repeat: no-repeat; background-position: 0 0; padding: 2px 0 4px 28px; margin:8px 0 0; font-weight: 700; color: #ff8d20}
+a.write:hover {background-position: 0 -60px}
+a.user_button {background: url('../images/btn_user_actions.gif') 0 0 no-repeat; padding: 4px 0 4px 28px; width: auto; margin: 0 8px 0 0; line-height: 20px; zoom: 1}
+a.user_button:hover{ background-position: 0 -60px}
+a.action_write {text-indent: 40px; width: 180px; font-weight: 700; margin: 0 0 .5em; color:#ff8d20; background: url('../images/btn_user_actions_med.gif') 0 0 no-repeat; padding: 10px 0 6px; display: block}
+a.action_write:hover {background-position: 0 -60px}
+a.action_rss {background-position: 0 -120px}
+a.action_rss:hover {background-position: 0 -180px}
+a.action_bookmark {background-position: 0 -240px}
+a.action_bookmark:hover {background-position: 0 -300px}
+a.action_bookmarked {background-position: 0 -840px; width: 30px}
+a.action_bookmarked:hover {background-position: 0 -840px}
+a.action_settings {background-position: 0 -360px}
+a.action_settings:hover {background-position: 0 -420px}
+a.action_thumbnail {background-position: 0 -480px}
+a.action_thumbnail:hover {background-position: 0 -540px}
+a.action_list {background-position: 0 -600px}
+a.action_list:hover {background-position: 0 -660px}
+a.action_remove_friend {background-position: 0 -720px}
+a.action_remove_friend:hover {background-position: 0 -780px}
+a.cast_vote{ background-position: 0 -1420px}
+a.cast_vote:hover{ background-position: 0 -1510px}
+a.voted{ background-position: 0 -1593px}
+a.voted:hover{ background-position: 0 -1593px}
+a.recommend_btn{ background-position: 0 -1140px}
+a.recommend_btn:hover{ background-position: 0 -1200px}
+a.list_btn{ background-position: 0 -2135px}
+a.list_btn:hover{ background-position: 0 -2195px}
+a.favorite{ background-position: 0 -2020px}
+a.favorite:hover{ background-position: 0 -2080px}
+a.embed{ background-position: 0 -2260px; zoom: 1}
+a.embed:hover{ background-position: 0 -2320px}
+a.split_mode_btn {margin: -3.5em 0 0; *margin: -2.5em 0 0; padding: 6px 0pt 4px 40px; background: url('../images/ui_skin_lists.gif') 0 3px no-repeat; font-family: verdana, clean, sans-serif; font-size: 80%; font-weight: bold; position: absolute}
+a.split_mode_btn:hover {background-position: 0 -30px}
+.comments a.user_button{ background-position: -2px -1347px}
+.local_panel li .user_button span{ float: none}
+.bookmark_ span{ background: transparent url(../images/btn_user_actions.gif) no-repeat scroll 0 -840px; padding: 4px 0pt 4px 28px}
+.blog_comments_and_votes .local_panel, .blog_comments_and_votes .local_panel .cn .cb{ background-color: #f6f6f6; margin: 0}
+.blog_comments_and_votes .local_panel .cc{ padding: 0 10px}
+a.list_button, span.list_button {text-indent: -30000px; display: block; height: 10px; width: 10px; background: transparent url(../images/list_ui_skin.png?1) 0 -500px repeat-x; padding: 7px; margin: 0 20px 0 0; float: none}
+.item_actions .list_button {text-indent: 0px; text-indent: 0; white-space: nowrap; margin: 0; width: auto}
+.item_actions .list_button em {margin-left: 12px; position: relative; top: -3px}
+span.list_button {margin: 0 4px 0}
+span.list_button_spacer {padding: 0.6em 13px}
+.list_button span {position: static; display: block; width: 10px; height: 10px; line-height: 12px; margin: 0; padding: 0}
+.list_subtract span, .list_subtract span:hover {background: #fff url(../images/list_ui_skin.png?1) 0 -760px repeat-x}
+.list_edit span, .list_edit span:hover {background: transparent url(../images/list_ui_skin.png?1) 0 -1260px repeat-x; height: 20px; width: 16px; margin: -2px 0 0 -3px}
+.list_add span, .list_add img {display: block; width: 10px; height: 10px; float: left; background: transparent url(../images/list_ui_skin.png?1) 0 -680px repeat-x}
+.list_add span a, span.list_add a{ position: absolute; margin: -12px 0 0 23px}
+.item_actions span.list_add a {position: relative; display: block}
+span.list_add:hover img {display: block; width: 10px; height: 10px; background: transparent url(../images/list_ui_skin.png?1) 0 -640px repeat-x}
+span.list_menu {float: right; margin: .1em 2px 0 0}
+span.list_menu img {display: block; width: 10px; height: 10px; background: transparent url(../images/list_ui_skin.png?1) 0 -860px repeat-x}
+span.list_menu:hover span {display: block; width: 10px; height: 10px; background: transparent url(../images/list_ui_skin.png?1) 100% -860px repeat-x}
+a.list_button:hover {background: transparent url(../images/list_ui_skin.png?1) 0 -540px repeat-x; cursor: hand; text-decoration: none}
+.list_add:hover span {background: transparent url(../images/list_ui_skin.png?1) 0 -640px repeat-x}
+a.delete {float: right; font-size: 70%; font-weight: bold; margin: 0 3px}
+a.list_play span, .list_play img {display: block; width: 10px; height: 10px; background: transparent url(../images/list_ui_skin.png?1) 100% -720px repeat-x}
+a.list_play:hover span, .list_play:hover img {background: transparent url(../images/list_ui_skin.png?1) 100% -760px repeat-x}
+a.list_play {margin: 0 0 0 5px}
+a.list_add {margin: 0}
+.blue_header.local_panel h3 {background-color: #F7FBFF; padding: 0.75em 8px}
+.local_panel ul.mypanel_list li {border-bottom: 1px dotted #dfdfdf}
+.mypanel{ padding: 3px 8px 0}
+.mypanel div.more_link{ border: none; margin-bottom: 5px}
+#set_current_word_list {border-top: 1px dotted #ccc; padding: .5em 0 0; clear: both; margin-top: 15px}
+.list_mine #set_current_word_list {border: none; padding: 0; margin: -47px 0 1.5em; float: right; position: relative}
+.list_mine #set_current_word_list h4 {font-weight: normal; margin: 0 0 .3em}
+#set_current_word_list select {width: 160px}
+.list_mine .spinner_small{ padding-left: 20px; background: url('../images/spinner.gif') no-repeat 0 5px}
+#sentence_lookup_results .hVocabulary a.list_add {margin: 0 5px 0 0}
+.adding_progress {background: url('/images/spinner.gif') no-repeat 50% 50%; display: inline; float: right; margin: .4em 8px 0 7px; padding: .6em 8px}
+.word_list_menu .adding_progress {float: left; margin: 3px 7px 0 0}
+.adding_progress span, .adding_progress:hover span {background: url('/images/spinner.gif') no-repeat 50% 50%; width: 16px; height: 16px; margin: -4px 0 0 -4px}
+.adding_complete span, .adding_complete:hover span {background: transparent url(../images/list_ui_skin.png?1) 100% -820px no-repeat; width: 16px; height: 16px; margin: -4px 0 0 -4px}
+a.adding_complete, a.adding_complete:hover {cursor: default; background: none}
+a.added_notice {background: transparent url(../images/list_ui_skin.png?1) 100% -820px no-repeat; display: block; float: right; margin: .4em 8px 0; padding: .8em 8px}
+form#resend_form {display: inline}
+#resend_email_1.added_notice {background: transparent url(../images/list_ui_skin.png?1) -383px -820px no-repeat; display: inline; float: none; margin: 0; padding: .2em 8px .2em 18px; color: #66cc33}
+form.spinner a {background: url('/images/spinner.gif') no-repeat 0 50%; padding: 0 0 0 18px; color: #999}
+.word_list_menu .adding_complete {float: left; margin: 3px 7px 0 0}
+#keyword_lookup_results .adding_complete, #keyword_lookup_results .adding_progress {display: inline; float: left}
+a.edit_object span {background: url(../images/list_ui_skin.png?1?1) 0 -1260px no-repeat; width: 16px; height: 15px}
+.sample_sentence a.edit_object{ padding: 4px}
+.cue_response a.list_add {margin: 6px 10px 0 5pt; float: right}
+a.panel_button {display: block; font-weight: bold; float: left; background: transparent url(../images/list_ui_skin.png?1) 0 -354px repeat-x; margin: 10px 0 0 250px; padding: 0 0 0 40px}
+a.panel_button:hover {background: transparent url(../images/list_ui_skin.png?1) 0 -420px repeat-x; cursor: hand}
+a.list_change span {display: block; background: transparent url(../images/list_ui_skin.png?1) 100% -354px repeat-x; padding: 10px 15px 18px 5px}
+a.list_change:hover span {background: transparent url(../images/list_ui_skin.png?1) 100% -420px repeat-x}
+a.new_list {float:right; display: inline; background: transparent url(../images/list_ui_skin.png?1) 0 -1000px repeat-x; margin: .5em .5em .1em .5em; padding: 0 0 0 2.4em; font-size: 85%}
+a.new_list span {display: block; background: transparent url(../images/list_ui_skin.png?1) 100% -1000px repeat-x; padding: .5em 1em .6em 0; line-height: 12px}
+a.new_list:hover span {background: transparent url(../images/list_ui_skin.png?1) 100% -1060px repeat-x}
+a.new_list:hover {background: transparent url(../images/list_ui_skin.png?1) 0 -1060px repeat-x}
+a.color2 {background-position: 0 -100px}
+a.color2:hover {background-position: 0 -150px}
+a.color3 {background-position: 0 -200px}
+a.color3:hover {background-position: 0 -250px}
+#btnSubmit {height: 130%; margin-left: 10px; zoom: 1}
+#correct_sentence span {background-position: left -1286px}
+a.list_items_edit, a.list_items_finish {color: #FA5B06; font-size: 120%; font-weight: bold; float: right}
+.new_sentence_options {margin: -2px 0 10px -4px;; font-size: 11px; color: #999}
+.small_progress {float: left; padding: 4px; width: 160px; color: #666; border: 1px solid #ddd; background: #fff}
+.progress {float: left; padding: 10px; color: #666; border: 1px solid #ddd; background: #fff}
+.not_enrolled_progress .bar_outer, .small_progress .bar_outer, .progress .bar_outer, .item_progress .bar_outer {width: 100px; height: 11px; background:#ccc url('../images/progress_bg.gif') left top repeat-x; border: 1px solid #ccc; overflow: hidden; float: left; margin: 2px auto; text-align: left}
+.my_page_main .not_enrolled_progress .bar_outer, .my_page_main .small_progress .bar_outer, .my_page_main .progress .bar_outer{ background: none; border: none}
+.item_progress .bar_outer {width: 60px; float: none}
+.integer {float: none; display: block; text-align: center; font-size: 80%}
+.not_enrolled_progress .bar_inner, .small_progress .bar_inner, .progress .bar_inner, .item_progress .bar_inner {height: 11px; background:#fa7841 url('../images/progress_highlight_bg.gif') left top repeat-x}
+.iknow span, .dictation span, .brainspeed span {color: #aaa; padding: 10px 0 0; display: block; float: left}
+.dictation .bar_inner {width: 20px}
+.iknow .bar_inner {width: 20px}
+ul.my_progress .progress {border: none; padding: 0; float: left}
+ul.my_progress li .progress span {padding: 0px}
+ul.my_progress .studying {float: left; margin: 0}
+ul.my_progress li {border-bottom: 1px dotted #ccc; padding: 0.3em 0; clear: both}
+ul.my_progress li .list_right_column {float: right}
+ul.my_progress .bar_outer {width: 160px; margin: 0 5px 0 0}
+ul.my_progress li.no_border .integer {float:right; position: relative; margin: 0}
+.list_table{ border: none; width: 100%; border-collapse:separate; border-spacing:0 3px}
+.list_table table {width: 100%}
+.list_table td h2 {margin: 0; border: none; font-size: 130%}
+.list_table th {text-decoration: none; padding: 5px; border-bottom: 2px solid #ccc; text-align: left; font-size: 80%}
+.item_list .list_table th, .item_list .list_table td {border-left: none; border-right: none}
+.list_table th a {padding: 2px 0; text-indent: 5px; color: #333}
+.list_table th a:hover {text-decoration: underline; background-color: #F7FBFF}
+.list_table th.selected a {background: transparent url('../images/ui_dropdown.gif') no-repeat right -43px; padding-right: 20px}
+.list_table th.descending a{ background: transparent url('../images/ui_dropdown.gif') no-repeat right 7px; padding-right: 20px}
+.list_options form {float: left; width: 100%; margin-right: 0}
+.list_table tr {display: table-row; margin: 0 0 .2em}
+.list_table tr.even {background: none}
+.list_table td {padding: 5px 0; border-bottom: 1px solid #ddd; border-top: 1px solid #fff; vertical-align: top}
+.list_table table td {padding: 3px 2px; border-bottom: 2px solid #fff}
+span.channel_name {display: block}
+#study_courses span.channel_name {display: inline}
+span.channel_name a, span.channel_name .my_lists_header{ font-weight: 700; color: #ff8d20; font-size: 85%}
+span.course_name {display: block}
+span.course_name a{ font-weight: 700; font-size: 105%; float: left}
+p.grouped_header {margin: 0; font-weight: bold; background: #EEE; display: block; padding: 5px 10px; border: 1px solid #CCC}
+.inbox li {padding: 10px; border: 1px solid #DFDFDF; border-top: none}
+li.message {padding: 10px 0; border: 1px solid #dfdfdf; border-bottom: none}
+span.message{ padding: 1em 10px; background: #ffffcc; display: block; position: relative; z-index: 100; color: #999}
+.inbox .list_heading {padding: 3px 10px; font-size: 80%; border: 1px solid #dfdfdf; background: #eee}
+.inbox .date {float: right; font-size: 85%; color: #999; margin-top: -5px}
+.list_heading .date {float: right; font-size: 90%}
+.inbox li.is_not_seen {}
+.inbox .local_panel li.is_not_seen{ }
+td.course_users{ text-align: center}
+td.course_img {background: url('../images/image_small_bg.gif') 5px 5px no-repeat; text-align: left; width: 1%}
+td.course_img img {height: 29px; margin: 7px 5px 5px 7px; width: 30px}
+td.course_title {border-left: none}
+.list_table table tr.even {background-color: #f4f4f4}
+.list_table table tr.odd {background-color: #fafafa}
+.table_list_1 li.odd {background-color:#E4F6FC}
+.order_ascending {text-align: left; background: url('../images/order_ascending.gif') center right no-repeat}
+.order_descending {text-align: left; background: url('../images/order_descending.gif') center right no-repeat}
+.filter_panel {padding: 5px; font-size: 95%; padding: 0 0 15px 0}
+td.items_panel input.button {margin: 5px 0}
+td.items_panel {background: #fff}
+.filter_block {padding: 10px 0; margin: 0 0 10px; border-bottom: 1px dotted #ccc; width: 100%; float: left; clear: left}
+.course_directory .filter_block{ float:none; clear: none}
+div.filter_panel {padding: 0 5px 5px}
+div.filter_panel label {padding-bottom: 3px; display: block}
+div.filter_panel input#text_search_filter {width: 100px}
+tr.skipped td {color: #999}
+.ranking_stars img {background: none; margin: 0 1px}
+.ranking_stars p {font-size: 80%; margin: 0; padding: 0; line-height: 1}
+.course_directory .ranking_stars span, .ranking_stars span {display: none}
+.course_level {color: #0689d0; float: left; display: inline; margin-left: 5px}
+.course_level p {display: inline; width: auto}
+a.sound_icon_disabled, a.sound_icon {display: inline; padding: 0 10px 1.6em; float: left; height: 4px; position: relative; z-index: 200}
+a.sound_icon_disabled {background: url('../skin/sound_play_icon_disabled.png') no-repeat 0 50%}
+a.sound_icon {background: url('../skin/sound_play_icon_up.png') no-repeat 0 50%}
+.play_sound {position: absolute; left: -12px; top: -2px}
+a.sound_icon:hover, td a.sound_icon:hover {background: url('../skin/sound_play_icon_over.png') no-repeat 0 50%}
+a.sound_icon span, a.sound_icon_disabled span {display: none}
+a.item_link {position: relative; overflow: hidden; display: block; zoom: 1}
+a.item_link:hover {text-decoration: none; background: #F7FBFF}
+#item_lookup_results a.item_link {padding: 2px 0 7px}
+#item_lookup_results a.item_link:hover {text-decoration: none; background: #E4F6FC}
+.response_2, .cue_transliteration {margin-left: 6px; color: #78aec8; overflow: visible}
+.response_2 em, .cue_transliteration em {font-style: normal; margin: 0; color: #666; font-weight: normal; display: inline-block}
+.response_2 em.no_brackets:before {content: ""}
+.response_2 em.no_brackets:after {content: ""}
+.cue_transliteration em.no_brackets:before {content: ""}
+.cue_transliteration em.no_brackets:after {content: ""}
+.item_link .response_2 em{ z-index: 600; font-size: 110%}
+.hVocabulary .item_link .response_2 em{ position: static; margin: 0}
+#item_lookup_results a.sound_icon {margin: 5px 5px 0 0}
+.sample_sentence .sentence .sentence {position: relative; margin-bottom: 10px}
+a.item_link .list_menu, a.item_link .list_add, a.item_link .adding_complete, a.item_link .list_button {visibility: hidden; float: right}
+.local_panel li a.item_link:hover span.list_menu, .local_panel li a.item_link:hover span.list_add, .local_panel li a.item_link:hover span.adding_complete, .local_panel li a.item_link:hover span.list_button, a.item_link:hover .list_menu, a.item_link:hover .list_add, a.item_link:hover .adding_complete, a.item_link:hover .list_button{ visibility: visible}
+a.item_link span.cue_text {display: inline; visibility: visible; margin-left: 5px}
+.cue_transliteration {color: #000}
+.item_blog_entries a.item_link span.cue_text {padding: 0.2em 0; font-weight: bold}
+.item_blog_entries a.sound_icon {margin: .3em 0 0 4px}
+.item_blog_entries li .item {margin-bottom: 5px; padding: 3px 0; background: #d5ebf2}
+#journal_content .blog_meta {margin-bottom: 15px}
+.search_form {float: left; width: 100%; margin: 0 0 1.75em}
+.search_form h3, .search_form h5 {margin: 0}
+.list_build #item_lookup_keyword, .search_field #keyword, .search_form #keyword {background: transparent; margin: 0 5px 0 30px; width: 221px; border: none; padding: 4px 0; float: left; display: inline}
+.lists_main .column_right .search_form #keyword {float: left; width: 255px}
+.column_right .search_form #keyword {float: left; width: 195px}
+.list_search .column_right .search_form #keyword {width: 255px}
+#search_language_pair_id {width: 190px}
+.column_right .search_form .hide_submit {border: none; background: transparent; text-align: left; width: 60px; margin: 0; padding: 0 0 0 5px; cursor: pointer}
+.list_build .item_lookup_form, .search_field {background: transparent url(../images/list_ui_skin.png?5) 0px -1316px no-repeat; height: 25px; float: left}
+.column_right .submit_field, .course_directory .submit_field {background:#fff url(../images/list_ui_skin.png?1) -262px -815px no-repeat; display: block; position: relative; float: left; margin: 0; height: 25px}
+.list_build #item_lookup .hide_submit, .search_form .hide_submit, .search_field .submit_field input {border: none; background: transparent; cursor: pointer; height: 22px; width: 65px; float: left; display: inline}
+.search_field {float: left}
+.search_form label {float: left; font-size: 80%; padding: 0; margin: 0 5px 0 0}
+.column_right .search_form label {display: block; float: none; margin: 0 0 6px}
+.search_options {border: 1px solid #c6c6c6; border-top: none; width: 214px; top: 25px; position: absolute; background: #fff; left: 19px}
+.search_options_toggle {float: left; display: block; border: 1px solid #c6c6c6; background: transparent url(../images/list_ui_skin.png?1) no-repeat scroll 0 -1px}
+.search_options_toggle a {display: block; text-indent: -3000px; margin: 1px; width: 16px; padding: 1px 0 2px; background: transparent url(../images/small_grey_triangle.gif) no-repeat scroll 3px 8px}
+#search_lists_form {position: relative; float: right}
+.search_options_toggle a:hover {background: #fff url(../images/small_grey_triangle.gif) no-repeat scroll 3px 8px}
+.search_options_container {padding: 5px 10px 10px 10px}
+#item_lookup_form p {padding: 0 0 3px; margin: 0; font-size: 90%}
+.item_search_field {float: left; display: inline; background: transparent url(../images/ui_form_skin.gif) no-repeat 100% 0}
+#item_lookup_keyword {margin: 0 0 5px; padding: 4px 0pt 5px; width: 160px; float: left; display: inline; border: none; background: transparent}
+.item_search_field span {float: left; display: block; background: transparent url(../images/ui_form_skin.gif) no-repeat 0 0; width: 25px; height: 25px}
+.item_lookup a.edit {margin: 0}
+.item_lookup {padding: 0 5px}
+.item_lookup .category {padding-top: 3px; width: 100%}
+.item_lookup .category input.checkbox {width: auto}
+.item_lookup input.text_field {margin: 0 6px 0 0; padding: 2px; width: 180px; float: left}
+#sentence_lookup_results .message, #item_lookup_results .message, #language_pair_error {background-color: #ffc; border: 1px solid #cc9; display: block; margin: 1em 10px; padding: 1em}
+#item_lookup_results ul {padding: 0; margin: 0px 0 0px; border-top: 1px dotted #ccc}
+#item_lookup_results li {padding: 3px; line-height: 1.4; list-style: none}
+p.spinner, #item_lookup_results p.spinner {display: block; background: #ffc url('../images/spinner.gif') 5px center no-repeat; padding:1em 1em 1em 2.4em; margin-right: 2px; float:none}
+.course_items .default, .mypage_items .default {background: transparent url(../images/word_list_panel_bg.gif) no-repeat 0 100%; border: none; width: 170px}
+.course_items .prototip .default .toolbar, .mypage_items .prototip .default .toolbar {background: transparent url(../images/word_list_panel_bg.gif) no-repeat 0 0}
+a.item_link span.add_to_word_list, a.item_link span.added_to_word_list, a.item_link span.word_list_dropdown {}
+span.pos{ padding: 0; color: #666}
+.pos em {font-style: normal}
+div.word_list_menu {position: absolute; display: none; margin: -3px 0 0 170px; width: 60px}
+a.item_link span.word_list_dropdown {width: 11px; float: left}
+a.item_link span.add_to_word_list {float: left}
+a.item_link:hover div.word_list_menu {display: block}
+a.item_link span.word_added {display: block; cursor: pointer}
+a.item_link span.adding_word {display: block; cursor: default}
+li.item_li {overflow: visible}
+.menu_unloaded {background: url('/images/loading.gif') no-repeat center center; height: 100px}
+div.popup {width: 0; height: 0; float: right; clear: both}
+div.popup div {position: relative}
+div.popup div div.popup_body {border: 2px solid #CCC; padding: 10px; width: 220px; height: auto; background-color: #FFF; position: absolute}
+div.popup div div.popup_body h4 {font-size: 120%}
+div.popup div div.dictionary {width: 220px}
+div.right_column div div.popup_body {top: -1px; left: -236px}
+div.left_column div div.popup_body {top: -19px; left: 1px}
+div.popup div div.popup_body .loading {text-align: center}
+.word_list_menu_list {margin: 0 10px 10px; padding-bottom: 10px; border-bottom: 1px solid #CCC}
+.word_list_menu_list a.edit {float: none; margin: 1em 0 0}
+.dictionary .word_list_menu_list {border-bottom: none}
+div.word_list_menu_list ul {margin: 10px 0}
+div.word_list_menu_list li {font-size: 100%}
+div.word_list_menu_list li span {float: none}
+div.word_list_menu_list a.added {background: url('../images/word_added.gif') no-repeat}
+div.word_list_menu_list .text_field, div.word_list_menu_list textarea {width: 95%; padding: 2px}
+div.word_list_menu_list h4 {padding: 2px 0; font-size: 80%; color: #666}
+p.word_list_menu_radio {cursor: pointer; font-weight: normal; font-size: 80%; padding: 0; margin-bottom: 5px}
+.prototip .default .content select {width: 140px; color: #666}
+a.existing_add_link, a.new_add_link {display: block; margin: 10px 0; padding-left: 20px; background: url('/images/add_to_word_list.gif') no-repeat}
+.item_image img {padding: 5px; border: 1px solid #ccc}
+.item_detail .list_table td.course_title {border-left: none; width: 99%; text-align: left}
+.studying {height: 21px; margin: -5px 0 -21px; background: url('../images/bg_studying_left.gif') top left no-repeat; width: 85px; float: right; display: inline; color: #0689d0}
+.actions_list .studying {float: none}
+.info_panel ul.actions_list li .studying span {float: none; background: url('../images/btn_user_actions.gif') 0 -1835px no-repeat; text-indent: 25px; display: block; padding: 0 0 .4em 0}
+.course_directory .studying {margin: 5px 0 0 10px; float: left}
+.studying div {height: 21px; margin-left: 6px; background: url('../images/bg_studying_right.gif') top right no-repeat; padding-right: 8px}
+.studying div span {background: url('../images/icon_studying.gif') left center no-repeat; padding:0 0 0 15px}
+a.studying {width: 18px; height: 18px; text-decoration: none}
+a.studying:hover span {top: -0.1em; width: 10em}
+.item_detail a.studying:hover span {top: .8em; left: 1em; width: 5em; text-align: center}
+a.contact_us {display: inline; float: left; padding: 3px 0 0 15px; margin: 0 20px 10px 0; background: url('/images/list_bullet_point.gif') no-repeat; font-weight: bold}
+.main_heading {margin: 0 0 5px}
+.main_heading h2{ border: none; padding: 0; margin: 5px 0 0; line-height: 1.4}
+.channel_main .main_heading, .course_main .main_heading{ border-bottom: 1px solid #ccc; margin: 0 0 15px}
+.profile_heading h1 {display: none}
+.user_diary .profile_heading ul {float: right; display: inline; line-height: 2em}
+.profile_heading li {display: inline; margin: 0; float: left; zoom: 1}
+.profile_heading li a {overflow: hidden; font-weight: bold; line-height: 2em; font-size: 85%}
+.breadKrumb {text-align: left; padding-bottom: 5px}
+.blog_listing p a {font-weight: 700; font-size: 110%}
+.blog_comments_and_votes {padding: 0; background: none; margin-top: 5px; clear: both}
+.blog_comments_and_votes ul {padding: .75em 8px .5em}
+.blog_comments_and_votes ul li {float: left; margin: 0 10px 3px 0}
+.blog_comments_and_votes ul li.bookmark_{ width: 103px}
+.blog_comments_and_votes ul li.votes{ width: 80px}
+.blog_meta {float: left; width: 100%}
+.blog_meta h6 {display: inline}
+.blog_tags, .blog_category {padding: 5px 10px 5px 25px; margin: 0 10px 1em 0; overflow: hidden; word-wrap:break-word; background: transparent url(../images/btn_user_actions.gif) 0 -1264px no-repeat; float: left}
+.blog_category {background: transparent url(../images/category.png) 0 2px no-repeat}
+.blog_comments_and_votes li a.spinner {background: url('../images/spinner.gif') no-repeat center left; display: block; width: 40px; cursor: default; text-indent: -10000px}
+.blog_comments_and_votes li.bookmark {padding: 10px 10px 5px 20px}
+h1 .sublink, h2 .sublink, h3 .sublink {font-weight: normal; float: right; position: relative}
+h1 .sublink {font-size: 65%; top: 8px}
+.container_left .local_panel dt{ display: inline}
+.local_panel dt div{ margin-right: 5px}
+.panel_plain li {padding: 2px 0}
+.panel_plain {float: left; margin: 0 0 10px; width: 100%}
+.local_panel li.odd {background-color: #EEF9FD}
+.local_panel li.even {background-color: #FFF}
+.ranking_preview .local_panel li span {float: left; display: inline}
+.person_small {float: left; text-align: center; width: 50px; height: 90px; position: relative}
+.users_panel_array .person_small {width: 63px}
+.person_small p a {overflow: hidden; font-size: 90%; font-family: Arial, Helvetica, sans-serif}
+.person_small p a.staff, .person_medium p a.staff {background: transparent url(../images/icon_iknow_staff.gif) no-repeat 0 2px; padding: 0 0 0 12px}
+.person_small p.no_badge {height: 8px}
+.person_small p a.study_tip{ color:#A0A0A0}
+.person_medium p a.study_tip{ color:#A0A0A0}
+.person_medium p {line-height: normal; margin: .2em 0 0; width: 80px; overflow: hidden}
+.container_left .users_panel_array {padding: 5px}
+.person_small a span.user_online{ position: absolute; right: 0; bottom: 0; background:url('../images/icon_online.gif') no-repeat; text-indent: -5000px; width: 14px; height: 12px; line-height: 0; z-index: 200}
+.person_medium a span.user_online{ position: absolute; text-indent: -5000px; width: 14px; height: 14px; z-index: 200; right: 0; bottom: 0; background: url('../images/icon_online.gif') center top no-repeat}
+.person_big .user_online{ position: absolute; text-indent: -5000px; width: 22px; height: 20px; margin: 115px 0 0 112px; z-index: 100; background: url('../images/icon_online_big.gif') center top no-repeat; bottom: 5px; right: 5px}
+.person_tiny a span.user_offline, .person_small a span.user_offline, .person_medium a span.user_offline, .person_big a span.user_offline{ display:none}
+.person_small a span.user_online img {padding: 0; margin: 0}
+.person_small p {padding: 0; margin: 0}
+.person_small p{ width: 50px; display: block; overflow: hidden}
+.person_small p span {font-size: 75%; line-height: 1; display: block}
+.person_small img, .person_medium img, .person_big img {position:absolute; clip: rect(0px, 52px, 52px, 0px); padding: 5px; margin-left: -100px; display: block; left: 100px; border: 1px solid #ededed; background: #fff}
+.person_small .person_image_small, .person_medium .person_image_medium, .person_big .person_image_big {display: block; height: 52px; width: 52px; position: relative; overflow: hidden; margin: 0 auto}
+.person_medium .person_image_medium{ height: 82px; width: 82px}
+.person_big .person_image_big {height: 152px; width: 155px}
+span.badge {font-size: 80%; font-weight: 700; line-height: 1%; display: block; margin: 3px 0 5px}
+.person_medium span.badge {height: 2.2em}
+.person_medium {float: left; display: inline; width: 82px; text-align: center; height: 130px; margin: 0 .5em 0 0; position: relative}
+.my_page_friends .person_medium {margin: 0 21px 0 0}
+.person_medium img {background: #fff; clip: rect(0px, 82px, 82px, 0px); background: #fff; border: 1px solid #dedede; padding: 5px}
+.person_big img {background: #fff; clip: rect(0px, 155px, 155px, 0px); padding: 10px}
+.study_profile .person_big p {display: none}
+.study_profile .person_big {width: 155px; margin: 0 auto}
+.person_medium p a {display: block; height: 17px; overflow: hidden}
+.person_medium p .badge a {overflow: visible}
+.person_medium span {font-size: 75%; display: block; padding: 0 5px; line-height: 1}
+.medium_icon {padding: 4px; margin: 5px 0; border: 1px solid #dfdfdf; float: left; background: #fff}
+.small_icon {padding: 3px; float: left; background: #fff}
+img.big_icon {margin: 1em 0 0}
+.person_tiny {float: left; display: inline; width: 25px; text-align: center; height: 25px; margin: 0 1em 0 0; position: relative}
+.person_tiny img {background: #fff; clip: rect(0px, 25px, 25px, 0px); background: #fff; border: 1px solid #dedede; padding: 2px}
+.user_admin_details h4 {font-size: 120%; border-bottom: 1px solid #ccc; padding: 0 0 5px 0; margin: 15px 0 0 0}
+.user_admin_details .content_block {padding-top: 10px}
+.error_notice, .page_notice_content {padding: 8px 12px 8px 30px; margin: 0; opacity: 0.85; border: 1px solid #DEDF99; background: #ffffcc url('../images/error.gif') no-repeat 8px 10px}
+.page_notice_content h2 {border-bottom: none}
+#page_notice_generic{ margin: 10px 0 20px}
+.hide_notice {font-size: 85%}
+a.invite_friend {display: block; height:33px; position:relative; top:32px; line-height: 33px; font-weight: 700; text-align: right; color: #cff; font-size: 85%; padding: 4px 55px 5px 0; margin: 10px 0 0; background: url('../images/header_icon_friends.gif') top right no-repeat}
+a.invite_friend_love, a.invite_friend_love:link, a.invite_friend_love:visited {display: block; height:33px; position:relative; top:18px; line-height: 33px; font-weight: 700; text-align: right; color: #cff; font-size: 85%; padding: 4px 55px 9px 150px; margin: 10px 14px 0; background: url('../images/top_invite_love_off.gif') top right no-repeat}
+a.invite_friend_love:hover {background: url('../images/top_invite_love_on.gif') top right no-repeat}
+div.badge_tip {position: absolute; width: 150px; padding: 5px; border: 1px solid #CCC; background-color: #FFF; z-index: 10000; left: -50%; top: 100%}
+.person_small div.badge_tip {left: -100%}
+div.badge_tip p {background-color: #EFEFEF; width: auto; padding: 1px 2px; margin: 0; text-align: left}
+.register {padding: 10px 0; margin: 0 10px; clear: both}
+.register span {font-size: 80%}
+a.btn_register {display: block; text-indent: 20px; background: url('../images/icon_register.gif') no-repeat; font-weight: 700}
+a.btn_forgot_password {display: block; margin: 20px 0 0; text-indent: 0; padding: 0; font-size: 90%}
+span.summary {float: right; display: block; padding: 4px; font-size: 85%}
+div.string_links {position: absolute; right: -365px; top: -5px; border: 2px solid #CCC; padding: 5px; background: #FFF; width: 350px; height: auto; min-height: 90px; font-size: 85%}
+div.string_links span {color: #888; width: 100%}
+#string_links_spinner {height: 16px; width: 16px; background: url('../images/spinner.gif') no-repeat center left}
+.odd {}
+.even {}
+ol.numbered_ol li {list-style-type: decimal; margin-top: 0; margin-bottom: 0.3em}
+.blog_listing ul {padding: 5px 0 0}
+.blog_listing li {padding: 5px 10px}
+#action_confirmation_fields {display: none; color: red}
+#item_lookup_results li.studied {background-color: #FFC}
+.paginate_more {text-align: right}
+.paginate_more a {padding-left: 22px}
+.paginate_more a.spinner {background: url('../images/spinner.gif') no-repeat center left}
+.next_previous_paging a {display: block; padding: 2px 5px; text-align: left; font-weight: normal}
+.next_previous_paging {zoom: 1; clear: both}
+.next_previous_paging div{ width: 49%}
+.next_previous_paging .paging_right a{ text-align: right}
+.local_panel .tagcloud li {text-align: left; font-size: 120%}
+.tagcloud a {padding-right: 0.4em; font-family: Verdana, Arial, Sans-Serif}
+.tagcloud a.strength_1 {font-size: 75%; line-height: 170%}
+.tagcloud a.strength_2 {font-size: 90%}
+.tagcloud a.strength_3 {font-size: 110%}
+.tagcloud a.strength_4 {font-size: 125%; line-height: 25px}
+.list_blog_entry h4 {margin: 0 0 5px; font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.2}
+.list_blog_entry p {margin: 0}
+.panel_footer {color: #FF8D20; font-size: 80%}
+.list_blog_entry .panel_footer {border-bottom: 1px dotted #CCC}
+.active_lists li, .rated_lists li {border-bottom: 1px dotted #CCC; padding:.5em 0 .75em; margin: 0}
+.active_lists li .small_icon {margin: 0 5px 0 0}
+.shoulder_buttons_list {float: right; display: block; margin-top: 7px}
+.word_list_builder #item_lookup{ float: left}
+.settings_block {padding: 20px; margin: 0 0 1em; background: #E4F9FF}
+.settings_block .settings_panel {float: left; display: inline; border: 1px solid #ccc; padding: 0; background: #fff; margin: 0 20px 20px 0; color: #666}
+.settings_panel p {width: 300px}
+.content_panel_container .settings_panel h3 {background: #eee none repeat scroll 0; color: #666; font-size: 140%; padding: 5px 10px; width: auto; text-align: left}
+.content_panel_container #sentence_settings h3, #privacy_settings h3 {padding: 5px 10px 5px 10px}
+#sentence_settings label {float: left; display: block; clear: both; margin: 0 0 .8em}
+.profile_heading {min-height: 30px}
+#notifications_settings {width: 450px}
+#notifications_settings h3 {padding: 5px 10px}
+.settings_panel .form_fields {padding: 0 20px 20px}
+.settings_panel .form_fields table {border-collapse: collapse; margin-bottom: 20px}
+.settings_panel .form_fields table td {padding: 4px 0}
+span.header_subtext {font-weight: normal; font-size: 70%; width: 100%; display: block; padding: .5em 0 0}
+.sidebar_nav li a {display: block; text-decoration: none; padding: 5px 10px}
+.sidebar_nav li.active a {font-weight: bold; background: #c6ecff}
+.sidebar_nav li a:hover {background: #E4F9FF}
+.content_blog .hVocabulary img {border: none; padding: 0}
+a.blog_list {display: block; font-weight: 700}
+.with_author a.blog_list {margin: 0 0 5px 55px; *margin: 0 0 5px 5px}
+.item_bank_row p {display: inline; border: none; background: #fff}
+#item_lookup_results .item_bank_row {clear: both; margin: -.3em 0 0 0}
+#item_lookup_results .item_bank_row span {display: inline; padding: 0; border: none; line-height: 0}
+#item_lookup_results .item_bank_row span.pos {padding: 1px 3px 0 0; font-size: 90%; color: #aaa; background: transparent}
+.row_slider, .li_slider {display: block; width: 20px; height: auto; cursor: n-resize}
+.row_slider img, .li_slider img {margin: auto}
+.li_slider {margin-right: 3px; float: left}
+* html .textareafix {width:100%; margin-left: -90px}
+.spicy_big {width: 36px; height: 23px; background: url('../images/spicy_big.gif') bottom left no-repeat; margin: 3px 0 0 5px; display: inline}
+* html .spicy_big {margin-top: -3px}
+.spicy_small {float: left; width: 25px; height: 16px; background: url('../images/spicy_small.gif') bottom left no-repeat; margin: 1px 0 0 5px}
+table.sentences td {padding: 3px}
+table.sentences input.link_field {padding: 1px; width: 190px}
+* html table.sentences input.link_field {width: 190px}
+table.sentences .sound_icon {padding: 0 2px 2px; float: left; display: inline}
+.sound_link {float: left; display: block; padding-top: 3px}
+.sound_link div {float: left; display: inline; padding: 2px}
+.lightbox .sentence {overflow: hidden; zoom: 1; padding-left: 20px}
+.lightbox .sentence .sentence {padding: 0; overflow: visible}
+.sound_link input.link_field {float: none; width: 97%}
+table.sentences div.hover_image {position: relative; cursor: pointer; width: 200px}
+table.sentences div.hover_image img {border: 2px solid #CCC}
+table.sentences div.hover_image div {border: 2px solid #CCC; position: absolute; top: -7px; right: 0; background-color: #FFF; padding: 7px}
+table.sentences div.hover_image div img {border: none}
+.send_high_five a {font-size: 10px; padding: 8px 0 4px 28px; line-height: normal; margin-left: 1px; background: url('../images/high_five.gif') no-repeat left; background-position: 0 2px; white-space: pre; zoom: 1}
+.send_high_five a:hover {background-position: 0 -37px}
+.received a {font-size: 100%; padding: 0 ; line-height: 1.22em; margin-left: 0; display: inline; background: none; background-position: 0 0; font-weight: normal}
+span.spinner {background: url('../images/spinner.gif') no-repeat center left; padding-left: 20px}
+.maintenance_message {background: #666666; color: #FFFFFF; padding: 8px 0; width: 100%; text-align: center}
+.maintenance_message span {background: url('/images/icon_maintanence.gif') no-repeat; padding: 2px 0 4px 25px}
+.spin_div {background: #fff url('/images/loading.gif') no-repeat center center; opacity: 0.85; filter:alpha(opacity: 85); -moz-opacity: 0.85; -khtml-opacity: 0.85; z-index: 1000}
+.spin_div_small {background: #fff url('/images/spinner.gif') no-repeat center center; width: 16px; height: 16px; position: absolute; margin: 4px 0 0 228px; padding-top: 5px}
+p.spinner, .spinner_block{ padding: 0 20px 0 0; margin: 0; float:left; width: auto; display: block; background: #fff url(../images/spinner.gif) no-repeat center right; *background-position: 65% right}
+p.spinner a, .spinner_block a {margin-right: 10px}
+.spinner_block{ background: none}
+.xfolkentry .description {font-size: 90%}
+ul.openid a {background-image: url('/images/login_services_sprite.png'); background-repeat: no-repeat; padding: 0 0 0 30px; display: block}
+a.yahoo_login {border: 1px solid #cccc99; background: #ffffcc url(../images/icons_openid_small.gif) no-repeat 5px 6px; display: block; float: left; text-indent:30px; color: #330033; margin: 0 20px 5px 0; font-weight: bold}
+.openid_yahoo_ja a {background-position: 0 0}
+.openid_yahoo a {background-position: 0 -77px}
+.openid_mixi a {background-position: 0 -131px}
+.openid_openid a {background-position: 0 -325px}
+.openid_google a {background-position: 0 -237px}
+a.google_id {background: transparent url(/images/icons/google_small.gif) no-repeat scroll 3pt 0pt; padding: 0pt 0pt 3pt 30px}
+.panel_login a.yahoo_login {margin: 10px 15px 0; float: none}
+.splash_page .local_panel {font-size:100%}
+.panel_login a.edit {margin: 5px 10px 0 0; letter-spacing: 0.2px}
+.panel_login .register {padding: 10px 0 0; margin: 0 .5em; font-size: 110%}
+.create_new_account a {font-size:110%; font-weight:bold; padding-bottom:10px}
+.editor_cancel_link, .cancel_link {display: block; margin: 0.6em 0 0 5px; width: 80px; float: left}
+.editor_field {border: 1px solid #ccc}
+.content_comment_form {padding: 2em 0pt 0pt 72px; margin: 0 0 2em}
+.known_issue_message {padding: 10px}
+.known_issue_message div a {display: block; float: right}
+.tagcloud {text-align: center; padding: 0 5px 1em}
+a.wizard_next_step {background-image: url('../images/btn_wizard_next.gif'); background-repeat: no-repeat; background-position: 0 0; padding: 2px 0 4px 28px; font-weight: 700; color: #ff8d20}
+.chart_container {display: inline; float: left; margin: 0 7px 2em 0; width: 230px}
+.chart_container .local_panel.rounded_8px {padding: .5em 0}
+.chart_container .local_panel.rounded_8px h3 {border: 1px solid #dfdfdf; color: #777; background-color: #f7fbfd; margin: 5px 9px 0; padding: 7px; -moz-border-radius-topright: 0; -webkit-border-top-right-radius: 0; -moz-border-radius-topleft: 0; -webkit-border-top-left-radius: 0}
+.chart_container .local_panel.rounded_8px .panel_container {padding: 0}
+.chart_swf_container {text-align: center; color: #fff; margin: 0 auto; width: 210px; height: 200px; border: 1px solid #dfdfdf; border-top: none}
+.invert_tabs{ margin-top: -8px}
+.chart_container a {text-decoration: none}
+.chart_container a:hover{ text-decoration: none}
+.chart_container ul {margin: 5px 0 6px; font-size: 85%; float: left}
+.chart_container ul li a {margin: 0 0 0 5px; padding: 4px}
+.chart_container .local_panel, .chart_container .cn .cb{ background-color: #f3f3f3; margin: 0}
+.chart_container .cn .cc{ padding: 0}
+.chart_container .local_panel dt{ border: 1px solid #dfdfdf; color: #777; background-color: #f7fbfd; margin: 5px 9px 0; padding: 7px}
+.chart_container .flat_tabs {height: 23px}
+.chart_container .flat_tabs .tabs {margin: 8px 5px 0 0}
+.chart_container .invert_tabs .flat_tabs{ height: 34px; *height: 38px}
+.chart_container li.selected a span{ padding-left: 1em; display: inline}
+#list_entries li, .recent_lists li, .item_blog_entries li {margin: 0 8px 1em; clear: both; border-bottom: 1px dotted #ccc}
+#list_entries li:last-child, .recent_lists li:last-child, .item_blog_entries li:last-child {border-bottom: 1px solid #E1E1E1; margin: 0 0 .5em}
+span.video_icon, span.text_icon, span.theme_icon, span.free_icon {width: 50px; height: 50px; text-indent: -4000px; background: #D6F7F7 url(../images/icon_video_list.gif) no-repeat center center; display: block; float: left; margin: 0 10px 0 0}
+.lists_main span.video_icon, .lists_main span.text_icon, .lists_main span.theme_icon, .lists_main span.free_icon {width: 70px; height: 70px; margin: 0 0 0 0}
+#word_list_form span.video_icon, #word_list_form span.text_icon, #word_list_form span.theme_icon, #word_list_form span.free_icon {margin: 0; width: 60px; height: 60px}
+span.text_icon {background: #FFEFB5 url(../images/icon_text_list.gif) no-repeat center center}
+span.theme_icon, span.free_icon {background: #E7FBFF url(../images/icon_theme_list.gif) no-repeat center center}
+img.list_logo {border: none; display: block; float: left; margin: 0 10px 0 0}
+.panel_square {background: #e4f9ff; padding: 0 0 .1em; margin-bottom: 20px}
+.panel_square span.footer {background: #f5f5f5}
+.item_count {font-weight: normal; font-size: 90%}
+.panel_square h3 {background: #17abe3; color: #fff; padding: 3px 8px; font-size: 110%; font-weight: bold; margin: 0 0 .5em}
+.panel_square li {padding: 5px; margin: 5px; background: #fff; overflow: hidden}
+.stats {font-size: 90%; color: #999; margin-bottom: -2px}
+.panel_square li h3, .panel_square li h4, .panel_square p {background: none; padding: 0; margin: 0; text-align: left}
+.panel_square p {display: none}
+.panel_square li h4 a {color: #FF8D20; font-size: 85%}
+.course_directory .panel_square p {display: block}
+.panel_square .width_390 {width: 200px}
+.panel_square .creator_series a {font-size: 85%; color: #FF8D20; font-weight: bold}
+.feeds{ float: right; position: relative; margin-top: -1000px; top: 1000px; z-index: 100}
+.feeds dt, .feeds dd {font-size: 85%; display: block; border: 1px solid #dfdfdf; width: auto; padding: 2px 0 2px 18px; background: #fff url(../images/feed.png) no-repeat 4px 4px}
+.feeds dt a, .feeds dd a {cursor: pointer; width: auto; position: relative; display: block; padding: 0 30px 0 0; background: url(../images/icons_arrows.gif) no-repeat right -30px}
+.feeds dd{ background: url(../images/bullet_orange.png) no-repeat 2px 2px; border-top: none; background-color: #fff}
+.feeds dd a{ padding: 0; background: none; display: block}
+.feeds dt a.active{ background-position: right 0}
+a.start_button {background:transparent url(../images/intro_buttons_course_wizard.png) no-repeat scroll 0pt 0pt; display:block; padding: 2.2em 0; width: 230px; position:static; text-indent:-5000px}
+a.start_button:hover {background-position: 0 -94px}
+a.wizard {float: right; margin: 2.3em 23px 0 0; display: inline}
+.splash_page a.wizard {float: left; margin: 2em}
+.start_btns {float:left; display: inline; width: 245px; margin-left: 32px}
+.start_btns a {width: 205px; display: block; height: 54px; background: url('../images/btn_intro.png') no-repeat 0 0; text-indent: -5000px; line-height: 54px; padding: 0; position: static}
+.start_btns .wizard a{ background-position: 0 -200px}
+.start_btns .wizard a:hover{ background-position: 0 -300px}
+.start_btns a:hover{ background-position: 0 -100px}
+.start_btns dd p{ padding: 0 10px 10px 10px; font-size: 90%}
+.start_panel{ background-color: #fff; margin: -15px 10px 0}
+.start_btns .wizard {margin-top: 10px}
+.attach_img a, #images_tab .attach_img a{ border: 1px solid #dfdfdf; border-left: 1px solid #f5f5f5; border-top: 1px solid #f5f5f5; width: 63px; height: 58px; display: block; overflow: hidden; background: #fff url('../images/ui_wiki.gif') no-repeat center 26px}
+.attach_img a:hover, #images_tab .attach_img a:hover{ border: 1px solid #dfdfdf; border-right: 1px solid #f5f5f5; border-bottom: 1px solid #f5f5f5; text-decoration: none; background-color: #F8FDFF; background-position: center 27px}
+.attach_img a:hover span, #images_tab .attach_img a:hover span{ padding: 11px 0 9px}
+.sample_sentence .sentence div.attach_img{ float: right; margin-bottom: 8px; margin-left: 10px}
+.attach_img span, #images_tab .attach_img span{ display: block; text-align: center; padding: 10px 0 10px; font-size: 10px; line-height: 10px}
+.time_filter_form {margin-top: 5px}
+.time_filter_form select {margin-right: 5px}
+.time_filter_form input.text_field {padding: 1px 3px; width: 120px}
+.time_filter_form img {margin: 0px 10px 0 5px; position: relative; top: 5px}
+.time_filter_form input.button {width: auto}
+div#loading {position: fixed; z-index: 2000}
+#loading_spinner {position: fixed; top: 50%; left: 50%; padding: 5px; border-top: 3px solid #CCC; border-left: 3px solid #CCC; border-right: 3px solid #666; border-bottom: 3px solid #666; width: 100px; height: 100px; margin: -50px 0 0 -50px; background: #FFF url('/images/loading.gif') no-repeat center center}
+#loading_background {width: 2000px; height: 5000px; opacity: 0.3; background-color: #CCC}
+.add_featured_status {background: url('/images/lightbulb_add.png') no-repeat left center; padding-left: 20px}
+.remove_featured_status {background: url('/images/lightbulb_delete.png') no-repeat left center; padding-left: 20px}
+th.remove_icon {background-image: url('/images/bin_empty.png'); background-repeat: no-repeat; background-position: center center}
+div.action_menu {cursor: default}
+div.action_menu_link {position: relative}
+div.action_menu_link div.action_menu {vertical-align: middle; font-style: normal; position: absolute; left: 0px; top: 1.4em; width: auto; background: #EFEFEF; border: 2px solid #BBB; z-index: 1000; font-weight: normal; color: #000}
+div.action_menu_link div.action_menu p {background: #EFEFEF; padding: 5px; font-size: 120%}
+div.action_menu_link p {}
+.sentence_paginator {position :relative; padding: 7px 4px 7px 7px; background-color: #f7fbfd; clear: both}
+.sentence_paginator .current {background-color: #0689D0; font-weight: bold; color: #fff; padding: 0px 3px}
+.attribution{ font-size: 80%; color: #bbb}
+.items_main .attribution{ display: block}
+.lang_en .attribution{ font-style: italic}
+.featured_objects {margin: 0 0 1.5em 0}
+.column_right .local_panel.featured_objects {border: none}
+.featured_objects h2 {margin: 0 0 .5em 0}
+.featured_objects ul {margin: 3px 0 0}
+.featured_objects li.odd, .featured_objects li.even {background: #fff; float: left; width: 280px; padding: 0; margin: 0 0 .5em; height: 60px; overflow: hidden; border: 1px solid #ececec; font-size: 85%}
+.featured_objects li .person_image_small {float: left}
+.featured_objects li .person_image_small img {padding: 5px; border: 1px solid #dfdfdf}
+.featured_objects li .container {padding: 5px}
+.featured_objects .panel_container li .content_inline_60 span {display: block}
+.featured_objects .panel_container li .content_inline_60 span a, .featured_objects .panel_container li h4 a {color: #ff8d20; line-height: 1.6; font-weight: normal}
+.featured_objects .panel_container li h3 {border: 0; display: inline; font-size: 125%; -moz-border-radius-topright: 0px; -webkit-border-top-right-radius: 0px; -moz-border-radius-topleft: 0px; -webkit-border-top-left-radius: 0px; background: none}
+.featured_objects .panel_container li h4 {margin-left: 48px}
+.featured_objects .panel_container li span.date, .featured_objects .panel_container li p {display: none}
+.featured_objects .panel_container li span.date, .featured_objects .panel_container h3 span {font-weight: normal; font-size: 80%; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; color: #999}
+.featured_objects .panel_container h3 span {display: block; margin-left: 50px; width: 90%}
+#user_language_pair_selection {clear: both; margin-top: 5px; height: 30px; position: relative; z-index: 1000}
+#user_language_pair_selection ul.language_pair {clear: both; float: left; position:relative; width: 170px; padding: 17pt 5px 0px; height: 17px; margin-top: -1000px; top: 999px; font-size: 100%; left: -4px; z-index: 10000; cursor: pointer}
+.result_container {position: relative; z-index: 150000}
+.language_pair li .language {line-height: 16px; padding: 3px 0; margin: 0pt 17pt 0pt 5px}
+.language_pair li .language span {padding: 0; margin: 0 2px 0 0}
+.language_pair li, .customized_selector li {border: 1px solid #dfdfdf; border-left: 1px solid #f5f5f5; border-top: none; margin: 0; background-color: #fff; padding: 0; width: 170px; zoom: 1; float: left; clear: both}
+.language_pair li:hover, .customized_selector li:hover{ background-color: #F8FDFF; cursor: pointer}
+.item_lang_pair .language{ margin: 0}
+.language_pair li.selected, .customized_selector li.selected{ background: #fff url(../images/icons_arrows.gif?) no-repeat scroll 154px -26px; position: absolute; border: 1px solid #dfdfdf; border-left: 1px solid #f5f5f5; border-top: 1px solid #f5f5f5; left: 5px; top: 0; z-index: 0; clear: none}
+.language_pair li.selected:hover, .customized_selector li.selected:hover{ background-color: #F8FDFF}
+.language_pair li.selected:active, .customized_selector li.selected:active{ border-left: 1px solid #dfdfdf; border-top: 1px solid #dfdfdf; border-right: 1px solid #f5f5f5; border-bottom: 1px solid #f5f5f5; background-position: 154px -25px}
+.language_pair li .language {margin: 0 0 0 10px; float: left}
+#user_language_pair_selection span.lang_icon {display: none}
+.lang_spinner{ width: 20px; height: 20px; background: transparent url(../images/spinner_small.gif) no-repeat scroll 0 0; position: absolute; left: 40px; top: 26px}
+#item_lookup_results{ clear: both}
+#flashDiv{ background-color: #FFFFCC; position: absolute; top: 0; left: 0; padding: 0; margin: 0}
+.content_blog .post_body{ padding: 0 5px}
+.bevel {border: 1px solid #ccc; border-left: 1px solid #ededed; border-top: 1px solid #ededed}
+a.bevel:hover {border: 1px solid #dfdfdf; border-right: 1px solid #f5f5f5; border-bottom: 1px solid #f5f5f5; text-decoration: none; background-color: #F8FDFF}
+.inverse_bevel{ border: 1px solid #e6e6e6; border-right: 1px solid #f5f5f5; border-bottom: 1px solid #f5f5f5}
+.add_action a, #create {padding: 5px 5px 5px 23px; background: #fff url(../images/ui_wikis.gif) no-repeat 3px 8px; border: 1px solid #dfdfdf; border-left: 1px solid #f5f5f5; border-top: 1px solid #f5f5f5; font-size: 11px; color: #0689D0; zoom: 1; width: auto}
+.add_action a:hover, #create:hover {border: 1px solid #f5f5f5; border-left: 1px solid #dfdfdf; border-top: 1px solid #dfdfdf; background-color: #F7FBFD; text-decoration: none}
+.back_to_top {float: right; margin: -22px 6px 0 0; font-size: 80%; font-weight: normal}
+.learn_more .center {float: left; width: 975px; margin: 1.5em 0 1.5em 0}
+.iknow_item_title h4{ line-height: 1.8}
+.iknow_button_small, .dictation_button_small, .brainspeed_button_small{ float: left; display: inline; margin: 0 5px 0 0; width: 50px; margin: 0 auto}
+.iknow_button_small a, .dictation_button_small a, .brainspeed_button_small a {display: block; width: 35px; height: 37px; background-image: url('../images/buttons_launch_tools.gif'); background-repeat: no-repeat; text-indent: -3000px; margin: 0}
+.dictation_button_small a {background-position: -50px 0px}
+.iknow_button_small a:hover {background-position: 0px -50px}
+.dictation_button_small a:hover {background-position: -50px -50px}
+.brainspeed_button_small a {background-position: -150px -100px}
+.brainspeed_button_small a:hover {background-position: -150px -150px}
+a.item_link span.cue_text.ja {font-weight: normal; font-size: 120%}
+.item_link .response_2.ja em {font-size: 120%}
+.lightbox .image_panel {width: 100%}
+.lightbox .image_con {margin: 0; width: auto; float: left}
+.lightbox .main_image_info {}
+.lightbox .image_info_panel{ float: left; clear: none; width: 430px; margin-left: 10px; background-color: #f2f2f2}
+.lightbox .main_image_info h1 {display: none}
+.lightbox .more_detail {float: right; padding: 5px}
+#main_lb .list_con {padding: 10px}
+#main_lb .list_con li {margin-bottom: 10px}
+#main_lb .list_con li h4 {margin-bottom: 5px}
+.image_con img{ padding: 15px; border: 1px solid #dfdfdf; background-color: #F7FBFD}
+.lightbox .image_con img {width: 380px}
+.show_image .attribution{ background-color: #fff; width: 95%; margin: 8px; padding: 7px}
+.attribution dl{ width: 193px; float: left}
+.list_con{ border: 1px solid #dfdfdf; padding: 10px; background-color: #fff}
+.image_panel{ width: 690px}
+.more_from_user ul{ padding: 10px; background-color: #fff; border: 1px solid #dfdfdf}
+.main_attribution .img{ background-color: #fff}
+.more_from_user li{ float: left}
+.more_from_user li img{ padding: 6px; border: 1px solid #f0f0f0; background-color: #F7FBFD; margin-right: 5px}
+.image_panel .attribution {font-size: 90%; font-style: normal}
+.attribution dd, .attribution dt{ margin: 0; display: inline; padding: 0.5em 0pt 0pt 0}
+.item_detail.lang_en .attribution {font-style: normal}
+.related_images li {float: left; padding: 0}
+.related_images li img {width: 40px; height: 40px; padding: 3px; border: 1px solid #dfdfdf; margin: 0 5px 5px 0}
+.more_from_user{ margin: 20px 0 0; display: none}
+.lightbox .main_attribution h1 {display: none}
+.image_detail .column_right .local_panel {padding: 5px}
+.post_body {width: 420px; overflow: hidden}
+.sentence a, .translation a{ color: #333}
+.sentence a:hover, .translation a:hover, .translations a:hover {color: #FF8D20}
+.list_tools ul {padding: .5em 0}
+.list_tools .help_link a {text-indent: 0; background: none; padding: 0; width: auto}
+.list_tools .help_link {float: none; margin-top: 0}
+.list_tools li {padding: 0; margin: 0 0 10px}
+.list_tools li:last-child {padding: 0; margin: 0}
+.recent_list_comments {clear: both}
+.list_build .panel_center {overflow: hidden}
+.translations #create span, #edit_sentence span, #correct_sentence span {margin-right: 10px; font-size: 11px}
+#edit_sentence, #correct_sentence {padding: 3px; position: absolute; right: 10px; bottom: 5px}
+#edit_sentence span, #correct_sentence span {padding-left: 20px; padding-bottom: 5px}
+#option_guidelines {background: url('../images/pointer_gray.gif') no-repeat 80% 100%; padding-bottom: 9px; position: absolute; bottom: 11%; right: 0%; z-index: 10000}
+#option_guidelines dt, #option_guidelines dd {background-color: #ffffcc; border: 1px solid #ccc; padding: 15px; margin: 0}
+#option_guidelines dt {color: #ffa611; font-size: 14px; font-weight: bold; border-bottom: none}
+#option_guidelines dd {padding-top: 0; padding-bottom: 15px; border-top: none}
+#option_guidelines dd p {font-size: 11px; height: 230px; overflow-y: auto; color: #999; width: 350px; margin: 0}
+.close_guidelines {position: absolute; top: 5px;; right: 10px; font-weight: bold; cursor: pointer; color: #ccc}
+.sentence_detail #option_guidelines {bottom: 28%}
+.list_build #option_guidelines {bottom: 20%}
+.sentence p, .sentence .sample {margin: 0 0 5px 0; zoom: 1}
+.sentence .sample {margin: 0 100px 5px 0}
+.sample_sentence .edit_icon, .sample_sentence .correct_icon {display: none}
+.sample_sentence.inline_edit .edit_icon, .sample_sentence.inline_edit .correct_icon, .sample_sentence.inline_edit .correct_package_icon {display: block}
+.editable {cursor: pointer}
+.sample_sentence .sentence_wrapper .sentence dt {display: block}
+.edit_icon dt a {background: url(../images/ui_wikis.gif) no-repeat scroll center -105px; text-indent: -5000px; display: block; width: 20px; height: 20px; margin: 0; margin-left: 5px}
+.edit_icon dd {position: absolute; width: 150px; margin: 0; background-color: #fff; padding: 6px; right: 20px; top: 24px; zoom: 1}
+.edit_icon dd a {color: #0689D0; font-weight: normal; display: block; padding: 3px; font-size: 11px; margin: 0 }
+.edit_icon dd a:hover {background-color: #F7FBFD}
+.edit_icon, .correct_icon{ display: block; position: absolute; margin: 0; right: 5px; padding: 3px 20px 3px 3px; font-weight: bolder; font-size: 87%; color: orange; z-index: 2000; cursor: pointer; top: 0; right: 52px; zoom: 1}
+.edit_icon.selected dt a, .edit_icon.selected dt a:hover{ margin: 0; border: 1px solid #ccc; border-left: 1px solid #ededed; border-top: 1px solid #ededed; border-bottom: none; background-color: #fff; position: relative; z-index: 3000; height: 21px}
+.correct_package_icon {display: none; position: absolute; bottom: 10px; right: 65px}
+.flag_count {float: right; color: #999; cursor: pointer; line-height: 20px; font-size: 10px}
+.flag_actions div a span {display: block; margin-right: 18px; font-size: 11px}
+.flag_actions div a:hover {background-color: #f3fbfe; text-decoration: none}
+.flag_actions {position: relative}
+.remove_flag:hover span {background-position: right 3px}
+.remove_flag {color: #aaa}
+.sample_sentence #correct_sentence {margin: 0}
+.sample_sentence textarea, div.tags.input {color: #666; font-size: 110%; background: #f7fbfd url(../images/shadow.gif) repeat-x 0 0}
+.item_detail #sentences_list .sample_sentence textarea {background: #fff none}
+.sample_sentence .sentence_wrapper #create {float: left}
+.sample_sentence .sentence_wrapper .attribution {clear: both}
+.play_sound.bevel {padding-left: 4px; margin: 4px 0 0 -12px; top: -2px}
+.edit_sentence_form {margin-left: 10px}
+.edit_sentence_form .play_sound {left: -22px}
+.stream_container {height: 545px; width: 177px; overflow: hidden; margin-top: 5px; padding: 0 10px 10px 10px; background-color: #F7FBFD; position: relative}
+.scroll_previous {margin: 4px 0; width: 49%; float :left}
+.scroll_previous.disabled {visibility: hidden}
+.scroll_next {margin-top: 4px; float: right; width: 49%}
+.scroll_previous, .scroll_next {cursor: pointer}
+.scroll_previous a, .scroll_next a {display: block; padding: 1px; text-indent: -5000px; background-color: #fff; cursor: pointer}
+.scroll_previous a span, .scroll_next a span {display: block; background: url(../images/ui_wikis.gif) no-repeat center -112px; font-size: 6px}
+.scroll_previous a span {background-position: center -162px}
+#study_courses .recommended_course {background: #fff; color: #666666; float: right; font-size: 100%; font-weight: normal; margin: 9px 10px 0; padding: 0 10px 0 5px; text-indent: 5px; -moz-border-radius: 2px; -webkit-border-radius: 2px}
+#study_courses .recommended_course em {color: #FFA319; font-size: 14px; font-weight: bold; font-style: normal; margin-right: 5px}
+#study_courses .recommended_course span a{ margin-left: 10px; font-weight: bold}
+.dropdown_see_all {}
+.google_translate_link {float: right; padding: 2px 10px 2px 25px; background-position: 2px center; background-image: url('/images/icons/google_small.gif'); background-repeat: no-repeat}
+.google_translate_link.translating {background-image: url('/images/loading_16_blue.gif')}
+select option.more {color: #999}
+#body_home .featured_courses, #body_home .featured_lists, #body_home .featured_journals {width: auto}
+.color_1 {color: #0689d0}
+.color_2 {color: #16387c}
+.color_3 {color: #e4f6fc}
+.color_4 {color: #d6ebff}
+.color_5 {color: #ff8d20}
+.bg_color_1 {background-color: #0689d0}
+.bg_color_2 {background-color: #16387c}
+.bg_color_3 {background-color: #E4F9FF}
+.bg_color_4 {background-color: #d6ebff}
+.bg_color_5 {background-color: #ff8d20}
+.grey_1 {color: #333}
+.grey_2 {color: #666}
+.grey_3 {color: #aaa}
+.grey_4 {color: #ccc}
+.grey_5 {color: #efefef}
+.bg_grey_1 {background-color: #333}
+.bg_grey_2 {background-color: #666}
+.bg_grey_3 {background-color: #aaa}
+.bg_grey_4 {background-color: #ccc}
+.bg_grey_5 {background-color: #efefef}
+.bg_grey_6 {background-color: #f6f6f6}
+.border {border: 1px solid #ddd}
+.border_top_1 {border-top: 1px solid #ccc}
+.border_bottom_1 {border-bottom: 1px solid #ccc; padding: 0 0 5px 0}
+.border_top_2 {border-top: 1px dashed #ccc}
+.border_bottom_2 {border-bottom: 1px dashed #ccc}
+.border_top_3 {border-top: 1px dotted #ccc}
+.border_bottom_3 {border-bottom: 1px dotted #ccc}
+table {border-collapse:separate;border-spacing:0;}
+caption, th, td {text-align:left;font-weight:normal;}
+table, td, th {vertical-align:middle;}
+blockquote:before, blockquote:after, q:before, q:after {content:"";}
+blockquote, q {quotes:"" "";}
+a img {border:none;}
+body {font-size:75%;line-height: 1.5;color:#333;font-family: Verdana,Lucida Sans Regular,Lucida Sans Unicode,Arial,sans-serif; height: 100%;}
+h1, h2, h3, h4, h5, h6 {font-weight:normal;color:#333;}
+h1 {font-size:2em;margin-bottom:0.5em;}
+h2 {font-size:1.5em;margin-bottom:0.75em}
+h3 {font-size:1.2em;margin-bottom:1em;font-weight:bold;}
+h4 {font-size:1.1em;line-height:1.25;margin-bottom:1.25em; font-weight: bold}
+h5 {font-size:.75em;font-weight:bold;margin-bottom:1.5em;}
+h6 {font-size:.75em;font-weight:bold;}
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin:0;}
+p {margin:0 0 1.5em; font-size: 110%;}
+p img.align_left {float:left;margin:1.5em 1.5em 1.5em 0;padding:0;}
+p img.align_right {float:right;margin:1.5em 0 1.5em 1.5em;}
+a {outline: none; -moz-outline-style: none}
+:focus{ -moz-outline-style: none; outline:none;}
+a {color:#0689D0; text-decoration:none; cursor: pointer;}
+a:hover {text-decoration:underline;}
+a:active {text-decoration:none; color: #FF8D20}
+blockquote {margin:1.5em;color:#666;font-style:italic;}
+strong {font-weight:bold;}
+em, dfn {font-style:italic;}
+dfn {font-weight:bold;}
+sup, sub {line-height:0;}
+abbr, acronym {border-bottom:1px dotted #666;}
+address {margin:0 0 1.5em;font-style:italic;}
+del {color:#666;}
+pre, code {margin:1.5em 0;white-space:normal;}
+pre, code, tt {font:1em 'andale mono', 'lucida console', monospace;line-height:1.5;}
+li ul, li ol {}
+ul, ol {margin:0}
+ul {list-style-type:disc;}
+ol {list-style-type:decimal;}
+dl {}
+dl dt {font-weight:bold;}
+dd {}
+table {}
+th {font-weight:bold;}
+th, td {padding:4px 10px 4px 5px;}
+tfoot {font-style:italic;}
+caption {background:#eee;}
+.bold {font-weight: bold}
+.small {font-size:.8em;margin-bottom:1.875em;line-height:1.875em;}
+.large {font-size:1.2em;line-height:2.5em;margin-bottom:1.25em;}
+.hide {display:none;}
+.quiet {color:#999;}
+.loud {color:#000;}
+.highlight {background:#ff0;}
+.added {background:#060;color:#fff;}
+.removed {background:#900;color:#fff;}
+.first {margin-left:0;padding-left:0;}
+.last {margin-right:0;padding-right:0;}
+.top {margin-top:0;padding-top:0;}
+.bottom {margin-bottom:0;padding-bottom:0;}
+.float_right {float: right;}
+.font10 {font-size:75%;}
+.font11 {font-size:80%;}
+.font12 {font-size:85%;}
+.font13 {font-size:100%;}
+.font14 {font-size:107%;}
+.font16 {font-size:122%;}
+.font18 {font-size:136%;}
+.font_color0{color:#333;}
+.font_color1{color:#16387c;}
+.font_color2{color:#0689d0;}
+a.read_more {float: left; display: block; margin: 0 0 1.5em 0}
+.grey_1_bg {background: #EFEFEF}
+.grey_2_bg {background: #F6F6F6}
+.lt_blue_bg {background: #E4F9FF}
+a.write {margin: 0; color: #0689D0; font-weight: normal}
+.feature_items {margin: 0 0 2em; float: left}
+.panel_plain ul.item_blog_entries {margin: 0; overflow: hidden}
+items_main .panel_plain ul.item_blog_entries {width: 210px}
+.item_language_pair {font-size: 10px; color: #999}
+p.no_badge {display: none}
+.mypage_items .profile_heading {padding: 0}
+.items_main .column_right .search_form #keyword {width: 195px}
+.item_courses_div h3 {margin: 0 0 1em; padding: 0 0 5px; border-bottom: 1px solid #ccc}
+.my_course_row {margin: 0 0 1em}
+.item_courses h3 {border: none; padding: 0; margin: 0}
+.course_img {float: left; margin: .4em 8px 0 0}
+.item_list {margin: 0 0 20px 0}
+.list_main .item_list{ clear: both}
+.item_progress .bar_outer {width: 60px; position: absolute; margin: -.5em 0 0}
+.integer {position: absolute; margin: -.5em 0 0 70px}
+.list_table table {border: none; margin: 0 0 20px 0; overflow: hidden}
+.list_table {border: none}
+.list_table table td {border: none; border-bottom: 1px solid #ddd}
+.list_table td.checkbox_cell {text-align: left; padding: 0 0 0 5px; vertical-align: middle; width: 20px}
+.list_table td.cue{ width: 300px}
+.list_table td.response {width: 250px}
+.list_table td.part_of_speech{ width: 75px}
+.list_table td.item_progress{ width: 110px}
+.list_table td.urgent {font-weight: bold; color: #FFA319; font-size: 120%}
+.item_detail .list_table td {padding: 5px; text-align: center}
+.item_detail .list_table td a {font-weight: bold}
+td.part_of_speech, td.item_progress {text-align: left}
+.items_main table td.cue_response {overflow: hidden}
+#item_lookup_results a.sound_icon {float: left}
+#dictionary_item_list a.sound_icon{ background: transparent url(/images/sound_play_icon_disabled.gif) no-repeat scroll 0%; cursor: default}
+#dictionary_item_list a.item_link span.cue_text{ color: #666; text-decoration: none; cursor: default}
+#dictionary_item_list a.item_link:hover {text-decoration: none}
+.items_main a.sound_icon img {margin: 0 0 -2px 0}
+.items_main .feature_items li {display: inline; margin: 0pt 10px 2em 0; float: left}
+.item_image img {padding: 5px; margin: 0; width: 90px; height: 90px; background-color: #fff; border: 1px solid #ccc; border-left: 1px solid #ededed; border-top: 1px solid #ededed}
+.item_response {margin: 0 0 0 20px; border-top: 1px solid #ccc}
+.item_detail .item_response {border-top: none}
+.items_main .sample_items {margin-top: 2.1em}
+.items_main .local_panel .item_blog_entries h3 {font-size: 120%; padding: .1em 0 0; margin: 0}
+.items_main .local_panel .active_lists h3 {margin: 0}
+.most_difficult ul {border: 1px solid #dedede; margin: 0 8px}
+.most_difficult li {float: left; clear: both; display: block; width: 100%}
+.person_medium {padding: 0; margin: 0 30px 0 0}
+.chart_layer {margin-bottom: 20px}
+.content_sentences td.image {width: 120px}
+.content_sentences .cue {background-color: #e4f6fc}
+.content_sentences .translation {margin-top: 0.2em}
+.item_detail td {vertical-align: top; padding-top: 10px}
+.items_main td {vertical-align: top}
+#sentences table {width: 90%; margin: 0 auto}
+span.translation {display: block; margin: 10px 0 0 22px}
+.items_main span.translation {margin: 10px 0 0 0}
+.paging {text-align: right; clear: both; margin: 0 0 1em}
+.paging .paging_left {float: left}
+.next_previous_paging {border: none}
+.list_spinner {background: url('/images/spinner.gif') no-repeat center right}
+input.field_was_changed {border: 1px solid #ff9999; background-color: #fff6f6}
+.sentence_search_bar {padding-bottom: 10px; border-bottom: 1px solid #AAA; margin-bottom: 10px}
+.sentence_search_bar .text_field {width: 250px}
+.sentence_search_bar input.button {width: auto}
+.no_sentences_warning {font-size: 120%}
+#sentence_search_form span {padding-right: 5px}
+#sentence_search_form label {display: inline; padding: 0 5px 0 10px}
+.items_main li table {width: 100%; float: left; border-collapse: collapse; border: 1px solid #d2eafa; background: #EEF9FD}
+.write_about_item h3 {font-size: 120%; padding: 0}
+td.course_img img {height: 29px; margin: 5px; width: 30px}
+.local_panel li span.comments {float: right; display: block}
+.item_detail .item_courses_div {width: 450px; margin: 0 0 2em}
+.item_detail .panel_plain .local_panel h3 {font-size: 130%; margin: 0; overflow: visible}
+.item_list .list_table th {font-size: 80%; background: none; border-bottom: 2px solid #ccc; text-align: left; padding: 0pt 0pt 4px; width: 100px; height: 20px}
+.list_table th.checkbox_cell {width: 45px; color: #999}
+.list_table th.cue {width: 200px}
+.list_table th.cue .total_items {font-weight: normal; margin-left: 5px}
+.list_table th.response {width: 180px}
+.list_table th.part_of_speech {width: 70px}
+.list_table th.item_progress {width: 110px}
+.item_list .list_table tr.odd, .item_list .list_table tr.even {background: none}
+.item_list .list_table td {padding: 0; vertical-align: middle; overflow: visible}
+.list_table td.cue, .list_table td.part_of_speech {padding: 0}
+.item_detail .list_table {border: #ccc solid 1px; border-top: none}
+.items_main td.item_image, .items_main td.item_response {padding: 10px; text-align: center}
+.items_main td.cue_response {padding: 10px 5px}
+.items_main td.item_image{ width: 85px}
+.items_main td.cue_response{ width: 375px}
+.items_main span.item_response {line-height: 1.22em; display: block; padding: 5px 0 10px; clear: both; font-size: 100%; margin: 0}
+#lightbox span.item_response {display: inline}
+td.item_divider {border-top: 1px dotted #ccc; padding: 10px 0 0 0}
+.course_items .paging {border-top: none; width: 686px}
+.course_items .list_table .item_progress .bar_outer {margin: -.5em 0 0; position: absolute}
+.course_items .integer{ position:absolute; margin: -.5em 0 0 70px; text-align: left}
+.course_items #lbContent .edit {margin: 1em auto}
+.feature_items a.sound_icon{ float: none; position: static; padding: 3px 8pt 0pt; *padding: 15px 8pt 0pt; display: inline; zoom: 1; line-height: 14px}
+.feature_items a.sound_icon span {display: none}
+.feature_items .sample_sentence{ line-height: 1.22em}
+.feature_items a.item_link {float: none; font-weight: bold; margin: 0; padding: 0; display: inline}
+.feature_items a.item_link span.cue_text{ display: inline}
+.item_blog_entries a.item_link {display: block; background: #eef9fd; padding: .3em 5px; margin: 0 0 1em 0}
+.item_blog_entries a.item_link span.cue_text{ padding: .3em 0}
+.item_blog_entries .person_small {margin: 0 5px 0 0}
+.item_blog_entries p {margin: 0; line-break: normal; word-wrap: normal}
+.filter_panel .edit{ width: 140px}
+.feature_items ul{ margin-bottom: 10px; padding: 0}
+.mypage_items .paging, .mypage_items .content_panel_container, .mypage_items #skip_form {width: 700px}
+.mypage_items .paging{ height: 15px; zoom: 1; background: none}
+h2#audio{ padding-top: 15px}
+.context_tab li .sound, .item_detail span.item_line{ display: none}
+.item_detail .cue_response{ background-color: #fff; border: 1px solid #DFDFDF; padding: 10px 20px 20px 40px; position: relative}
+.create_sentence .item_detail .cue_response {padding: 3px 20px 11px 10px }
+.panel_clear .cc{ padding: 6px 10px}
+.item .sound{ position: absolute; top: 17px; left: 16px}
+.item .sound span{ display: none}
+.item .text{ clear: none; margin: 0; font-size: 210%; font-weight: normal; color: #000}
+.item .cue{ display: inline; line-height: normal; overflow: visible; padding: 0}
+.item .pos{ margin: 0 15pt 0 5pt; display: inline; color: #aaa}
+.item .response .text{ font-size: 130%; float: none; color: #666}
+.item_detail .cue_response .response{ margin: 0}
+.item_detail .content_panel_container h2{ padding: 0; margin: 0 0 10px; clear: both}
+.item_detail .content_panel_container h2.item_sentences {float: left; clear: none}
+.add_sentence {position: absolute; bottom: 3px; right: -10px; float: right; display: inline}
+.add_sentence a, .image_action a{ background: url('../images/ui_wikis.gif') no-repeat left -209px; padding: 1pt 10px 5px; display: inline; color: #0689D0}
+.add_sentence a:hover, .image_action a:hover{ background-position: left -329px; padding: 1pt 10px 5px; position: relative; top: 1px}
+.add_sentence span, .image_action span{ padding: 10px 0; display: inline; border-top: 1px solid #e2f3fa; border-bottom: 1px solid #d6e1e5; border-right: 1px solid #d6e1e5; line-height: 26px; padding: 2px 20px 3pt 0; font-size: 10px; background: #E8F7FE url('../images/ui_wikis.gif') no-repeat right -265px}
+.image_action .image_detail a {background-position: left -459px}
+.image_action .image_detail a:hover {background-position: left -530px}
+.image_action .image_detail span {background-color: #f3f3f3; border-top: 1px solid #f1f1f1; border-bottom: 1px solid #dfdfdf; border-right: 1px solid #dfdfdf}
+.image_action .image_detail a:hover span {background-color: #ededed; border-bottom: 1px solid #f1f1f1}
+.add_sentence a:hover span, .image_action a:hover span{ border-bottom: 1px solid #e2f3fa; border-top: 1px solid #d6e1e5; border-right: 1px solid #d6e1e5; background-color: #d8f3ff; background-position: right -264px; padding: 3px 20px 2pt 0}
+.image_action span, .image_action a:hover span {background-image: none; padding: 2px 5px 3pt 0}
+.lang_ja h2{ font-weight: bold}
+.a_sound{ position: absolute; top: 0; left: -25px}
+.a_audio{ }
+.a_source{ display: block; clear: both; color: #999}
+.lang_en .a_source{ font-style: italic}
+.audio li{ float: left; width: 165px; font-size: 85%; position: relative}
+.audio p{ margin: 0 0 0 25px; line-height: normal}
+.item_detail .sentences_block dl, .courses {border-top: 1px dotted #cbcbcb}
+.item_detail .sentences_block dl{ border-top: none}
+.sentences_block li, .courses li{ padding: 5px 0; margin: 0 0 5px}
+.context_tab dt, .context_tab li{ float: left; font-size: 85%; font-weight: normal}
+#item_cue_images li {width: 56px}
+#item_cue_images li a{ margin: 0 auto; display: block; width: 45px}
+.sentences_block li{ float: none; height: auto; font-size: 12px; font-weight: normal; border-bottom: 1px dotted #cbcbcb; margin-left: 15px; z-index: 1; cursor: default}
+.sentence_wrapper {position: relative; padding: 0 0 0 10px; zoom: 1}
+.recent_sentences .sentence_wrapper {position: relative}
+.recent_sentences .sentences_block li {position: static}
+.recent_sentences .play_sound {top: -2px}
+.items_main .sentences_block li{ margin-right: 15px}
+.item_detail #sentences_list .sample_sentence .sentence div{ background-color: transparent}
+#sentences_list .local_panel {padding-left: 0}
+.sentence_image p{ line-height: normal}
+.list_main .translation {width: auto; margin: 0 0 .4em}
+.list_main .sample_sentence .sentence div {background: none}
+.sentences_block img{ float: right; width: 63px; position: relative; margin-bottom: 16px}
+#images_stream li {float: left}
+#sentences_list .hVocabulary .sample_sentence img{ width: 50px}
+.item_detail #sentences_list .locked_icon, .item_detail #sentences_list .edit_icon {bottom: 28px}
+.course_items .sentences_block li{ width: 97%}
+.context_tab{ position: relative; clear: both}
+.column_right .panel_plain .context_tab {border: none; padding: 0; margin: 0; position: static}
+.column_right .cue_images img {margin: 0 8px 0 0}
+.cue_images, #item_sentences, #sentencesTab{ position: relative; margin: 10px; background-color: #fff; padding-bottom: 10px; width: auto}
+#item_sentences{ padding-bottom: 0}
+div.more_sentences, div.more_images {margin: 10px 10px 0; float: none; display: block; text-align: right}
+.column_right .attach_img a {width: 45px; height: 45px; background-position: center 18px}
+.column_right .attach_img a:hover {background-position: center 19px}
+.column_right .attach_img a span {text-indent: -5000px}
+.images_tab span.message{ width: auto; padding: 22px; float: left; margin: 6px 10px 0 0; line-height: normal; color: #666}
+.item_detail .item{ margin-bottom: 20px}
+.items_main span.header_subtext {padding: 0}
+.item_detail .content_panel .context_tab dd.more_link{ float: right}
+.cue_images{ z-index: 100; padding: 10px}
+.cue_images img{ margin: 0 8px 10px 0; width: 45px; height: 45px}
+#sentencesTab{ background-color: #f7fbfd; padding: 10px 10px 30px; margin-top: -10px}
+#images_tab .thumbnails{ background-color: transparent; margin: 5px 0 0; padding: 0; height: 100%; min-height: 0}
+a.browse_link{ position:relative; float: left; border-top: none; top :-2px; background-color: #fff; padding: 0 10px 10px; display: inline; cursor: pointer}
+a.browse_link:hover{ border: 1px solid #dfdfdf; border-left: 1px solid #f5f5f5; border-top: 1px solid #f5f5f5; background-color: #fff; border-top: none; text-decoration: underline}
+.browse_link span{ float: left; font-size: 11px; margin: 0; padding: 4pt 21px 5px 10px; position: relative; background: #f7fbfd url('../images/ui_wikis.gif') no-repeat right -103px}
+.close_browse{ float: right; width: 20px; height: 20px; font-size: 11px; font-weight: bold; position: absolute; top: 5px; right: 0}
+.browse_link {margin-bottom: 25px}
+.browse_link span.open{ background-position: right -153px}
+.context_tab span.sentence_source{ font-size: 80%}
+.sentences_block .sentence .sound{ display: none}
+.item_detail .content_panel .context_tab dd{ border: none; margin: 5px 0 10px; float: left}
+.item_detail .context_tab .sentences_block dd{ float: none}
+.context_tab .selected{ background-color: transparent}
+.context_tab .selected a{ font-weight: bold}
+#sentencesTab{ border-bottom: none; clear: both; overflow: hidden}
+.item_detail span.channel_name a{ color: #666}
+.sentences_block .hVocabulary{ position: relative}
+.item_detail .sentences_block{ min-height: 415px; _height: 415px; width: 100%; position: relative; float: none}
+.item_detail .courses{ font-size: 90%; margin-bottom: 5px; clear: both}
+.courses dd{ border-bottom: 1px dotted #cbcbcb}
+.courses p{ font-size: 10px}
+.item_detail em{ font-style: normal}
+.item_actions .adding_complete span, .adding_complete span {float: left; display: inline}
+.context_tab dt{ display: inline; float: none}
+.context_tab .sentences_block dt{ display: none}
+.item_actions li{ clear: both; margin: 5px 0; padding: 5px 0; border-bottom: 1px dotted #ddd}
+.item_actions .added_notice {float: left; height: 10px; margin-left: 3px; padding-bottom: 5px}
+.item_actions ul{ margin-top: -10px}
+.item_links{ margin-bottom: 25px; font-size: 90%}
+.item_links a{ font-weight: bold}
+.recent_activity li{ border-top: 1px dotted #DFDFDF; border-bottom: none; padding: 10px 0}
+.panel_footer{ margin: 0; padding: 0}
+.language, .cue_source{ margin: 0 0 15px; color: #333}
+.language_pair .language{ font-size: 80%}
+.item_about li{ padding: 10px 0; color: #666}
+.lang_en .language, .lanf_en .cue_source{ font-style: italic}
+.language span{ font-style: normal}
+.item_blog_entries a, .recent_activity a {font-weight: bold}
+.item_blog_entries .grey_1 {font-weight: normal}
+.item_blog_entries, .recent_activity {font-size: 90%; clear: both}
+.items_main .item_blog_entries {width: 270px; overflow: hidden}
+.items_main .center h1 {font-size: 160%}
+.item_blog_entries h3 {font-size: 90%}
+.item_info li, .item_about li.source, .item_about li.translation_count{ background: url('../images/icons_item_notice.gif?') no-repeat 0 10px; padding: 6px 0 10px 25px}
+.item_about li.source {background-position: 0 -290px}
+.item_about li span {margin-right: 10px}
+.item_info .completed_by {background-position: 0 -90px;}
+.item_info .completed_by {background-position: 0 -90px;}
+.item_info .hours_studied{background-position: 0 -190px;}
+.item_info .learn_span{background-position: 0 -290px;}
+.item_info .favs{background-position: 0 -390px;}
+.item_info .appears_in, .item_about li.translation_count{background-position: 0 -490px;}
+.item_info .skipped_by {background-position: 0 -592px}
+.item_info strong{ color: #444}
+.discussion_posts .grey_3, .recent_activity .grey_3{ font-size: 90%}
+.list_logo{ float: left; margin: 0}
+.recent_activity .list_logo, .recent_contributors .list_logo{ margin: 0 10px 0 0; display: inline}
+.course_img{ margin: 0 5px 0 0}
+.sentences_block .hVocabulary, .sentences_block .local_panel, .sentences_block .cn, .sentences_block .cn .cb, .sentences_block .cn .cc{ background:none; margin: 0; padding: 0}
+.sound_icon span{ text-indent: -3000px}
+.item_detail .sentences_block .cn .cc{ padding: 2px 0 10px 25px}
+.close_bottom{ display: none}
+.context_tab dd .pagination span{ display: inline}
+.sentence_paginator{ width: auto; margin: 0}
+.sentences_block .spin_div{ display: block; width: 100%; height: 415px; position: absolute; left: 0; top: 0; background-color: transparent}
+#item_sentences{ height: auto; min-height: 0}
+.attribution_box{ overflow: auto; height: 570px}
+.sentence .attribution{ background-color: transparent; clear: both; display: block}
+.sentence .transliteration {font-size: 1em; margin-top: -0.6em; color: #999; position: static}
+.item_detail .sentence .attribution{ margin: 0}
+.courses h3{ margin-bottom: 5px}
+span.theme_icon{ margin: 0 5px 0 0}
+.recent_activity .person_small{ height: auto; margin-right: 5px; width: 30px; height: 40px; display: inline}
+.recent_activity .person_image_small{ width: 30px; height: 30px}
+.recent_contributors li{ margin: 0; float: left; clear: both; width: 100%; display: inline; border-bottom: 1px dotted #dfdfdf; padding: 5px 0 0}
+.recent_activity .person_image_small img{ width: 20px}
+.item_detail .response_2{ margin: -5px 0 0 5px}
+.item_detail .item .response_2 em{ color: #656565; font-size: 210%; position: relative; margin: 0}
+.items_main .person_small{ height: 52px; overflow: hidden}
+#search_options_pair{ clear: both; position: relative; padding-top: 24px; margin-top: -200px; top: 195px; float: left; width: 180px; z-index: 2000}
+.search_options .language_pair li.selected{ left: 0}
+.sentence_transliteration {padding: 0; font-size: 90%; color: #999; margin: 0; letter-spacing: 1px}
+.add_image_block {padding: 10px 10px 10px; position: relative; z-index: 100; clear: both}
+#images_stream a {float: left}
+#images_stream li {float: left; margin: 9px 4px 3pt 5pt}
+.add_image_block a img {padding: 3px; border: 1px solid #dfdfdf; background-color: #fff; width: 40px; height: 40px}
+.item_images .thumbnails {padding: 0; margin: 0; background: none}
+.add_action {float: right; margin: 0 10px 5px 0; position: relative; top: 1px; height: 25px}
+.column_right .add_action {position: absolute; top: 12px; right: 0; z-index: 1000}
+.column_right .add_action a {float: right}
+.item_images #item_cue_images {border: 1px solid #f1f1f1; clear: both; margin: 0}
+.item_images #item_cue_images li {background-color: #FAFAFA; padding: 10px; margin-bottom: 10px; position: relative}
+.item_images #item_cue_images .image_action li {padding: 0; margin: 0; float: left; background-color: transparent}
+.item_images .cue_images img {margin: 0 10px 0 0; float: left}
+.item_images .cue_images dl {float: left; width: 265px; font-size: 90%}
+.item_images .add_action {margin: 0 0 5px 0}
+.item_images .cue_images dt {float: left; clear: both}
+.item_images .cue_images dd {float: left; margin-bottom: 5px}
+.item_images .content_panel_container h2 {clear: none}
+.item_images h5 {font-weight: normal; clear: both}
+.image_action {position: absolute; bottom: 5px; right: -5px}
+.lightbox .image_action {position: static; float: right}
+.item_detail #create {float: right; margin-bottom: 5px}
+#item_sentences #new_sentence_form textarea {width: 95%; height: 30px}
+#item_sentences .sentence_form p {margin: 0}
+#item_sentences #new_sentence_form h4 {margin: 5px 0 0; padding: 0}
+#item_sentences #create_sentence {border: none; margin: 0; padding: 0}
+#item_sentences #new_sentence_form {border-bottom: 1px dotted #CBCBCB; padding-bottom: 10px}
+.item_detail .column_right .local_panel {position: relative}
+#tags {position: relative; margin-top: 10px}
+.item_lookup .autocompleter {z-index: 15000; -moz-border-radius: 5px; -webkit-border-radius: 5px; border: 4px solid #dadada; padding: 0; margin: 0}
+.item_lookup .autocompleter ul {margin: 0px; padding: 0px; list-style-type: none; background-color: #fff}
+.item_lookup .autocompleter ul li.selected {background-color: #ffb}
+.item_lookup .autocompleter ul li {margin: 0; padding: 2px; list-style-type: none; border-bottom: 1px dotted #ddd; background-color: #fff; font-size: 1.1em}
+.item_detail .item_actions .list_add span span {background: none}
+.item_lookup .language_pair li, .item_lookup #user_language_pair_selection ul.language_pair {width: 82px}
+.item_lookup .language_pair li.selected {background-position: 66px -26px}
+.item_lookup #user_language_pair_selection #item_bank_cue.language_pair {float: left}
+.item_lookup #user_language_pair_selection #item_bank_response.language_pair {float: right}
+.item_lookup .language_pair li .language {margin: 0 0 0 5px; zoom: 1; overflow: hidden}
+.item_lookup .language_pair li.selected .language {width: 58px; overflow: hidden}
+.item_lookup #language_pair_error {clear: both}
+.close_pair_error {float: right; color: #999; font-weight: bold; margin: -12px -5px 0 0}
+.language_pair_arrow {display: block; width: 15px; height: 15px; position: absolute; top: 0; left: 90px}
+#user_language_pair_selection select {width: 82px}
+#user_language_pair_selection #cue_language {float: left}
+#user_language_pair_selection #response_language {float: right}
+.items_main .column_right .local_panel {clear: both}
+.item_detail .sentence_form {background-color: #F2F7FB; margin-bottom: 10px; padding: 15px}
+#item_lookup_results li.odd {background-color: #F9F9F9;}
+#item_lookup_results li.even {background-color: #FFFFFF;}
+#item_lookup_results li {border-bottom: 1px dotted #cccccc;}
+div.empty_match_result {background-color: #FFFFCC; font-size: 14px; margin: 10px; padding: 10px; border: 1px solid #CCCC99}
+body {margin: 0;}
