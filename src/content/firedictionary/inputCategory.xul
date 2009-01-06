@@ -116,8 +116,24 @@
               </hbox>
               <menulist id="cue-language">
                 <menupopup>
-                  <menuitem label="en" value="en"/>
-                  <menuitem label="ja" value="ja"/>
+                  <menuitem label="&lang.Chinese;" value="zh-CN"/>
+                  <menuitem label="&lang.Dutch;" value="nl"/>
+                  <menuitem label="&lang.English;" value="en"/>
+                  <menuitem label="&lang.Finnish;" value="fi"/>
+                  <menuitem label="&lang.French;" value="fr"/>
+                  <menuitem label="&lang.German;" value="de"/>
+                  <menuitem label="&lang.Greek;" value="el"/>
+                  <menuitem label="&lang.Hungarian;" value="hu"/>
+                  <menuitem label="&lang.Indonesian;" value="id"/>
+                  <menuitem label="&lang.Italian;" value="it"/>
+                  <menuitem label="&lang.Japanese;" value="ja"/>
+                  <menuitem label="&lang.Korean;" value="ko"/>
+                  <menuitem label="&lang.Polish;" value="pl"/>
+                  <menuitem label="&lang.Portuguese;" value="pt"/>
+                  <menuitem label="&lang.Russia;" value="ru"/>
+                  <menuitem label="&lang.Spanish;" value="es"/>
+                  <menuitem label="&lang.Swedish;" value="sv"/>
+                  <menuitem label="&lang.Thai;" value="th"/>
                 </menupopup>
               </menulist>
             </row>
@@ -128,8 +144,24 @@
               </hbox>
               <menulist id="response-language">
                 <menupopup>
-                  <menuitem label="en" value="en"/>
-                  <menuitem label="ja" value="ja"/>
+                  <menuitem label="&lang.Chinese;" value="zh-CN"/>
+                  <menuitem label="&lang.Dutch;" value="nl"/>
+                  <menuitem label="&lang.English;" value="en"/>
+                  <menuitem label="&lang.Finnish;" value="fi"/>
+                  <menuitem label="&lang.French;" value="fr"/>
+                  <menuitem label="&lang.German;" value="de"/>
+                  <menuitem label="&lang.Greek;" value="el"/>
+                  <menuitem label="&lang.Hungarian;" value="hu"/>
+                  <menuitem label="&lang.Indonesian;" value="id"/>
+                  <menuitem label="&lang.Italian;" value="it"/>
+                  <menuitem label="&lang.Japanese;" value="ja"/>
+                  <menuitem label="&lang.Korean;" value="ko"/>
+                  <menuitem label="&lang.Polish;" value="pl"/>
+                  <menuitem label="&lang.Portuguese;" value="pt"/>
+                  <menuitem label="&lang.Russia;" value="ru"/>
+                  <menuitem label="&lang.Spanish;" value="es"/>
+                  <menuitem label="&lang.Swedish;" value="sv"/>
+                  <menuitem label="&lang.Thai;" value="th"/>
                 </menupopup>
               </menulist>
             </row>

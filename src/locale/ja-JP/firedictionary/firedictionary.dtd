@@ -25,3 +25,22 @@
 
 <!ENTITY tab.basic	                    "基本">
 <!ENTITY tab.category	                "カテゴリ">
+
+<!ENTITY lang.Chinese			"中国語">
+<!ENTITY lang.Dutch			"オランダ語">
+<!ENTITY lang.English			"英語">
+<!ENTITY lang.Finnish			"フィンランド語">
+<!ENTITY lang.French			"フランス語">
+<!ENTITY lang.German			"ドイツ語">
+<!ENTITY lang.Greek			"ギリシア語">
+<!ENTITY lang.Hungarian			"ハンガリー語">
+<!ENTITY lang.Indonesian		"インドネシア語">
+<!ENTITY lang.Italian			"イタリア語">
+<!ENTITY lang.Japanese			"日本語">
+<!ENTITY lang.Korean			"韓国語">
+<!ENTITY lang.Polish			"ポーランド語">
+<!ENTITY lang.Portuguese		"ポルトガル語">
+<!ENTITY lang.Russia			"ロシア語">
+<!ENTITY lang.Spanish			"スペイン語">
+<!ENTITY lang.Swedish			"スウェーデン語">
+<!ENTITY lang.Thai			"タイ語">

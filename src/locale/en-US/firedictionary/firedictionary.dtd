@@ -24,3 +24,22 @@
 
 <!ENTITY tab.basic	                    "Basic">
 <!ENTITY tab.category	                "Category">
+
+<!ENTITY lang.Chinese			"Chinese">
+<!ENTITY lang.Dutch			"Dutch">
+<!ENTITY lang.English			"English">
+<!ENTITY lang.Finnish			"Finnish">
+<!ENTITY lang.French			"French">
+<!ENTITY lang.German			"German">
+<!ENTITY lang.Greek			"Greek">
+<!ENTITY lang.Hungarian			"Hungarian">
+<!ENTITY lang.Indonesian		"Indonesian">
+<!ENTITY lang.Italian			"Italian">
+<!ENTITY lang.Japanese			"Japanese">
+<!ENTITY lang.Korean			"Korean">
+<!ENTITY lang.Polish			"Polish">
+<!ENTITY lang.Portuguese		"Portuguese">
+<!ENTITY lang.Russia			"Russia">
+<!ENTITY lang.Spanish			"Spanish">
+<!ENTITY lang.Swedish			"Swedish">
+<!ENTITY lang.Thai			"Thai">
