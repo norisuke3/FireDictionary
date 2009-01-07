@@ -34,33 +34,46 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
+/**
+ * FDDirectory(String property)
+ *  Constructor of this class.
+ * 
+ * @param property A path to a directory. 
+ *                 If it's null, it will be set as "ProfD".
+ *                 (ProfD: User's profile directory)
+ */
 function FDDirectory(property){
- // private
- var serviceProperties = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+  // private
+  var serviceProperties = Components.classes['@mozilla.org/file/directory_service;1']
+			    .getService(Components.interfaces.nsIProperties);
  
- /**
-  * FDDirectory(String property)
-  *  Constructor of this class.
-  * 
-  * @param property If it's fail value, it will be set as "ProfD".
-  *   ProfD	: Current profile directory
-  */
- if ( !property ) property = "ProfD";
- FDPermanent.call(this, serviceProperties.get(property, Components.interfaces.nsIFile));
+  if ( !property ) property = "ProfD";
 
+  var dirs = property.split('/');
+  FDPermanent.call(this, serviceProperties.get(dirs[0], Components.interfaces.nsIFile));
+  
+  for(var i = 1; i < dirs.length ; i++ ){
+    this.changeDirectory(dirs[i]);
+  }
+};
+
+//
+////// prototype definition /////////////////////////////////
+//
+FDDirectory.prototype = {
  /**
   * nsIFile createNewDirectory(String name) 
   *
   * @param name The name of directory you want to create under the current directory.
   * @return clone of the directory.
   */
- this.createNewDirectory = function(name){
-  this.permanent.append(name);
-  if( !this.permanent.exists() ){
-   this.permanent.create(this.permanent.DIRECTORY_TYPE, 0700);
-  }
-  return this.permanent.clone();
- }
+  createNewDirectory:  function(name){
+    this.permanent.append(name);
+    if( !this.permanent.exists() ){
+      this.permanent.create(this.permanent.DIRECTORY_TYPE, 0700);
+    }
+    return this.permanent.clone();
+  },
  
  /**
   * Boolean changeDirectory(String name)
@@ -70,19 +83,19 @@ function FDDirectory(property){
   * @param A string which is intended to be a child directory of the current directory.
   * @return success - true, otherwise - false.
   */
- this.changeDirectory = function(name){
- 	var test = this.getDirectory();
- 	var result = false;
- 	
- 	// test whether the directory which is mentioned by the argument name exists or not.
- 	test.append(name); 	
- 	if ( test.exists() ){
- 		this.permanent.append(name);
- 		result = true;
- 	}
- 	
- 	return result;
- }
+  changeDirectory: function(name){
+    var test = this.getDirectory();
+    var result = false;
+    
+    // test whether the directory which is mentioned by the argument name exists or not.
+    test.append(name); 	
+    if ( test.exists() ){
+      this.permanent.append(name);
+      result = true;
+    }
+    
+    return result;
+  },
 
  /**
   * FDFile createFileInstance(String name)
@@ -93,42 +106,42 @@ function FDDirectory(property){
   * @param name the name of a file you want to create under this directory path.
   * @return success - file instance. fail - false.
   */
- this.createFileInstance = function(name){
- 	var dir = this.getDirectory();
- 	var file = new FDFile();
- 	
- 	dir.append(name);
- 	file.setFile(dir);
-
-  return file;
- }
+  createFileInstance: function(name){
+    var dir = this.getDirectory();
+    var file = new FDFile();
+    
+    dir.append(name);
+    file.setFile(dir);
+    
+    return file;
+  },
 
  /**
   * nsIFile getDirectory()
   *
   * @return clone of this directory.
   */
- this.getDirectory = function(){
-  return this.getPermanent();
- }
+  getDirectory: function(){
+    return this.getPermanent();
+  },
   
  /**
   * setDirectory(nsIFile _dir)
   *
   * @param _dir file object which is instance of nsIFile.
   */
- this.setDirectory = function(_dir){
-  this.setPermanent(_dir);
- }
+  setDirectory: function(_dir){
+    this.setPermanent(_dir);
+  },
  
  /**
   * setDirectoryByPath(String path)
   *
   * @param path A string of a path.
   */
- this.setDirectoryByPath = function(path){
- 	 var aDir = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
- 	 aDir.initWithPath(path);
- 	 this.setPermanent(aDir);
+  setDirectoryByPath: function(path){
+    var aDir = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+    aDir.initWithPath(path);
+    this.setPermanent(aDir);
  }
-}
+};
