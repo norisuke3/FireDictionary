@@ -585,76 +585,66 @@ this.loadIKnow = function(keyword){
   * @return A word which is the result of dictionary lookup.
   */
  function lookupwithModifiedKeyword(keyword){
-  var result = "";
-  var modified;
-  var RECJK = /[\u2E80-\uFE4F]/;             // handle cjk (chinese/japanese/korean) chars specially
+   var result = "";
+   var modified;
+   var RECJK = /[\u2E80-\uFE4F]/;             // handle cjk (chinese/japanese/korean) chars specially
+   var normalizer = [
+     { deletion: "est", addition: ""    },
+     { deletion: "ism", addition: ""    },
+     { deletion: "s",   addition: ""    },
+     { deletion: "ed",  addition: ""    },
+     { deletion: "ied", addition: "y"   },
+     { deletion: "r",   addition: ""    },
+     { deletion: "er",  addition: ""    },
+     { deletion: "ing", addition: ""    },
+     { deletion: "d",   addition: ""    }
+   ];
+   // sample
+   // files, tired, booked, copied, eater, providing, forged, inspirer, fader, fadder
   
-  if ( RECJK.test(keyword.substr(0,1)) ) {
-   // try all truncations starting with the longest
-   for ( len = keyword.length - 1 ; (result == "") && (len > 0) ; len-- ){
-    modified = keyword.substr(0, len);
-    result = dic.lookup(modified);
-   }
-   
-  } else {
-   modified = keyword.toLowerCase();
-   result = dic.lookup(modified);
-  
-   if ( result == "" && keyword.substr(-1, 1) == "s" ){
-    modified = keyword.substr(0, keyword.length - 1);
-    result = dic.lookup(modified);
-   }
-  
-   if ( result == "" && keyword.substr(-2, 2) == "ed" ){
-    modified = keyword.substr(0, keyword.length - 2);
-    result = dic.lookup(modified);
-   
-    if ( result == "" && keyword.substr(-3, 3) == "ied" ){
-     modified = keyword.substr(0, keyword.length - 3) + "y";
-     result = dic.lookup(modified);    
-    }
-   }
-  
-   if ( result == "" && keyword.substr(-2, 2) == "er" ){
-    modified = keyword.substr(0, keyword.length - 2);
-    result = dic.lookup(modified);
-   }
-  
-   if ( result == "" && keyword.substr(-3, 3) == "ing" ){
-    modified = keyword.substr(0, keyword.length - 3);
-    result = dic.lookup(modified);
-   
-    if( result == "" ){
-     // for double consonant. ex.)filterring, preferring, bannning, etc...
-     if(keyword.substr(-4, 1) == keyword.substr(-5, 1)){
-      modified = keyword.substr(0, keyword.length - 4);
-      result = dic.lookup(modified);
-     
-     } else {
-      modified = keyword.substr(0, keyword.length - 3) + "e";
-      result = dic.lookup(modified);
+   if ( RECJK.test(keyword.substr(0,1)) ) {
+     // try all truncations starting with the longest
+     for ( len = keyword.length - 1 ; (result == "") && (len > 0) ; len-- ){
+       modified = keyword.substr(0, len);
+       result = dic.lookup(modified);
      }
-    }
+   
+   } else {
+     modified = keyword.toLowerCase();
+     result = dic.lookup(modified);
+
+     // try to see if the normalizer works
+     if ( result == "" ){
+       normalizer.find(function(norm){
+	 if ( keyword.match(new RegExp(norm.deletion + "$")) != null ){
+	 modified = keyword.substr(0, keyword.length - norm.deletion.length) + norm.addition;
+	 result = dic.lookup(modified);
+       }
+     
+       return (result != "");
+       });
+     }
+    
+     if( result == "" ){
+       // for double consonant. ex.)filterring, preferring, banning, etc...
+       if(keyword.substr(-4, 1) == keyword.substr(-5, 1)){
+	 modified = keyword.substr(0, keyword.length - 4);
+	 result = dic.lookup(modified);
+     
+       } else {
+	 modified = keyword.substr(0, keyword.length - 3) + "e";
+	 result = dic.lookup(modified);
+       }
+     }
    }
   
-   if ( result == "" && keyword.substr(-1, 1) == "d" ){
-    modified = keyword.substr(0, keyword.length - 1);
-    result = dic.lookup(modified);
+   // After process only the case when the word found.
+   if ( result != ""){
+     getPickupWordLabel().value = keyword;
+     getKeywordTextbox().value = modified;
    }
   
-   if ( result == "" && keyword.substr(-1, 1) == "r" ){
-    modified = keyword.substr(0, keyword.length - 1);
-    result = dic.lookup(modified);
-   }
-  }
-  
-  // After process only the case when the word found.
-  if ( result != ""){
-   getPickupWordLabel().value = keyword;
-   getKeywordTextbox().value = modified;
-  }
-  
-  return result;
+   return result;
  }
  
  /**
