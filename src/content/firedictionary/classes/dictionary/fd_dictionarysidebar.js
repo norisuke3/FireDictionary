@@ -260,17 +260,11 @@ this.registHistory = function(){
  */
 this.loadIKnow = function(keyword){
   var self = this;
-  var dir = new FDDirectory("ProfD");
-  dir.createNewDirectory("FireDictionary");
-  dir.createNewDirectory("tmp");
-  var file = dir.createFileInstance('result.html');
-  
-  var urlSkin = new FDDirectory("ProfD");
-  urlSkin.createNewDirectory("FireDictionary");
-  urlSkin.createNewDirectory("skin");
-  var url = urlSkin.getURL() + 'iKnow.html';
+  var file = new FDDirectory("ProfD/FireDictionary/tmp").createFileInstance('result.html');
+  var url = new FDDirectory("ProfD/FireDictionary/skin").getURL() + 'iKnow.html';
   
   var prefs = new FDPrefs();
+
   var params = {
     language: prefs.getCharPref("iknow.cue-language"),
     translation_language: prefs.getCharPref("iknow.response-language"),
@@ -386,13 +380,13 @@ this.loadIKnow = function(keyword){
   
   // update undo and redo button state
   updateUndoRedoButtonState(
-   history.getHistoryCount(),
-   history.getUndoBufferCount()
-  )
+    history.getHistoryCount(),
+    history.getUndoBufferCount()
+  );
   
-  // At this time, clear the temporary files.
-  clearTempFiles();
- }
+   // At this time, clear the temporary files.
+   new FDDirectory("ProfD/FireDictionary/tmp").remove(true);
+ };
  
 /**
  * viewHistory()
@@ -687,18 +681,6 @@ this.loadIKnow = function(keyword){
   }
   
   return prefs.getUniCharPref("dictionary-name");
- }
- 
- /**
-  * clearTempFiles()
-  *  remove temporary files which is in the directory 'tmp'.
-  */
- function clearTempFiles(){
-  var  dirTemp = new FDDirectory("ProfD");
-  dirTemp.createNewDirectory("FireDictionary");
-  dirTemp.createNewDirectory("tmp");
-
-  dirTemp.remove(true);
  }
  
  /**

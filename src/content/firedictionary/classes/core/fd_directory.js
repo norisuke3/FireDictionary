@@ -53,6 +53,7 @@ function FDDirectory(property){
   FDPermanent.call(this, serviceProperties.get(dirs[0], Components.interfaces.nsIFile));
   
   for(var i = 1; i < dirs.length ; i++ ){
+    this.createNewDirectory(dirs[i]);
     this.changeDirectory(dirs[i]);
   }
 };

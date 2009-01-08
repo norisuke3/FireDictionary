@@ -36,8 +36,7 @@
  
 //////////// global variables /////////////////////
 
-var dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_ENTERERD);								// Dictinoary sidebar object.
-var dirTemp;																													// Temporary directory.
+var dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_ENTERERD);  // Dictinoary sidebar object.
 
 ///////////////////////////////////////////////////
 
@@ -64,13 +63,8 @@ function initialize(){
   var prefs = new FDPrefs();
   var menuUseIKnow = document.getElementById("fd-use-iknow");
 
- 	dicSidebar.initialize();
+  dicSidebar.initialize();
 	
-	// Initialize temporary directory.
- dirTemp = new FDDirectory("ProfD");
- dirTemp.createNewDirectory("FireDictionary");
- dirTemp.createNewDirectory("tmp");
-
   // initialize a status of iknow
   initPrefs("useIKnow", "true");
   initPrefs("iknow.response-language", "ja");
@@ -127,7 +121,7 @@ function viewHistory(){
 function loadGeneratedPage(){
 	var pasteboard = new FDPasteBoard();
 	var tabbrowser = top.document.getElementById("content");
-	var file = dirTemp.createFileInstance("temp.html");
+	var file = new FDDirectory("ProfD/FireDictionary/tmp").createFileInstance("temp.html");
 	var tab;
 	
         file.write(pasteboard.getContentAsHtml(), "UTF-8");
