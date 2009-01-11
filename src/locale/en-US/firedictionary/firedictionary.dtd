@@ -4,6 +4,7 @@
 <!ENTITY menu.homepage			"FireDictionary Web Site">
 <!ENTITY menu.dictionoaryConfiguration  "Dictionary Configuration...">
 <!ENTITY menu.preferences               "Preferences...">
+<!ENTITY menu.mylist                    "iKnow! My List Manager">
 
 <!ENTITY label.category                 "Category : ">
 <!ENTITY label.escapeKey1               "Escape key for not registering a word to">

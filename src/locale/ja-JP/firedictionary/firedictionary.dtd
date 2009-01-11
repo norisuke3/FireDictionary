@@ -4,7 +4,7 @@
 <!ENTITY menu.homepage			"ホームページ">
 <!ENTITY menu.dictionoaryConfiguration  "辞書の設定...">
 <!ENTITY menu.preferences               "設定...">
-
+<!ENTITY menu.mylist                    "iKnow! マイリストの管理">
 
 <!ENTITY label.category                 "カテゴリー : ">
 <!ENTITY label.escapeKey1               "単語をクリックした時に、履歴に単語を登録しないための">

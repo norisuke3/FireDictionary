@@ -208,3 +208,10 @@ function checkIKnowMenu(){
 
   dicSidebar.InitIKnowPanel();
 }
+
+function openMyListManager(){
+  var tabbrowser = top.document.getElementById("content");
+  var tab = tabbrowser.addTab("chrome://firedictionary/content/iknow/iKnowMyListManager.html");
+ 
+  tabbrowser.selectedTab = tab;
+}
