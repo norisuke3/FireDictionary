@@ -20,7 +20,7 @@
     <!-- - - - - - - - - - - - - - - - - - 
           target: makeJar
          - - - - - - - - - - - - - - - - - -->
-	<target name="makeJar">
+	<target name="makeJar" depends="generate">
 		<mkdir dir="chrome"/>
 		<jar destfile="chrome/firedictionary.jar">
 			<fileset dir="src"/>
@@ -115,5 +115,15 @@
 		<delete dir="download"/>
    	    <delete dir="download.addons.mozilla.org"/>
 		<delete dir="jsdoc"/>
+	</target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: generate
+	    generate iKnowMyListManager.html by running ruby script
+         - - - - - - - - - - - - - - - - - -->
+	<target name="generate">
+	    <exec executable="ruby">
+		<arg value="generate.rb"/>
+	    </exec>
 	</target>
 </project>
