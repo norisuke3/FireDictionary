@@ -589,15 +589,15 @@ this.loadIKnow = function(keyword){
    var modified;
    var RECJK = /[\u2E80-\uFE4F]/;             // handle cjk (chinese/japanese/korean) chars specially
    var normalizer = [
-     { deletion: "est", addition: ""    },
-     { deletion: "ism", addition: ""    },
      { deletion: "s",   addition: ""    },
      { deletion: "ed",  addition: ""    },
      { deletion: "ied", addition: "y"   },
      { deletion: "r",   addition: ""    },
      { deletion: "er",  addition: ""    },
      { deletion: "ing", addition: ""    },
-     { deletion: "d",   addition: ""    }
+     { deletion: "d",   addition: ""    },
+     { deletion: "est", addition: ""    },
+     { deletion: "ism", addition: ""    }
    ];
    // sample
    // files, tired, booked, copied, eater, providing, forged, inspirer, fader, fadder
