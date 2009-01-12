@@ -58,13 +58,14 @@ body {
 }
 
 #iknow_header > p {
-    height : 46px; 
+    height : 51px; 
     font-size: 30px;
     background-color: #0189DB;
     color: #FFFFFF;
-    padding-top: 10px;
+    padding-top: 5px;
     padding-left: 15px;
-    margin-top: 40px;
+    margin-top: 50px;
+    margin-bottom: 0px;
 }
 
 #iknow_footer { 
@@ -83,7 +84,7 @@ body {
     height: 25px;
     color: #FFFFFF;
     font-size: 19px;
-    padding-top: 3px;
+    padding-bottom: 3px;
     padding-left: 15px;
 }
 
@@ -101,7 +102,7 @@ body {
     width: 110px;
     float: left;
     margin-right: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .textbox {
@@ -117,12 +118,13 @@ body {
 #iknow_my-list {
     float: left;
     width: 150px;
+    margin-top:20px;
 }
 
 #ind-loading{
     float: left;
     padding-left: 10px;
-    padding-top: 2px;
+    padding-top: 22px;
 }
 
 #iknow_contents { 
@@ -137,6 +139,11 @@ body {
     font-size: 14px;
     margin-top: 30px;
     margin-bottom: 20px;
+}
+
+#submit-items {
+    margin-bottom: 20px;
+    float: right;
 }
 
 .rounded_8px {
@@ -158,8 +165,9 @@ body {
 
 
 .history_item{
-    padding-top: 20px;
+    padding-top: 30px;
     margin-bottom: 50px;
+    border-top: 2px dashed #BBBBBB;
 }
 
 .history_main{
@@ -190,6 +198,23 @@ body {
 
 .history_option{
     clear:both;
+    padding-top: 20px;
+}
+
+.radio_item{
+    float: left;
+    margin-top: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.iknow_item{
+    width: 243px;
+    float: left;
+}
+
+.iknow_item_end{
+    clear: both;
 }
 
 .red {

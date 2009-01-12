@@ -37,11 +37,16 @@
 <html>
   <head>
     <title>iKnow My List Manager</title>
+    <link rel="Stylesheet" type="text/css" media="all" href="chrome://firedictionary/skin/iknow-panel.css"/>
     <link rel="stylesheet" type="text/css" href="chrome://firedictionary/skin/iKnowMyListManager.css">
     <!-- <script type="application/x-javascript" src="chrome://firedictionary/content/lib/prototype-1.6.0.3.js"/> -->
     <script type="application/x-javascript">
       <script-src src="lib/prototype-1.6.0.3.js"/>
     </script><!-- prototype-1.6.0.3.js -->
+    <!-- <script type="application/x-javascript" src="chrome://firedictionary/content/lib/base64.js"/> -->
+    <script type="application/x-javascript">
+      <script-src src="lib/base64.js"/>
+    </script><!-- base64.js.js -->
     <!-- <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/> -->
     <script type="application/x-javascript">
       <script-src src="classes/core/fd_file.js"/>
@@ -76,17 +81,25 @@
 	      <input type="text" id="username" class="textbox" />
 	    </div>
             <input id="submit-username" type="submit" value="OK" onClick="iKnowMyListManager.getMyList()"/>
+	    <div style="clear: both;"> </div>
+	    Password:
+            <div class="input-border rounded_8px">
+	      <input type="password" id="password" class="textbox" />
+	    </div>
 
 	    <select id="iknow_my-list" onChange="iKnowMyListManager.getItemsInList();">
 	      <option value="">--- My List ---</option>
 	    </select>
 	    <div id="ind-loading">
-	      <img src="chrome://firedictionary/skin/loading_16.png"/>	      
+	      <img src="chrome://firedictionary/skin/loading_16.png"/>
 	    </div>
 	  </div>
         </div>
         <div id="iknow_contents" class="rounded_8px">
-          <div id="description">このページの機能を使って、下に一覧表示された FireDictionary の履歴単語一覧をあなたの iKnow! マイリストにアップロードする事ができます。</div>
+          <div id="description">このページの機能を使って、下に一覧表示された FireDictionary の履歴単語一覧をあなたの iKnow! マイリストにアップロードする事ができます。
+	  </div>
+	  <input id="submit-items" type="submit" value="送信" onClick="iKnowMyListManager.submitItems()"/>
+	  <div style="clear: both;"> </div>
         </div>
       </div>
     </div>
