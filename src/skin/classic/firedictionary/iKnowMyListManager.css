@@ -141,6 +141,11 @@ body {
     margin-bottom: 20px;
 }
 
+#keyword-status{
+    float: right;
+    margin-right: 20px;
+}
+
 #submit-items {
     margin-bottom: 20px;
     float: right;
@@ -219,4 +224,20 @@ body {
 
 .red {
   color: red;
+}
+
+div.msg_green {
+    background-color: #CCFFCC; 
+    font-size: 14px; 
+    margin: 10px; 
+    padding: 10px; 
+    border: 1px solid #99CC99
+}
+
+div.msg_red {
+    background-color: #FFCCCC;
+    font-size: 14px; 
+    margin: 10px; 
+    padding: 10px; 
+    border: 1px solid #CC9999
 }

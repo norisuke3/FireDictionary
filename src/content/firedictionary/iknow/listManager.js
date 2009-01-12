@@ -37,7 +37,30 @@
 var iKnowMyListManager = iKnowMyListManager || {};
 
 (function(){
+   /**
+    *  Scope variable keywords
+    *    Hoding the following attributes of each keywords in the history.
+    *    member of the array is reffered as a variable 'k' in this code.
+    * 
+    * @param keyword a keyword itself
+    * @param id      a keyword id which is actually a timestamp of registerd time
+    * @param element an elment of div.history_option for the keyword ( information part )
+    * @param itemId  an item id related to the keyword
+    * @param status  taking either of the value 'initial', 'selected', 'sent', 'registered' and 'failed'
+    */
    var keywords = new Array();
+   
+   keywords.getStatus = function(){
+     return 'ÁíÃ±¸ì¿ô: '      + this.length + ', '  +
+            'ÁªÂò: '   + this.findAll(function(k){return k.status == "selected";  }).length + ', '  +
+	    'Á÷¿®ºÑ¤ß: '       + this.findAll(function(k){return k.status == "sent";      }).length + ', '  +
+	    'ÅÐÏ¿´°Î»: ' + this.findAll(function(k){return k.status == "registered";}).length + ', '  +
+	    '¼ºÇÔ: '     + this.findAll(function(k){return k.status == "failed";    }).length;
+   };
+   
+   keywords.updateStatus = function(){
+     $('keyword-status').update(this.getStatus());
+   };
    
   /**
    * initialize()
@@ -93,8 +116,11 @@ var iKnowMyListManager = iKnowMyListManager || {};
       keywords.push({
 	keyword: item.hs::keyword.toString(),
 	id     : item.hs::timestamp.toString(),
-	element: $(item.hs::timestamp.toString())
+	element: $(item.hs::timestamp.toString()),
+	status : "initial"
       });
+      
+      keywords.updateStatus();
     }
   };
 
@@ -115,20 +141,20 @@ var iKnowMyListManager = iKnowMyListManager || {};
     
     // get lists by a user name.
     new Ajax.Request(
-      'http://api.iknow.co.jp/lists.json?' + Object.toQueryString(param) ,
-      { method: 'get',
-      onSuccess: function(transport){
-	populateMyList(transport.responseText);
+      'http://api.iknow.co.jp/lists.json?' + Object.toQueryString(param) , {  // getMyList (Ajax call)
+	method: 'get',
+	onSuccess: function(transport){
+	  populateMyList(transport.responseText);
 	
-        $('ind-loading').hide();
-      },
-      onFailure: function(transport){
+          $('ind-loading').hide();
+	},
+	onFailure: function(transport){
     
-      },
-      onException: function(transport, ex){
+	},
+	onException: function(transport, ex){
     
-      }
-    })
+	}
+      })
   };
 
   /**
@@ -144,20 +170,20 @@ var iKnowMyListManager = iKnowMyListManager || {};
     
     // get items in a list.
     new Ajax.Request(
-      'http://api.iknow.co.jp/lists/' + $F('iknow_my-list') + '/items.json',
-      { method: 'get',
-      onSuccess: function(transport){
-	keywords.each(function(k){
-	  showItems(k);
-	});
-      },
-      onFailure: function(transport){
+      'http://api.iknow.co.jp/lists/' + $F('iknow_my-list') + '/items.json', {// getItemsInList (Ajax call)
+	method: 'get',
+	onSuccess: function(transport){
+	  keywords.each(function(k){
+	    showItems(k);
+	  });
+	},
+	onFailure: function(transport){
     
-      },
-      onException: function(transport, ex){
+	},
+	onException: function(transport, ex){
     
-      }
-    })
+	}
+      })
   };
    
   /**
@@ -168,11 +194,11 @@ var iKnowMyListManager = iKnowMyListManager || {};
    * @param itemId an id of the item in the iKnow item bank.
    */
   this.selectItem = function(keywordId, itemId){
-    var keyword = keywords.find(function(k){
-      return k.id == keywordId;
-    });
-    
-    keyword.itemId = itemId;
+    var k = keywords.find(function(k){ return k.id == keywordId; });
+
+    k.itemId = itemId;	    
+    k.status = 'selected';
+    keywords.updateStatus();
   };
 
    /**
@@ -180,38 +206,45 @@ var iKnowMyListManager = iKnowMyListManager || {};
     *   submit the selected items to the iKnow! server.
     */
    this.submitItems = function(){
-     console.log('submitItems is called.');
+     var timer = 0;
+     
      keywords.findAll(function(k){ return k.itemId;})
              .each(function(k){
-   
-       var params = {
-	 id: k.itemId,
-	 api_key: "gs3rzbq2n5e9pgt6nuq5shvp"
-       };
 
-       var reqHeaders = { 
-	 Authorization: ' Basic '+ base64encode($('username').value + ':' + $('password').value) 
-       };
+       (function(){                // This anonymous function is for calling delay().
+         k.status = 'sent';
+         keywords.updateStatus();
 
-       // submit the selected items to register them to the iKnow server.
-       new Ajax.Request(
-         'http://api.iknow.co.jp/lists/' + $F('iknow_my-list') + '/items',
-         { method: 'post',
-	   parameters: params,
-	   requestHeaders: reqHeaders,
-         onSuccess: function(transport){
-           console.log(transport.responseText);
-         },
-         onFailure: function(transport){
-	   console.log('failed');
-           console.log(transport.responseText);
-         },
-         onException: function(transport, ex){
-	   console.log(ex.message);
-           console.log(transport.responseText);
-         }
-       })
-       
+         // submit the selected items to register them to the iKnow server.
+         new Ajax.Request(
+           'http://api.iknow.co.jp/lists/' + $F('iknow_my-list') + '/items', {  // submit Items (Ajax call)
+	     method: 'post',
+	     parameters: {
+	       id: k.itemId,
+	       api_key: "gs3rzbq2n5e9pgt6nuq5shvp"
+	     },
+	     requestHeaders: {
+	       Authorization: ' Basic '+ base64encode($('username').value + ':' + $('password').value) 
+	     },
+             onSuccess: function(transport){
+               console.log(transport.responseText);
+	       $(k.id).update('<div class="msg_green">ÅÐÏ¿¤µ¤ì¤Þ¤·¤¿¡£</div>');
+	       k.status = 'registered';
+	       keywords.updateStatus();
+             },
+             onFailure: function(transport){
+	       $(k.id).update('<div class="msg_red">failed: ' + transport.responseText + '</div>');
+	       k.status = 'failed';
+	       keywords.updateStatus();
+             },
+             onException: function(transport, ex){
+	       $(k.id).update('<div class="msg_red">failed: ' + transport.responseText + '</div>');
+	       k.status = 'failed';
+	       keywords.updateStatus();
+             }
+	   })
+	  
+	}).delay(timer += 0.6);  // The anonymous function end.
      });
    };
   
@@ -231,22 +264,22 @@ var iKnowMyListManager = iKnowMyListManager || {};
     return false;
   }
    
-  function showItems(kInfo){
+  function showItems(k){
     // get items matching to the keyword.
     new Ajax.Request(
-      'http://api.iknow.co.jp/items/matching/' + kInfo.keyword + '.json',
-      { method: 'get',
-      onSuccess: function(transport){
-	$(kInfo.id).update('');
-	$(kInfo.id).insert(createIKnowHTML(transport.responseText, kInfo.id));
-      },
-      onFailure: function(transport){
+      'http://api.iknow.co.jp/items/matching/' + k.keyword + '.json', {   // Matching a keyword (Ajax call)
+	method: 'get',
+	onSuccess: function(transport){
+	  $(k.id).update('');
+	  $(k.id).insert(createIKnowHTML(transport.responseText, k.id));
+	},
+	onFailure: function(transport){
     
-      },
-      onException: function(transport, ex){
+	},
+	onException: function(transport, ex){
     
-      }
-    })
+	}
+      })
   };
    
   function showAllSet(){
