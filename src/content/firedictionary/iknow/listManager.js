@@ -51,16 +51,29 @@ var iKnowMyListManager = iKnowMyListManager || {};
    var keywords = new Array();
    
    keywords.getStatus = function(){
-     return '総単語数: '      + this.length + ', '  +
-            '選択: '   + this.findAll(function(k){return k.status == "selected";  }).length + ', '  +
-	    '送信済み: '       + this.findAll(function(k){return k.status == "sent";      }).length + ', '  +
+     return '総単語数: ' + this.length + ', '  +
+            '選択: '    + this.findAll(function(k){return k.status == "selected";  }).length + ', '  +
+	    '送信済み: ' + this.findAll(function(k){return k.status == "sent";      }).length + ', '  +
 	    '登録完了: ' + this.findAll(function(k){return k.status == "registered";}).length + ', '  +
-	    '失敗: '     + this.findAll(function(k){return k.status == "failed";    }).length;
+	    '失敗: '    + this.findAll(function(k){return k.status == "failed";    }).length;
    };
    
    keywords.updateStatus = function(){
      $('keyword-status').update(this.getStatus());
    };
+   
+   var conn = new FireDictionary.DBConn("ProfD/FireDictionary", "firedictionary.sqlite");
+   
+   // creating table RegisterInfo with an index (kId, listId)
+   //   kId - keyword id
+   //   listId - iknow list id
+   //   itemId - iknow item id
+   conn.execute('CREATE TABLE IF NOT EXISTS RegisterInfo (' + 
+		    'kId    TEXT NOT NULL, ' + 
+		    'listId TEXT NOT NULL, ' + 
+		    'itemId TEXT NOT NULL)');
+   
+   conn.execute('CREATE INDEX IF NOT EXISTS keyRegisterInfo ON RegisterInfo (kId, listId)');
    
   /**
    * initialize()
@@ -100,9 +113,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
 	  <div id={item.hs::timestamp.toString()} class="history_option"></div>
         </div>.toXMLString());
       
-      var elmSentence = $A(temp.getElementsByTagName('div')).find(function(elm){
-			  return elm.className == 'sentence';
-			});
+      var elmSentence = $(temp).down('div[class=sentence]');
       var pickedupword = item.hs::pickedupword.toString();
       var sentence = item.hs::sentence.toString();
       
@@ -174,7 +185,15 @@ var iKnowMyListManager = iKnowMyListManager || {};
 	method: 'get',
 	onSuccess: function(transport){
 	  keywords.each(function(k){
-	    showItems(k);
+	    if( isRegistered(k) ) {
+	      if ( isDeleted(k, transport.responseText) ){
+		showDeleted(k);
+	      } else {
+		showAllSet(k);
+	      }
+	    } else {
+	      showItems(k, transport.responseText);
+	    }
 	  });
 	},
 	onFailure: function(transport){
@@ -231,6 +250,11 @@ var iKnowMyListManager = iKnowMyListManager || {};
 	       $(k.id).update('<div class="msg_green">登録されました。</div>');
 	       k.status = 'registered';
 	       keywords.updateStatus();
+	       conn.execute(
+		 'INSERT INTO RegisterInfo (kId, listId, itemId) VALUES (' + 
+		   k.id + ', ' + 
+		   $F('iknow_my-list') + ', ' + 
+		   k.itemId + '  )');
              },
              onFailure: function(transport){
 	       $(k.id).update('<div class="msg_red">failed: ' + transport.responseText + '</div>');
@@ -252,26 +276,91 @@ var iKnowMyListManager = iKnowMyListManager || {};
   ///////  provate functions /////////////////////////////////////////////
   //
   
-  function isRegistered(){
-    return false;
+  /**
+   * isRegistered(k)
+   *   checks if an item related to the keyword k has already been registered by this My List Manager.
+   *   It doesn't matter at this point if an item has been registered at the iknow website.
+   * 
+   * @param k a keyword
+   * @return true - if it's already been registered, otherwise false
+   */
+  function isRegistered(k){
+    var result = false;
+
+    conn.executeStep(
+      'SELECT * from RegisterInfo WHERE kId = "' + k.id + '" AND listId = "' + $F('iknow_my-list') + '"', 
+      function(stmt){
+	result = true;
+      });
+
+    return result;
   }
   
-  function checkDeleted(){
-    return false;
+  /**
+   * isDeleted(k, json)
+   *   checks if the registered item has been deleted at the iknow website.
+   * 
+   * @param k a keyword
+   * @param json text formated as json of an API http://api.iknow.co.jp/lists/:listId/items.json
+   * @return true - if it's deleted, otherwise false
+   */
+  function isDeleted(k, json){
+    var items = json.evalJSON(true);
+    var registered;
+    
+    conn.executeStep(
+      'SELECT itemId from RegisterInfo WHERE kId = "' + k.id + '" AND listId = "' + $F('iknow_my-list') + '"', 
+      function(stmt){
+	registered = stmt.getString(0);
+      });
+
+    return !(items.any(function(item){ return item.id == registered; }));
   }
    
-  function checkAlreadyPresent(){
-    return false;
+  /**
+   * isAlreadyPresent(items, kitems)
+   *   checks if any of items related to the keyword has not been registered.
+   * 
+   * @param items an array of all items already registered
+   * @param kitems an array of all items related to the keyword.
+   * @return true - if it's already present, otherwise false
+   */
+   function isAlreadyPresent(items, kitems){
+
+     return items.any(function(id){ return kitems.include(id); });
   }
    
-  function showItems(k){
+   /**
+    * showItems(k, json)
+    *   Shows items if any of items related to the keyword has not been registered.
+    * 
+   * @param k a keyword
+   * @param json text formated as json of an API http://api.iknow.co.jp/lists/:listId/items.json
+    */
+   function showItems(k, json){
+     var items = json.evalJSON(true);
+     
     // get items matching to the keyword.
     new Ajax.Request(
       'http://api.iknow.co.jp/items/matching/' + k.keyword + '.json', {   // Matching a keyword (Ajax call)
 	method: 'get',
 	onSuccess: function(transport){
-	  $(k.id).update('');
-	  $(k.id).insert(createIKnowHTML(transport.responseText, k.id));
+	  var kitems = transport.responseText.evalJSON(true);
+	  if ( isAlreadyPresent(items.pluck("id"), kitems.pluck("id"))){
+	    k.itemId = items.pluck("id").filter(function(i){return kitems.pluck("id").indexOf(i)!=-1;})[0];  // intersection
+	    
+	    conn.execute(
+	      'INSERT INTO RegisterInfo (kId, listId, itemId) VALUES (' + 
+		k.id + ', ' + 
+		$F('iknow_my-list') + ', ' + 
+		k.itemId + '  )');
+
+	    showAllSet(k);
+	    
+	  } else {
+	    $(k.id).update('');
+	    $(k.id).insert(createIKnowHTML(transport.responseText, k.id));
+	  }
 	},
 	onFailure: function(transport){
     
@@ -282,13 +371,12 @@ var iKnowMyListManager = iKnowMyListManager || {};
       })
   };
    
-  function showAllSet(){
-     
+  function showAllSet(k){
+     $(k.id).update('<div class="msg_green">登録済みです。</div>');
   };
      
-  function showDeleted(){
-     // TODO
-    showItems();
+  function showDeleted(k){
+    $(k.id).update('<div class="msg_yellow">FireDictionary からは登録済みですが、iKnow サイト上で削除されている可能性があります。</div>');
   };
 
   /**
