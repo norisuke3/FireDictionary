@@ -306,14 +306,8 @@ var iKnowMyListManager = iKnowMyListManager || {};
    */
   function isDeleted(k, json){
     var items = json.evalJSON(true);
-    var registered;
+    var registered = getItemId(k);
     
-    conn.executeStep(
-      'SELECT itemId from RegisterInfo WHERE kId = "' + k.id + '" AND listId = "' + $F('iknow_my-list') + '"', 
-      function(stmt){
-	registered = stmt.getString(0);
-      });
-
     return !(items.any(function(item){ return item.id == registered; }));
   }
    
@@ -372,7 +366,9 @@ var iKnowMyListManager = iKnowMyListManager || {};
   };
    
   function showAllSet(k){
-     $(k.id).update('<div class="msg_green">ÅÐÏ¿ºÑ¤ß¤Ç¤¹¡£</div>');
+    console.log(k);
+     $(k.id).update('<div class="msg_green"><a href="http://www.iknow.co.jp/items/' + 
+		                 getItemId(k) + '" target="_blank">ÅÐÏ¿ºÑ¤ß</a>¤Ç¤¹¡£</div>');
   };
      
   function showDeleted(k){
@@ -440,6 +436,22 @@ var iKnowMyListManager = iKnowMyListManager || {};
     $('iknow_my-list').value = "";
   };
 
+   /**
+    * getItemId(kId, listId)
+    *   database access wrapper
+    */
+   function getItemId(k){
+    var itemId;
+     
+    conn.executeStep(
+      'SELECT itemId from RegisterInfo WHERE kId = "' + k.id + '" AND listId = "' + $F('iknow_my-list') + '"', 
+      function(stmt){
+	itemId = stmt.getString(0);
+      });
+     
+     return itemId;
+   }
+   
   /**
    * Document getXMLDocument(String url)
    *
