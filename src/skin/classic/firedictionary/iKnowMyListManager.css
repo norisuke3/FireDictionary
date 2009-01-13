@@ -241,3 +241,11 @@ div.msg_red {
     padding: 10px; 
     border: 1px solid #CC9999
 }
+
+div.msg_yellow {
+    background-color: #FFFFCC;
+    font-size: 14px; 
+    margin: 10px; 
+    padding: 10px; 
+    border: 1px solid #CC9999
+}
