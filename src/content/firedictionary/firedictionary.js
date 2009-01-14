@@ -214,4 +214,6 @@ function openMyListManager(){
   var tab = tabbrowser.addTab("chrome://firedictionary/content/iknow/iKnowMyListManager.html");
  
   tabbrowser.selectedTab = tab;
+  
+  dicSidebar.turnOffMouseOverMode();
 }
