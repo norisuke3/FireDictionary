@@ -276,3 +276,7 @@ div.msg_yellow {
     padding: 10px; 
     border: 1px solid #CC9999
 }
+
+.right-align {
+    text-align: right;
+}
