@@ -46,7 +46,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
     * @param id      a keyword id which is actually a timestamp of registerd time
     * @param element an elment of div.history_option for the keyword ( information part )
     * @param itemId  an item id related to the keyword
-    * @param status  taking either of the value 'initial', 'selected', 'sent', 'registered' and 'failed'
+    * @param status  taking either of the value 'initial', 'selected', 'registered' and 'failed'
     */
    var keywords = new Array();
    
@@ -192,7 +192,9 @@ var iKnowMyListManager = iKnowMyListManager || {};
 		showAllSet(k);
 	      }
 	    } else {
-	      showItems(k, transport.responseText);
+	      var items = transport.responseText.evalJSON(true);
+	      
+	      showItems(k, items.pluck("id"));
 	    }
 	  });
 	},
@@ -231,7 +233,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
        $('submit-items').disabled = true;
      }
      
-     keywords.findAll(function(k){ return k.itemId;})
+     keywords.findAll(function(k){ return k.status == "selected";})
              .each(function(k){
        (function(){                // This anonymous function is for calling delay().
          // submit the selected items to register them to the iKnow server.
@@ -304,6 +306,17 @@ var iKnowMyListManager = iKnowMyListManager || {};
 	    .invoke($('filter-registered').checked ? 'hide' : 'show');
   };
    
+  /**
+   * _showItems(kid)
+   *   show items only for a keyword which used to have a error/notification message 
+   *   rather than item list.
+   */
+  this._showItems = function(kid){
+    var keyword = keywords.find(function(k){return k.id == kid;});
+    
+    showItems(keyword, []);
+  };
+   
   //
   ///////  provate functions /////////////////////////////////////////////
   //
@@ -357,23 +370,21 @@ var iKnowMyListManager = iKnowMyListManager || {};
   }
    
    /**
-    * showItems(k, json)
+    * showItems(k, ItemIds)
     *   Shows items if any of items related to the keyword has not been registered.
     * 
-   * @param k a keyword
-   * @param json text formated as json of an API http://api.iknow.co.jp/lists/:listId/items.json
+    * @param k a keyword
+    * @param ItemIds an array of items in the list 
     */
-   function showItems(k, json){
-     var items = json.evalJSON(true);
-
+   function showItems(k, ItemIds){
     // get items matching to the keyword.
     new Ajax.Request(
       'http://api.iknow.co.jp/items/matching/' + k.keyword + '.json', {   // Matching a keyword (Ajax call)
 	method: 'get',
 	onSuccess: function(transport){
-	  var kitems = transport.responseText.evalJSON(true);
-	  if ( isAlreadyPresent(items.pluck("id"), kitems.pluck("id"))){
-	    k.itemId = items.pluck("id").filter(function(i){return kitems.pluck("id").indexOf(i)!=-1;})[0];  // intersection
+ 	  var kitems = transport.responseText.evalJSON(true);
+	  if ( isAlreadyPresent(ItemIds, kitems.pluck("id"))){
+	    k.itemId = ItemIds.filter(function(i){return kitems.pluck("id").indexOf(i)!=-1;})[0];  // intersection
 	    
 	    conn.execute(
 	      'INSERT INTO RegisterInfo (kId, listId, itemId) VALUES (' + 
@@ -415,9 +426,12 @@ var iKnowMyListManager = iKnowMyListManager || {};
   };
      
   function showDeleted(k){
+    k.status = "initial";
+    keywords.updateStatus();
+    
     $(k.id).update('<div class="msg_yellow right-align">' + 
 		   '<span style="float:left;">FireDictionary からは登録済みですが、iKnow サイト上で削除されている可能性があります。</span>' + 
-		   '<input type="submit" value="再登録"/></div>');
+		   '<input type="submit" value="再登録" onClick="iKnowMyListManager._showItems(' + k.id + ')"/></div>');
     
     $(k.id).up('div[class=history_item]')
            .down('div[class=keyword_ind]')
