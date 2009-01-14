@@ -320,6 +320,8 @@ var iKnowMyListManager = iKnowMyListManager || {};
   this._showItems = function(kid){
     var keyword = keywords.find(function(k){return k.id == kid;});
     
+    conn.execute('DELETE FROM RegisterInfo WHERE  kId = "' + kid + '" AND listId = "' + $F('iknow_my-list') + '"');
+    
     showItems(keyword, []);
   };
    
