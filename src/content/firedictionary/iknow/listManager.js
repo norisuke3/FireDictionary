@@ -44,7 +44,6 @@ var iKnowMyListManager = iKnowMyListManager || {};
     * 
     * @param keyword a keyword itself
     * @param id      a keyword id which is actually a timestamp of registerd time
-    * @param element an elment of div.history_option for the keyword ( information part )
     * @param itemId  an item id related to the keyword
     * @param status  taking either of the value 'initial', 'selected', 'registered' and 'failed'
     */
@@ -73,7 +72,14 @@ var iKnowMyListManager = iKnowMyListManager || {};
 		    'itemId TEXT NOT NULL)');
    
    conn.execute('CREATE INDEX IF NOT EXISTS keyRegisterInfo ON RegisterInfo (kId, listId)');
+
    
+   // initialize e4x object of history.xml
+   var urlHistory = new FDDirectory("ProfD/FireDictionary").createFileInstance("history.xml").getURL();
+   var xml = new XML(getXMLDocument(urlHistory));
+   var hs = new Namespace('http://www.firedictionary.com/history');
+    
+
   /**
    * initialize()
    *   initialize a page of iKnow! My List Manager
@@ -91,10 +97,6 @@ var iKnowMyListManager = iKnowMyListManager || {};
     $('submit-items').disabled = true;
     
     // main initialization
-    var urlHistory = new FDDirectory("ProfD/FireDictionary").createFileInstance("history.xml").getURL();
-    var xml = new XML(getXMLDocument(urlHistory));
-    var hs = new Namespace('http://www.firedictionary.com/history');
-    
     for each (var item in xml..hs::item){
       var temp = new Element('temp');
       
@@ -122,16 +124,6 @@ var iKnowMyListManager = iKnowMyListManager || {};
       } 
       
       $('iknow_contents').insert(temp.firstChild);    
-      
-      // preparing keyword information
-      keywords.push({
-	keyword: item.hs::keyword.toString(),
-	id     : item.hs::timestamp.toString(),
-	element: $(item.hs::timestamp.toString()),
-	status : "initial"
-      });
-      
-      keywords.updateStatus();
     }
   };
 
@@ -175,6 +167,20 @@ var iKnowMyListManager = iKnowMyListManager || {};
   this.getItemsInList = function(){
     if ( $F('iknow_my-list') == "" ) { return; }
 
+    // initialize keywords Object
+    keywords.clear();
+    
+    for each (var item in xml..hs::item){
+      // preparing keyword information
+      keywords.push({
+	keyword: item.hs::keyword.toString(),
+	id     : item.hs::timestamp.toString(),
+	status : "initial"
+      });
+    }
+    
+    keywords.updateStatus();
+    
     keywords.each(function(k){
       $(k.id).update('<img src="chrome://firedictionary/skin/loading_16.png"/>');
     });
@@ -301,7 +307,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
   this.filterRegistered = function(){
     keywords.findAll(function(k){return k.status =='registered';})
             .collect(function(k){
-	      return k.element.up('div[class=history_item]');
+	      return $(k.id).up('div[class=history_item]');
 	    })
 	    .invoke($('filter-registered').checked ? 'hide' : 'show');
   };
@@ -430,7 +436,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
     keywords.updateStatus();
     
     $(k.id).update('<div class="msg_yellow right-align">' + 
-		   '<span style="float:left;">FireDictionary からは登録済みですが、iKnow サイト上で削除されている可能性があります。</span>' + 
+		   '<span style="float:left;">FireDictionary からは登録済みですが、iKnow サイト上で削除された可能性があります。</span>' + 
 		   '<input type="submit" value="再登録" onClick="iKnowMyListManager._showItems(' + k.id + ')"/></div>');
     
     $(k.id).up('div[class=history_item]')
