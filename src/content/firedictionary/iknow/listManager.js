@@ -276,18 +276,22 @@ var iKnowMyListManager = iKnowMyListManager || {};
 		   k.itemId + '  )');
              },
              onFailure: function(transport){
-	       $(k.id).update('<div class="msg_red">failed: ' + transport.responseText + '</div>');
+	       $(k.id).update('<div class="msg_red right-align">' + 
+			      '<span style="float:left;">failed: ' + transport.responseText.escapeHTML() + '</span>' +
+			      '<input type="submit" value="╨фепо©" onClick="iKnowMyListManager._showItems(' + k.id + ')"/></div>');
 	       k.status = 'failed';
 	       keywords.updateStatus();
              },
              onException: function(transport, ex){
-	       $(k.id).update('<div class="msg_red">failed: ' + transport.responseText + '</div>');
+	       $(k.id).update('<div class="msg_red right-align">' + 
+			      '<span style="float:left;">failed: ' + transport.responseText.escapeHTML() + '</span>' +
+			      '<input type="submit" value="╨фепо©" onClick="iKnowMyListManager._showItems(' + k.id + ')"/></div>');
 	       k.status = 'failed';
 	       keywords.updateStatus();
              }
 	   })
 	  
-	}).delay(timer += 0.6);  // The anonymous function end.
+	}).delay(timer += 0.7);  // The anonymous function end.
      });
    };
   
