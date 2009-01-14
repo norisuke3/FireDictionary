@@ -53,8 +53,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
    keywords.getStatus = function(){
      return '総単語数: ' + this.length + ', '  +
             '選択: '    + this.findAll(function(k){return k.status == "selected";  }).length + ', '  +
-	    '送信済み: ' + this.findAll(function(k){return k.status == "sent";      }).length + ', '  +
-	    '登録完了: ' + this.findAll(function(k){return k.status == "registered";}).length + ', '  +
+	    '登録済:   ' + this.findAll(function(k){return k.status == "registered";}).length + ', '  +
 	    '失敗: '    + this.findAll(function(k){return k.status == "failed";    }).length;
    };
    
@@ -89,6 +88,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
      
     // visutal effects initialization
     $('ind-loading').hide();
+    $('submit-items').disabled = true;
     
     // main initialization
     var urlHistory = new FDDirectory("ProfD/FireDictionary").createFileInstance("history.xml").getURL();
@@ -101,7 +101,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
       temp.insert(
 	<div class="history_item">
 	  <div class="history_main">
-	    <div class="keyword">{ item.hs::keyword.toString() }</div>
+	    <div class="keyword">{ item.hs::keyword.toString() }<div class="keyword_ind"> </div></div>
 	    <div class="keyword_info">
 	      <div class="result">{ item.hs::result.toString() }</div>
               <div class="sentence"> </div>
@@ -178,7 +178,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
     keywords.each(function(k){
       $(k.id).update('<img src="chrome://firedictionary/skin/loading_16.png"/>');
     });
-    
+
     // get items in a list.
     new Ajax.Request(
       'http://api.iknow.co.jp/lists/' + $F('iknow_my-list') + '/items.json', {// getItemsInList (Ajax call)
@@ -227,13 +227,13 @@ var iKnowMyListManager = iKnowMyListManager || {};
    this.submitItems = function(){
      var timer = 0;
      
+     if(keywords.any(function(k){ return k.status == "selected"; })){
+       $('submit-items').disabled = true;
+     }
+     
      keywords.findAll(function(k){ return k.itemId;})
              .each(function(k){
-
        (function(){                // This anonymous function is for calling delay().
-         k.status = 'sent';
-         keywords.updateStatus();
-
          // submit the selected items to register them to the iKnow server.
          new Ajax.Request(
            'http://api.iknow.co.jp/lists/' + $F('iknow_my-list') + '/items', {  // submit Items (Ajax call)
@@ -246,10 +246,21 @@ var iKnowMyListManager = iKnowMyListManager || {};
 	       Authorization: ' Basic '+ base64encode($('username').value + ':' + $('password').value) 
 	     },
              onSuccess: function(transport){
-               console.log(transport.responseText);
 	       $(k.id).update('<div class="msg_green">登録されました。</div>');
+
+	       $(k.id).up('div[class=history_item]')
+		      .down('div[class=keyword_ind]')
+		      .update('<div class="image"><img src="chrome://firedictionary/skin/adding_completed.png"/></div>' + 
+			      '<div class="keyword_ind_msg"><a href="http://www.iknow.co.jp/items/' + 
+			      k.itemId + '" target="_blank">登録済み</a></div>');
+
 	       k.status = 'registered';
 	       keywords.updateStatus();
+	       
+	       if( keywords.all(function(k){ return k.status != 'selected'; }) ){
+		 $('submit-items').disabled = false;
+	       }
+	       
 	       conn.execute(
 		 'INSERT INTO RegisterInfo (kId, listId, itemId) VALUES (' + 
 		   k.id + ', ' + 
@@ -272,6 +283,27 @@ var iKnowMyListManager = iKnowMyListManager || {};
      });
    };
   
+  /**
+   * enableSubmit()
+   *   change an enability of the send submit button.
+   *   if the password input box is not empty, the submit botton is enabled.
+   */
+  this.enableSubmit = function(){
+    $('submit-items').disabled = ( $('password').value == '' );
+  };
+   
+  /**
+   * filterRegistered()
+   *   filters keyword registered out.
+   */
+  this.filterRegistered = function(){
+    keywords.findAll(function(k){return k.status =='registered';})
+            .collect(function(k){
+	      return k.element.up('div[class=history_item]');
+	    })
+	    .invoke($('filter-registered').checked ? 'hide' : 'show');
+  };
+   
   //
   ///////  provate functions /////////////////////////////////////////////
   //
@@ -333,7 +365,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
     */
    function showItems(k, json){
      var items = json.evalJSON(true);
-     
+
     // get items matching to the keyword.
     new Ajax.Request(
       'http://api.iknow.co.jp/items/matching/' + k.keyword + '.json', {   // Matching a keyword (Ajax call)
@@ -354,6 +386,10 @@ var iKnowMyListManager = iKnowMyListManager || {};
 	  } else {
 	    $(k.id).update('');
 	    $(k.id).insert(createIKnowHTML(transport.responseText, k.id));
+	    
+	    $(k.id).up('div[class=history_item]')
+                   .down('div[class=keyword_ind]')
+	           .update('');
 	  }
 	},
 	onFailure: function(transport){
@@ -366,13 +402,27 @@ var iKnowMyListManager = iKnowMyListManager || {};
   };
    
   function showAllSet(k){
-    console.log(k);
-     $(k.id).update('<div class="msg_green"><a href="http://www.iknow.co.jp/items/' + 
-		                 getItemId(k) + '" target="_blank">登録済み</a>です。</div>');
+    $(k.id).update('');
+
+    $(k.id).up('div[class=history_item]')
+           .down('div[class=keyword_ind]')
+	   .update('<div class="image"><img src="chrome://firedictionary/skin/adding_completed.png"/></div>' + 
+		   '<div class="keyword_ind_msg"><a href="http://www.iknow.co.jp/items/' + 
+		    getItemId(k) + '" target="_blank">登録済み</a></div>');
+    
+    k.status = 'registered';
+    keywords.updateStatus();
   };
      
   function showDeleted(k){
-    $(k.id).update('<div class="msg_yellow">FireDictionary からは登録済みですが、iKnow サイト上で削除されている可能性があります。</div>');
+    $(k.id).update('<div class="msg_yellow right-align">' + 
+		   '<span style="float:left;">FireDictionary からは登録済みですが、iKnow サイト上で削除されている可能性があります。</span>' + 
+		   '<input type="submit" value="再登録"/></div>');
+    
+    $(k.id).up('div[class=history_item]')
+           .down('div[class=keyword_ind]')
+	   .update('');
+
   };
 
   /**

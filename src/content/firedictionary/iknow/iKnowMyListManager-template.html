@@ -88,7 +88,7 @@
 	    <div style="clear: both;"> </div>
 	    Password:
             <div class="input-border rounded_8px">
-	      <input type="password" id="password" class="textbox" />
+	      <input type="password" id="password" class="textbox" onkeyup="iKnowMyListManager.enableSubmit();"/>
 	    </div>
 
 	    <select id="iknow_my-list" onChange="iKnowMyListManager.getItemsInList();">
@@ -102,9 +102,18 @@
         <div id="iknow_contents" class="rounded_8px">
           <div id="description">このページの機能を使って、下に一覧表示された FireDictionary の履歴単語一覧をあなたの iKnow! マイリストにアップロードする事ができます。
 	  </div>
-	  <input id="submit-items" type="submit" value="送信" onClick="iKnowMyListManager.submitItems()"/>
-	  <div id="keyword-status"> </div>
-	  <div style="clear: both;"> </div>
+	  <div style="">
+	    <input id="submit-items" type="submit" value="送信" onClick="iKnowMyListManager.submitItems()"/>
+	    <div id="keyword-status"> </div>
+	    <div style="clear:both;"></div>
+	  </div>
+	  <div class="filter-registered">
+	    <input id="filter-registered" type="checkbox" onClick="iKnowMyListManager.filterRegistered();"/>
+	  </div>
+	  <div class="filter-registered-text">
+	    未登録の単語のみ表示
+	  </div>
+	  <div style="clear: both;"></div>
         </div>
       </div>
     </div>
