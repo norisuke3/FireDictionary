@@ -101,7 +101,15 @@
 	  </div>
         </div>
         <div id="iknow_contents" class="rounded_8px">
-          <div id="description">このページの機能を使って、下に一覧表示された FireDictionary の履歴単語一覧をあなたの iKnow! マイリストにアップロードする事ができます。
+          <div id="description">このページの機能を使って、下に一覧表示された FireDictionary の履歴単語一覧をあなたの iKnow! マイリストにアップロードする事ができます。　<a onClick='$("detailed-description").toggle()'>&lt;&lt; 使い方 &gt;&gt;</a></div>
+	  <div id="detailed-description" class="msg_yellow">
+	    使い方
+	    <ol>
+	      <li>iKnow のユーザ名(※1)とパスワードを入力し「OK」ボタンを押します</li>
+	      <li>ドロップダウンからアイテムを登録したいマイリストを選択します</li>
+	      <li>各単語から、iKnowのアイテムを一つずつ選び、「送信」ボタンを押します</li>
+	    </ol><br/>
+	    ※1 ユーザ名はiKnowログイン時に使用するメールアドレスではなく、ログイン後に画面再上部に表示されるユーザ名を入力してください。
 	  </div>
 	  <div style="">
 	    <input id="submit-items" type="submit" value="送信" onClick="iKnowMyListManager.submitItems()"/>

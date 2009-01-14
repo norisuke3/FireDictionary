@@ -94,6 +94,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
      
     // visutal effects initialization
     $('ind-loading').hide();
+    $('detailed-description').hide();
     $('submit-items').disabled = true;
     
     // main initialization
