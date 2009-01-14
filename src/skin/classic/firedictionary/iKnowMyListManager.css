@@ -280,3 +280,11 @@ div.msg_yellow {
 .right-align {
     text-align: right;
 }
+
+#detailed-description {
+    margin-bottom: 20px;
+}
+
+#detailed-description li {
+    margin-left: 30px;
+}
