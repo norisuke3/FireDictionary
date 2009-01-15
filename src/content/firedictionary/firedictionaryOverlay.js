@@ -36,98 +36,109 @@
  
 //////////// global variables /////////////////////
 
-var dicSidebar;
+var FireDictionary = FireDictionary || {};
 
 ///////////////////////////////////////////////////
 
-/**
- * initialize()
- *  function to initialize FireDictionary environment.
- */
-function initialize(){
-	// Initialize tab browser and events.
-	var tabbrowser = document.getElementById("content");
-	
-	if ( tabbrowser ) {
-	 tabbrowser.addEventListener("click", sendWordToHistory, false);
- 	tabbrowser.addEventListener("mousemove", sendContentWord, false);
-	}	
-                     
-	// Initialize dictionary sidebar object.
-	dicSidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
-	
-	// Initialize preference.
-        initPrefs("accept-empty-definition-ind", "false");
-  
-	// emit iKnow files: css and png if it's not present
-        emitIKnowFiles();
-}
- 
-function emitIKnowFiles(){
-  var sourceURL = "chrome://firedictionary/skin/";
-  var resources = [
-    { name: "iknow-panel.css",              bin: false },
-    { name: "iKnow.html",                   bin: false },
-    { name: "empty.html",                   bin: false },
-    { name: "sound_play_icon_disabled.png", bin: true },
-    { name: "sound_play_icon_over.png",     bin: true },
-    { name: "sound_play_icon_up.png",       bin: true }
-  ];
-  var dir = new FDDirectory("ProfD");
-  dir.createNewDirectory("FireDictionary");
-  dir.createNewDirectory("skin");
+(function(){
 
-  resources.each(function(res){
-    if(!(dir.createFileInstance(res.name).exists())){
-      var emitter = new FDInstallFileEmitter(sourceURL + res.name, res.bin);
-      emitter.emitTo(dir);
+  var sidebar;
+   
+  /**
+   * initialize()
+   *  function to initialize FireDictionary environment.
+   */
+  this.initialize = function(){
+    var self = this;
+   
+    // Initialize tab browser and events.
+    var tabbrowser = document.getElementById("content");
+    
+    if ( tabbrowser ) {
+      tabbrowser.addEventListener("click", self.sendWordToHistory, false);
+      tabbrowser.addEventListener("mousemove", self.sendContentWord, false);
     }
-  });
-}
-
-//
-// Event handler  ///////////////////////////////////////////////////////
-//
- 
-/**
- * sendContentWord(event)
- *
- * @param event
- */
-function sendContentWord(event){
- if ( !dicSidebar.isActive() || !dicSidebar.getMouseOverMode() ) return;
- 
-	var extractor = new FDSentenceExtractor(event);
-	
-	var keyword = extractor.getKeyword();
-	var sentence = extractor.getSentence();
-	var url = event.view.document.URL;
-	var title = event.view.document.title;
-	
-	dicSidebar.setKeywordInformation(url, title, sentence);
-	dicSidebar.setKeyword(keyword);
-	dicSidebar.lookup();
-}
-
-/**
- * sendWordToHistory(event)
- *  Send the word to Find History.
- */
-function sendWordToHistory(event){
-  var prefs = new FDPrefs();
-  var escKey = prefs.getCharPref("escape-history-key");
-
-  if ( !dicSidebar.getMouseOverMode() ) return;
-
-  if((escKey == "ctrlKey" && event.ctrlKey) ||
-     (escKey == "altKey"  && event.altKey)  ||
-     (escKey == "shiftKey" && event.shiftKey) 
-  ){
-    dicSidebar.loadIKnow();
-
-  } else {
-    dicSidebar.registHistory();
-  }
-
-  return false;
-}
+                       
+    // Initialize dictionary sidebar object.
+    sidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
+  	
+    // Initialize preference.
+    initPrefs("accept-empty-definition-ind", "false");
+    
+    // emit iKnow files: css and png if it's not present
+    emitIKnowFiles();
+  };
+  
+  /**
+   * emitIKnowFiles()
+   *   emitting resource files to ProfD/FireDictionary/skin.
+   */
+  function emitIKnowFiles(){
+    var sourceURL = "chrome://firedictionary/skin/";
+    var resources = [
+      { name: "iknow-panel.css",              bin: false },
+      { name: "iKnow.html",                   bin: false },
+      { name: "empty.html",                   bin: false },
+      { name: "sound_play_icon_disabled.png", bin: true },
+      { name: "sound_play_icon_over.png",     bin: true },
+      { name: "sound_play_icon_up.png",       bin: true }
+    ];
+    var dir = new FDDirectory("ProfD/FireDictionary/skin");
+  
+    resources.each(function(res){
+      if(!(dir.createFileInstance(res.name).exists())){
+        var emitter = new FDInstallFileEmitter(sourceURL + res.name, res.bin);
+        emitter.emitTo(dir);
+      }
+    });
+  };
+  
+  
+  //
+  // Event handler  ///////////////////////////////////////////////////////
+  //
+   
+  /**
+   * sendContentWord(event)
+   *
+   * @param event
+   */
+  this.sendContentWord = function(event){
+    if ( !sidebar.isActive() || !sidebar.getMouseOverMode() ) return;
+   
+    var extractor = new FDSentenceExtractor(event);
+    
+    var keyword = extractor.getKeyword();
+    var sentence = extractor.getSentence();
+    var url = event.view.document.URL;
+    var title = event.view.document.title;
+    
+    sidebar.setKeywordInformation(url, title, sentence);
+    sidebar.setKeyword(keyword);
+    sidebar.lookup();
+  };
+  
+  /**
+   * sendWordToHistory(event)
+   *  Send the word to Find History.
+   */
+  this.sendWordToHistory = function(event){
+    var prefs = new FDPrefs();
+    var escKey = prefs.getCharPref("escape-history-key");
+  
+    if ( !sidebar.getMouseOverMode() ) return;
+  
+    if((escKey == "ctrlKey" && event.ctrlKey) ||
+       (escKey == "altKey"  && event.altKey)  ||
+       (escKey == "shiftKey" && event.shiftKey) 
+    ){
+      sidebar.loadIKnow();
+  
+    } else {
+      sidebar.registHistory();
+    }
+  
+    return false;
+  };
+   
+}).apply(FireDictionary);

@@ -66,7 +66,7 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/dummyDictionary/DummyDictinoary.js"/>
     
 		
-	<script>initialize();</script>  	
+	<script>FireDictionary.initialize();</script>  	
 		
 	<!--broadcast for Firefox-->
 	<broadcasterset id="mainBroadcasterSet">
