@@ -84,13 +84,14 @@ var FireDictionary = FireDictionary || {};
       { name: "sound_play_icon_up.png",       bin: true }
     ];
     var dir = new FDDirectory("ProfD/FireDictionary/skin");
-  
-    resources.each(function(res){
+
+    for (var i = 0 ; i < resources.length ; i++){
+      var res = resources[i];
       if(!(dir.createFileInstance(res.name).exists())){
         var emitter = new FDInstallFileEmitter(sourceURL + res.name, res.bin);
         emitter.emitTo(dir);
       }
-    });
+    }
   };
   
   

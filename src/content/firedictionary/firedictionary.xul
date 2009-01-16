@@ -53,6 +53,7 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_outputstream.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_dombase.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/exception.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_xhr.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/xml/fd_xmlhistoryitem.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/xml/fd_xmlhistory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/legacy/fd_historytranslator.js"/>

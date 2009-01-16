@@ -40,6 +40,8 @@
 FDDictionarySidebar.FD_MODE_WORD_ENTERERD = 1;
 FDDictionarySidebar.FD_MODE_WORD_PICKEDUP = 2;
 
+Components.utils.import("resource://gre/modules/JSON.jsm");
+
 /**
  * A class for dictionary sidebar.
  */
@@ -265,35 +267,29 @@ this.loadIKnow = function(keyword){
   
   var prefs = new FDPrefs();
 
-  var params = {
-    language: prefs.getCharPref("iknow.cue-language"),
-    translation_language: prefs.getCharPref("iknow.response-language"),
-    include_sentences: false
-  };
   var urlMatching = 'http://api.iknow.co.jp/items/matching/' + keyword + '.json?' + 
-		    Object.toQueryString(params);
+		    'language=' + prefs.getCharPref("iknow.cue-language") + '&' +
+		    'translation_language=' + prefs.getCharPref("iknow.response-language") + '&' +
+		    'include_sentences=false';
   
   if ( !keyword.match(/^( |\n)*$/i) ){ 
     getIKnowThrobber().setAttribute('status', 'on');
 
-    new Ajax.Request(urlMatching, {
-      method: 'get',
-      onSuccess: function(transport){
-	file.write(self.createIKnowHTML(transport.responseText), "UTF-8");
-	getIKnowBody().setAttribute('src', '');
-	getIKnowBody().setAttribute('src', url);
-      },
-      onFailure: function(transport){
-	file.write(self.createIKnowErrorHTML('failure'), "UTF-8");
-	getIKnowBody().setAttribute('src', '');
-	getIKnowBody().setAttribute('src', url);
-      },
-      onException: function(transport, ex){
-	file.write(self.createIKnowErrorHTML('Exception', ex), "UTF-8");
-	getIKnowBody().setAttribute('src', '');
-	getIKnowBody().setAttribute('src', url);
-      }
-    })
+
+    var xhr = new FireDictionary.xhr(urlMatching, "");
+	
+    xhr.setCallback(function(){
+      file.write(self.createIKnowHTML(xhr.getResponseText()), "UTF-8");
+      getIKnowBody().setAttribute('src', '');
+      getIKnowBody().setAttribute('src', url);
+    });
+    
+    xhr.setErrorCallback(function(){
+      file.write(self.createIKnowErrorHTML('failure'), "UTF-8");
+      getIKnowBody().setAttribute('src', '');
+      getIKnowBody().setAttribute('src', url);
+    });
+    xhr.get();
   }
 };
 
@@ -304,11 +300,12 @@ this.loadIKnow = function(keyword){
    * @param json text formated as json
    * @return html string 
    */
-  this.createIKnowHTML = function(json){
+  this.createIKnowHTML = function(jsonString){
     var html;
     var rowType = ['odd', 'even'];
     var row = 0;
-    var matchingResults = json.evalJSON(true);
+    var matchingResults = JSON.fromString(jsonString);
+    var lis = new Array();
       
     html = "<html><head>";
     html = html + '<link type="text/css" rel="Stylesheet" media="all" href="../skin/iknow-panel.css"/>';
@@ -317,8 +314,11 @@ this.loadIKnow = function(keyword){
       html = html + '<div class="empty_match_result">This item doesn\'t exist yet in the iKnow! item bank.';
     } else {
       html = html + '<div id="item_lookup_results"><ul id="rich_item_list">';
-      html = html + matchingResults.collect(function(item){
+      
+      for(var i = 0 ; i < matchingResults.length ; i++){
+	var item = matchingResults[i];
 	var li = '<li class = "' + rowType[row++ % 2] + ' rich_item">';
+	
 	if (item.cue.sound){
 	  li = li + '<a class="sound_icon" target="sound_player" href="' + item.cue.sound + '"><span>音声再生</span></a>';
 	}else{   // for casees of null, undefnied and ''
@@ -333,9 +333,11 @@ this.loadIKnow = function(keyword){
 	li = li + '  <span class="response">' + item.responses[0].text + '</span>';
 	li = li + '</div>';
 	li = li + '</li>';
-	return li;
-      }).join('\n');
-
+	
+	lis.push(li);
+      }
+      html = html + lis.join('\n');
+      
       html = html + "</ul>";
     }
     html = html + "</div></body></html>";
@@ -615,14 +617,16 @@ this.loadIKnow = function(keyword){
 
      // try to see if the normalizer works
      if ( result == "" ){
-       normalizer.find(function(norm){
+       for (var i = 0; i < normalizer.length ; i++){
+	 var norm = normalizer[i];
+	 
 	 if ( keyword.match(new RegExp(norm.deletion + "$")) != null ){
-	 modified = keyword.substr(0, keyword.length - norm.deletion.length) + norm.addition;
-	 result = dic.lookup(modified);
-       }
+	   modified = keyword.substr(0, keyword.length - norm.deletion.length) + norm.addition;
+	   result = dic.lookup(modified);
+	 }
      
-       return (result != "");
-       });
+	 if (result != "") break;
+       }
      }
     
      if( result == "" ){

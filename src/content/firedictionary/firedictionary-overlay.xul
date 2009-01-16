@@ -39,7 +39,7 @@
 <overlay title="firedictionary-sidebar"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-    <script type="application/x-javascript" src="chrome://firedictionary/content/lib/prototype-1.6.0.3.js"/>
+<!--     <script type="application/x-javascript" src="chrome://firedictionary/content/lib/prototype-1.6.0.3.js"/> -->
     <script type="application/x-javascript" src="chrome://firedictionary/content/firedictionaryOverlay.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_file.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_directory.js"/>
@@ -50,6 +50,7 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_sentenceExtractor.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_dombase.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/exception.js"/>
+    <script type="application/x-javascript" src="chrome://firedictionary/content/classes/core/fd_xhr.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/xml/fd_xmlhistoryitem.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/xml/fd_xmlhistory.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/legacy/fd_historytranslator.js"/>
