@@ -599,6 +599,8 @@ this.loadIKnow = function(keyword){
      { deletion: "ing", addition: ""    },
      { deletion: "d",   addition: ""    },
      { deletion: "est", addition: ""    },
+     { deletion: "ly",  addition: ""    },
+     { deletion: "ily", addition: "y"   },
      { deletion: "ism", addition: ""    }
    ];
    // sample
