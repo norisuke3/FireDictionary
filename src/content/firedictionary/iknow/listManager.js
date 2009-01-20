@@ -184,6 +184,10 @@ var iKnowMyListManager = iKnowMyListManager || {};
     
     keywords.each(function(k){
       $(k.id).update('<img src="chrome://firedictionary/skin/loading_16.png"/>');
+
+      $(k.id).up('div[class=history_item]')
+             .down('div[class=keyword_ind]')
+             .update('');
     });
     
     // initializing the selected list information
@@ -414,12 +418,7 @@ var iKnowMyListManager = iKnowMyListManager || {};
 	    showAllSet(k);
 	    
 	  } else {
-	    $(k.id).update('');
-	    $(k.id).insert(createIKnowHTML(transport.responseText, k.id));
-	    
-	    $(k.id).up('div[class=history_item]')
-                   .down('div[class=keyword_ind]')
-	           .update('');
+	    $(k.id).update(createIKnowHTML(transport.responseText, k.id));
 	  }
 	},
 	onFailure: function(transport){
@@ -451,11 +450,6 @@ var iKnowMyListManager = iKnowMyListManager || {};
     $(k.id).update('<div class="msg_yellow right-align">' + 
 		   '<span style="float:left;">FireDictionary からは登録済みですが、iKnow サイト上で削除された可能性があります。</span>' + 
 		   '<input type="submit" value="再登録" onClick="iKnowMyListManager._showItems(' + k.id + ')"/></div>');
-    
-    $(k.id).up('div[class=history_item]')
-           .down('div[class=keyword_ind]')
-	   .update('');
-
   };
 
   /**
