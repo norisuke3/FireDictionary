@@ -126,6 +126,11 @@ body {
     padding-left: 10px;
     padding-top: 22px;
 }
+#list-information {
+    clear: both;
+    padding-top: 15px;
+    padding-left: 10px;
+}
 
 #iknow_contents { 
     background-color: #FFFFFF;

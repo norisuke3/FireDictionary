@@ -185,6 +185,12 @@ var iKnowMyListManager = iKnowMyListManager || {};
     keywords.each(function(k){
       $(k.id).update('<img src="chrome://firedictionary/skin/loading_16.png"/>');
     });
+    
+    // initializing the selected list information
+    var url = 'http://www.iknow.co.jp/lists/' + $F('iknow_my-list');
+    var option = $('iknow_my-list').down('option[value=' + $F('iknow_my-list') + ']');
+    $('list-information').update('');
+    $('list-information').insert(new Element('a', { href: url, target: '_blank'}).update(option.readAttribute('title')));
 
     // get items in a list.
     new Ajax.Request(
@@ -507,7 +513,10 @@ var iKnowMyListManager = iKnowMyListManager || {};
     $('iknow_my-list').update('<option value="">--- My List ---</option>');
     
     mylist.each(function(list){
-      $('iknow_my-list').insert('<option value="' + list.id + '">' + list.title + '</option>');
+      $('iknow_my-list').insert(new Element('option', { 
+					      value: list.id,
+					      title: list.title
+					    }).update(list.title));
     });
     
     $('iknow_my-list').value = "";
