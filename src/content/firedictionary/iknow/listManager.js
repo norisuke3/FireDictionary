@@ -181,8 +181,13 @@ var iKnowMyListManager = iKnowMyListManager || {};
     }
     
     keywords.updateStatus();
+
+    $('filter-registered').checked = false;
     
     keywords.each(function(k){
+      // clearning the registered filter. (show all)
+      $(k.id).up('div[class=history_item]').show();
+		    
       $(k.id).update('<img src="chrome://firedictionary/skin/loading_16.png"/>');
 
       $(k.id).up('div[class=history_item]')
@@ -320,6 +325,11 @@ var iKnowMyListManager = iKnowMyListManager || {};
    *   filters keyword registered out.
    */
   this.filterRegistered = function(){
+     keywords.findAll(function(k){return k.status !='registered';})
+             .collect(function(k){
+ 	      return $(k.id).up('div[class=history_item]');
+ 	    }).invoke('show');
+
     keywords.findAll(function(k){return k.status =='registered';})
             .collect(function(k){
 	      return $(k.id).up('div[class=history_item]');
