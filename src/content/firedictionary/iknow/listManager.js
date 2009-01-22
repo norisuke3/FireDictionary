@@ -182,17 +182,8 @@ var iKnowMyListManager = iKnowMyListManager || {};
     
     keywords.updateStatus();
 
-    $('filter-registered').checked = false;
-    
     keywords.each(function(k){
-      // clearning the registered filter. (show all)
-      $(k.id).up('div[class=history_item]').show();
-		    
       $(k.id).update('<img src="chrome://firedictionary/skin/loading_16.png"/>');
-
-      $(k.id).up('div[class=history_item]')
-             .down('div[class=keyword_ind]')
-             .update('');
     });
     
     // initializing the selected list information
