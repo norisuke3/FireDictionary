@@ -199,7 +199,13 @@ var iKnowMyListManager = iKnowMyListManager || {};
     var url = 'http://www.iknow.co.jp/lists/' + $F('iknow_my-list');
     var option = $('iknow_my-list').down('option[value=' + $F('iknow_my-list') + ']');
     $('list-information').update('');
-    $('list-information').insert(new Element('a', { href: url, target: '_blank'}).update(option.readAttribute('title')));
+    $('list-information').insert(
+      new Element('a', { href: url, target: '_blank', style: 'float: left;'}).update(option.readAttribute('title'))
+    );
+    $('list-information').insert(
+      new Element('input', { value: 'Reset', type: 'submit', onClick: 'location.reload()' })
+    );
+    $('iknow_my-list').hide();
 
     // get items in a list.
     new Ajax.Request(
