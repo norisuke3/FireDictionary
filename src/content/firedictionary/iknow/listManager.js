@@ -203,6 +203,9 @@ var iKnowMyListManager = iKnowMyListManager || {};
       'http://api.iknow.co.jp/lists/' + $F('iknow_my-list') + '/items.json', {// getItemsInList (Ajax call)
 	method: 'get',
 	onSuccess: function(transport){
+	  var unregistered = new Array();
+	  var ItemIds = transport.responseText.evalJSON(true).pluck("id");
+	  
 	  keywords.each(function(k){
 	    if( isRegistered(k) ) {
 	      if ( isDeleted(k, transport.responseText) ){
@@ -211,11 +214,23 @@ var iKnowMyListManager = iKnowMyListManager || {};
 		showAllSet(k);
 	      }
 	    } else {
-	      var items = transport.responseText.evalJSON(true);
-	      
-	      showItems(k, items.pluck("id"));
+	      unregistered.push(k);
 	    }
 	  });
+	  
+	  var iid = setInterval(function(){
+	    unregistered.each(function(k){
+	      var top = $(k.id).up('div[class=history_item]').viewportOffset().top;
+	      if( top > -200 && top < window.innerHeight ){
+		showItems(k, ItemIds);
+		unregistered = unregistered.without(k);
+		
+		if (unregistered.length == 0){
+		  clearInterval(iid);
+		}
+	      }
+	    });
+	  }, 1500);
 	},
 	onFailure: function(transport){
     
