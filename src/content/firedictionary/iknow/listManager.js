@@ -59,6 +59,29 @@ var iKnowMyListManager = iKnowMyListManager || {};
    keywords.updateStatus = function(){
      $('keyword-status').update(this.getStatus());
    };
+
+   var keywordBase = function(){};
+   
+   keywordBase.prototype = {
+     /**
+      * isRegistered()
+      *   checks if an item related to the keyword has already been registered by this My List Manager.
+      *   It doesn't matter at this point if an item has been registered at the iknow website.
+      * 
+      * @return true - if it's already been registered, otherwise false
+      */
+     isRegistered: function(){
+       var result = false;
+
+       conn.executeStep(
+	 'SELECT * from RegisterInfo WHERE kId = "' + this.id + '" AND listId = "' + $F('iknow_my-list') + '"', 
+	 function(stmt){
+	   result = true;
+	 });
+
+       return result;
+     }
+   };
    
    var conn = new FireDictionary.DBConn("ProfD/FireDictionary", "firedictionary.sqlite");
    
@@ -173,11 +196,11 @@ var iKnowMyListManager = iKnowMyListManager || {};
     
     for each (var item in xml..hs::item){
       // preparing keyword information
-      keywords.push({
+      keywords.push(Object.extend(new keywordBase(), {
 	keyword: item.hs::keyword.toString(),
 	id     : item.hs::timestamp.toString(),
 	status : "initial"
-      });
+      }));
     }
     
     keywords.updateStatus();
@@ -203,21 +226,20 @@ var iKnowMyListManager = iKnowMyListManager || {};
       'http://api.iknow.co.jp/lists/' + $F('iknow_my-list') + '/items.json', {// getItemsInList (Ajax call)
 	method: 'get',
 	onSuccess: function(transport){
-	  var unregistered = new Array();
+	  var unregistered = keywords.reject(function(k){ return k.isRegistered(); });
 	  var ItemIds = transport.responseText.evalJSON(true).pluck("id");
-	  
-	  keywords.each(function(k){
-	    if( isRegistered(k) ) {
-	      if ( isDeleted(k, transport.responseText) ){
-		showDeleted(k);
-	      } else {
-		showAllSet(k);
-	      }
-	    } else {
-	      unregistered.push(k);
-	    }
-	  });
-	  
+
+	  // a process for keywords registered
+	  keywords.findAll(function(k){ return k.isRegistered(); })
+	          .each(function(k){
+		    if ( isDeleted(k, transport.responseText) ){
+		      showDeleted(k);
+		    } else {
+		      showAllSet(k);
+		    }
+		  });
+	    
+	  // a process for keywords unregistered
 	  var iid = setInterval(function(){
 	    unregistered.each(function(k){
 	      var top = $(k.id).up('div[class=history_item]').viewportOffset().top;
@@ -363,28 +385,8 @@ var iKnowMyListManager = iKnowMyListManager || {};
   };
    
   //
-  ///////  provate functions /////////////////////////////////////////////
+  ///////  private functions /////////////////////////////////////////////
   //
-  
-  /**
-   * isRegistered(k)
-   *   checks if an item related to the keyword k has already been registered by this My List Manager.
-   *   It doesn't matter at this point if an item has been registered at the iknow website.
-   * 
-   * @param k a keyword
-   * @return true - if it's already been registered, otherwise false
-   */
-  function isRegistered(k){
-    var result = false;
-
-    conn.executeStep(
-      'SELECT * from RegisterInfo WHERE kId = "' + k.id + '" AND listId = "' + $F('iknow_my-list') + '"', 
-      function(stmt){
-	result = true;
-      });
-
-    return result;
-  }
   
   /**
    * isDeleted(k, json)
