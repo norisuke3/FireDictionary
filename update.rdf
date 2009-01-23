@@ -9,14 +9,14 @@
       <rdf:Seq>
         <rdf:li>
           <rdf:Description>
-            <em:version>0.9.14.1</em:version>
+            <em:version>0.9.15</em:version>
             <em:targetApplication>
               <rdf:Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>3.0</em:minVersion>
                 <em:maxVersion>3.0.*</em:maxVersion>
-                <em:updateLink>http://www.firedictionary.com/stats/download.php?id=72</em:updateLink>
-                <em:updateHash>sha1:face746d98462e5a8b9063f06647724a999b44ad</em:updateHash>
+                <em:updateLink>http://www.firedictionary.com/stats/download.php?id=80</em:updateLink>
+                <em:updateHash>sha1:451eb074a71c8d642ae4104ec33141f9ab760e0b</em:updateHash>
               </rdf:Description>
             </em:targetApplication>
           </rdf:Description>
