@@ -40,6 +40,50 @@
 function FDPrefs(){
  var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService); 
  this.mBranch = prefService.getBranch("firedictionary.");
+ 
+ this.initValues = {};
+ var children = this.mBranch.getChildList("", {});
+
+ for (var i = 0 ; i < children.length ; i++ ) {
+   this[children[i]] = this.mBranch.getComplexValue(children[i], Components.interfaces.nsISupportsString).data;
+   this.initValues[children[i]] = this.mBranch.getComplexValue(children[i], Components.interfaces.nsISupportsString).data;
+ }
+}
+
+/**
+ * register()
+ *   register the updated values to the preference system.
+ */
+FDPrefs.prototype.register = function(){
+  for (var prop in this.initValues) {
+    if (this[prop] != this.initValues[prop]){
+      this.setUniCharPref(prop, this[prop]);
+      this.initValues[prop] = this[prop];
+    }
+  }
+};
+
+/**
+ * initialize(name, value)
+ *  initialize preference of the name with the value. If a value has already set
+ *  on the preference, doing nothing and returning false.
+ *
+ * @param name  A name of a preference
+ * @param value A value for the preference.
+ * @return  true - successfully set, false - otherwise.
+ */
+FDPrefs.prototype.initialize = function(name, value){
+  var result = false;
+
+  if ( this[name] == null ) {
+    this[name] = value;
+    this.initValues[name]  = "";
+    
+    this.register();
+    result = true;
+  }
+
+  return result;
 }
 
 /**
@@ -107,29 +151,4 @@ FDPrefs.prototype.getUniCharPref = function(name){
  }
  
  return value;
-}
-
-//
-// Public functions  ///////////////////////////////////////////////////////
-//
-
-/**
- * initPrefs(name, value)
- *  initialize preference of the name with the value. If a value has already set
- *  on the preference, doing nothing and returning false.
- *
- * @param name  A name of a preference
- * @param value A value for the preference.
- * @return  true - successfully set, false - otherwise.
- */
-function initPrefs(name, value){
-  var result = false;
-  var prefs = new FDPrefs();
-
-  if ( prefs.getCharPref(name) == null ) {
-    prefs.setCharPref(name, value);
-    result = true;
-  }
-
-  return result;
 }

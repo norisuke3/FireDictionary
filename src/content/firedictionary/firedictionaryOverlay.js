@@ -63,7 +63,7 @@ var FireDictionary = FireDictionary || {};
     sidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
   	
     // Initialize preference.
-    initPrefs("accept-empty-definition-ind", "false");
+    new FDPrefs().initialize("accept-empty-definition-ind", "false");
     
     // emit iKnow files: css and png if it's not present
     emitIKnowFiles();
@@ -125,7 +125,7 @@ var FireDictionary = FireDictionary || {};
    */
   this.sendWordToHistory = function(event){
     var prefs = new FDPrefs();
-    var escKey = prefs.getCharPref("escape-history-key");
+    var escKey = prefs["escape-history-key"];
   
     if ( !sidebar.getMouseOverMode() ) return;
   

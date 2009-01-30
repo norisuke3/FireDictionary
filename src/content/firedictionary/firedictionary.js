@@ -66,12 +66,12 @@ function initialize(){
   dicSidebar.initialize();
 	
   // initialize a status of iknow
-  initPrefs("useIKnow", "true");
-  initPrefs("iknow.response-language", "ja");
-  initPrefs("iknow.cue-language", "en");
-  initPrefs("escape-history-key", "ctrlKey");
+  prefs.initialize("useIKnow", "true");
+  prefs.initialize("iknow.response-language", "ja");
+  prefs.initialize("iknow.cue-language", "en");
+  prefs.initialize("escape-history-key", "ctrlKey");
 
-  menuUseIKnow.setAttribute("checked", prefs.getCharPref("useIKnow"));
+  menuUseIKnow.setAttribute("checked", prefs.useIKnow);
 }
 
 //
