@@ -238,7 +238,7 @@ this.registHistory = function(){
 	if ( !category || category == "" ) category = "Unclassified";
    
 	// load iKnow
-	this.loadIKnow(keyword);
+	this.loadIKnow();
 
 	if ( !keyword.match(/^( |\n)*$/i) && ( result != "" || acceptEmptyDefinitionInd == "true")){
 		history.registWord(keyword, result, mUrl, mTitle, mSentence, mPickedUpWord, category);
@@ -255,10 +255,11 @@ this.registHistory = function(){
 }
 
 /**
- * loadIKnow(keyword)
+ * loadIKnow()
  *
  */
-this.loadIKnow = function(keyword){
+this.loadIKnow = function(){
+  var keyword = getKeywordTextbox().value;
   var self = this;
   var file = new FDDirectory("ProfD/FireDictionary/tmp").createFileInstance('result.html');
   var url = new FDDirectory("ProfD/FireDictionary/skin").getURL() + 'iKnow.html';
