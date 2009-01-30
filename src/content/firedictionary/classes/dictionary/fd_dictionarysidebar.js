@@ -40,8 +40,6 @@
 FDDictionarySidebar.FD_MODE_WORD_ENTERERD = 1;
 FDDictionarySidebar.FD_MODE_WORD_PICKEDUP = 2;
 
-Components.utils.import("resource://gre/modules/JSON.jsm");
-
 /**
  * A class for dictionary sidebar.
  */
@@ -304,7 +302,7 @@ this.loadIKnow = function(keyword){
     var html;
     var rowType = ['odd', 'even'];
     var row = 0;
-    var matchingResults = JSON.fromString(jsonString);
+    var matchingResults = parseJSON(jsonString);
     var lis = new Array();
       
     html = "<html><head>";
@@ -703,5 +701,20 @@ this.loadIKnow = function(keyword){
   } else {
    buttonRedo.enable();
   }
+ }
+  
+ /**
+  * parseJSON(jsonString)
+  *   parse a JSON string.
+  * 
+  * @param jsonString a string formatted as JSON
+  * @return object created from the jsonString
+  */
+ function parseJSON(jsonString){
+   var Ci = Components.interfaces;
+   var Cc = Components.classes;
+
+   var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
+   return nativeJSON.decode(jsonString);
  }
 }
