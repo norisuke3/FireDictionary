@@ -49,8 +49,21 @@ var FireDictionary = FireDictionary || {};
    *  function to initialize FireDictionary environment.
    */
   this.initialize = function(){
+    var mozCC = Components.classes['@mozilla.org/extensions/manager;1'];
+    var mozCI = Components.interfaces;
+    var version = mozCC.getService(mozCI.nsIExtensionManager)
+		       .getItemForID("{ABA70AB8-D620-4cef-885B-559691663E23}")
+		       .version;
+    
+    var prefs = new FDPrefs();
     var self = this;
    
+    // Initialize a preference value of a FireDictionary's version.
+    if (prefs.version != version){
+      prefs.create("updated", "true");
+    }
+    prefs.create("version", version);
+    
     // Initialize tab browser and events.
     var tabbrowser = document.getElementById("content");
     
@@ -63,7 +76,7 @@ var FireDictionary = FireDictionary || {};
     sidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
   	
     // Initialize preference.
-    new FDPrefs().initialize("accept-empty-definition-ind", "false");
+    prefs.initialize("accept-empty-definition-ind", "false");
     
     // emit iKnow files: css and png if it's not present
     emitIKnowFiles();
