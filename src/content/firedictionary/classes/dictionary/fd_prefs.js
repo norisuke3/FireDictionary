@@ -87,6 +87,17 @@ FDPrefs.prototype.initialize = function(name, value){
 }
 
 /**
+ * create(name, value)
+ *   create a preference of the name with the value. If a preference of the name has already been present,
+ *   its value is overridden.
+ */
+FDPrefs.prototype.create = function(name, value){
+  this[name] = value;
+  this.initValues[name] = "";
+  this.register();
+}
+
+/**
  * setCharPref(name, value)
  *  set a preference with a String type value.
  *  
