@@ -68,49 +68,48 @@ function FDWordHistory(){
 		}
 	}
 	
-	/**
-	 * registWord(
-	 *     String keyword,
-	 *     String result,
-	 *     String url,
-	 *     String title,
-	 *     String sentence,
-	 *     String pickedupword,
-	 *     String category
-	 * )
-	 */
-	this.registWord = function(keyword, result, url, title, sentence, pickedupword, category){
-		var file = getHistoryFile();
-	 var xmlHistory = new FDXmlHistory();
- 	var item;
-	
-		if( file.exists() ){
-			xmlHistory.readFromFile(file);
-		}
-		
-		// If the keyword is registered just before, do noghing and return.
-		var lastWord = xmlHistory.getLastAddedItem();
-		if ( lastWord != null && lastWord.getKeyword() == keyword ){
-			return;
-		}
- 	
- 	item = new FDXmlHistoryItem();
- 	item.setKeyword(keyword);
- 	item.setResult(result);
- 	item.setUrl(url);
- 	item.setTitle(title);
- 	item.setSentence(sentence);
- 	item.setPickedUpWord(pickedupword);
- 	item.setCategory(category);
-		
-		xmlHistory.addHistoryItem(item);
-		
-		setText(formatHistory(xmlHistory));
-		xmlHistory.writeToFile(file);
-		
-		mHistoryCount = xmlHistory.getItemCount();
-	}
-	
+    /**
+     * registWord(
+     *     String keyword,
+     *     String result,
+     *     String url,
+     *     String title,
+     *     String sentence,
+     *     String pickedupword,
+     *     String category
+     * )
+     */
+    this.registWord = function(keyword, result, url, title, sentence, pickedupword, category){
+        var file = getHistoryFile();
+        var xmlHistory = new FDXmlHistory();
+    
+        if( file.exists() )
+            xmlHistory.readFromFile(file);
+        
+        var h = new XML(xmlHistory.serializeToString());
+        var ns = new Namespace("http://www.firedictionary.com/history");
+        // If the keyword is registered just before, do noghing and return.
+        var lastWord = h..ns::item[0] ? h..ns::item[0].ns::keyword : null;
+        if ( lastWord == keyword ) 
+            return;
+     
+        var item = new FDXmlHistoryItem();
+        item.setKeyword(keyword);
+        item.setResult(result);
+        item.setUrl(url);
+        item.setTitle(title);
+        item.setSentence(sentence);
+        item.setPickedUpWord(pickedupword);
+        item.setCategory(category);
+        
+        xmlHistory.addHistoryItem(item);
+        
+        setText(formatHistory(xmlHistory));
+        xmlHistory.writeToFile(file);
+        
+        mHistoryCount = xmlHistory.getItemCount();
+    };
+    
 	/**
 	 * clear()
 	 *  Clear the history and delete the history file.

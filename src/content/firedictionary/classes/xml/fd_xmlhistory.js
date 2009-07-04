@@ -103,25 +103,6 @@ function FDXmlHistory(){
  }
  
  /**
-  * FDXmlHistoryItem getLastAddedItem()
-  *  Return an item object which is added last time. If there are no items, return null.
-  *
-  * @return an item object which is added last time.
-  */
- this.getLastAddedItem = function(){
- 	var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
- 	var item = new FDXmlHistoryItem();
- 	var result = null;
- 	
- 	if ( items.hasChildNodes() ){
- 		item.setDocumentElement(items.firstChild);
- 		result = item;
- 	}
- 	
- 	return result;
- }
- 
- /**
   * FDXmlHistoryItem removeLastAddedItem()
   *  remove an item object which is added last time. If there are no items, return null.
   *
