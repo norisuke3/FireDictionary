@@ -80,6 +80,8 @@ function FDXmlHistory(){
   this.create = function(history){
     var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
     if ( !history.category ) history.category = strbundle.getString("unclassified");
+    if ( !history.timestamp ) history.timestamp = new Date().getTime();
+    if ( !history.date ) history.date = getDate();
     
     var new_item = this.create_element("item", null);
 
@@ -90,8 +92,8 @@ function FDXmlHistory(){
     new_item.appendChild(this.create_element("sentence",     history.sentence));
     new_item.appendChild(this.create_element("pickedupword", history.pickedupword));
     new_item.appendChild(this.create_element("category",     history.category));
-    new_item.appendChild(this.create_element("timestamp",    new Date().getTime()));
-    new_item.appendChild(this.create_element("date",         getDate()));
+    new_item.appendChild(this.create_element("timestamp",    history.timestamp));
+    new_item.appendChild(this.create_element("date",         history.date));
 
     items.insertBefore(new_item, items.firstChild);
 
