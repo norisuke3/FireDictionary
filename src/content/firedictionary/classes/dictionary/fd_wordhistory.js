@@ -160,7 +160,7 @@ function FDWordHistory(){
 		
 		item = xmlHistory.removeLastAddedItem();
 		if( item ){
-		 mUndoBuffer.addHistoryItem(item);
+		 mUndoBuffer.create(item);
 		}
 				
 		setText(formatHistory(xmlHistory));
@@ -183,7 +183,7 @@ function FDWordHistory(){
 		
 		item = mUndoBuffer.removeLastAddedItem();
 		if( item ){
-		 xmlHistory.addHistoryItem(item);
+		 xmlHistory.create(item);
 		}
 				
 		setText(formatHistory(xmlHistory));

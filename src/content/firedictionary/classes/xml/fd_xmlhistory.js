@@ -161,25 +161,35 @@ function FDXmlHistory(){
  }
  
  /**
-  * FDXmlHistoryItem removeLastAddedItem()
+  * Hash removeLastAddedItem()
   *  remove an item object which is added last time. If there are no items, return null.
   *
   * @return the removed item.
   */
  this.removeLastAddedItem = function(){
- 	var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
- 	var item = new FDXmlHistoryItem();
- 	var result = null;
- 	
- 	if ( items.hasChildNodes() ){
- 		item.setDocumentElement(items.firstChild);
- 		result = item;
- 		
- 		// remove the last one
- 		items.removeChild(items.firstChild);
- 	}
- 	
- 	return result;
+   var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
+   var result = null;
+
+   if ( items.hasChildNodes() ){
+     var h = new XML(this.serializeToString());
+     
+     result = {
+       keyword:      h..ns::item[0].ns::keyword,
+       result:       h..ns::item[0].ns::result,
+       url:          h..ns::item[0].ns::url,
+       title:        h..ns::item[0].ns::title,
+       sentence:     h..ns::item[0].ns::sentence,
+       pickedupword: h..ns::item[0].ns::pickedupword,
+       category:     h..ns::item[0].ns::category,
+       timestamp:    h..ns::item[0].ns::timestamp,
+       date:         h..ns::item[0].ns::date
+     };
+     
+     // remove the last one
+     items.removeChild(items.firstChild);
+   }
+   
+   return result;
  }
  
  /**
