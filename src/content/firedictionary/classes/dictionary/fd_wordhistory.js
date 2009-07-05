@@ -93,17 +93,16 @@ function FDWordHistory(){
         if ( lastWord == keyword ) 
             return;
      
-        var item = new FDXmlHistoryItem();
-        item.setKeyword(keyword);
-        item.setResult(result);
-        item.setUrl(url);
-        item.setTitle(title);
-        item.setSentence(sentence);
-        item.setPickedUpWord(pickedupword);
-        item.setCategory(category);
-        
-        xmlHistory.addHistoryItem(item);
-        
+        xmlHistory.create({
+            keyword:      keyword,
+	    result:       result,
+	    url:          url,
+	    title:        title,
+	    sentence:     sentence,
+	    pickedupword: pickedupword,
+	    category:     category
+	});
+      
         setText(formatHistory(xmlHistory));
         xmlHistory.writeToFile(file);
         

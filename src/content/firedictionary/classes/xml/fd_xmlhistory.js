@@ -38,28 +38,89 @@
  * A class for a xml element of a history which can contain history items.
  */
 function FDXmlHistory(){
- var ns = "http://www.firedictionary.com/history"
- 
+ var ns = "http://www.firedictionary.com/history";
+ var strbundle = document.getElementById("fd-localized-strings");
+  
  /**
   * FDXmlHistory()
   *  Constructor of this class.
   *  Initialize a dom tree.
   */
  FDDomBase.call(this);
-
-	// Add a top node.
- var top = this.domDocument.createElementNS(ns, "hs:firedictionary"); 
- this.domDocument.appendChild(top);
  
+ var top = this.domDocument.createElementNS(ns, "hs:firedictionary");
+ this.domDocument.appendChild(top);
+
  // Add a history node.
  var history = this.domDocument.createElementNS(ns, "hs:history");
  top.appendChild(history);
- 
+
  // Add a items node.
  var items = this.domDocument.createElementNS(ns, "hs:items");
  history.appendChild(items);
+
+ /**
+  * create(history as Hash)
+  *   add a history to this FDXmlHistory object.
+  *   The hash should have the foloowing entry. Otherwise, 
+  *   the each empty or null entries are going to be "".
+  * 
+  *     > keyword
+  *     > result
+  *     > url
+  *     > title
+  *     > sentence
+  *     > pickedupword
+  *     > category
+  * 
+  * 
+  * @param history a hash of a history
+  * @return the history hash, but history.category is set to "unclassified" if it's originally null.
+  */
+  this.create = function(history){
+    var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
+    if ( !history.category ) history.category = strbundle.getString("unclassified");
+    
+    var new_item = this.create_element("item", null);
+
+    new_item.appendChild(this.create_element("keyword",      history.keyword));
+    new_item.appendChild(this.create_element("result",       history.result));
+    new_item.appendChild(this.create_element("url",          history.url));
+    new_item.appendChild(this.create_element("title",        history.title));
+    new_item.appendChild(this.create_element("sentence",     history.sentence));
+    new_item.appendChild(this.create_element("pickedupword", history.pickedupword));
+    new_item.appendChild(this.create_element("category",     history.category));
+    new_item.appendChild(this.create_element("timestamp",    new Date().getTime()));
+    new_item.appendChild(this.create_element("date",         getDate()));
+
+    items.insertBefore(new_item, items.firstChild);
+
+    return history;
+  };
+  
+  /**
+   * create_element(element_name as string, text as string)
+   *   creates an element of this dom tree without any parent, which means 
+   *   the created element needs to be inserted to some element of this tree.
+   *   A name space prefix 'hs:' is added to the element_name. 
+   *   Also, the text is inserted to the created element is the text is not null.
+   *   
+   * @param element_name a name of the element
+   * @param text a text string to be added to the element.
+   * @return the created element.
+   */
+  this.create_element = function(element_name, text){
+    var element = this.domDocument.createElementNS(ns, "hs:" + element_name);
+
+    if (text) {
+      var textNode = this.domDocument.createTextNode(text);
+      element.appendChild(textNode);
+    }
+
+    return element;
+  };
  
- 
+  
  /**
   * addItem(String keyword, String result)
   *
@@ -68,7 +129,6 @@ function FDXmlHistory(){
   * @return added element.
   */
  this.addItem = function(keyword, result, category){
-    var strbundle=document.getElementById("fd-localized-strings");
  	var item = new FDXmlHistoryItem();
  	
  	if ( !category ) category = strbundle.getString("unclassified");
@@ -93,11 +153,7 @@ function FDXmlHistory(){
  	var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
         var newNode = this.domDocument.importNode(item.getDocumentElement(), true)
 
- 	if ( !items.hasChildNodes() ){
- 		items.appendChild(newNode);
- 	} else {
- 		items.insertBefore(newNode, items.firstChild);
- 	}
+	items.insertBefore(newNode, items.firstChild);
  	
  	return item;
  }
@@ -134,5 +190,21 @@ function FDXmlHistory(){
      var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
 
  	return items.childNodes.length;
+ };
+
+ //
+ // Private method ///////////////////////////////////////////////////////
+ //
+
+ /**
+  * String getDate()
+  *  return a string which express current date. The format is "yyyy/mm/dd".
+  *
+  * @return a string of date.
+  */
+ function getDate(){
+ 	var today = new Date();
+ 	
+ 	return today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
  }
 }
