@@ -124,43 +124,6 @@ function FDXmlHistory(){
  
   
  /**
-  * addItem(String keyword, String result)
-  *
-  * @param keyword Dictionary keyword.
-  * @paran result Result of dictionary.
-  * @return added element.
-  */
- this.addItem = function(keyword, result, category){
- 	var item = new FDXmlHistoryItem();
- 	
- 	if ( !category ) category = strbundle.getString("unclassified");
- 	
- 	item.setKeyword(keyword);
- 	item.setResult(result);
- 	item.setUrl("");
- 	item.setTitle("");
- 	item.setCategory(category);
- 	
- 	this.addHistoryItem(item);
-  
-  return item;
- }
- 
- /**
-  * FDXmlHistoryItem addHistoryItem(FDXmlHistoryItem item)
-  *
-  * @param item a object of history item
-  */
- this.addHistoryItem = function(item){
- 	var items = this.domDocument.getElementsByTagNameNS(ns, "items").item(0);
-        var newNode = this.domDocument.importNode(item.getDocumentElement(), true)
-
-	items.insertBefore(newNode, items.firstChild);
- 	
- 	return item;
- }
- 
- /**
   * Hash removeLastAddedItem()
   *  remove an item object which is added last time. If there are no items, return null.
   *
