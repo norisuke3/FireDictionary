@@ -41,7 +41,7 @@
 
   <Description about="urn:mozilla:install-manifest">
     <em:id>{ABA70AB8-D620-4cef-885B-559691663E23}</em:id>
-    <em:version>0.9.16</em:version>
+    <em:version>0.10.0</em:version>
     <em:type>2</em:type>
     
     <!-- Target Application this extension can install into, 
@@ -50,7 +50,7 @@
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
         <em:minVersion>3.0</em:minVersion>
-        <em:maxVersion>3.5.*</em:maxVersion>
+        <em:maxVersion>3.6.*</em:maxVersion>
       </Description>
     </em:targetApplication>
     
@@ -60,11 +60,12 @@
     <em:creator>Noriaki Hamamoto</em:creator>
     <em:homepageURL>http://www.firedictionary.com/</em:homepageURL>
     <em:updateURL>http://www.firedictionary.com/download/update.rdf</em:updateURL>
-    <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQuCd7vsH7PDVyvtNWWpVYBZOzDpxAWD9h5A/V5JujsmaWqao0M3k+hxTDnwp2SIjLdZqlAfy9XXaBvzjY2qMcwGrmEweBhdCAEuWNBWuuYRaDa5TEeN4GCbgThdlJ8d3GVW2Io9/RyFed2HS6+cxJ7W9tDCtnBENJLrWJkn0LFQIDAQAB</em:updateKey>
+    <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W/f0E3Gno0ELBRhC9Yt5IR8QW8xPMc7qcaY6S/Ct/cJb+RyrLBgcm+NA/GW+j5R3Igm5hg6R/dNk7NaKfJ8CoFZ28e/T/uigislQSq5O1FmsdeHvMeAFUs3VCc5y+Z77yfO00/LqI+1SsslHiVhDrRXQ2LQ35hoNlrtNqP+VyQIDAQAB</em:updateKey>
+
     <!-- Front End Integration Hooks (used by Extension Manager)-->
     <!--<em:optionsURL>chrome://newext2/content/options.xul</em:optionsURL>-->
     <!--<em:aboutURL>chrome://newext2/content/options.xul</em:aboutURL>-->
-    <!--<em:iconURL>chrome://newext2/skin/newext2.png</em:iconURL>-->
+    <em:iconURL>chrome://firedictionary/skin/fd_icon.png</em:iconURL>
     
     <!-- Packages, Skins and Locales that this extension registers -->
     <em:file>
