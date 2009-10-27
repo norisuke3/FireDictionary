@@ -26,6 +26,8 @@
 <!ENTITY tab.basic	                    "Basic">
 <!ENTITY tab.category	                "Category">
 
+<!ENTITY toolbarbutton.tooltip		"Open FireDictionary in the sidebar">
+
 <!ENTITY lang.Chinese			"Chinese">
 <!ENTITY lang.Dutch			"Dutch">
 <!ENTITY lang.English			"English">

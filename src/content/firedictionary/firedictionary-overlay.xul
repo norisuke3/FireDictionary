@@ -36,6 +36,11 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
+<?xml-stylesheet href="chrome://firedictionary/skin/toolbar-button.css" type="text/css"?>
+
+<!--locale-->
+<!DOCTYPE window SYSTEM "chrome://firedictionary/locale/firedictionary.dtd">
+
 <overlay title="firedictionary-sidebar"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
@@ -65,10 +70,15 @@
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/fd_sidebargadget.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/pdictext/PDICText.js"/>
     <script type="application/x-javascript" src="chrome://firedictionary/content/classes/dictionary/dummyDictionary/DummyDictinoary.js"/>
-    
-		
-	<script>FireDictionary.initialize();</script>  	
-		
+    <script>FireDictionary.initialize();</script>
+
+	<!-- toolbar button -->
+	<toolbarpalette id="BrowserToolbarPalette">
+	  <toolbarbutton id="fd-toolbar-button" class="toolbarbutton-1"
+	    label="FireDictionary" tooltiptext="&toolbarbutton.tooltip;"
+	    oncommand="toggleSidebar('viewFireDictionarySidebar');"/>
+	</toolbarpalette>
+
 	<!--broadcast for Firefox-->
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="viewFireDictionarySidebar"

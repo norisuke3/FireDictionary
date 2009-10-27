@@ -1,0 +1,9 @@
+/*  skin/toolbar-button.css  */
+
+#fd-toolbar-button {
+  list-style-image: url("chrome://firedictionary/skin/icon24.png");
+}
+
+toolbar[iconsize="small"] #fd-toolbar-button {
+  list-style-image: url("chrome://firedictionary/skin/icon16.png");
+}

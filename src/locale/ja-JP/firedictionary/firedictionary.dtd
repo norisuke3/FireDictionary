@@ -26,6 +26,8 @@
 <!ENTITY tab.basic	                    "基本">
 <!ENTITY tab.category	                "カテゴリ">
 
+<!ENTITY toolbarbutton.tooltip		"FireDictionaryをサイドバーに表示します">
+
 <!ENTITY lang.Chinese			"中国語">
 <!ENTITY lang.Dutch			"オランダ語">
 <!ENTITY lang.English			"英語">
