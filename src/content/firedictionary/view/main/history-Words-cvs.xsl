@@ -39,8 +39,26 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:hs="http://www.firedictionary.com/history">
-  <xsl:include href="history-mainarea.xsl"/>
+  <xsl:param name="category"></xsl:param>
+  <xsl:param name="date"></xsl:param>
+  <xsl:param name="keyword"></xsl:param>
+  <xsl:param name="first-letter-of-the-keyword"></xsl:param>
   
+  <xsl:template match="/">
+          <table>
+            <xsl:apply-templates select="hs:firedictionary/hs:history/hs:items"/>
+          </table>
+  </xsl:template>
+  
+  <xsl:template match="hs:items">
+    <xsl:apply-templates select="hs:item
+        [not(string($keyword)) or hs:keyword=$keyword]
+        [not(string($date)) or hs:date=$date]
+        [not(string($category)) or hs:category=$category]
+        [not(string($first-letter-of-the-keyword)) or starts-with(hs:keyword, $first-letter-of-the-keyword)]
+    ">
+    </xsl:apply-templates>
+  </xsl:template>
   
   <xsl:template match="hs:item">
     <xsl:element name="a">

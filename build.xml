@@ -119,7 +119,10 @@
 
     <!-- - - - - - - - - - - - - - - - - - 
           target: generate
-	    generate iKnowMyListManager.html by running ruby script
+	    generate the following files by running ruby script
+
+	      iknow/iKnowMyListManager.html
+	      view/WordHistoryAndExcerpt.html
          - - - - - - - - - - - - - - - - - -->
 	<target name="generate">
 	    <exec executable="ruby">
