@@ -1,0 +1,6 @@
+content firedictionary jar:chrome/firedictionary.jar!/content/firedictionary/
+locale firedictionary ja-JP jar:chrome/firedictionary.jar!/locale/ja-JP/firedictionary/
+locale firedictionary en-US jar:chrome/firedictionary.jar!/locale/en-US/firedictionary/
+skin firedictionary classic/1.0 jar:chrome/firedictionary.jar!/skin/classic/firedictionary/
+overlay chrome://browser/content/browser.xul chrome://firedictionary/content/firedictionary-overlay.xul
+style chrome://global/content/customizeToolbar.xul chrome://firedictionary/skin/toolbar-button.css
