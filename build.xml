@@ -95,6 +95,9 @@
                in="install.rdf"
                out="download.addons.mozilla.org/temp/install.rdf"/>
 
+        <copy file="chrome.manifest"
+             tofile="download.addons.mozilla.org/temp/chrome.manifest"/>
+
         <copy file="chrome/firedictionary.jar"
              tofile="download.addons.mozilla.org/temp/chrome/firedictionary.jar"/>
 
@@ -102,6 +105,7 @@
             <fileset dir="download.addons.mozilla.org/temp">
                 <include name="chrome/firedictionary.jar"/>
                 <include name="install.rdf"/>
+		<include name="chrome.manifest"/>
             </fileset>
 		</jar>
 	</target>
