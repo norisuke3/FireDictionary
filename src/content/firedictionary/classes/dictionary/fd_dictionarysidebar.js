@@ -591,6 +591,8 @@ this.loadIKnow = function(){
    var RECJK = /[\u2E80-\uFE4F]/;             // handle cjk (chinese/japanese/korean) chars specially
    var normalizer = [
      { deletion: "s",   addition: ""    },
+     { deletion: "es",  addition: ""    },
+     { deletion: "ies", addition: "y"   },
      { deletion: "ed",  addition: ""    },
      { deletion: "ied", addition: "y"   },
      { deletion: "r",   addition: ""    },
