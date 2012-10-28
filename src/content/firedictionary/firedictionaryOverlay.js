@@ -49,7 +49,6 @@ var FireDictionary = FireDictionary || {};
    *  function to initialize FireDictionary environment.
    */
   this.initialize = function(){
-
     var version = new String();
     var calledFunc = "notYet";
     function getVersionCallBack(addon) {
@@ -59,13 +58,13 @@ var FireDictionary = FireDictionary || {};
     };
     Components.utils.import("resource://gre/modules/AddonManager.jsm");
     AddonManager.getAddonByID("{ABA70AB8-D620-4cef-885B-559691663E23}",  getVersionCallBack);
-
     
     var prefs = new FDPrefs();
     var self = this;
+
     //  loop to wait until getVersionCallBack() is called
-    while (calledFunc == "notYet")
-	{};
+    while (calledFunc == "notYet"){};
+
     //  alert("calledFunc is " + calledFunc + " and version is "+version);
 
     // Initialize a preference value of a FireDictionary's version.
