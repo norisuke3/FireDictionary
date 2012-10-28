@@ -317,18 +317,19 @@ this.loadIKnow = function(){
       for(var i = 0 ; i < matchingResults.length ; i++){
 	var item = matchingResults[i];
 	var li = '<li class = "' + rowType[row++ % 2] + ' rich_item">';
-	
+
+	var strVoicePlay = strbundle.getString("iKnowVoicePlay");
 	if (item.cue.sound){
-	  li = li + '<a class="sound_icon" target="sound_player" href="' + item.cue.sound + '"><span>音声再生</span></a>';
+	  li = li + '<a class="sound_icon" target="sound_player" href="' + item.cue.sound + '"><span>'+strVoicePlay+'</span></a>';
 	}else{   // for casees of null, undefnied and ''
-	  li = li + '<a class="sound_icon_disabled"><span>音声再生</span></a>';
+	  li = li + '<a class="sound_icon_disabled"><span>'+strVoicePlay+'</span></a>';
 	}
 	li = li + '<a target="_blank" onclick="" class="item_link" href="http://www.iknow.co.jp/items/' + item.id + '">';
 	li = li + '<span lang="en" xml:lang="en" class="cue_text en">' + item.cue.text + '</span>';
 	li = li + '</a>';
 	li = li + '<div class="item_bank_row">';
 	li = li + '  <span class="pos">(' + item.cue.part_of_speech + ')</span>';
-      //    responsees の要素は常に一つ？
+      //    only one element in responsees at any time?
 	li = li + '  <span class="response">' + item.responses[0].text + '</span>';
 	li = li + '</div>';
 	li = li + '</li>';

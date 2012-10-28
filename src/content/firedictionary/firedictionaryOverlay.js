@@ -49,15 +49,25 @@ var FireDictionary = FireDictionary || {};
    *  function to initialize FireDictionary environment.
    */
   this.initialize = function(){
-    var mozCC = Components.classes['@mozilla.org/extensions/manager;1'];
-    var mozCI = Components.interfaces;
-    var version = mozCC.getService(mozCI.nsIExtensionManager)
-		       .getItemForID("{ABA70AB8-D620-4cef-885B-559691663E23}")
-		       .version;
+
+    var version = new String();
+    var calledFunc = "notYet";
+    function getVersionCallBack(addon) {
+      version = new String(addon.version);
+      // alert("My extension's version is " + addon.version + ";  " + version);
+      calledFunc = "done";
+    };
+    Components.utils.import("resource://gre/modules/AddonManager.jsm");
+    AddonManager.getAddonByID("{ABA70AB8-D620-4cef-885B-559691663E23}",  getVersionCallBack);
+
     
     var prefs = new FDPrefs();
     var self = this;
-   
+    //  loop to wait until getVersionCallBack() is called
+    while (calledFunc == "notYet")
+	{};
+    //  alert("calledFunc is " + calledFunc + " and version is "+version);
+
     // Initialize a preference value of a FireDictionary's version.
     if (prefs.version != version){
       prefs.create("updated", "true");
@@ -121,7 +131,6 @@ var FireDictionary = FireDictionary || {};
     if ( !sidebar.isActive() || !sidebar.getMouseOverMode() ) return;
    
     var extractor = new FDSentenceExtractor(event);
-    
     var keyword = extractor.getKeyword();
     var sentence = extractor.getSentence();
     var url = event.view.document.URL;
