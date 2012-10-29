@@ -49,46 +49,38 @@ var FireDictionary = FireDictionary || {};
    *  function to initialize FireDictionary environment.
    */
   this.initialize = function(){
-    var version = new String();
-    var calledFunc = "notYet";
-    function getVersionCallBack(addon) {
+    var self = this;
+    var version = "";
+    var prefs = new FDPrefs();
+
+    Components.utils.import("resource://gre/modules/AddonManager.jsm");
+    AddonManager.getAddonByID("{ABA70AB8-D620-4cef-885B-559691663E23}",  function(addon){
       version = new String(addon.version);
       // alert("My extension's version is " + addon.version + ";  " + version);
-      calledFunc = "done";
-    };
-    Components.utils.import("resource://gre/modules/AddonManager.jsm");
-    AddonManager.getAddonByID("{ABA70AB8-D620-4cef-885B-559691663E23}",  getVersionCallBack);
-    
-    var prefs = new FDPrefs();
-    var self = this;
 
-    //  loop to wait until getVersionCallBack() is called
-    while (calledFunc == "notYet"){};
+      // Initialize a preference 'version' with a FireDictionary's version.
+      if (prefs.version != version){
+        prefs.create("updated", "true");
+      }
+      prefs.create("version", version);
 
-    //  alert("calledFunc is " + calledFunc + " and version is "+version);
+      // Initialize tab browser and events.
+      var tabbrowser = document.getElementById("content");
 
-    // Initialize a preference value of a FireDictionary's version.
-    if (prefs.version != version){
-      prefs.create("updated", "true");
-    }
-    prefs.create("version", version);
-    
-    // Initialize tab browser and events.
-    var tabbrowser = document.getElementById("content");
-    
-    if ( tabbrowser ) {
-      tabbrowser.addEventListener("click", self.sendWordToHistory, false);
-      tabbrowser.addEventListener("mousemove", self.sendContentWord, false);
-    }
-                       
-    // Initialize dictionary sidebar object.
-    sidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
-  	
-    // Initialize preference.
-    prefs.initialize("accept-empty-definition-ind", "false");
-    
-    // emit iKnow files: css and png if it's not present
-    emitIKnowFiles();
+      if ( tabbrowser ) {
+        tabbrowser.addEventListener("click", self.sendWordToHistory, false);
+        tabbrowser.addEventListener("mousemove", self.sendContentWord, false);
+      }
+
+      // Initialize dictionary sidebar object.
+      sidebar = new FDDictionarySidebar(FDDictionarySidebar.FD_MODE_WORD_PICKEDUP);
+
+      // Initialize preference.
+      prefs.initialize("accept-empty-definition-ind", "false");
+
+      // emit iKnow files: css and png if it's not present
+      emitIKnowFiles();
+    });
   };
   
   /**
