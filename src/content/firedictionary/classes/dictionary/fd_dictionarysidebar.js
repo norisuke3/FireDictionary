@@ -14,11 +14,15 @@
  * The Original Code is FireDictionary.
  *
  * The Initial Developer of the Original Code is 
- * Noriaki Hamamoto <nori@firedictionary.com>.
+ * 
+ *    Noriaki Hamamoto <nori@firedictionary.com>.
+ * 
  * Portions created by the Initial Developer are Copyright (C) 2005
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
+ * 
+ *    Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
