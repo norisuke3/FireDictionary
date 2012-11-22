@@ -1,0 +1,1 @@
+[FireDictionary](http://www.firedictionary.com/) is a Firefox extention providing a simple and powerful dictionary function.
