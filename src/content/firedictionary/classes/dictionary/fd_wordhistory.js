@@ -83,15 +83,12 @@ function FDWordHistory(){
         var file = getHistoryFile();
         var xmlHistory = new FDXmlHistory();
     
-        if( file.exists() )
+        if( file.exists() ) {
             xmlHistory.readFromFile(file);
-        
-        var h = new XML(xmlHistory.serializeToString());
-        var ns = new Namespace("http://www.firedictionary.com/history");
-        // If the keyword is registered just before, do noghing and return.
-        var lastWord = h..ns::item[0] ? h..ns::item[0].ns::keyword : null;
-        if ( lastWord == keyword ) 
-            return;
+            var lastWord = xmlHistory.domDocument.getElementsByTagName("hs:items").item(0).firstChild.getElementsByTagName("hs:keyword").item(0).nodeValue;
+            // If the keyword is registered just before, do noghing and return.
+            if ( lastWord == keyword ) return;
+        }
      
         xmlHistory.create({
             keyword:      keyword,

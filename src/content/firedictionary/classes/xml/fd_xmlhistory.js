@@ -134,24 +134,24 @@ function FDXmlHistory(){
    var result = null;
 
    if ( items.hasChildNodes() ){
-     var h = new XML(this.serializeToString());
-     
+//     var h = new XML(this.serializeToString());
      result = {
-       keyword:      h..ns::item[0].ns::keyword,
-       result:       h..ns::item[0].ns::result,
-       url:          h..ns::item[0].ns::url,
-       title:        h..ns::item[0].ns::title,
-       sentence:     h..ns::item[0].ns::sentence,
-       pickedupword: h..ns::item[0].ns::pickedupword,
-       category:     h..ns::item[0].ns::category,
-       timestamp:    h..ns::item[0].ns::timestamp,
-       date:         h..ns::item[0].ns::date
+//       keyword:      h..ns::item[0].ns::keyword,
+//       keyword     : items.getElementsByTagName("hs:keyword").item(0).firstChild.nodeValue,
+       keyword     : firstItemText(items,"keyword"),
+       result      : firstItemText(items,"result"),
+       url         : firstItemText(items,"url"),
+       title       : firstItemText(items,"title"),
+       sentence    : firstItemText(items,"sentence"),
+       pickedupword: firstItemText(items,"pickedupword"),
+       category    : firstItemText(items,"category"),
+       timestamp   : firstItemText(items,"timestamp"),
+       date        : firstItemText(items,"date")
      };
      
      // remove the last one
      items.removeChild(items.firstChild);
    }
-   
    return result;
  }
  
@@ -181,5 +181,24 @@ function FDXmlHistory(){
  	var today = new Date();
  	
  	return today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
+ }
+
+ /**
+  * String firstItemText(nodeList as list, element_name as string)
+  *  return a string, the textNode of firstChild of nodeList.
+  *
+  * @param nodeList list of node (got with getElementsByTagNameNS)
+  * @param element_name a name of the element
+  * @return a textNode of firstChild of item as a string.
+  *           return null if item doesn't have a child.
+  */
+ function firstItemText(nodeList, element_name){
+    retText = "";
+    var firstC = nodeList.getElementsByTagName("hs:" + element_name).item(0).firstChild;
+
+    if (firstC) {
+       retText = firstC.nodeValue;
+    }
+    return retText;
  }
 }
